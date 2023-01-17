@@ -12,7 +12,7 @@
 
 <main class="overflow-hidden">
 	<section class="section-1 flex flex-col items-center justify-center bg-dark h-screen">
-		<div class="max-w-2xl text-center">
+		<div class="max-w-3xl text-center">
 			<h2 class="font-sans font-bold text-4xl text-light">
 				<span class="text-accent">+70</span> MUERTOS
 			</h2>
@@ -20,17 +20,17 @@
 				<span class="text-accent">+152</span> DESAPARECIDOS
 			</h2>
 			<h2 class="font-sans font-bold text-4xl text-light mb-4">
-				Tratando de llegar de Cuba a los Estados Unidos
+				Tratando de llegar de Cuba <br/> a los Estados Unidos
 			</h2>
-			<span class="text-accent text-xs">2021-2022</span>
+			<span class="text-accent text-sm font-medium">2021-2022</span>
 		</div>
 	</section>
 	<section class="section-2 flex flex-col items-center justify-center bg-dark h-screen">
-		<div class="container mx-auto max-w-2xl">
+		<div class="container mx-auto max-w-3xl">
 			<h2 class="font-sans font-bold text-4xl text-light">CUBA - EEUU</h2>
 			<h2 class="font-sans font-bold text-4xl text-accent my-4">MIGRAR:</h2>
 			<h2 class="font-sans font-bold text-4xl text-accent">Una decisión de vida o muerte</h2>
-			<p class="text-gray mx-10 mt-10">
+			<p class="text-gray mx-20 mt-10">
 				Desde enero de 2021 y durante el 2022 Cuba ha experimentado la ola migratoria más grande en,
 				al menos, los últimos 60 años. Esto significa que solo entre enero de 2021 y octubre de 2022
 				han llegado a las fronteras estadounidense 283 094 cubanos, según datos de Oficina de
@@ -53,10 +53,10 @@
 		</div>
 	</section>
 	<section class="section-3 flex flex-col items-center justify-center bg-dark h-screen">
-		<div class="container mx-auto max-w-2xl">
+		<div class="container mx-auto max-w-3xl">
 			<h2 class="font-sans font-extrabold text-6xl text-accent">+72</h2>
 			<h2 class="font-sans font-bold text-4xl text-light my-4">Personas fallecidas</h2>
-			<p class="text-gray mx-10 mt-10">
+			<p class="text-gray mx-20 mt-10">
 				Hasta ahora hemos contabilizado 72 cubanas y cubanos fallecidos en el intento de migrar
 				hacia otro país, la mayoría de ellos con destino a los Estados Unidos. Conocemos la
 				identidad de 43 de ellos y sabemos que hay 20 mujeres y 25 hombres, el resto se mantiene en
@@ -84,13 +84,16 @@
 		</div>
 	</section>
 	<section class="section-4 bg-dark min-h-screen">
+		<!-- <div class="container mx-auto">
+			<Grid />
+		</div> -->
 		<Grid />
 	</section>
 	<section class="section-5 flex flex-col items-center justify-center bg-light min-h-screen py-20">
 		<div class="container mx-auto max-w-3xl">
 			<h2 class="font-sans font-extrabold text-6xl text-accent">+152</h2>
 			<h2 class="font-sans font-bold text-4xl text-dark my-4">Personas Desaparecidas</h2>
-			<p class="text-dark mx-10 mt-10">
+			<p class="text-dark mx-20 mt-10">
 				Un migrante se considera desaparecido cuando no se tiene noticias de su llegada pero tampoco
 				existe un cuerpo que pueda confirmar la muerte. En el mejor de los casos solo están
 				retenidos por las autoridades, e incluso, pueden estar bajo custodia durante meses sin que
@@ -142,7 +145,7 @@
 				<Button>Reportar desaparecido</Button>
 			</div>
 
-			<p class="text-dark mx-10 my-20">
+			<p class="text-dark mx-20 my-20">
 				Te mostramos la distribución del presupuesto regional durante los años 2010 al 2021. Puedes
 				observar tanto el gasto presupuestado total, como el presupuesto por habitante. También
 				puedes ver las cantidades por área funcional, como por ejemplo Sanidad, referidas a cada
