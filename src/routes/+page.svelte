@@ -13,24 +13,26 @@
 <main class="overflow-hidden">
 	<section class="section-1 flex flex-col items-center justify-center bg-dark h-screen">
 		<div class="max-w-3xl text-center">
-			<h2 class="font-sans font-bold text-4xl text-light">
-				<span class="text-accent">+70</span> MUERTOS
+			<h2
+				class="flex flex-col md:flex-row justify-center font-sans font-bold text-6xl md:text-4xl text-light"
+			>
+				<span class="text-accent md:mr-2 font-extrabold">+70</span> <span class="text-4xl">MUERTOS</span>
 			</h2>
-			<h2 class="font-sans font-bold text-4xl text-light my-4">
-				<span class="text-accent">+152</span> DESAPARECIDOS
+			<h2 class="flex flex-col md:flex-row justify-center font-sans font-bold text-6xl md:text-4xl text-light my-20 md:my-4">
+				<span class="text-accent md:mr-2 font-extrabold">+152</span> <span class="text-4xl">DESAPARECIDOS</span>
 			</h2>
-			<h2 class="font-sans font-bold text-4xl text-light mb-4">
-				Tratando de llegar de Cuba <br/> a los Estados Unidos
+			<h2 class="font-sans font-bold text-4xl text-light mb-20 md:mb-4">
+				Tratando de llegar de Cuba <br /> a los Estados Unidos
 			</h2>
-			<span class="text-accent text-sm font-medium">2021-2022</span>
+			<span class="text-accent text-xl md:text-sm font-medium">2021-2022</span>
 		</div>
 	</section>
-	<section class="section-2 flex flex-col items-center justify-center bg-dark h-screen">
-		<div class="container mx-auto max-w-3xl">
+	<section class="section-2 flex flex-col items-center justify-center bg-dark h-min-screen">
+		<div class="container mx-auto px-10 md:px-0 max-w-3xl">
 			<h2 class="font-sans font-bold text-4xl text-light">CUBA - EEUU</h2>
 			<h2 class="font-sans font-bold text-4xl text-accent my-4">MIGRAR:</h2>
 			<h2 class="font-sans font-bold text-4xl text-accent">Una decisión de vida o muerte</h2>
-			<p class="text-gray mx-20 mt-10">
+			<p class="text-gray md:mx-20 mt-10">
 				Desde enero de 2021 y durante el 2022 Cuba ha experimentado la ola migratoria más grande en,
 				al menos, los últimos 60 años. Esto significa que solo entre enero de 2021 y octubre de 2022
 				han llegado a las fronteras estadounidense 283 094 cubanos, según datos de Oficina de
@@ -52,11 +54,11 @@
 			</p>
 		</div>
 	</section>
-	<section class="section-3 flex flex-col items-center justify-center bg-dark h-screen">
-		<div class="container mx-auto max-w-3xl">
+	<section class="section-3 flex flex-col items-center justify-center bg-dark h-min-screen py-20">
+		<div class="container mx-auto max-w-3xl px-10 md:px-0">
 			<h2 class="font-sans font-extrabold text-6xl text-accent">+72</h2>
 			<h2 class="font-sans font-bold text-4xl text-light my-4">Personas fallecidas</h2>
-			<p class="text-gray mx-20 mt-10">
+			<p class="text-gray md:mx-20 mt-10">
 				Hasta ahora hemos contabilizado 72 cubanas y cubanos fallecidos en el intento de migrar
 				hacia otro país, la mayoría de ellos con destino a los Estados Unidos. Conocemos la
 				identidad de 43 de ellos y sabemos que hay 20 mujeres y 25 hombres, el resto se mantiene en
@@ -90,10 +92,10 @@
 		<Grid />
 	</section>
 	<section class="section-5 flex flex-col items-center justify-center bg-light min-h-screen py-20">
-		<div class="container mx-auto max-w-3xl">
+		<div class="container mx-auto max-w-3xl px-10 md:px-0">
 			<h2 class="font-sans font-extrabold text-6xl text-accent">+152</h2>
 			<h2 class="font-sans font-bold text-4xl text-dark my-4">Personas Desaparecidas</h2>
-			<p class="text-dark mx-20 mt-10">
+			<p class="text-dark md:mx-20 mt-10">
 				Un migrante se considera desaparecido cuando no se tiene noticias de su llegada pero tampoco
 				existe un cuerpo que pueda confirmar la muerte. En el mejor de los casos solo están
 				retenidos por las autoridades, e incluso, pueden estar bajo custodia durante meses sin que
@@ -110,7 +112,14 @@
 				<div class="swiper-controls" />
 			</div>
 			<div class="w-full mt-10">
-				<Swiper slidesPerView={2.2} spaceBetween={30} centeredSlides={false}>
+				<Swiper slidesPerView={1} spaceBetween={50} centeredSlides={true}
+				breakpoints={{
+					'768': {
+						slidesPerView: 2.2,
+						spaceBetween: 30,
+						centeredSlides: false
+					}
+				}}>
 					<SwiperSlide>
 						<Profile />
 					</SwiperSlide>
@@ -135,8 +144,8 @@
 				</Swiper>
 			</div>
 
-			<div class="bg-dark border-r-4 flex items-center p-10 mt-20 rounded-lg">
-				<p class="text-light text-sm">
+			<div class="bg-dark border-r-4 flex flex-col md:flex-col items-center -mx-10 md:-mx-0 p-10 mt-20 md:rounded-lg">
+				<p class="text-light text-lg md:text-sm mb-8 md:mb-0">
 					Si tienes algún familiar, amigo o conocido que haya desaparecido tratando de migrar o
 					conociste alguien que viajaba contigo y se ha denunciado que no llegó, escríbenos.
 					Queremos que no se olvide su historia y ayudar, de acuerdo con nuestras posibilidades, a
@@ -145,7 +154,7 @@
 				<Button>Reportar desaparecido</Button>
 			</div>
 
-			<p class="text-dark mx-20 my-20">
+			<p class="text-dark md:mx-20 my-20">
 				Te mostramos la distribución del presupuesto regional durante los años 2010 al 2021. Puedes
 				observar tanto el gasto presupuestado total, como el presupuesto por habitante. También
 				puedes ver las cantidades por área funcional, como por ejemplo Sanidad, referidas a cada
@@ -161,16 +170,16 @@
 				tener en cuenta esas diferencias.
 			</p>
 
-			<div class="grid grid-cols-2 gap-10">
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-10">
 				<Article />
 				<Article />
 			</div>
 		</div>
 	</section>
 	<section class="section-4 flex flex-col items-center bg-dark min-h-screen">
-		<div class="grid grid-cols-2 flex-1 my-20 max-w-5xl gap-20">
-			<img src="" alt="" class="map bg-accent w-full h-full rounded-2xl" />
-			<div class="flex flex-col justify-center">
+		<div class="grid md:grid-cols-2 flex-1 my-20 max-w-5xl px-10 md:px-0 gap-20">
+			<img src="" alt="" class="map bg-accent w-full h-full rounded-2xl order-2 md:order-1" />
+			<div class="flex flex-col justify-center order-1 md:order-2">
 				<h2 class="text-4xl font-bold mb-10 text-light">Rutas Migratorias</h2>
 				<p class="text-gray">
 					Cruzar por el mar las 90 millas —o un poco más dependiendo del punto de salida— que separa

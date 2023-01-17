@@ -4,11 +4,11 @@
 
 <div class="flex flex-col h-full">
 	<div
-		class="flex-1 grid grid-cols-6 grid-rows-3 divide-x divide-y divide-light border-b border-r-2 border-light"
+		class="flex-1 grid grid-cols-2 md:grid-cols-6 md:grid-rows-3 divide-x divide-y divide-light border-b border-r-2 border-light"
 	>
-		<div class="col-span-2 row-span-2 bg-accent flex flex-col p-10">
-			<h2 class="text-light font-bold text-4xl">Personas fallecidas</h2>
-			<p class="mt-auto text-light">
+		<div class="col-span-2 row-span-2 bg-accent flex flex-col justify-center p-10">
+			<h2 class="text-light font-bold text-4xl mb-10">Personas fallecidas</h2>
+			<p class=" text-light">
 				Te mostramos la distribución del presupuesto regional durante los años 2010 al 2021. Puedes
 				observar tanto el gasto presupuestado total, como el presupuesto por habitante. También
 				puedes ver las cantidades por área funcional, como por ejemplo Sanidad, referidas a cada
@@ -41,8 +41,8 @@
 		<div class="aspect-square" />
 		<div class="aspect-square" />
 	</div>
-	<div class="flex items-center justify-center my-10">
-		<Button classes="mr-8 text-light" type="bordered">Reportar fallecido</Button>
+	<div class="flex flex-col md:flex-row items-center justify-center my-10">
+		<Button classes="md:mr-8 mb-8 md:mb-0 text-light" type="bordered">Reportar fallecido</Button>
 		<Button>Ver listado</Button>
 	</div>
 </div>

@@ -6,8 +6,8 @@ import "../app.css";
 <footer class="bg-accent">
     <div class="max-w-3xl py-20 mx-auto">
         <div></div>
-        <div class="flex items-center">
-            <div class="flex flex-col flex-1">
+        <div class="flex flex-col md:flex-row items-center">
+            <div class="flex flex-col flex-1 mb-10 md:mb-0">
                 <span class="text-gray">Coordinación editorial: Jessica Dominguez Delgado</span>
                 <span class="text-gray">Compilación y análisis de datos: -</span>
                 <span class="text-gray">Coordinación de Marketing: Roberto Pablo</span>
