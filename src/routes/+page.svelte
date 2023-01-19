@@ -2,6 +2,7 @@
 	import Button from '$lib/components/button.svelte';
 	import Grid from '$lib/components/grid.svelte';
 	import Timeline from '$lib/components/timeline.svelte';
+	import Map from '$lib/components/map.svelte';
 
 	import { Swiper, SwiperSlide } from 'swiper/svelte';
 
@@ -178,7 +179,7 @@
 	</section>
 	<section class="section-4 flex flex-col items-center bg-dark min-h-screen">
 		<div class="grid md:grid-cols-2 flex-1 my-20 max-w-5xl px-10 md:px-0 gap-20">
-			<img src="" alt="" class="map bg-accent w-full h-full rounded-2xl order-2 md:order-1" />
+			<Map></Map>
 			<div class="flex flex-col justify-center order-1 md:order-2">
 				<h2 class="text-4xl font-bold mb-10 text-light">Rutas Migratorias</h2>
 				<p class="text-gray">
