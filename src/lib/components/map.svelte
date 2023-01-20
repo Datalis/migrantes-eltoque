@@ -1,31 +1,35 @@
-<script>
-    import HighCharts from "highcharts/highmaps";
+<script lang="ts">
+    import * as HighCharts from "highcharts/highmaps";
+    import * as MarkerClusters from "highcharts/modules/marker-clusters";
+    import * as map from "@highcharts/map-collection/custom/world.topo.json"
     import { onMount } from "svelte";
-    import map from "@highcharts/map-collection/custom/europe.geo.json"
     import peoples from "$lib/data/people.json"
+    
 
     onMount(() => {
+        MarkerClusters(HighCharts)
+
         HighCharts.mapChart('container', {
             chart: {
                 map
             },
             title: {
-                text: 'European Train Stations Near Airports'
+                text: 'Rutas migratorias'
             },
             subtitle: {
-                text: 'Source: <a href="https://github.com/trainline-eu/stations">' +
-                    'github.com/trainline-eu/stations</a>'
+                text: 'Fuente: <a href="https://eltoque.com">' +
+                    'El Toque</a>'
             },
             mapNavigation: {
                 enabled: true
             },
             tooltip: {
-                headerFormat: '',
-                pointFormat: '<b>{point.name}</b>'
-            },
-            colorAxis: {
-                min: 0,
-                max: 20
+                formatter: function () {
+                    if (this.point.clusteredData) {
+						return this.point.clusterPointsAmount + ' personas';
+					}
+					return this.point.name + '<br> lat: ' + this.point.lat;
+				}
             },
             plotOptions: {
                 mappoint: {
@@ -51,43 +55,37 @@
                             marker: {
                                 radius: 15
                             }
+                        }, {
+                            from: 10,
+                            to: 14,
+                            marker: {
+                                radius: 18
+                            }
+                        }, {
+                            from: 15,
+                            to: 99,
+                            marker: {
+                                radius: 20
+                            }
                         }]
                     }
                 }
             },
             series: [{
                 name: 'Europe',
+                type: 'map',
                 accessibility: {
                     exposeAsGroupOnly: true
                 },
                 borderColor: '#A0A0A0',
-                nullColor: 'rgba(177, 244, 177, .5)'
+                nullColor: 'rgba(177, 244, 177, .5)',
+                showInLegend: false
             }, {
                 type: 'mappoint',
                 enableMouseTracking: true,
-                accessibility: {
-                    point: {
-                        descriptionFormatter: point => {
-                            if (point.isCluster) {
-                                return point.clusterPointsAmount + ' Personas';
-                            }
-                            return point.name;
-                        }
-                    }
-                },
-                colorKey: 'clusterPointsAmount',
+				colorKey: 'clusterPointsAmount',
                 name: 'Personas',
-                data: peoples,
-                color: HighCharts.getOptions().colors[5],
-                marker: {
-                    lineWidth: 1,
-                    lineColor: '#fff',
-                    symbol: 'mapmarker',
-                    radius: 8
-                },
-                dataLabels: {
-                    verticalAlign: 'top'
-                }
+                data: peoples
             }]
         })
     })
