@@ -5,10 +5,14 @@
 	import Map from '$lib/components/map.svelte';
 
 	import { Swiper, SwiperSlide } from 'swiper/svelte';
+	import { gsap } from "gsap"
+	import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 	import 'swiper/css';
 	import Profile from '$lib/components/profile.svelte';
 	import Article from '$lib/components/article.svelte';
+
+	gsap.registerPlugin(ScrollTrigger)
 </script>
 
 <main class="overflow-hidden">

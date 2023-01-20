@@ -38,6 +38,7 @@
 	"type": "module",
 	"dependencies": {
 		"@highcharts/map-collection": "^2.0.1",
+		"gsap": "^3.11.4",
 		"highcharts": "^10.3.2",
 		"proj4": "^2.8.1",
 		"swiper": "^8.4.5"
