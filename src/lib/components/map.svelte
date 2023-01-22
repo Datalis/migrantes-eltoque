@@ -91,5 +91,5 @@
     })
 </script>
 
-<div id="container" class="map bg-accent w-full h-full rounded-2xl order-2 md:order-1">
+<div id="container" class="map bg-accent w-full h-full rounded-2xl order-2 md:order-1 max-h-80">
 </div>

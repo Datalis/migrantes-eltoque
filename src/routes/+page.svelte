@@ -5,14 +5,14 @@
 	import Map from '$lib/components/map.svelte';
 
 	import { Swiper, SwiperSlide } from 'swiper/svelte';
-	import { gsap } from "gsap"
-	import { ScrollTrigger } from "gsap/ScrollTrigger"
+	import { gsap } from 'gsap';
+	import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 	import 'swiper/css';
 	import Profile from '$lib/components/profile.svelte';
 	import Article from '$lib/components/article.svelte';
 
-	gsap.registerPlugin(ScrollTrigger)
+	// gsap.registerPlugin(ScrollTrigger)
 </script>
 
 <main class="overflow-hidden">
@@ -21,10 +21,14 @@
 			<h2
 				class="flex flex-col md:flex-row justify-center font-sans font-bold text-6xl md:text-4xl text-light"
 			>
-				<span class="text-accent md:mr-2 font-extrabold">+70</span> <span class="text-4xl">MUERTOS</span>
+				<span class="text-accent md:mr-2 font-extrabold">+70</span>
+				<span class="text-4xl">MUERTOS</span>
 			</h2>
-			<h2 class="flex flex-col md:flex-row justify-center font-sans font-bold text-6xl md:text-4xl text-light my-20 md:my-4">
-				<span class="text-accent md:mr-2 font-extrabold">+152</span> <span class="text-4xl">DESAPARECIDOS</span>
+			<h2
+				class="flex flex-col md:flex-row justify-center font-sans font-bold text-6xl md:text-4xl text-light my-20 md:my-4"
+			>
+				<span class="text-accent md:mr-2 font-extrabold">+152</span>
+				<span class="text-4xl">DESAPARECIDOS</span>
 			</h2>
 			<h2 class="font-sans font-bold text-4xl text-light mb-20 md:mb-4">
 				Tratando de llegar de Cuba <br /> a los Estados Unidos
@@ -117,14 +121,18 @@
 				<div class="swiper-controls" />
 			</div>
 			<div class="w-full mt-10">
-				<Swiper slidesPerView={1} spaceBetween={50} centeredSlides={true}
-				breakpoints={{
-					'768': {
-						slidesPerView: 2.2,
-						spaceBetween: 30,
-						centeredSlides: false
-					}
-				}}>
+				<Swiper
+					slidesPerView={1}
+					spaceBetween={50}
+					centeredSlides={true}
+					breakpoints={{
+						'768': {
+							slidesPerView: 2.2,
+							spaceBetween: 30,
+							centeredSlides: false
+						}
+					}}
+				>
 					<SwiperSlide>
 						<Profile />
 					</SwiperSlide>
@@ -149,7 +157,9 @@
 				</Swiper>
 			</div>
 
-			<div class="bg-dark border-r-4 flex flex-col md:flex-col items-center -mx-10 md:-mx-0 p-10 mt-20 md:rounded-lg">
+			<div
+				class="bg-dark border-r-4 flex flex-col md:flex-col items-center -mx-10 md:-mx-0 p-10 mt-20 md:rounded-lg"
+			>
 				<p class="text-light text-lg md:text-sm mb-8 md:mb-0">
 					Si tienes algún familiar, amigo o conocido que haya desaparecido tratando de migrar o
 					conociste alguien que viajaba contigo y se ha denunciado que no llegó, escríbenos.
@@ -181,11 +191,11 @@
 			</div>
 		</div>
 	</section>
-	<section class="section-4 flex flex-col items-center bg-dark min-h-screen">
+	<section class="section-4 flex flex-col items-center bg-dark">
 		<div class="grid md:grid-cols-2 flex-1 my-20 max-w-5xl px-10 md:px-0 gap-20">
-			<Map></Map>
-			<div class="flex flex-col justify-center order-1 md:order-2">
-				<h2 class="text-4xl font-bold mb-10 text-light">Rutas Migratorias</h2>
+			<Map />
+			<div class="block order-1 md:order-2 max-h-96 overflow-x-auto pb-2">
+				<h2 class="title">Rutas Migratorias</h2>
 				<p class="text-gray">
 					Cruzar por el mar las 90 millas —o un poco más dependiendo del punto de salida— que separa
 					a Cuba de los Estados Unidos en balsas o embarcaciones rústicas es una vía usada desde
@@ -200,6 +210,29 @@
 					Hemos identificados las zonas más peligrosas de estos recorridos y dónde han ocurrido mayor
 					cantidad de incidentes con migrantes cubanos.
 				</p>
+				<div id="history-1" class="text-gray">
+					<h2 class="title">Historia 1</h2>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+						incididunt ut labore et dolore magna aliqua. Faucibus scelerisque eleifend donec
+						pretium. Risus nec feugiat in fermentum posuere urna nec tincidunt. Sagittis id
+						consectetur purus ut faucibus pulvinar. Nulla pellentesque dignissim enim sit amet
+						venenatis urna cursus eget. Faucibus vitae aliquet nec ullamcorper sit amet risus
+						nullam. Quam id leo in vitae turpis massa. Mi eget mauris pharetra et ultrices neque
+						ornare aenean. Massa tincidunt nunc pulvinar sapien et ligula ullamcorper malesuada
+						proin. Imperdiet sed euismod nisi porta lorem mollis aliquam ut. Fringilla ut morbi
+						tincidunt augue. Hendrerit gravida rutrum quisque non tellus. Vitae justo eget magna
+						fermentum iaculis eu non diam. Venenatis tellus in metus vulputate eu. Dignissim diam
+						quis enim lobortis scelerisque fermentum dui faucibus. Dignissim suspendisse in est ante
+						in nibh mauris cursus mattis. Vitae proin sagittis nisl rhoncus mattis. In ante metus
+						dictum at tempor commodo ullamcorper. Ornare suspendisse sed nisi lacus sed viverra. Sed
+						euismod nisi porta lorem. Convallis a cras semper auctor neque vitae tempus. Enim nunc
+						faucibus a pellentesque. Faucibus pulvinar elementum integer enim neque volutpat. Rutrum
+						tellus pellentesque eu tincidunt tortor. Maecenas accumsan lacus vel facilisis volutpat
+						est velit egestas dui. Eu scelerisque felis imperdiet proin fermentum leo vel. Morbi
+						tristique senectus et netus et.
+					</p>
+				</div>
 			</div>
 		</div>
 	</section>
