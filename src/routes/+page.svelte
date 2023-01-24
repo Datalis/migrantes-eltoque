@@ -8,11 +8,41 @@
 	import { gsap } from 'gsap';
 	import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+    import * as worldMap from "@highcharts/map-collection/custom/world.topo.json"
+    import * as centralAmericaMap from "@highcharts/map-collection/custom/central-america.topo.json"
+    import * as northAmericaMap from "@highcharts/map-collection/custom/north-america.topo.json"
+
+    import peoples from "$lib/data/people.json"
+
 	import 'swiper/css';
 	import Profile from '$lib/components/profile.svelte';
 	import Article from '$lib/components/article.svelte';
+	import { onMount } from 'svelte';
 
-	// gsap.registerPlugin(ScrollTrigger)
+	let map = worldMap;
+	let data = peoples;
+	let mapComponent: Map;
+
+	onMount(() => {
+		gsap.registerPlugin(ScrollTrigger)
+
+		gsap.to("#history-1", {
+			scrollTrigger: {
+				trigger: "#history-1",
+				scroller: "#map-text",
+				onEnter: () => {
+					map = northAmericaMap;
+					data = [{
+						"name": "Fulanito Perez",
+    					"lat": 23.634501,
+    					"lon": -102.552788
+					}]
+					console.log('entro')
+					mapComponent.update_data(map, data)
+				}
+			},
+		})
+	})
 </script>
 
 <main class="overflow-hidden">
@@ -193,8 +223,8 @@
 	</section>
 	<section class="section-4 flex flex-col items-center bg-dark">
 		<div class="grid md:grid-cols-2 flex-1 my-20 max-w-5xl px-10 md:px-0 gap-20">
-			<Map />
-			<div class="block order-1 md:order-2 max-h-96 overflow-x-auto pb-2">
+			<Map map={map} data={data} bind:this={mapComponent} />
+			<div id="map-text" class="block order-1 md:order-2 max-h-96 overflow-x-auto pb-2">
 				<h2 class="title">Rutas Migratorias</h2>
 				<p class="text-gray">
 					Cruzar por el mar las 90 millas —o un poco más dependiendo del punto de salida— que separa

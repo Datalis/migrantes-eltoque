@@ -1,15 +1,31 @@
 <script lang="ts">
     import * as HighCharts from "highcharts/highmaps";
     import * as MarkerClusters from "highcharts/modules/marker-clusters";
-    import * as map from "@highcharts/map-collection/custom/world.topo.json"
     import { onMount } from "svelte";
-    import peoples from "$lib/data/people.json"
+
+    interface Person extends HighCharts.SeriesMappointDataOptions {
+        name: string;
+        lat: number;
+        lon: number;
+    }
+    let highcharts;
+    type MapType = (string|HighCharts.GeoJSON|HighCharts.TopoJSON|Array<any>)
+
+    export let map: MapType; 
+    export let data: Array<Person>;
+    export function update_data(new_map: MapType, new_data: Array<Person>) {
+        if (new_map) {
+            // highcharts.series[0].setData(new_map)
+            highcharts.series[0].update({data: [], mapData: new_map});
+        }
+        highcharts.series[1].setData(new_data, true, true)
+    }
     
 
     onMount(() => {
         MarkerClusters(HighCharts)
 
-        HighCharts.mapChart('container', {
+        highcharts = HighCharts.mapChart('container', {
             chart: {
                 map
             },
@@ -85,11 +101,11 @@
                 enableMouseTracking: true,
 				colorKey: 'clusterPointsAmount',
                 name: 'Personas',
-                data: peoples
+                data
             }]
         })
     })
 </script>
 
-<div id="container" class="map bg-accent w-full h-full rounded-2xl order-2 md:order-1 max-h-80">
+<div id="container" class="map bg-accent w-full h-full rounded-2xl order-2 md:order-1">
 </div>
