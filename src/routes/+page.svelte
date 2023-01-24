@@ -37,8 +37,12 @@
     					"lat": 23.634501,
     					"lon": -102.552788
 					}]
-					console.log('entro')
 					mapComponent.update_data(map, data)
+				},
+				onLeaveBack: ({progress, direction, isActive}) => {
+					map = worldMap
+					data = peoples
+					mapComponent.update_data(map, data)	
 				}
 			},
 		})
