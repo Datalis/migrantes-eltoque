@@ -27,6 +27,7 @@
 
         highcharts = HighCharts.mapChart('container', {
             chart: {
+                backgroundColor: 'rgb(120, 86, 255)',
                 map
             },
             title: {
@@ -38,13 +39,24 @@
             tooltip: {
                 formatter: function () {
                     if (this.point.clusteredData) {
-						return this.point.clusterPointsAmount + ' personas';
-					}
-					return this.point.name + '<br> lat: ' + this.point.lat;
-				}
+                        return this.point.clusterPointsAmount + ' personas';
+                    }
+                    return this.point.name + '<br> lat: ' + this.point.lat;
+                }
             },
             plotOptions: {
+                series: {
+                    dataLabels: {
+                        style: {
+                            color: '#fff',
+                            textOutline: '',
+                            fontSize: '1rem',
+                            textDecoration: 'underline'
+                        }
+                    }
+                },
                 mappoint: {
+                    color: 'rgb(180, 180, 180)',
                     cluster: {
                         enabled: true,
                         allowOverlap: false,
@@ -89,13 +101,13 @@
                 accessibility: {
                     exposeAsGroupOnly: true
                 },
-                borderColor: '#A0A0A0',
-                nullColor: 'rgba(177, 244, 177, .5)',
+                borderColor: 'rgb(120, 86, 255)',
+                nullColor: 'rgb(76, 52, 164)',
                 showInLegend: false
             }, {
                 type: 'mappoint',
                 enableMouseTracking: true,
-				colorKey: 'clusterPointsAmount',
+                colorKey: 'clusterPointsAmount',
                 name: 'Personas',
                 showInLegend: false,
                 data
