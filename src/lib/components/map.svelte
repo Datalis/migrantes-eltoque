@@ -57,6 +57,11 @@
                 },
                 mappoint: {
                     color: 'rgb(180, 180, 180)',
+                    dataLabels: {
+                        style: {
+                            color: '#fff'
+                        }
+                    },
                     cluster: {
                         enabled: true,
                         allowOverlap: false,
