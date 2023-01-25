@@ -30,14 +30,10 @@
                 map
             },
             title: {
-                text: 'Rutas migratorias'
-            },
-            subtitle: {
-                text: 'Fuente: <a href="https://eltoque.com">' +
-                    'El Toque</a>'
+                text: ''
             },
             mapNavigation: {
-                enabled: true
+                enabled: false
             },
             tooltip: {
                 formatter: function () {
@@ -101,6 +97,7 @@
                 enableMouseTracking: true,
 				colorKey: 'clusterPointsAmount',
                 name: 'Personas',
+                showInLegend: false,
                 data
             }]
         })
