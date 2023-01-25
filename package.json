@@ -15,6 +15,7 @@
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.28.1",
+		"@poppanator/sveltekit-svg": "^2.0.2",
 		"@sveltejs/adapter-auto": "^1.0.0",
 		"@sveltejs/adapter-netlify": "^1.0.0-next.88",
 		"@sveltejs/kit": "^1.0.0",
@@ -38,6 +39,8 @@
 	"type": "module",
 	"dependencies": {
 		"@highcharts/map-collection": "^2.0.1",
+		"google-auth-library": "^8.7.0",
+		"googleapis": "^110.0.0",
 		"gsap": "^3.11.4",
 		"highcharts": "^10.3.2",
 		"proj4": "^2.8.1",

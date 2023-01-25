@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="70"
+   height="70"
+   viewBox="0 0 70 70"
+   version="1.1"
+   id="svg11"
+   sodipodi:docname="flecha.svg"
+   inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs15" />
+  <sodipodi:namedview
+     id="namedview13"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="11.842857"
+     inkscape:cx="34.95778"
+     inkscape:cy="34.95778"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg11" />
+  <g
+     id="Grupo_727"
+     data-name="Grupo 727"
+     transform="rotate(180,2377.6405,586.0685)">
+    <g
+       id="Elipse_2644"
+       data-name="Elipse 2644"
+       transform="translate(4685.281,1102.137)"
+       fill="none"
+       stroke="#7856ff"
+       stroke-width="3">
+      <circle
+         cx="35"
+         cy="35"
+         r="35"
+         stroke="none"
+         id="circle2" />
+      <circle
+         cx="35"
+         cy="35"
+         r="33.5"
+         fill="none"
+         id="circle4" />
+    </g>
+    <g
+       id="Grupo_726"
+       data-name="Grupo 726"
+       transform="translate(4060.17,-5093.93)">
+      <path
+         id="Trazado_30256"
+         data-name="Trazado 30256"
+         d="m -18222,-12934.314 h 29.7"
+         transform="translate(18868,19165.381)"
+         fill="none"
+         stroke="#7856ff"
+         stroke-width="3" />
+      <path
+         id="Trazado_30255"
+         data-name="Trazado 30255"
+         d="m -18180.336,-12973.2 17.82,17.819 -17.82,17.819"
+         transform="translate(18838.211,19186.451)"
+         fill="none"
+         stroke="#7856ff"
+         stroke-width="3" />
+    </g>
+  </g>
+</svg>

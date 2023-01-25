@@ -1,6 +1,6 @@
 <script lang="ts">
     export let type: 'solid' | 'bordered' = 'solid';
-    export let color: 'accent' | 'light' | 'dark' = 'accent';
+    export let color: 'accent' | 'light' | 'dark' | 'gray' = 'accent';
     export let classes = "";
 </script>
 
@@ -47,6 +47,14 @@
     }
     .btn.btn-bordered.btn-light:hover {
         background-color: #fffffd;
+        color: #7856ff;
+    }
+
+    .btn.btn-bordered.btn-gray {
+        border: 2px solid #e0e0e0;
+    }
+    .btn.btn-bordered.btn-gray:hover {
+        background-color: #e0e0e0;
         color: #7856ff;
     }
 </style>

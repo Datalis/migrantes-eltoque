@@ -1,81 +1,124 @@
 <script lang="ts">
+	import ArrowRightIcon from '$lib/assets/images/arrow-right.svg?component';
+	import ArrowLeftIcon from '$lib/assets/images/arrow-left.svg?component';
+
 	import Button from '$lib/components/button.svelte';
 	import Grid from '$lib/components/grid.svelte';
-	import Timeline from '$lib/components/timeline.svelte';
+	// import Timeline from '$lib/components/timeline.svelte';
 	import Map from '$lib/components/map.svelte';
+
+	import DecorVela from '$lib/assets/images/vela.svg?component';
 
 	import { Swiper, SwiperSlide } from 'swiper/svelte';
 	import { gsap } from 'gsap';
 	import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-    import * as worldMap from "@highcharts/map-collection/custom/world.topo.json"
-    import * as centralAmericaMap from "@highcharts/map-collection/custom/central-america.topo.json"
-    import * as northAmericaMap from "@highcharts/map-collection/custom/north-america.topo.json"
+	import * as worldMap from '@highcharts/map-collection/custom/world.topo.json';
+	import * as centralAmericaMap from '@highcharts/map-collection/custom/central-america.topo.json';
+	import * as northAmericaMap from '@highcharts/map-collection/custom/north-america.topo.json';
 
-    import peoples from "$lib/data/people.json"
+	import peoples from '$lib/data/people.json';
 
 	import 'swiper/css';
 	import Profile from '$lib/components/profile.svelte';
 	import Article from '$lib/components/article.svelte';
 	import { onMount } from 'svelte';
+	import type { PageData } from './$types';
 
 	let map = worldMap;
-	let data = peoples;
+	// let data = peoples;
+	let people = peoples;
 	let mapComponent: Map;
 
-	onMount(() => {
-		gsap.registerPlugin(ScrollTrigger)
+	let swiperIndex = 0;
+	let swiper: {
+		[x: string]: any;
+		activeIndex: number;
+	};
 
-		gsap.to("#history-1", {
+	function onSwiper(e: any) {
+		swiper = e.detail[0];
+	}
+
+	function onSwiperNext() {
+		swiper.slideNext();
+		swiperIndex !== missing.length && ++swiperIndex;
+	}
+
+	function onSwiperPrev() {
+		swiper.slidePrev();
+		swiperIndex !== 0 && --swiperIndex;
+	}
+
+	export let data: PageData;
+
+	$: deceased = data?.deceased?.values || [];
+	$: missing = data?.missing?.values || [];
+
+	onMount(() => {
+		gsap.registerPlugin(ScrollTrigger);
+
+		gsap.to('#history-1', {
 			scrollTrigger: {
-				trigger: "#history-1",
-				scroller: "#map-text",
+				trigger: '#history-1',
+				scroller: '#map-text',
 				onEnter: () => {
 					map = northAmericaMap;
-					data = [{
-						"name": "Fulanito Perez",
-    					"lat": 23.634501,
-    					"lon": -102.552788
-					}]
-					mapComponent.update_data(map, data)
+					people = [
+						{
+							name: 'Fulanito Perez',
+							lat: 23.634501,
+							lon: -102.552788
+						}
+					];
+					mapComponent.update_data(map, people as any);
 				},
-				onLeaveBack: ({progress, direction, isActive}) => {
-					map = worldMap
-					data = peoples
-					mapComponent.update_data(map, data)	
+				onLeaveBack: ({ progress, direction, isActive }) => {
+					map = worldMap;
+					people = peoples;
+					mapComponent.update_data(map, people as any);
 				}
-			},
-		})
-	})
+			}
+		});
+
+		console.log(missing);
+	});
 </script>
 
 <main class="overflow-hidden">
-	<section class="section-1 flex flex-col items-center justify-center bg-dark h-screen">
-		<div class="max-w-3xl text-center">
+	<section class="section-1 flex flex-col items-center justify-center bg-accent min-h-screen">
+		<div class="section-1-wrapper max-w-3xl text-center h-full flex flex-col justify-center">
 			<h2
-				class="flex flex-col md:flex-row justify-center font-sans font-bold text-6xl md:text-4xl text-light"
+				class="flex flex-col md:flex-row justify-center items-baseline font-sans font-bold  text-light"
 			>
-				<span class="text-accent md:mr-2 font-extrabold">+70</span>
-				<span class="text-4xl">MUERTOS</span>
+				<span class="text-accent-dark md:mr-4 font-extrabold text-8xl">+70</span>
+				<span class="text-6xl font-bold">MUERTOS</span>
 			</h2>
 			<h2
-				class="flex flex-col md:flex-row justify-center font-sans font-bold text-6xl md:text-4xl text-light my-20 md:my-4"
+				class="flex flex-col md:flex-row justify-center items-baseline font-sans font-bold  text-light mt-4 mb-10"
 			>
-				<span class="text-accent md:mr-2 font-extrabold">+152</span>
-				<span class="text-4xl">DESAPARECIDOS</span>
+				<span class="text-accent-dark md:mr-4 font-extrabold text-8xl">+175</span>
+				<span class="text-6xl font-bold">DESAPARECIDOS</span>
 			</h2>
-			<h2 class="font-sans font-bold text-4xl text-light mb-20 md:mb-4">
-				Tratando de llegar de Cuba <br /> a los Estados Unidos
+			<h2 class="font-sans font-bold text-4xl text-light">
+				En la travesía de Cuba <br /> a Estados Unidos
 			</h2>
-			<span class="text-accent text-xl md:text-sm font-medium">2021-2022</span>
+		</div>
+		<div class="section-1-decor w-full">
+			<div class="flex justify-center items-center">
+				<DecorVela height="180px" width="180px" />
+				<DecorVela height="300px" width="300px" />
+				<DecorVela height="180px" width="180px" />
+			</div>
 		</div>
 	</section>
-	<section class="section-2 flex flex-col items-center justify-center bg-dark h-min-screen">
+	<section class="section-2 flex flex-col items-center justify-center bg-dark min-h-screen">
 		<div class="container mx-auto px-10 md:px-0 max-w-3xl">
-			<h2 class="font-sans font-bold text-4xl text-light">CUBA - EEUU</h2>
-			<h2 class="font-sans font-bold text-4xl text-accent my-4">MIGRAR:</h2>
-			<h2 class="font-sans font-bold text-4xl text-accent">Una decisión de vida o muerte</h2>
-			<p class="text-gray md:mx-20 mt-10">
+			<h2 class="font-sans font-bold text-6xl text-light my-4 text-center">MIGRAR:</h2>
+			<h2 class="font-sans font-bold text-4xl text-accent text-center">
+				Una decisión de vida o muerte
+			</h2>
+			<p class="text-gray md:mx-20 mt-20">
 				Desde enero de 2021 y durante el 2022 Cuba ha experimentado la ola migratoria más grande en,
 				al menos, los últimos 60 años. Esto significa que solo entre enero de 2021 y octubre de 2022
 				han llegado a las fronteras estadounidense 283 094 cubanos, según datos de Oficina de
@@ -96,12 +139,13 @@
 				las historias de quienes no lo han logrado.
 			</p>
 		</div>
+		<div class="section-2-decor" />
 	</section>
 	<section class="section-3 flex flex-col items-center justify-center bg-dark h-min-screen py-20">
 		<div class="container mx-auto max-w-3xl px-10 md:px-0">
-			<h2 class="font-sans font-extrabold text-6xl text-accent">+72</h2>
+			<h2 class="font-sans font-extrabold text-7xl text-accent">+72</h2>
 			<h2 class="font-sans font-bold text-4xl text-light my-4">Personas fallecidas</h2>
-			<p class="text-gray md:mx-20 mt-10">
+			<p class="text-gray md:mx-20 mt-20">
 				Hasta ahora hemos contabilizado 72 cubanas y cubanos fallecidos en el intento de migrar
 				hacia otro país, la mayoría de ellos con destino a los Estados Unidos. Conocemos la
 				identidad de 43 de ellos y sabemos que hay 20 mujeres y 25 hombres, el resto se mantiene en
@@ -132,13 +176,13 @@
 		<!-- <div class="container mx-auto">
 			<Grid />
 		</div> -->
-		<Grid />
+		<Grid data={deceased} />
 	</section>
-	<section class="section-5 flex flex-col items-center justify-center bg-light min-h-screen py-20">
+	<section class="section-5 flex flex-col items-center justify-center bg-light min-h-screen pt-20">
 		<div class="container mx-auto max-w-3xl px-10 md:px-0">
-			<h2 class="font-sans font-extrabold text-6xl text-accent">+152</h2>
+			<h2 class="font-sans font-extrabold text-7xl text-accent">+152</h2>
 			<h2 class="font-sans font-bold text-4xl text-dark my-4">Personas Desaparecidas</h2>
-			<p class="text-dark md:mx-20 mt-10">
+			<p class="text-dark md:mx-20 mt-20">
 				Un migrante se considera desaparecido cuando no se tiene noticias de su llegada pero tampoco
 				existe un cuerpo que pueda confirmar la muerte. En el mejor de los casos solo están
 				retenidos por las autoridades, e incluso, pueden estar bajo custodia durante meses sin que
@@ -152,47 +196,50 @@
 			</p>
 			<div class="flex mt-20">
 				<Button>Ver listado</Button>
-				<div class="swiper-controls" />
+				<div class="swiper-controls flex ml-auto">
+					<!-- svelte-ignore a11y-click-events-have-key-events -->
+					<span on:click={onSwiperPrev}>
+						<ArrowLeftIcon
+							class="control mr-4 {swiperIndex == 0 ? 'control-disabled' : ''}"
+							width="48"
+							height="48"
+						/>
+					</span>
+					<!-- svelte-ignore a11y-click-events-have-key-events -->
+					<span on:click={onSwiperNext}>
+						<ArrowRightIcon
+							class="control {swiperIndex == missing?.length ? 'control-disabled' : ''}"
+							width="48"
+							height="48"
+						/>
+					</span>
+				</div>
 			</div>
 			<div class="w-full mt-10">
 				<Swiper
+					on:swiper={onSwiper}
+					lazy
 					slidesPerView={1}
 					spaceBetween={50}
 					centeredSlides={true}
 					breakpoints={{
 						'768': {
-							slidesPerView: 2.2,
+							slidesPerView: 2.6,
 							spaceBetween: 30,
 							centeredSlides: false
 						}
 					}}
 				>
-					<SwiperSlide>
-						<Profile />
-					</SwiperSlide>
-					<SwiperSlide>
-						<Profile />
-					</SwiperSlide>
-					<SwiperSlide>
-						<Profile />
-					</SwiperSlide>
-					<SwiperSlide>
-						<Profile />
-					</SwiperSlide>
-					<SwiperSlide>
-						<Profile />
-					</SwiperSlide>
-					<SwiperSlide>
-						<Profile />
-					</SwiperSlide>
-					<SwiperSlide>
-						<Profile />
-					</SwiperSlide>
+					{#each missing?.slice(1) as p}
+						<SwiperSlide>
+							<Profile data={p} />
+						</SwiperSlide>
+					{/each}
 				</Swiper>
 			</div>
 
 			<div
-				class="bg-dark border-r-4 flex flex-col md:flex-col items-center -mx-10 md:-mx-0 p-10 mt-20 md:rounded-lg"
+				class="bg-dark border-r-4 flex flex-col md:flex-row items-center -mx-10 md:-mx-0 p-10 mt-20 md:rounded-lg"
 			>
 				<p class="text-light text-lg md:text-sm mb-8 md:mb-0">
 					Si tienes algún familiar, amigo o conocido que haya desaparecido tratando de migrar o
@@ -203,31 +250,16 @@
 				<Button>Reportar desaparecido</Button>
 			</div>
 
-			<p class="text-dark md:mx-20 my-20">
-				Te mostramos la distribución del presupuesto regional durante los años 2010 al 2021. Puedes
-				observar tanto el gasto presupuestado total, como el presupuesto por habitante. También
-				puedes ver las cantidades por área funcional, como por ejemplo Sanidad, referidas a cada
-				región o a todo el territorio nacional. Ten en cuenta que algunas comunidades autónomas
-				tienen competencias que otras no tienen -pasa, por ejemplo, en Justicia, que en ocasiones
-				está transferida y en otras no-, por Te mostramos la distribución del presupuesto regional
-				durante los años 2010 al 2021. Puedes observar tanto el gasto presupuestado total, como el
-				presupuesto por habitante. También puedes ver las cantidades por área funcional, como por
-				ejemplo Sanidad, referidas a cada región o a todo el territorio nacional. Ten en cuenta que
-				algunas comunidades autónomas tienen competencias que otras no tienen -pasa, por ejemplo, en
-				Justicia, que en ocasiones está transferida y en otras no-, por lo que el gasto total no es
-				comparable sin tener en cuenta esas diferencias.lo que el gasto total no es comparable sin
-				tener en cuenta esas diferencias.
-			</p>
-
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-10 mt-20">
 				<Article />
 				<Article />
 			</div>
 		</div>
+		<div class="section-5-decor mt-20" />
 	</section>
-	<section class="section-4 flex flex-col items-center bg-dark">
+	<section class="section-6 flex flex-col items-center bg-dark">
 		<div class="grid md:grid-cols-2 flex-1 my-20 max-w-5xl px-10 md:px-0 gap-20">
-			<Map map={map} data={data} bind:this={mapComponent} />
+			<Map {map} data={people} bind:this={mapComponent} />
 			<div id="map-text" class="block order-1 md:order-2 max-h-96 overflow-x-auto pb-2">
 				<h2 class="title">Rutas Migratorias</h2>
 				<p class="text-gray">
@@ -269,11 +301,68 @@
 				</div>
 			</div>
 		</div>
+		<div class="section-6-decor" />
+		<div class="max-w-3xl my-32">
+			<p class="text-light">
+				Entre enero de 2021 y noviembre de 2022 más de 8302 personas han sido repatriadas a Cuba:
+				7158 desde Estados Unidos, 933 desde México, 16 desde Guatemala y 195 desde Bahamas. Han
+				sido interceptados en el mar 619 y 208 rescatados por las autoridades marítimas.
+				<br /><br />
+				Aunque muchos consiguen llegar a su destino, la migración irregular no es una vía segura y muchas
+				veces no tiene un final feliz.
+			</p>
+		</div>
 	</section>
 </main>
 
 <style>
 	:global(.swiper) {
 		overflow: unset !important;
+	}
+
+	.section-1 .section-1-wrapper {
+		background-image: url(/src/lib/assets/images/luz.svg);
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: contain;
+		height: 90vh;
+	}
+	.section-1 .section-1-decor {
+		bottom: -100px;
+		position: absolute;
+	}
+
+	.section-2 {
+		padding-top: 200px;
+	}
+	.section-2 .section-2-decor {
+		margin-top: 5rem;
+		width: 100%;
+		height: 300px;
+		background-image: url(/src/lib/assets/images/mapa.png);
+		background-size: cover;
+		background-position: center;
+	}
+
+	.section-5 .section-5-decor {
+		width: 100%;
+		height: 350px;
+		background-image: url(/src/lib/assets/images/mar.png);
+		background-size: cover;
+		background-position: center;
+	}
+	:global(.section-5 .swiper-controls .control) {
+		cursor: pointer;
+	}
+	:global(.section-5 .swiper-controls .control.control-disabled) {
+		opacity: 0.4;
+	}
+
+	.section-6 .section-6-decor {
+		height: 500px;
+		width: 100%;
+		background-image: url(/src/lib/assets/images/rio.png);
+		background-size: cover;
+		background-position: center;
 	}
 </style>
