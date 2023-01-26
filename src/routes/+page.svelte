@@ -79,8 +79,6 @@
 					},
 					onLeaveBack: ({ progress, direction, isActive }) => {
 						// map = worldMap;
-                        console.log("place", place)
-                        console.log("i", i)
                         if (i == 0) {
                             placesData = places;
 						    mapComponent.update_data(map, placesData);
