@@ -75,15 +75,16 @@
                 onEnter: () => {
                     map = northAmericaMap;
                     peoplesData = [{
-                        "name": "Fulanito Perez",
-                        "lat": 23.634501,
-                        "lon": -102.552788
+                        name: "Fulanito Perez",
+                        lat: 23.634501,
+                        lon: -102.552788
                     }]
                     mapComponent.update_data(map, peoplesData)
                 },
                 onLeaveBack: ({progress, direction, isActive}) => {
                     map = worldMap
-                    mapComponent.update_data(map, peoples)	
+                    peoplesData = peoples
+                    mapComponent.update_data(map, peoplesData)	
                 }
             },
         })

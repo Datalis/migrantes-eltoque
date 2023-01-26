@@ -8,8 +8,8 @@
         lat: number;
         lon: number;
     }
-    let highcharts;
-    type MapType = (string|HighCharts.GeoJSON|HighCharts.TopoJSON|Array<any>)
+    let highcharts: HighCharts.MapChart;
+    type MapType = (HighCharts.GeoJSON|HighCharts.TopoJSON|Array<any>)
 
     export let map: MapType; 
     export let data: Array<Person>;
