@@ -64,7 +64,7 @@
                 end: "bottom 80%",
                 pin: true,
                 pinSpacing: false,
-                markers: true,
+                // markers: true,
             },
         })
 
