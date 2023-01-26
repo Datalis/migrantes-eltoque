@@ -1,21 +1,22 @@
 <script lang="ts">
 	import ArrowRightIcon from '$lib/assets/images/arrow-right.svg?component';
 	import ArrowLeftIcon from '$lib/assets/images/arrow-left.svg?component';
+	import DecorVela from '$lib/assets/images/vela.svg?component';
 
 	import Button from '$lib/components/button.svelte';
 	import Grid from '$lib/components/grid.svelte';
 	// import Timeline from '$lib/components/timeline.svelte';
 	import Map from '$lib/components/map.svelte';
 
-	import DecorVela from '$lib/assets/images/vela.svg?component';
+	
 
 	import { Swiper, SwiperSlide } from 'swiper/svelte';
 	import { gsap } from 'gsap';
 	import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-	import * as worldMap from '@highcharts/map-collection/custom/world.topo.json';
-	import * as centralAmericaMap from '@highcharts/map-collection/custom/central-america.topo.json';
-	import * as northAmericaMap from '@highcharts/map-collection/custom/north-america.topo.json';
+	import worldMap from '@highcharts/map-collection/custom/world.topo.json';
+	import centralAmericaMap from '@highcharts/map-collection/custom/central-america.topo.json';
+	import northAmericaMap from '@highcharts/map-collection/custom/north-america.topo.json';
 
 	import peoples from '$lib/data/people.json';
 

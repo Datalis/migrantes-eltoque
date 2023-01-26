@@ -13,7 +13,7 @@ const config = {
 			entries: ['*']
 		},
 		adapter: adapter({
-			edge: false
+			edge: false,
 		})
 	}
 };

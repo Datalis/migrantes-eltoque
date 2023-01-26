@@ -13,10 +13,13 @@ const auth = new GoogleAuth({
     scopes: "https://www.googleapis.com/auth/spreadsheets"
 })
 
-const client = await auth.getClient();
 
-const sheet = google.sheets({ version: 'v4', auth: client });
+const get = async (range: string) => {
+    // const client = await auth.getClient();
+    const sheet = google.sheets({ version: 'v4', auth: auth });
+    return sheet.spreadsheets.values.get({ spreadsheetId: SPREADSHEET_ID, range });
+}
 
-export const getDeceasedPersons = () => sheet.spreadsheets.values.get({ spreadsheetId: SPREADSHEET_ID, range: 'Personas fallecidas' });
 
-export const getMissingPersons = () => sheet.spreadsheets.values.get({ spreadsheetId: SPREADSHEET_ID, range: 'Personas desaparecidas' });
+export const getDeceasedPersons = () => get('Personas fallecidas');
+export const getMissingPersons = () => get('Personas desaparecidas');
