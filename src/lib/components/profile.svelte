@@ -1,15 +1,30 @@
 <script lang="ts">
 	import PersonImg from '$lib/assets/images/person.png';
 	import Button from './button.svelte';
+
+	export let data: any;
 </script>
 
-<div class="flex flex-col">
-	<img src={PersonImg} class="aspect-square rounded-2xl" alt="" />
-	<span class="font-bold text-lg mt-4">Julio García Morales</span>
+<div class="profile flex flex-col">
+	<img src={data[2] ? 'https://api.eltoque.com' + data[2] : 'https://fakeimg.pl/250x250/7856ff/'} class="aspect-square rounded-2xl" alt="" />
+	<span class="font-bold mt-4">{data[3]}</span>
 	<small>La Habana / 42 años</small>
-	<p class="text-sm mt-4 leading-6">
-		Visto por última vez mostramos la distribución del presupuesto regional durante los años 2010 al
-		2021. Puedes observar tanto el gasto presupuestado total, como el presupuesto por habitante.
+	<p class="text-sm my-4 leading-6">
+		{data[7]}
 	</p>
-    <Button classes="mt-4 self-start">Ofrecer información</Button>
+	<Button classes="mt-4 self-start">Ofrecer información</Button>
 </div>
+
+<style>
+	.profile img {
+		object-fit: cover;
+		object-position: center;
+	}
+	.profile p {
+		display: -webkit-box;
+		-webkit-line-clamp: 5;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+</style>
