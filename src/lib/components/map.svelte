@@ -25,7 +25,7 @@
     onMount(() => {
         MarkerClusters(HighCharts)
 
-        highcharts = HighCharts.mapChart('container', {
+        highcharts = HighCharts.mapChart('map-component', {
             chart: {
                 backgroundColor: 'rgb(120, 86, 255)',
                 map
@@ -121,5 +121,5 @@
     })
 </script>
 
-<div id="container" class="map bg-accent w-full h-full rounded-2xl order-2 md:order-1">
+<div id="map-component" class="map bg-accent w-full h-full rounded-2xl order-2 md:order-1 max-h-96">
 </div>
