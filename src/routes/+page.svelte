@@ -18,7 +18,6 @@
 
 	import peoples from '$lib/data/people.json';
 
-<<<<<<< HEAD
     import 'swiper/css';
     import Profile from '$lib/components/profile.svelte';
     import Article from '$lib/components/article.svelte';
