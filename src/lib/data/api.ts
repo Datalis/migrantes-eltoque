@@ -6,7 +6,7 @@ const SPREADSHEET_ID = "1rb96kgAuMVclENWvoZTXtXfN1pqWYdT8EifWkprBMMQ";
 
 const auth = new GoogleAuth({
     credentials: {
-        private_key: GOOGLEAPIS_PRIVATE_KEY,
+        private_key: GOOGLEAPIS_PRIVATE_KEY.split(String.raw`\n`).join('\n'),
         client_id: GOOGLEAPIS_CLIENT_ID,
         client_email: GOOGLEAPIS_CLIENT_EMAIL,
     },
