@@ -16,17 +16,11 @@
 	import centralAmericaMap from '@highcharts/map-collection/custom/central-america.topo.json';
 	import northAmericaMap from '@highcharts/map-collection/custom/north-america.topo.json';
 
-	import peoples from '$lib/data/people.json';
-
-    import 'swiper/css';
-    import Profile from '$lib/components/profile.svelte';
-    import Article from '$lib/components/article.svelte';
-    import { onMount } from 'svelte';
+	import 'swiper/css';
+	import Profile from '$lib/components/profile.svelte';
+	import Article from '$lib/components/article.svelte';
+	import { onMount } from 'svelte';
 	import type { PageData } from './$types';
-
-    let map = worldMap;
-    let peoplesData = peoples;
-    let mapComponent: Map;
 
 	let swiperIndex = 0;
 	let swiper: {
@@ -52,44 +46,53 @@
 
 	$: deceased = data?.deceased?.values || [];
 	$: missing = data?.missing?.values || [];
+	$: places = data?.places?.values?.slice(1) || [];
 
-    onMount(() => {
-        gsap.registerPlugin(ScrollTrigger)
-        
-        gsap.to(mapComponent, {
-            scrollTrigger: {
-                trigger: "#map-component",
-                start: "top 80px",
-                endTrigger: "#map-text",
-                end: "bottom 80%",
-                pin: true,
-                pinSpacing: false,
-                // markers: true,
-            },
-        })
+	let map = northAmericaMap;
+	$: placesData = places;
+	let mapComponent: Map;
 
-        gsap.to("#history-1", {
-            scrollTrigger: {
-                trigger: "#history-1",
-                start: "top center",
-                onEnter: () => {
-                    map = northAmericaMap;
-                    peoplesData = [{
-                        name: "Fulanito Perez",
-                        lat: 23.634501,
-                        lon: -102.552788
-                    }]
-                    mapComponent.update_data(map, peoplesData)
-                },
-                onLeaveBack: ({progress, direction, isActive}) => {
-                    map = worldMap
-                    peoplesData = peoples
-                    mapComponent.update_data(map, peoplesData)	
-                }
-            },
-        })
-		console.log(missing);
-    })
+	onMount(() => {
+		gsap.registerPlugin(ScrollTrigger);
+
+		gsap.to(mapComponent, {
+			scrollTrigger: {
+				trigger: '#map-component',
+				start: 'top 80px',
+				endTrigger: '#map-text',
+				end: 'bottom 80%',
+				pin: true,
+				pinSpacing: false
+				// markers: true,
+			}
+		});
+
+		places.map((place, i) => {
+			gsap.to(`#place-${i}`, {
+				scrollTrigger: {
+					trigger: `#place-${i}`,
+					start: 'top center',
+					onEnter: () => {
+						// map = worldMap;
+						placesData = place;
+						mapComponent.update_data(map, [placesData]);
+					},
+					onLeaveBack: ({ progress, direction, isActive }) => {
+						// map = worldMap;
+                        console.log("place", place)
+                        console.log("i", i)
+                        if (i == 0) {
+                            placesData = places;
+						    mapComponent.update_data(map, placesData);
+                        } else {
+                            placesData = places[i - 1]
+						    mapComponent.update_data(map, [placesData]);
+                        }
+					}
+				}
+			});
+		});
+	});
 </script>
 
 <main class="overflow-hidden">
@@ -264,50 +267,33 @@
 		</div>
 		<div class="section-5-decor mt-20" />
 	</section>
-    <section class="section-6 flex flex-col items-center bg-dark" id="section-map">
-        <div class="grid md:grid-cols-2 flex-1 my-20 max-w-5xl px-10 md:px-0 gap-20">
-            <Map map={map} data={peoplesData} bind:this={mapComponent} />
-            <div id="map-text" class="block order-1 md:order-2">
-                <h2 class="title">Rutas Migratorias</h2>
-                <p class="text-gray">
-                    Cruzar por el mar las 90 millas —o un poco más dependiendo del punto de salida— que separa
-                    a Cuba de los Estados Unidos en balsas o embarcaciones rústicas es una vía usada desde
-                    hace muchos por cubanas y cubanos. Durante esta nueva oleada no ha dejado de utilizarse, a
-                    pesar de estar muy vigilado por las autoridades de ambas naciones y no tener ninguna
-                    garantía de éxito.
-                    <br /> <br />
-                    Sin embargo, las rutas terrestres cruzando el Darien o partiendo desde Nicaragua, país al que
-                    los cubanos pueden llegar sin necesidad de visado, y atravesando Centroamérica han resultado
-                    más efectivas en este nuevo contexto.
-                    <br /> <br />
-                    Hemos identificados las zonas más peligrosas de estos recorridos y dónde han ocurrido mayor
-                    cantidad de incidentes con migrantes cubanos.
-                </p>
-                <div id="history-1" class="text-gray">
-                    <h2 class="title">Historia 1</h2>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                        incididunt ut labore et dolore magna aliqua. Faucibus scelerisque eleifend donec
-                        pretium. Risus nec feugiat in fermentum posuere urna nec tincidunt. Sagittis id
-                        consectetur purus ut faucibus pulvinar. Nulla pellentesque dignissim enim sit amet
-                        venenatis urna cursus eget. Faucibus vitae aliquet nec ullamcorper sit amet risus
-                        nullam. Quam id leo in vitae turpis massa. Mi eget mauris pharetra et ultrices neque
-                        ornare aenean. Massa tincidunt nunc pulvinar sapien et ligula ullamcorper malesuada
-                        proin. Imperdiet sed euismod nisi porta lorem mollis aliquam ut. Fringilla ut morbi
-                        tincidunt augue. Hendrerit gravida rutrum quisque non tellus. Vitae justo eget magna
-                        fermentum iaculis eu non diam. Venenatis tellus in metus vulputate eu. Dignissim diam
-                        quis enim lobortis scelerisque fermentum dui faucibus. Dignissim suspendisse in est ante
-                        in nibh mauris cursus mattis. Vitae proin sagittis nisl rhoncus mattis. In ante metus
-                        dictum at tempor commodo ullamcorper. Ornare suspendisse sed nisi lacus sed viverra. Sed
-                        euismod nisi porta lorem. Convallis a cras semper auctor neque vitae tempus. Enim nunc
-                        faucibus a pellentesque. Faucibus pulvinar elementum integer enim neque volutpat. Rutrum
-                        tellus pellentesque eu tincidunt tortor. Maecenas accumsan lacus vel facilisis volutpat
-                        est velit egestas dui. Eu scelerisque felis imperdiet proin fermentum leo vel. Morbi
-                        tristique senectus et netus et.
-                    </p>
-                </div>
-            </div>
-        </div>
+	<section class="section-6 flex flex-col items-center bg-dark" id="section-map">
+		<div class="grid md:grid-cols-2 flex-1 my-20 max-w-5xl px-10 md:px-0 gap-20">
+			<Map {map} data={placesData} bind:this={mapComponent} />
+			<div id="map-text" class="block order-1 md:order-2">
+				<h2 class="title">Rutas Migratorias</h2>
+				<p class="text-gray">
+					Cruzar por el mar las 90 millas —o un poco más dependiendo del punto de salida— que separa
+					a Cuba de los Estados Unidos en balsas o embarcaciones rústicas es una vía usada desde
+					hace muchos por cubanas y cubanos. Durante esta nueva oleada no ha dejado de utilizarse, a
+					pesar de estar muy vigilado por las autoridades de ambas naciones y no tener ninguna
+					garantía de éxito.
+					<br /> <br />
+					Sin embargo, las rutas terrestres cruzando el Darien o partiendo desde Nicaragua, país al que
+					los cubanos pueden llegar sin necesidad de visado, y atravesando Centroamérica han resultado
+					más efectivas en este nuevo contexto.
+					<br /> <br />
+					Hemos identificados las zonas más peligrosas de estos recorridos y dónde han ocurrido mayor
+					cantidad de incidentes con migrantes cubanos.
+				</p>
+				{#each places as p, index}
+					<div id="place-{index}" class="text-gray">
+						<h2 class="title">{p[0]}</h2>
+						<p>{p[1]}</p>
+					</div>
+				{/each}
+			</div>
+		</div>
 		<div class="section-6-decor" />
 		<div class="max-w-3xl my-32">
 			<p class="text-light">
@@ -319,7 +305,7 @@
 				veces no tiene un final feliz.
 			</p>
 		</div>
-    </section>
+	</section>
 </main>
 
 <style>

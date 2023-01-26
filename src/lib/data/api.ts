@@ -23,3 +23,4 @@ const get = async (range: string) => {
 
 export const getDeceasedPersons = () => get('Personas fallecidas');
 export const getMissingPersons = () => get('Personas desaparecidas');
+export const getDangerousPlaces = () => get('Lugares peligrosos');

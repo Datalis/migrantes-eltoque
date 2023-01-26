@@ -3,7 +3,7 @@
     import * as MarkerClusters from "highcharts/modules/marker-clusters";
     import { onMount } from "svelte";
 
-    interface Person extends HighCharts.SeriesMappointDataOptions {
+    interface Place extends HighCharts.SeriesMappointDataOptions {
         name: string;
         lat: number;
         lon: number;
@@ -12,13 +12,28 @@
     type MapType = (HighCharts.GeoJSON|HighCharts.TopoJSON|Array<any>)
 
     export let map: MapType; 
-    export let data: Array<Person>;
-    export function update_data(new_map: MapType, new_data: Array<Person>) {
+    export let data: Array<any>;
+    export function update_data(new_map: MapType | null, new_data: string[][]) {
         if (new_map) {
             // highcharts.series[0].setData(new_map)
             highcharts.series[0].update({data: [], mapData: new_map});
         }
-        highcharts.series[1].setData(new_data, true, true)
+        highcharts.series[1].setData(processData(new_data), true, true)
+    }
+
+    function processData (data: string[][]): Place[] {
+        const results: Place[] = []
+
+        data.forEach(element => {
+            if (element.length === 3) {
+                results.push({
+                    name: element[0],
+                    lat: parseInt(element[2].split(",")[0].trim()),
+                    lon: parseInt(element[2].split(",")[1].trim()),
+                }) 
+            }
+        });
+        return results
     }
     
 
@@ -39,7 +54,7 @@
             tooltip: {
                 formatter: function () {
                     if (this.point.clusteredData) {
-                        return this.point.clusterPointsAmount + ' personas';
+                        return this.point.clusterPointsAmount + ' lugares';
                     }
                     return this.point.name + '<br> lat: ' + this.point.lat;
                 }
@@ -113,9 +128,9 @@
                 type: 'mappoint',
                 enableMouseTracking: true,
                 colorKey: 'clusterPointsAmount',
-                name: 'Personas',
+                name: 'Lugares',
                 showInLegend: false,
-                data
+                data: processData(data)
             }]
         })
     })
