@@ -27,10 +27,20 @@
         border: 2px solid #7856ff;
         color: #fffffd;
     }
-    
     .btn.btn-solid.btn-accent:hover {
         background-color: #412C90;
         border-color: #412C90;
+    }
+
+
+    .btn.btn-solid.btn-light {
+        background-color: #fffffd;
+        border: 2px solid #fffffd;
+        color: #7856ff;
+    }
+    .btn.btn-solid.btn-light:hover {
+        background-color: #fffffd;
+        border-color: #fffffd;
     }
 
     .btn.btn-bordered.btn-accent {
