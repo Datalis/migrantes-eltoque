@@ -5,22 +5,18 @@
 
 	import Button from '$lib/components/button.svelte';
 	import Grid from '$lib/components/grid.svelte';
-	import Timeline from '$lib/components/timeline.svelte';
 	import Map from '$lib/components/map.svelte';
+	import Profile from '$lib/components/profile.svelte';
+	import Article from '$lib/components/article.svelte';
 
 	import { Swiper, SwiperSlide } from 'swiper/svelte';
 	import { gsap } from 'gsap';
 	import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-	import worldMap from '@highcharts/map-collection/custom/world.topo.json';
-	import centralAmericaMap from '@highcharts/map-collection/custom/central-america.topo.json';
-	import northAmericaMap from '@highcharts/map-collection/custom/north-america.topo.json';
-
-	import 'swiper/css';
-	import Profile from '$lib/components/profile.svelte';
-	import Article from '$lib/components/article.svelte';
 	import { onMount } from 'svelte';
 	import type { PageData } from './$types';
+
+	import 'swiper/css';
 
 	let swiperIndex = 0;
 	let swiper: {
@@ -48,44 +44,39 @@
 	$: missing = data?.missing?.values || [];
 	$: places = data?.places?.values?.slice(1) || [];
 
-	let map = northAmericaMap;
-	$: placesData = places;
 	let mapComponent: Map;
 
 	onMount(() => {
 		gsap.registerPlugin(ScrollTrigger);
 
-		gsap.to(mapComponent, {
+		gsap.to('#map-component', {
 			scrollTrigger: {
-				trigger: '#map-component',
-				start: 'top 80px',
+				trigger: '.section-6',
+				start: 'top top',
 				endTrigger: '#map-text',
-				end: 'bottom 80%',
-				pin: true,
-				pinSpacing: false
-				// markers: true,
+				end: 'bottom bottom',
+				pin: '#map-component',
+				pinSpacing: false,
+				markers: true,
+				scrub: true
 			}
 		});
 
-		places.map((place, i) => {
-			gsap.to(`#place-${i}`, {
+		gsap.utils.toArray('.place').forEach((e: any, i: number) => {
+			gsap.to(e, {
 				scrollTrigger: {
-					trigger: `#place-${i}`,
+					trigger: e,
 					start: 'top center',
 					onEnter: () => {
-						// map = worldMap;
-						placesData = place;
-						mapComponent.update_data(map, [placesData]);
+						const place = places[i];
+						mapComponent?.update([place]);
 					},
-					onLeaveBack: ({ progress, direction, isActive }) => {
-						// map = worldMap;
-                        if (i == 0) {
-                            placesData = places;
-						    mapComponent.update_data(map, placesData);
-                        } else {
-                            placesData = places[i - 1]
-						    mapComponent.update_data(map, [placesData]);
-                        }
+					onLeaveBack: () => {
+						if (i == 0) {
+							mapComponent?.update(places);
+						} else {
+							mapComponent?.update([places[i - 1]]);
+						}
 					}
 				}
 			});
@@ -266,28 +257,32 @@
 		<div class="section-5-decor mt-20" />
 	</section>
 	<section class="section-6 flex flex-col items-center bg-dark" id="section-map">
-		<div class="grid md:grid-cols-2 flex-1 my-20 max-w-5xl px-10 md:px-0 gap-20">
-			<Map {map} data={placesData} bind:this={mapComponent} />
-			<div id="map-text" class="block order-1 md:order-2">
-				<h2 class="title">Rutas Migratorias</h2>
-				<p class="text-gray">
-					Cruzar por el mar las 90 millas —o un poco más dependiendo del punto de salida— que separa
-					a Cuba de los Estados Unidos en balsas o embarcaciones rústicas es una vía usada desde
-					hace muchos por cubanas y cubanos. Durante esta nueva oleada no ha dejado de utilizarse, a
-					pesar de estar muy vigilado por las autoridades de ambas naciones y no tener ninguna
-					garantía de éxito.
-					<br /> <br />
-					Sin embargo, las rutas terrestres cruzando el Darien o partiendo desde Nicaragua, país al que
-					los cubanos pueden llegar sin necesidad de visado, y atravesando Centroamérica han resultado
-					más efectivas en este nuevo contexto.
-					<br /> <br />
-					Hemos identificados las zonas más peligrosas de estos recorridos y dónde han ocurrido mayor
-					cantidad de incidentes con migrantes cubanos.
-				</p>
+		<div class="grid md:grid-cols-2 flex-1  max-w-5xl px-10 md:px-0 gap-20">
+			<div class="map h-screen flex flex-col">
+				<Map data={places} bind:this={mapComponent} />
+			</div>
+			<div id="map-text" class="block order-1 md:order-2 my-20">
+				<div class="intro min-h-screen">
+					<h2 class="title">Rutas Migratorias</h2>
+					<p class="text-gray">
+						Cruzar por el mar las 90 millas —o un poco más dependiendo del punto de salida— que
+						separa a Cuba de los Estados Unidos en balsas o embarcaciones rústicas es una vía usada
+						desde hace muchos por cubanas y cubanos. Durante esta nueva oleada no ha dejado de
+						utilizarse, a pesar de estar muy vigilado por las autoridades de ambas naciones y no
+						tener ninguna garantía de éxito.
+						<br /> <br />
+						Sin embargo, las rutas terrestres cruzando el Darien o partiendo desde Nicaragua, país al
+						que los cubanos pueden llegar sin necesidad de visado, y atravesando Centroamérica han resultado
+						más efectivas en este nuevo contexto.
+						<br /> <br />
+						Hemos identificados las zonas más peligrosas de estos recorridos y dónde han ocurrido mayor
+						cantidad de incidentes con migrantes cubanos.
+					</p>
+				</div>
 				{#each places as p, index}
-					<div id="place-{index}" class="text-gray">
+					<div id="place-{index}" class="place text-gray min-h-screen">
 						<h2 class="title">{p[0]}</h2>
-						<p>{p[1]}</p>
+						<p>{p[1] || 'Some text'}</p>
 					</div>
 				{/each}
 			</div>
@@ -330,7 +325,7 @@
 		margin-top: 5rem;
 		width: 100%;
 		height: 300px;
-		background-image: url(/src/lib/assets/images/mapa.png);
+		background-image: url(/src/lib/assets/images/mapa.webp);
 		background-size: cover;
 		background-position: center;
 	}
@@ -338,7 +333,7 @@
 	.section-5 .section-5-decor {
 		width: 100%;
 		height: 350px;
-		background-image: url(/src/lib/assets/images/mar.png);
+		background-image: url(/src/lib/assets/images/mar.webp);
 		background-size: cover;
 		background-position: center;
 	}
@@ -352,7 +347,7 @@
 	.section-6 .section-6-decor {
 		height: 500px;
 		width: 100%;
-		background-image: url(/src/lib/assets/images/rio.png);
+		background-image: url(/src/lib/assets/images/rio.webp);
 		background-size: cover;
 		background-position: center;
 	}

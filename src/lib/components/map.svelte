@@ -1,140 +1,110 @@
 <script lang="ts">
-    import * as HighCharts from "highcharts/highmaps";
-    import * as MarkerClusters from "highcharts/modules/marker-clusters";
-    import { onMount } from "svelte";
+	import Highcharts from 'highcharts/highmaps';
+  
+	import { onMount } from 'svelte';
 
-    interface Place extends HighCharts.SeriesMappointDataOptions {
-        name: string;
-        lat: number;
-        lon: number;
-    }
-    let highcharts: HighCharts.MapChart;
-    type MapType = (HighCharts.GeoJSON|HighCharts.TopoJSON|Array<any>)
+	export let data: any[] = [];
 
-    export let map: MapType; 
-    export let data: Array<any>;
-    export function update_data(new_map: MapType | null, new_data: string[][]) {
-        if (new_map) {
-            // highcharts.series[0].setData(new_map)
-            highcharts.series[0].update({data: [], mapData: new_map});
+    let highcharts: Highcharts.MapChart;
+
+    export const update = (data: any[]) => {
+        highcharts?.series[1].update({
+			data: mapData(data),
+			type: 'mappoint'
+		}, true);
+        if (data.length == 1) {
+            // Zoom to point
+            const item = mapData(data)[0];
+            let point = highcharts?.fromLatLonToPoint({ lat: item?.lat, lon: item?.lon });
+            highcharts?.mapZoom(1, point.x, point.y);
         }
-        highcharts.series[1].setData(processData(new_data), true, true)
     }
 
-    function processData (data: string[][]): Place[] {
-        const results: Place[] = []
+    const mapData = (data: any[]) => data
+			.filter((e) => e.length == 3)
+			.map((e) => ({
+				name: e[0],
+				lat: parseFloat(e[2].split(',')[0].trim()),
+				lon: parseFloat(e[2].split(',')[1].trim())
+			}));
 
-        data.forEach(element => {
-            if (element.length === 3) {
-                results.push({
-                    name: element[0],
-                    lat: parseInt(element[2].split(",")[0].trim()),
-                    lon: parseInt(element[2].split(",")[1].trim()),
-                }) 
-            }
-        });
-        return results
-    }
-    
+	onMount(() => {
+		// Lazy load GeoJson data & library setup
+		import('@highcharts/map-collection/custom/north-america.topo.json').then((geoMap) => {
 
-    onMount(() => {
-        MarkerClusters(HighCharts)
-
-        highcharts = HighCharts.mapChart('map-component', {
-            chart: {
-                backgroundColor: 'rgb(120, 86, 255)',
-                map
-            },
-            title: {
-                text: ''
-            },
-            mapNavigation: {
-                enabled: false
-            },
-            tooltip: {
-                formatter: function () {
-                    if (this.point.clusteredData) {
-                        return this.point.clusterPointsAmount + ' lugares';
-                    }
-                    return this.point.name + '<br> lat: ' + this.point.lat;
-                }
-            },
-            plotOptions: {
-                series: {
-                    dataLabels: {
-                        style: {
-                            color: '#fff',
-                            textOutline: '',
-                            fontSize: '1rem',
-                            textDecoration: 'underline'
-                        }
-                    }
+			highcharts = Highcharts.mapChart({
+				chart: {
+					renderTo: 'map-component',
+					backgroundColor: 'rgb(120, 86, 255)',
+					map: geoMap
+				},
+				title: {
+					text: ''
+				},
+				mapNavigation: {
+					enabled: false,
+				},
+                mapView: {
+                    zoom: 4,
+                    center: [-88.58134373081575, 24.750755309124187],
                 },
-                mappoint: {
-                    color: 'rgb(180, 180, 180)',
-                    dataLabels: {
-                        style: {
-                            color: '#fff'
+				plotOptions: {
+					series: {
+						dataLabels: {
+							style: {
+								color: '#fff',
+								textOutline: '',
+								fontSize: '1rem',
+								textDecoration: 'underline'
+							}
+						}
+					},
+					mappoint: {
+						color: 'rgb(180, 180, 180)',
+						dataLabels: {
+							style: {
+								color: '#fff'
+							}
+						},
+                        cluster: {
+                            enabled: true,
+                            layoutAlgorithm: {
+                                type: 'grid',
+                                gridSize: 70
+                            }
                         }
-                    },
-                    cluster: {
-                        enabled: true,
-                        allowOverlap: false,
-                        animation: {
-                            duration: 450
-                        },
-                        layoutAlgorithm: {
-                            type: 'grid',
-                            gridSize: 70
-                        },
-                        zones: [{
-                            from: 1,
-                            to: 4,
-                            marker: {
-                                radius: 13
-                            }
-                        }, {
-                            from: 5,
-                            to: 9,
-                            marker: {
-                                radius: 15
-                            }
-                        }, {
-                            from: 10,
-                            to: 14,
-                            marker: {
-                                radius: 18
-                            }
-                        }, {
-                            from: 15,
-                            to: 99,
-                            marker: {
-                                radius: 20
-                            }
-                        }]
-                    }
-                }
-            },
-            series: [{
-                name: 'Europe',
-                type: 'map',
-                accessibility: {
-                    exposeAsGroupOnly: true
-                },
-                borderColor: 'rgb(120, 86, 255)',
-                nullColor: 'rgb(76, 52, 164)',
-                showInLegend: false
-            }, {
-                type: 'mappoint',
-                enableMouseTracking: true,
-                colorKey: 'clusterPointsAmount',
-                name: 'Lugares',
-                showInLegend: false,
-                data: processData(data)
-            }]
-        })
-    })
+						
+					}
+				},
+				series: [
+					{
+						name: 'Basemap',
+						type: 'map',
+						borderColor: 'rgb(120, 86, 255)',
+						nullColor: 'rgb(76, 52, 164)',
+						showInLegend: false,
+					},
+					{
+						name: 'Lugares',
+						type: 'mappoint',
+						enableMouseTracking: true,
+						colorKey: 'clusterPointsAmount',
+						showInLegend: false,
+						data: mapData(data)
+					}
+				]
+			});
+
+            // MarkerClusters(Highcharts);
+		});
+	});
 </script>
 
-<div id="map-component" class="map bg-accent w-full h-full rounded-2xl order-2 md:order-1 max-h-96">
-</div>
+<div id="map-component" class="w-full rounded-2xl order-2 md:order-1" />
+
+<style>
+    #map-component {
+        height: 90%;
+        margin: auto;
+    }
+</style>
