@@ -28,7 +28,7 @@
 				</div>
 				<h3 class="text-center mt-auto md:text-2xl font-bold text-accent">{person[2]}</h3>
 				<small class="mt-2 text-light font-light">{person[3]} años</small>
-				<DecorDeceased class="mt-auto relative w-3/4"></DecorDeceased>
+				<DecorDeceased class="mt-4 relative w-3/4"></DecorDeceased>
 			</div>
 		{/each}
 	</div>
