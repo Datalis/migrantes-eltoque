@@ -257,12 +257,12 @@
 		<div class="section-5-decor mt-20" />
 	</section>
 	<section class="section-6 flex flex-col items-center bg-dark" id="section-map">
-		<div class="grid md:grid-cols-2 flex-1  max-w-5xl px-10 md:px-0 gap-20">
-			<div class="map h-screen flex flex-col">
+		<div class="grid md:grid-cols-2 flex-1 max-w-5xl md:px-0 gap-20">
+			<div class="map h-screen flex flex-col px-10">
 				<Map data={places} bind:this={mapComponent} />
 			</div>
-			<div id="map-text" class="block order-1 md:order-2 my-20">
-				<div class="intro min-h-screen">
+			<div id="map-text" class="block my-20 z-10">
+				<div class="intro min-h-screen bg-black md:px-0">
 					<h2 class="title">Rutas Migratorias</h2>
 					<p class="text-gray">
 						Cruzar por el mar las 90 millas —o un poco más dependiendo del punto de salida— que
@@ -280,9 +280,11 @@
 					</p>
 				</div>
 				{#each places as p, index}
-					<div id="place-{index}" class="place text-gray min-h-screen">
-						<h2 class="title">{p[0]}</h2>
-						<p>{p[1] || 'Some text'}</p>
+					<div id="place-{index}" class="place bg-black text-gray min-h-screen md:px-0">
+						<div>
+							<h2 class="title">{p[0]}</h2>
+							<p>{p[1] || 'Some text'}</p>
+						</div>
 					</div>
 				{/each}
 			</div>
@@ -350,5 +352,9 @@
 		background-image: url(/src/lib/assets/images/rio.webp);
 		background-size: cover;
 		background-position: center;
+	}
+
+	.intro, .place div {
+		@apply bg-opacity-70 backdrop-blur px-10 py-5;
 	}
 </style>

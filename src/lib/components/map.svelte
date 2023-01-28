@@ -100,7 +100,7 @@
 	});
 </script>
 
-<div id="map-component" class="w-full rounded-2xl order-2 md:order-1" />
+<div id="map-component" class="w-full rounded-2xl z-0" />
 
 <style>
     #map-component {
