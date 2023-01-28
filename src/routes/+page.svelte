@@ -57,7 +57,7 @@
 				end: 'bottom bottom',
 				pin: '#map-component',
 				pinSpacing: false,
-				markers: true,
+				// markers: true,
 				scrub: true
 			}
 		});
