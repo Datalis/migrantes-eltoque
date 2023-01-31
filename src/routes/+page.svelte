@@ -88,11 +88,11 @@
 						utilizarse, a pesar de estar muy vigilado por las autoridades de ambas naciones y no
 						tener ninguna garantía de éxito.
 						<br /> <br />
-						Sin embargo, las rutas terrestres cruzando el Darien o partiendo desde Nicaragua, país al
-						que los cubanos pueden llegar sin necesidad de visado, y atravesando Centroamérica han resultado
-						más efectivas en este nuevo contexto.
+						Sin embargo, las rutas terrestres que cruzan el Darien o parten desde Nicaragua, país al
+						que los cubanos pueden llegar sin necesidad de visado, y que atraviesan Centroamérica han resultado
+						más efectivas en este nuevo contexto. Esto puede cambiar.
 						<br /> <br />
-						Hemos identificados las zonas más peligrosas de estos recorridos y dónde han ocurrido mayor
+						Estas son las zonas más peligrosas de los recorridos y dónde ha ocurrido la mayor
 						cantidad de incidentes con migrantes cubanos.
 					</p>
 				</div>
