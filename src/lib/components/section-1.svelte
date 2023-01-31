@@ -7,14 +7,14 @@
         <h2
             class="flex flex-col md:flex-row justify-center items-center md:items-baseline font-sans font-bold  text-light"
         >
-            <span class="text-accent-dark md:mr-4 font-extrabold text-8xl">+70</span>
-            <span class="text-4xl md:text-6xl font-bold">MUERTOS</span>
+            <span class="text-accent-dark md:mr-4 font-extrabold text-7xl">+70</span>
+            <span class="text-2xl md:text-6xl font-bold">MUERTOS</span>
         </h2>
         <h2
             class="flex flex-col md:flex-row justify-center items-center md:items-baseline font-sans font-bold  text-light mt-4 mb-10"
         >
-            <span class="text-accent-dark md:mr-4 font-extrabold text-8xl">+175</span>
-            <span class="text-4xl md:text-6xl font-bold">DESAPARECIDOS</span>
+            <span class="text-accent-dark md:mr-4 font-extrabold text-7xl">+175</span>
+            <span class="text-2xl md:text-6xl font-bold">DESAPARECIDOS</span>
         </h2>
         <h2 class="font-sans font-bold text-2xl md:text-4xl text-light">
             En la travesía de Cuba <br /> a Estados Unidos
@@ -38,7 +38,7 @@
 		height: 90vh;
 	}
 	.section-1 .section-1-decor {
-		bottom: -100px;
+		bottom: -120px;
 		position: absolute;
 	}
 </style>

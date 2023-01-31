@@ -1,34 +1,41 @@
 <script>
-    import MapBackground from '$lib/assets/images/section-2/mapa.png';
+	import MapBackground from '$lib/assets/images/section-2/mapa.png';
 	import LinePath from '$lib/assets/images/section-2/line-full.svg?component';
+	import LinePathSmall from '$lib/assets/images/section-2/line-small.svg?component';
 	import Plane from '$lib/assets/images/section-2/plane.png';
-    import Volcano from '$lib/assets/images/section-2/volcano.png';
+	import Volcano from '$lib/assets/images/section-2/volcano.png';
 	import gsap from 'gsap';
 	import MotionPathPlugin from 'gsap/MotionPathPlugin';
-    import ScrollTrigger from 'gsap/ScrollTrigger';
+	import ScrollTrigger from 'gsap/ScrollTrigger';
 	import { onMount } from 'svelte';
 
-	onMount(() => {
-        gsap.registerPlugin(ScrollTrigger);
-		gsap.registerPlugin(MotionPathPlugin);
+	let windowWidth = 0;
 
-		gsap.to('#plane', {
-            scrollTrigger: {
-                // markers: true,
-                trigger: '.section-2-decor',
-                scrub: 1, 
-            },
-			motionPath: {
-				path: '#line path',
-				align: '#line path',
-				autoRotate: true,
-				alignOrigin: [0.5, 0.5],
-                start: 0.7,
-                end: 0.6,
-			}
-		});
+	onMount(() => {
+		if (windowWidth >= 768) {
+			gsap.registerPlugin(ScrollTrigger);
+			gsap.registerPlugin(MotionPathPlugin);
+
+			gsap.to('#plane', {
+				scrollTrigger: {
+					// markers: true,
+					trigger: '.section-2-decor',
+					scrub: 1
+				},
+				motionPath: {
+					path: '#line path',
+					align: '#line path',
+					autoRotate: true,
+					alignOrigin: [0.5, 0.5],
+					start: 0.7,
+					end: 0.6
+				}
+			});
+		}
 	});
 </script>
+
+<svelte:window bind:innerWidth={windowWidth} />
 
 <section class="section-2 flex flex-col items-center justify-center bg-dark min-h-screen">
 	<div class="container mx-auto px-10 md:px-0 max-w-3xl">
@@ -58,10 +65,11 @@
 		</p>
 	</div>
 	<div class="section-2-decor">
-        <img class="decor-bg" src={MapBackground} alt="">
-		<LinePath id="line" class="decor-line w-full" />
+		<img class="decor-bg" src={MapBackground} alt="" />
+		<LinePath id="line" class="decor-line w-full hidden md:block" />
+		<LinePathSmall id="line" class="decor-line w-full md:hidden" />
 		<img id="plane" class="decor-plane" src={Plane} alt="" />
-        <img id="volcano" class="decor-volcano" src={Volcano} alt="">
+		<img id="volcano" class="decor-volcano" src={Volcano} alt="" />
 	</div>
 </section>
 
@@ -70,38 +78,57 @@
 		padding-top: 200px;
 	}
 	.section-2 .section-2-decor {
-        position: relative;
+		position: relative;
 		margin-top: 5rem;
 		width: 100%;
 		height: 736px;
 	}
-    .section-2 .section-2-decor .decor-bg {
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        object-fit: cover;
-        object-position: center;
-        z-index: 1;
-        height: 600px;
-    }
-    :global(.section-2 .section-2-decor .decor-line) {
-        z-index: 2;
-        position: relative;
-    }
+	.section-2 .section-2-decor .decor-bg {
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		object-fit: cover;
+		object-position: center;
+		z-index: 1;
+		height: 600px;
+	}
+
+	:global(.section-2 .section-2-decor .decor-line) {
+		z-index: 2;
+		position: relative;
+	}
 	.section-2 .section-2-decor .decor-plane {
 		position: absolute;
-        width: 400px;
-        height: 400px;
-        object-fit: contain;
-        object-position: center;
-        z-index: 9999;
+		width: 400px;
+		height: 400px;
+		object-fit: contain;
+		object-position: center;
+		z-index: 9999;
 	}
-    .section-2 .section-2-decor .decor-volcano {
-        position: absolute;
-        width: 50%;
-        top: 30%;
-        left: 20%;
-        z-index: 4;
-    }
+	.section-2 .section-2-decor .decor-volcano {
+		position: absolute;
+		width: 50%;
+		top: 30%;
+		left: 20%;
+		z-index: 4;
+	}
+
+	@media (max-width: 768px) {
+		.section-2 .section-2-decor .decor-bg {
+			height: 736px;
+		}
+
+		.section-2 .section-2-decor .decor-volcano {
+			width: 100%;
+		}
+
+		.section-2 .section-2-decor .decor-plane {
+			width: 300px;
+			height: 300px;
+			transform: rotate(-130deg);
+			left: calc(50% - 200px);
+			bottom: calc(50% - 250px);
+		}
+	}
 </style>
