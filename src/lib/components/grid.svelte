@@ -14,11 +14,6 @@
 				Sirva este espacio como recuerdo de esas personas que no pudieron completar su camino.
 			</h2>
 		</div>
-		<!-- <div class="p-5 flex flex-col aspect-square">
-			<span class="text-accent font-extrabold text-3xl">04</span>
-			<h3 class="mt-auto text-2xl font-bold text-light">Julio García Morales</h3>
-			<small class="mt-2 text-light">42 años</small>
-		</div> -->
 		{#each data.slice(1) as person}
 			<div class="grid-item flex flex-col items-center justify-around p-4 m-2 md:m-0">
 				<div class="overlay p-4 flex items-center">
@@ -26,7 +21,7 @@
 						{person[10]}
 					</p>		
 				</div>
-				<h3 class="text-center mt-auto md:text-2xl font-bold text-accent">{person[2]}</h3>
+				<h3 class="name text-center mt-auto md:text-2xl font-bold text-accent">{person[2]}</h3>
 				<small class="mt-2 text-light font-light">{person[3]} años</small>
 				<DecorDeceased class="mt-4 relative w-3/4"></DecorDeceased>
 			</div>
@@ -59,6 +54,9 @@
 		right: 0;
 		opacity: 0;
 		z-index: 1;
+	}
+	.grid-item .name {
+		min-height: 64px;
 	}
 	.memorial-block {
 		background-image: url(/src/lib/assets/images/angel.svg);
