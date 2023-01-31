@@ -25,6 +25,23 @@
 
 	onMount(() => {
 		gsap.registerPlugin(ScrollTrigger);
+		const getPlace = (index: number) => {
+			let found = false
+			let results = []
+			for(let position = 0; position < places.length; position++) {
+				if (found && !!places[position][0]) {
+					break
+				}
+				if (places[position][0] == index + 1) {
+					found = true
+					continue
+				}
+				if (!places[position][0] && found) {
+					results.push(places[position])
+				}
+			}
+			return results
+		}
 
 		gsap.to('#map-component', {
 			scrollTrigger: {
@@ -40,27 +57,10 @@
 		});
 
 		gsap.utils.toArray('.place').forEach((e: any, i: number) => {
-			const getPlace = (index: number) => {
-				let found = false
-				let results = []
-				for(let position = 0; position < places.length; position++) {
-					if (found && !!places[position][0]) {
-						break
-					}
-					if (places[position][0] == index + 1) {
-						found = true
-						continue
-					}
-					if (!places[position][0] && found) {
-						results.push(places[position])
-					}
-				}
-				return results
-			}
 			gsap.to(e, {
 				scrollTrigger: {
 					trigger: e,
-					start: 'top center',
+					start: 'top bottom',
 					onEnter: () => {
 						const place = getPlace(i)
 						mapComponent?.update(place);
@@ -69,12 +69,25 @@
 						if (i == 0) {
 							mapComponent?.update(places);
 						} else {
-							mapComponent?.update(getPlace((i - 1)));
+							mapComponent?.update(getPlace(i - 1));
 						}
 					}
 				}
 			});
 		});
+
+		gsap.to('.resume', {
+			scrollTrigger: {
+				trigger: '.resume',
+				start: 'top bottom',
+				onEnter: () => {
+					mapComponent?.update(places)
+				},
+				onLeaveBack: () => {
+					mapComponent?.update(getPlace(gsap.utils.toArray('.place').length - 1))
+				}
+			}
+		})
 	});
 </script>
 
@@ -90,7 +103,7 @@
 				<Map data={places} bind:this={mapComponent} />
 			</div>
 			<div id="map-text" class="block my-20 z-10">
-				<div class="intro min-h-screen bg-black md:px-0">
+				<div class="intro bg-black md:px-0">
 					<h2 class="title">Rutas Migratorias</h2>
 					<p class="text-gray">
 						Cruzar por el mar las 90 millas —o un poco más dependiendo del punto de salida— que
@@ -107,14 +120,25 @@
 						cantidad de incidentes con migrantes cubanos.
 					</p>
 				</div>
+				<div class="space h-screen md:h-0"></div>
 				{#each places.filter(place => !!place[0]) as p, index}
-					<div id="place-{index}" class="place bg-black text-gray min-h-screen md:px-0">
+					<div id="place-{index}" class="place bg-black text-gray md:px-0">
 						<div>
 							<h2 class="title">{p[1]}</h2>
 							<p>{p[3] || 'Some text'}</p>
 						</div>
 					</div>
+					<div class="space h-screen md:h-0"></div>
 				{/each}
+				<div class="resume text-gray gb-black md:px-0">
+					<p>
+						Estas rutas no son nuevas para los cubanos, ni tampoco exclusiva de ellos; pero no por eso dejan de
+						ser peligrosas. La inexperiencia de quienes las transitan —tanto en tierra como el mar—, las 
+						condiciones previas de salud y los accidentes llevan muchas veces a finales trágicos y la intervención
+						de las autoridades migratorias en labores de rescates y devolución en distintos países de la región.
+					</p>
+				</div>
+				<div class="space h-screen md:h-0"></div>
 			</div>
 		</div>
 		<div class="section-6-decor" />
@@ -141,7 +165,10 @@
 		background-position: center;
 	}
 
-	.intro, .place div {
+	.section-6 .space {
+	}
+
+	.intro, .place div, .resume {
 		@apply bg-opacity-70 backdrop-blur px-10 py-5;
 	}
 </style>

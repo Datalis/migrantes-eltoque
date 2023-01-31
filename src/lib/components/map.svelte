@@ -60,7 +60,7 @@
 							style: {
 								color: '#fff',
 								textOutline: '',
-								fontSize: '1rem',
+								fontSize: '.8rem',
 								textDecoration: 'underline'
 							}
 						}
