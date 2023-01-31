@@ -20,13 +20,19 @@
         }
     }
 
-    const mapData = (data: any[]) => data
-			.filter((e) => e.length == 3)
-			.map((e) => ({
-				name: e[0],
-				lat: parseFloat(e[2].split(',')[0].trim()),
-				lon: parseFloat(e[2].split(',')[1].trim())
-			}));
+    const mapData = (data: any[]) => {
+		let results: any[] = []
+		for(let i = 0; i < data.length; i++) {
+			if (!data[i][0]) {
+				results.push({
+					name: data[i][1],
+					lat: parseFloat(data[i][2].split(',')[0].trim()),
+					lon: parseFloat(data[i][2].split(',')[1].trim()),
+				})
+			}
+		}
+		return results
+	}
 
 	onMount(() => {
 		// Lazy load GeoJson data & library setup

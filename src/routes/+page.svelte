@@ -1,11 +1,5 @@
 <script lang="ts">
-	
-
-	import Grid from '$lib/components/grid.svelte';
 	import Map from '$lib/components/map.svelte';
-	import Profile from '$lib/components/profile.svelte';
-	import Article from '$lib/components/article.svelte';
-
 	
 	import { gsap } from 'gsap';
 	import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -46,19 +40,36 @@
 		});
 
 		gsap.utils.toArray('.place').forEach((e: any, i: number) => {
+			const getPlace = (index: number) => {
+				let found = false
+				let results = []
+				for(let position = 0; position < places.length; position++) {
+					if (found && !!places[position][0]) {
+						break
+					}
+					if (places[position][0] == index + 1) {
+						found = true
+						continue
+					}
+					if (!places[position][0] && found) {
+						results.push(places[position])
+					}
+				}
+				return results
+			}
 			gsap.to(e, {
 				scrollTrigger: {
 					trigger: e,
 					start: 'top center',
 					onEnter: () => {
-						const place = places[i];
-						mapComponent?.update([place]);
+						const place = getPlace(i)
+						mapComponent?.update(place);
 					},
 					onLeaveBack: () => {
 						if (i == 0) {
 							mapComponent?.update(places);
 						} else {
-							mapComponent?.update([places[i - 1]]);
+							mapComponent?.update(getPlace((i - 1)));
 						}
 					}
 				}
@@ -96,11 +107,11 @@
 						cantidad de incidentes con migrantes cubanos.
 					</p>
 				</div>
-				{#each places as p, index}
+				{#each places.filter(place => !!place[0]) as p, index}
 					<div id="place-{index}" class="place bg-black text-gray min-h-screen md:px-0">
 						<div>
-							<h2 class="title">{p[0]}</h2>
-							<p>{p[1] || 'Some text'}</p>
+							<h2 class="title">{p[1]}</h2>
+							<p>{p[3] || 'Some text'}</p>
 						</div>
 					</div>
 				{/each}
