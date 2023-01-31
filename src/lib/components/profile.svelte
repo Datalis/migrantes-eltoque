@@ -5,14 +5,14 @@
 	export let data: any;
 </script>
 
-<div class="profile flex flex-col">
-	<img src={data[2] ? 'https://api.eltoque.com' + data[2] : 'https://fakeimg.pl/250x250/7856ff/'} class="aspect-square rounded-2xl" alt="" />
+<div class="profile flex flex-col items-center md:items-start">
+	<img src={data[2] ? 'https://api.eltoque.com' + data[2] : 'https://fakeimg.pl/250x250/7856ff/'} class="aspect-square rounded-2xl w-3/4 md:w-full" alt="" />
 	<span class="font-bold mt-4">{data[3]}</span>
 	<small>La Habana / 42 años</small>
 	<p class="text-sm my-4 leading-6">
 		{data[7]}
 	</p>
-	<Button classes="mt-4 self-start">Ofrecer información</Button>
+	<Button classes="mt-4 self-start w-full md:w-auto">Ofrecer información</Button>
 </div>
 
 <style>

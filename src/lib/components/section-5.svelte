@@ -54,8 +54,8 @@
             para publicar los datos y tratar de ayudar a despejar la incertidumbre.
         </p>
         <div class="flex mt-20">
-            <Button>Ver listado</Button>
-            <div class="swiper-controls flex ml-auto">
+            <a href="/desaparecidos" class="w-full md:w-auto"><Button classes="w-full">Ver listado</Button></a>
+            <div class="swiper-controls hidden md:flex ml-auto">
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
                 <span on:click={onSwiperPrev}>
                     <ArrowLeftIcon
@@ -74,7 +74,7 @@
                 </span>
             </div>
         </div>
-        <div class="w-full mt-10">
+        <div class="w-full mt-20">
             <Swiper
                 on:swiper={onSwiper}
                 lazy
@@ -95,10 +95,29 @@
                     </SwiperSlide>
                 {/each}
             </Swiper>
+
+            <div class="swiper-controls flex justify-between w-full ml-auto mt-10 md:hidden">
+                <!-- svelte-ignore a11y-click-events-have-key-events -->
+                <span on:click={onSwiperPrev}>
+                    <ArrowLeftIcon
+                        class="control {swiperIndex == 0 ? 'control-disabled' : ''}"
+                        width="48"
+                        height="48"
+                    />
+                </span>
+                <!-- svelte-ignore a11y-click-events-have-key-events -->
+                <span on:click={onSwiperNext}>
+                    <ArrowRightIcon
+                        class="control {swiperIndex == data?.length ? 'control-disabled' : ''}"
+                        width="48"
+                        height="48"
+                    />
+                </span>
+            </div>
         </div>
 
         <div
-            class="bg-dark border-r-4 flex flex-col md:flex-row items-center -mx-10 md:-mx-0 p-10 mt-20 md:rounded-lg"
+            class="bg-dark border-r-4 flex flex-col md:flex-row items-center -mx-10 md:-mx-0 p-10 mt-10 md:mt-20 md:rounded-lg"
         >
             <p class="text-light text-lg md:text-sm mb-8 md:mb-0">
                 Si tienes algún familiar, amigo o conocido que haya desaparecido tratando de migrar o
