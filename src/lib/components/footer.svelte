@@ -37,20 +37,20 @@
                 <span class="text-gray leading-loose">Programación: Datalis</span>
                 <Button type='bordered' color="gray" classes="text-gray mt-10">Descarga la base de datos</Button>
             </div>
-            <nav class="flex flex-col items-center md:items-end bg-dark md:bg-accent w-full md:w-auto py-5">
+            <nav class="flex flex-col items-center md:items-end bg-dark md:bg-accent w-full md:w-auto md:py-0 py-5">
                 <a href="/" class="text-light leading-loose">Home</a>
                 <a href="/fallecidos" class="text-light leading-loose">Listado de Fallecidos</a>
                 <a href="/desaparecidos" class="text-light leading-loose">Listado de Desparecidos</a>
                 <div class="md:hidden md:ml-auto flex mt-10">
-                    <span class="social-icon">
+                    <a href="/" class="social-icon">
                         <FacebookIcon fill="#e0e0e0" width="32" height="32"></FacebookIcon>
-                    </span>
-                    <span class="social-icon mx-5">
+                    </a>
+                    <a href="/" class="social-icon mx-5">
                         <TwitterIcon fill="#e0e0e0" width="32" height="32"></TwitterIcon>
-                    </span>
-                    <span class="social-icon">
+                    </a>
+                    <a href="/" class="social-icon">
                         <InstagramIcon fill="#e0e0e0" width="32" height="32"></InstagramIcon>
-                    </span>
+                    </a>
                 </div>
             </nav>
         </div>
@@ -71,6 +71,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        cursor: pointer;
     }
     :global(.footer .logo path) {
         fill: #e0e0e0;

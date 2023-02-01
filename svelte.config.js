@@ -10,7 +10,7 @@ const config = {
 
 	kit: {
 		prerender: {
-			entries: ['*']
+			entries: ['*'],
 		},
 		adapter: adapter({
 			edge: false,
