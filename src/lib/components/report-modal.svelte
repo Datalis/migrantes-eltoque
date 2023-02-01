@@ -14,24 +14,34 @@
         }
     }
 
+    const handleSubmit = (e) => {
+        const formData = new FormData(e.target)
+        const data = {};
+        for (let field of formData) {
+            const [key, value] = field;
+            data[key] = value;
+        }
+        console.log(data)
+    }
+
 </script>
 
 <svelte:window on:keydown={handle_keydown} />
 
 <div class="modal bg-dark bg-opacity-100 text-gray w-full h-full flex justify-center" role="dialog" aria-modal="true" bind:this={modal}>
-    <form action="post" class="flex flex-col max-w-lg">
+    <form method="post" class="flex flex-col max-w-lg" on:submit|preventDefault={handleSubmit}>
         <button on:click={close} type="button" class="close absolute right-4 top-4">X</button>
         <label>
             <span>
                 Nombre del desaparecido
             </span>
-            <input type="text" required>
+            <input type="text" required name="missing_name">
         </label>
         <label>
             <span>
                 Nombre del denunciante
             </span>
-            <input type="text" required>
+            <input type="text" required name="complainant_name">
         </label>
         <div class="flex flex-nowrap flex-row">
             <label class="flex flex-col w-2/3 mr-2">
@@ -44,7 +54,7 @@
                 <span>
                     Teléfono
                 </span>
-                <input type="tel">
+                <input type="tel" name="phone_number">
             </label>
         </div>
         <label>
