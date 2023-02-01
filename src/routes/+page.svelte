@@ -11,17 +11,17 @@
 
 	export let data: PageData;
 
-	$: deceased = data?.deceased?.values || [];
-	$: missing = data?.missing?.values || [];
+	$: deceased = data?.deceased?.values?.slice(1) || [];
+	$: missing = data?.missing?.values?.slice(1)?.reverse() || [];
 	$: places = data?.places?.values?.slice(1) || [];
 	$: articles = data?.articles || [];
 
 </script>
 
 <main class="overflow-hidden">
-	<Section_1></Section_1>
+	<Section_1 {deceased} {missing}></Section_1>
 	<Section_2></Section_2>
-	<Section_3></Section_3>
+	<Section_3 {deceased}></Section_3>
 	<Section_4 data={deceased}></Section_4>
 	<Section_5 data={missing} {articles}></Section_5>
 	<Section_6 {places}></Section_6>

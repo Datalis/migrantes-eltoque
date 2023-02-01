@@ -17,10 +17,10 @@
 			class="memorial-block relative col-span-2 row-span-2 bg-accent flex flex-col justify-end p-10"
 		>
 			<h2 class="text-light text-center md:text-left font-bold text-4xl md:mb-10 z-10">
-				Sirva este espacio como recuerdo de esas personas que no pudieron completar su camino.
+				En memoria de quienes no pudieron completar su camino
 			</h2>
 		</div>
-		{#each data.slice(1) as person}
+		{#each data as person}
 			<div class="grid-item flex flex-col items-center justify-around p-4 m-2 md:m-0">
 				<div class="overlay p-4 flex items-center">
 					<p class="font-medium text-xs">
@@ -36,15 +36,14 @@
 	<div
 		class="flex flex-col md:flex-row items-center justify-center mt-10 md:mt-16 mb-10 md:mb-20 px-10 md:px-0"
 	>
+		<Button type="bordered" classes="md:mr-8 mb-8 md:mb-0 w-full md:w-auto">
+			<a href="/fallecidos"> Ver listado </a>
+		</Button>
 		<Button
-			classes="md:mr-8 mb-8 md:mb-0 text-light w-full md:w-auto"
-			type="bordered"
+			classes="text-light w-full md:w-auto"
 			onClick={() => (showModal = true)}
 		>
 			Reportar fallecido
-		</Button>
-		<Button classes="w-full md:w-auto">
-			<a href="/fallecidos"> Ver listado </a>
 		</Button>
 	</div>
 </div>

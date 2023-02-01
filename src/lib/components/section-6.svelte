@@ -1,8 +1,8 @@
 <script lang="ts">
-    import Flag from '$lib/assets/images/section-6/flag1.png';
-    // import Sign from '$lib/assets/images/section-6/sign.png';
-    import Child from '$lib/assets/images/section-6/child.png';
-    
+	import Flag from '$lib/assets/images/section-6/flag1.png';
+	// import Sign from '$lib/assets/images/section-6/sign.png';
+	import Child from '$lib/assets/images/section-6/child.png';
+
 	import gsap from 'gsap';
 	import ScrollTrigger from 'gsap/ScrollTrigger';
 	import { onMount } from 'svelte';
@@ -92,16 +92,17 @@
 				<p class="text-gray">
 					Cruzar por el mar las 90 millas —o un poco más dependiendo del punto de salida— que separa
 					a Cuba de los Estados Unidos en balsas o embarcaciones rústicas es una vía usada desde
-					hace muchos por cubanas y cubanos. Durante esta nueva oleada no ha dejado de utilizarse, a
+					hace mucho por cubanas y cubanos. Durante la nueva oleada no ha dejado de utilizarse, a
 					pesar de estar muy vigilado por las autoridades de ambas naciones y no tener ninguna
 					garantía de éxito.
 					<br /> <br />
-					Sin embargo, las rutas terrestres que cruzan el Darien o parten desde Nicaragua, país al que
-					los cubanos pueden llegar sin necesidad de visado, y que atraviesan Centroamérica han resultado
-					más efectivas en este nuevo contexto. Esto puede cambiar.
+					Cruzar por el mar las 90 millas —o un poco más dependiendo del punto de salida— que separa
+					a Cuba de los Estados Unidos en balsas o embarcaciones rústicas es una vía usada desde hace
+					mucho por cubanas y cubanos. Durante la nueva oleada no ha dejado de utilizarse, a pesar de
+					estar muy vigilado por las autoridades de ambas naciones y no tener ninguna garantía de éxito.
 					<br /> <br />
-					Estas son las zonas más peligrosas de los recorridos y dónde ha ocurrido la mayor cantidad
-					de incidentes con migrantes cubanos.
+					Han sido identificadas las zonas más peligrosas de los recorridos y dónde ha ocurrido la mayor
+					cantidad de incidentes con migrantes cubanos.
 				</p>
 			</div>
 			<div class="space h-screen md:h-0" />
@@ -127,68 +128,71 @@
 		</div>
 	</div>
 	<div class="section-6-decor">
-        <img src={Flag} class="decor-flag" alt="">
-        <!-- <img src={Sign} class="decor-sign" alt=""> -->
-        <img src={Child} class="decor-child" alt="">
-    </div>
+		<img src={Flag} class="decor-flag" alt="" />
+		<!-- <img src={Sign} class="decor-sign" alt=""> -->
+		<img src={Child} class="decor-child" alt="" />
+	</div>
 	<div class="max-w-3xl my-10 md:my-32 px-10">
 		<p class="text-light">
-			Entre enero de 2021 y noviembre de 2022 más de 8302 personas han sido repatriadas a Cuba: 7158
-			desde Estados Unidos, 933 desde México, 16 desde Guatemala y 195 desde Bahamas. Han sido
-			interceptados en el mar 619 y 208 rescatados por las autoridades marítimas.
+			Entre enero de 2021 y noviembre de 2022 más de 10 385 personas han sido repatriadas a Cuba: 9
+			134 desde Estados Unidos, 933 desde México, 16 desde Guatemala y 195 desde Bahamas. Han sido
+			interceptados en el mar 619 y 215 rescatados por las autoridades marítimas.
 			<br /><br />
 			Aunque muchos consiguen llegar a su destino, la migración irregular no es una vía segura y muchas
 			veces no tiene un final feliz.
 		</p>
 	</div>
 </section>
+
 <style>
-    .section-6 .section-6-decor {
+	.section-6 .section-6-decor {
 		height: 600px;
 		width: 100%;
 		background-image: url(/src/lib/assets/images/rio.webp);
 		background-size: cover;
 		background-position: center;
-        position: relative;
+		position: relative;
 	}
-    .section-6 .section-6-decor .decor-flag,
+	.section-6 .section-6-decor .decor-flag,
     /* .section-6 .section-6-decor .decor-sign, */
     .section-6 .section-6-decor .decor-child {
-        position: absolute
-    }
+		position: absolute;
+	}
 
-    .section-6 .section-6-decor .decor-flag {
-        height: 500px;
-        top: calc(50% - 250px);
-        left: calc(50% - 500px);
-        z-index: 2;
-    }
+	.section-6 .section-6-decor .decor-flag {
+		height: 500px;
+		top: calc(50% - 250px);
+		left: calc(50% - 500px);
+		z-index: 2;
+	}
 
-    /* .section-6 .section-6-decor .decor-sign {
+	/* .section-6 .section-6-decor .decor-sign {
         width: 160px;
     } */
 
-    .section-6 .section-6-decor .decor-child {
-        width: 530px;
-        left: calc(50% - 175px);
-        top: calc(50% - 160px);
-        transform: rotate(-15deg)
-    }
+	.section-6 .section-6-decor .decor-child {
+		width: 530px;
+		left: calc(50% - 175px);
+		top: calc(50% - 160px);
+		transform: rotate(-15deg);
+	}
 
-	.intro, .place div, .resume {
+	.intro,
+	.place div,
+	.resume {
 		@apply bg-opacity-70 backdrop-blur px-10 py-5;
 	}
 
-    @media (max-width: 768px) {
-        .section-6 .section-6-decor .decor-child {
-            left: -50px;
-            top: calc(50% - 125px);
-        }
-        .section-6 .section-6-decor .decor-flag {
-            top: 5%;
-            height: 300px;
-            left: unset;
-            right: 5%;
-        }
-    }
+	@media (max-width: 768px) {
+		.section-6 .section-6-decor .decor-child {
+			left: -50px;
+			top: calc(50% - 125px);
+		}
+		.section-6 .section-6-decor .decor-flag {
+			top: 5%;
+			height: 300px;
+			left: unset;
+			right: 5%;
+		}
+	}
 </style>
