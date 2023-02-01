@@ -15,6 +15,7 @@
 	import 'swiper/css';
 
 	export let data: any[];
+	export let articles: any[] = [];
 
 	let swiperIndex = 0;
 	let swiper: {
@@ -138,8 +139,9 @@
 		</div>
 
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-10 my-10 md:my-20 mx-10 md:mx-0">
-			<Article />
-			<Article />
+			{#each articles as article}
+				<Article data={article}></Article>
+			{/each}
 		</div>
 	</div>
 	<div class="hidden md:block section-5-decor">

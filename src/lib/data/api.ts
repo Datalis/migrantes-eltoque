@@ -24,3 +24,9 @@ const get = async (range: string) => {
 export const getDeceasedPersons = () => get('Personas fallecidas');
 export const getMissingPersons = () => get('Personas desaparecidas');
 export const getDangerousPlaces = () => get('Lugares peligrosos');
+
+export const getElToqueArticles = async () => {
+    const URL = 'https://api.eltoque.com/posts?categories=63daba063c88b2001e980d89&_sort=publish_date:DESC&_limit=2';
+    const data = await fetch(URL);
+    return { data: await data.json() };
+}

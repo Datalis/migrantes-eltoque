@@ -14,6 +14,7 @@
 	$: deceased = data?.deceased?.values || [];
 	$: missing = data?.missing?.values || [];
 	$: places = data?.places?.values?.slice(1) || [];
+	$: articles = data?.articles || [];
 
 </script>
 
@@ -22,7 +23,7 @@
 	<Section_2></Section_2>
 	<Section_3></Section_3>
 	<Section_4 data={deceased}></Section_4>
-	<Section_5 data={missing}></Section_5>
+	<Section_5 data={missing} {articles}></Section_5>
 	<Section_6 {places}></Section_6>
 </main>
 

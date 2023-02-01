@@ -1,4 +1,4 @@
-import { getDeceasedPersons, getMissingPersons, getDangerousPlaces } from "$lib/data/api";
+import { getDeceasedPersons, getMissingPersons, getDangerousPlaces, getElToqueArticles } from "$lib/data/api";
 import type { PageServerLoad } from "./$types";
 
 export const load: PageServerLoad = async () => {
@@ -6,5 +6,6 @@ export const load: PageServerLoad = async () => {
         deceased: (await getDeceasedPersons()).data,
         missing: (await getMissingPersons()).data,
         places: (await getDangerousPlaces()).data,
+        articles: (await getElToqueArticles()).data,
     }
 }
