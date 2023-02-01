@@ -12,7 +12,7 @@
 	<!-- svelte-ignore a11y-missing-attribute -->
 	<img
 		src="https://api.eltoque.com{data?.feature_image?.url}"
-		class="aspect-3/4 bg-accent h-64 rounded-2xl"
+		class="aspect-3/4 bg-accent rounded-2xl"
 	/>
 	<span class="font-bold my-4 text-lg">
 		{data?.title}

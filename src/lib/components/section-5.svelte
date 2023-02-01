@@ -122,7 +122,7 @@
 		</div>
 		<div class="section-5-decor section-5-decor-sm md:hidden mt-10">
 			<img src={SeaBackground} class="decor-bg" alt="" />
-			<LinePathSmall class="decor-line w-full" />
+			<LinePathSmall class="decor-line" />
 			<img src={Ocean} class="decor-ocean" alt="" />
 			<img src={Map} class="decor-map" alt="" />
 		</div>
@@ -194,8 +194,8 @@
 		top: calc(50% - 100px);
 	}
     .section-5 .section-5-decor.section-5-decor-sm .decor-map {
-        width: 100%;
-        top: calc(50% - 100px);
+        width: 450px;
+        top: calc(50% - 180px);
         left: -70px;
     }
 	.section-5 .section-5-decor .decor-map {
