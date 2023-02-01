@@ -29,7 +29,7 @@
 <svelte:window on:keydown={handle_keydown} />
 
 <div class="modal bg-dark bg-opacity-100 text-gray w-full h-full flex justify-center" role="dialog" aria-modal="true" bind:this={modal}>
-    <form method="post" class="flex flex-col max-w-lg" on:submit|preventDefault={handleSubmit}>
+    <form method="post" class="flex flex-col max-w-lg mt-8" on:submit|preventDefault={handleSubmit}>
         <button on:click={close} type="button" class="close absolute right-4 top-4">X</button>
         <label>
             <span>
@@ -43,14 +43,14 @@
             </span>
             <input type="text" required name="complainant_name">
         </label>
-        <div class="flex flex-nowrap flex-row">
-            <label class="flex flex-col w-2/3 mr-2">
+        <div class="flex flex-nowrap flex-col md:flex-row">
+            <label class="flex flex-col w-full md:w-2/3 mr-2">
                 <span>
                     Email
                 </span>
                 <input type="email" name="email" id="email" required>
             </label>
-            <label class="flex flex-col w-1/3">
+            <label class="flex flex-col w-full md:w-1/3">
                 <span>
                     Teléfono
                 </span>
