@@ -7,6 +7,10 @@
 	let showModal = false;
 </script>
 
+{#if showModal}
+	<ReportModal on:close={() => showModal = false} />
+{/if}
+
 <div class="flex flex-col h-full xl:container mx-auto">
 	<div
 		class="flex-1 grid md:gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-5 md:grid-rows-3"
@@ -30,15 +34,12 @@
 		{/each}
 	</div>
 	<div class="flex flex-col md:flex-row items-center justify-center mt-10 md:mt-16 mb-10 md:mb-20">
-		<Button classes="md:mr-8 mb-8 md:mb-0 text-light" type="bordered" on:click={() => showModal = true}>
+		<Button classes="md:mr-8 mb-8 md:mb-0 text-light" type="bordered" onClick={() => showModal = true}>
 			Reportar fallecido
 		</Button>
 		<a href="/fallecidos">
 			<Button>Ver listado</Button>
 		</a>
-		{#if showModal}
-			<ReportModal />
-		{/if}
 	</div>
 </div>
 

@@ -3,9 +3,10 @@
     export let color: 'accent' | 'light' | 'dark' | 'gray' = 'accent';
     export let classes = "";
     export let buttonType: 'submit' | 'button' | 'reset' = 'button';
+    export let onClick = () => {};
 </script>
 
-<button class="btn btn-{type} btn-{color} {classes}" type="{buttonType}">
+<button class="btn btn-{type} btn-{color} {classes}" type="{buttonType}" on:click={onClick}>
     <slot></slot>
 </button>
 

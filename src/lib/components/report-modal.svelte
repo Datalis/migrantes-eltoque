@@ -70,11 +70,12 @@
     }
 
     .modal {
-        position: absolute;
+        position: fixed;
         left: 0;
         top: 0;
         overflow: auto;
         padding: 1rem;
+        z-index: 999;
     }
 
     .modal form > label {
