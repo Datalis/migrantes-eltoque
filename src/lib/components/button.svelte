@@ -2,9 +2,10 @@
     export let type: 'solid' | 'bordered' = 'solid';
     export let color: 'accent' | 'light' | 'dark' | 'gray' = 'accent';
     export let classes = "";
+    export let buttonType: 'submit' | 'button' | 'reset' = 'button';
 </script>
 
-<button class="btn btn-{type} btn-{color} {classes}">
+<button class="btn btn-{type} btn-{color} {classes}" type="{buttonType}">
     <slot></slot>
 </button>
 
