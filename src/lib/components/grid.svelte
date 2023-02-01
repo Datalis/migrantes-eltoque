@@ -1,8 +1,10 @@
 <script lang="ts">
 	import Button from './button.svelte';
+	import ReportModal from './report-modal.svelte';
 	import DecorDeceased from '$lib/assets/images/ornamental-fallecidos.svg?component';
 
 	export let data: any[];
+	let showModal = false;
 </script>
 
 <div class="flex flex-col h-full xl:container mx-auto">
@@ -28,10 +30,15 @@
 		{/each}
 	</div>
 	<div class="flex flex-col md:flex-row items-center justify-center mt-10 md:mt-16 mb-10 md:mb-20">
-		<Button classes="md:mr-8 mb-8 md:mb-0 text-light" type="bordered">Reportar fallecido</Button>
+		<Button classes="md:mr-8 mb-8 md:mb-0 text-light" type="bordered" on:click={() => showModal = true}>
+			Reportar fallecido
+		</Button>
 		<a href="/fallecidos">
 			<Button>Ver listado</Button>
 		</a>
+		{#if showModal}
+			<ReportModal />
+		{/if}
 	</div>
 </div>
 
