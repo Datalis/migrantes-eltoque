@@ -8,7 +8,7 @@
 	export let data: PageData;
 
 	$: missing =
-		data?.missing?.values?.slice(1).reverse().map((e) => ({
+		data?.missing?.values?.slice(1).reverse().map((e: any) => ({
 			name: e[3],
 			age: e[5],
 			date: e[6],

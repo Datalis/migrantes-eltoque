@@ -14,19 +14,28 @@ const auth = new GoogleAuth({
 })
 
 
-const get = async (range: string) => {
-    // const client = await auth.getClient();
+export const getSheet = async (range: string) => {
     const sheet = google.sheets({ version: 'v4', auth: auth });
     return sheet.spreadsheets.values.get({ spreadsheetId: SPREADSHEET_ID, range });
 }
 
+export const batchGetSheet = async (ranges: string[]) => {
+    const sheet = google.sheets({ version: 'v4', auth: auth });
+    return sheet.spreadsheets.values.batchGet({ spreadsheetId: SPREADSHEET_ID, ranges });
+}
 
-export const getDeceasedPersons = () => get('Personas fallecidas');
-export const getMissingPersons = () => get('Personas desaparecidas');
-export const getDangerousPlaces = () => get('Lugares peligrosos');
-
-export const getElToqueArticles = async () => {
-    const URL = 'https://api.eltoque.com/posts?categories=63daba063c88b2001e980d89&_sort=publish_date:DESC&_limit=2';
-    const data = await fetch(URL);
+export const get = async (url: string) => {
+    const data = await fetch(url);
     return { data: await data.json() };
 }
+
+
+// export const getAllEvents = () => get('Todos los eventos');
+// export const getDeceasedPersons = () => get('Personas fallecidas');
+// export const getMissingPersons = () => get('Personas desaparecidas');
+// export const getDangerousPlaces = () => get('Lugares peligrosos');
+
+// export const getElToqueArticles = async () => {
+//     const data = await fetch(ELTOQUE_API_URL);
+//     return { data: await data.json() };
+// }

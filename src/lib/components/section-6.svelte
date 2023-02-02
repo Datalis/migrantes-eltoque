@@ -8,7 +8,7 @@
 	import { onMount } from 'svelte';
 	import Map from './map.svelte';
 
-	export let places: any[];
+	export let places: any[] = [];
 
 	let mapComponent: Map;
 
@@ -16,15 +16,15 @@
 		let found = false;
 		let results = [];
 		for (let position = 0; position < places.length; position++) {
-			if (found && !!places[position][0]) {
+			if (found && !!places?.[position][0]) {
 				break;
 			}
-			if (places[position][0] == index + 1) {
+			if (places?.[position][0] == index + 1) {
 				found = true;
 				continue;
 			}
-			if (!places[position][0] && found) {
-				results.push(places[position]);
+			if (!places?.[position][0] && found) {
+				results.push(places?.[position]);
 			}
 		}
 		return results;

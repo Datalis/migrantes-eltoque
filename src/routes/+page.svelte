@@ -7,23 +7,24 @@
 	import Section_3 from '$lib/components/section-3.svelte';
 	import Section_4 from '$lib/components/section-4.svelte';
 	import Section_6 from '$lib/components/section-6.svelte';
+	import { onMount } from 'svelte';
 
 	export let data: PageData;
 
-	$: deceased = data?.deceased?.values?.slice(1) || [];
-	$: missing = data?.missing?.values?.slice(1)?.reverse() || [];
-	$: places = data?.places?.values?.slice(1) || [];
-	$: articles = data?.articles || [];
+	const { totals, deceased, missing, articles, places } = data;
 
+	onMount(() => {
+		console.log(data);
+	});
 </script>
 
 <main class="overflow-hidden">
-	<Section_1 {deceased} {missing}></Section_1>
-	<Section_2></Section_2>
-	<Section_3 {deceased}></Section_3>
-	<Section_4 data={deceased}></Section_4>
-	<Section_5 data={missing} {articles}></Section_5>
-	<Section_6 {places}></Section_6>
+	<Section_1 {totals} />
+	<Section_2 />
+	<Section_3 {totals} {deceased}/>
+	<Section_4 {deceased} />
+	<Section_5 {missing} {articles} {totals} />
+	<Section_6 {places} />
 </main>
 
 <style>

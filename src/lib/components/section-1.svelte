@@ -1,8 +1,8 @@
 <script lang="ts">
-    import DecorVela from '$lib/assets/images/vela1.svg?component';
+    import Vela from '$lib/assets/images/section-1/vela1.svg?component';
+    import Plano from '$lib/assets/images/section-1/plano.svg?component';
 
-    export let deceased: any[] = [];
-    export let missing: any[] = [];
+    export let totals: any;
 
 </script>
 
@@ -11,13 +11,13 @@
         <h2
             class="flex flex-col md:flex-row justify-center items-center md:items-baseline font-sans font-bold  text-light"
         >
-            <span class="text-accent-dark md:mr-4 font-extrabold text-7xl">+{deceased?.length || 0}</span>
+            <span class="text-accent-dark md:mr-4 font-extrabold text-7xl">+{totals?.deceased}</span>
             <span class="text-2xl md:text-6xl font-bold">MUERTOS</span>
         </h2>
         <h2
             class="flex flex-col md:flex-row justify-center items-center md:items-baseline font-sans font-bold  text-light mt-4 mb-10"
         >
-            <span class="text-accent-dark md:mr-4 font-extrabold text-7xl">+{missing?.length || 0}</span>
+            <span class="text-accent-dark md:mr-4 font-extrabold text-7xl">+{totals?.missing}</span>
             <span class="text-2xl md:text-6xl font-bold">DESAPARECIDOS</span>
         </h2>
         <h2 class="font-sans font-bold text-2xl md:text-4xl text-light">
@@ -25,10 +25,11 @@
         </h2>
     </div>
     <div class="section-1-decor w-full">
-        <div class="flex justify-center items-center">
-            <DecorVela height="180px" width="180px" />
-            <DecorVela height="300px" width="300px" />
-            <DecorVela height="180px" width="180px" />
+        <Plano class="decor-plano"></Plano>
+        <div class="decor-candles flex justify-center items-center">
+            <Vela height="180px" width="180px" />
+            <Vela height="300px" width="300px" />
+            <Vela height="180px" width="180px" />
         </div>
     </div>
 </section>
@@ -45,4 +46,13 @@
 		bottom: -120px;
 		position: absolute;
 	}
+    .section-1 .section-1-decor .decor-candles {
+        z-index: 2;
+        position: relative;
+    }
+    :global(.section-1 .section-1-decor .decor-plano) {
+        position: absolute;
+        z-index: 1;
+        bottom: -36px;
+    }
 </style>

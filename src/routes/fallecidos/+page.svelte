@@ -5,7 +5,7 @@
 
 	export let data: PageData;
 
-	$: deceased = data?.deceased?.values?.slice(1).map((e) => ({
+	$: deceased = data?.deceased?.values?.slice(1).map((e: any) => ({
 		name: e[2],
 		age: e[3],
 		details: e[10]
