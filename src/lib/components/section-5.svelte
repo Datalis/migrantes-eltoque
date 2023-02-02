@@ -13,8 +13,11 @@
 	import Article from './article.svelte';
 
 	import 'swiper/css';
+	import InfoModal from './info-modal.svelte';
 
 	export let data: any[];
+	let showModal = false;
+	let selectedPerson;
 
 	let swiperIndex = 0;
 	let swiper: {
@@ -36,6 +39,10 @@
 		swiperIndex !== 0 && --swiperIndex;
 	}
 </script>
+
+{#if showModal}
+	<InfoModal on:close={() => showModal = false} info={selectedPerson} />
+{/if}
 
 <section class="section-5 flex flex-col items-center justify-center bg-light min-h-screen pt-20">
 	<div class="container mx-auto max-w-3xl md:px-0">
@@ -95,7 +102,7 @@
 			>
 				{#each data?.slice(1) as p}
 					<SwiperSlide>
-						<Profile data={p} />
+						<Profile data={p} onClick={() => {selectedPerson = p; showModal = true;} } />
 					</SwiperSlide>
 				{/each}
 			</Swiper>

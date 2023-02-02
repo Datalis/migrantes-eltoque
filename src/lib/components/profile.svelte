@@ -3,6 +3,7 @@
 	import Button from './button.svelte';
 
 	export let data: any;
+	export let onClick;
 </script>
 
 <div class="profile flex flex-col items-center md:items-start">
@@ -12,7 +13,7 @@
 	<p class="text-sm my-4 leading-6">
 		{data[7]}
 	</p>
-	<Button classes="mt-4 self-start w-full md:w-auto">Ofrecer información</Button>
+	<Button classes="mt-4 self-start w-full md:w-auto" onClick={onClick}>Ofrecer información</Button>
 </div>
 
 <style>
