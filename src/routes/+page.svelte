@@ -60,7 +60,7 @@
 			gsap.to(e, {
 				scrollTrigger: {
 					trigger: e,
-					start: 'top bottom',
+					start: 'top 80%',
 					onEnter: () => {
 						const place = getPlace(i)
 						mapComponent?.update(place);
