@@ -1,9 +1,9 @@
 <script lang="ts">
 	import LinePath from '$lib/assets/images/section-5/line-full.svg?component';
 	import LinePathSmall from '$lib/assets/images/section-5/line-small.svg?component';
-	import SeaBackground from '$lib/assets/images/section-5/mar.png';
-	import Ocean from '$lib/assets/images/section-5/ocean.png';
-	import Map from '$lib/assets/images/section-5/map.png';
+	import SeaBackground from '$lib/assets/images/section-5/mar.webp';
+	import Ocean from '$lib/assets/images/section-5/ocean.webp';
+	import Map from '$lib/assets/images/section-5/map.webp';
 
 	import Button from './button.svelte';
 	import ArrowRightIcon from '$lib/assets/images/arrow-right.svg?component';

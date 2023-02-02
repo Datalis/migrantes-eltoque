@@ -1,7 +1,6 @@
 <script lang="ts">
-	import Flag from '$lib/assets/images/section-6/flag1.png';
-	// import Sign from '$lib/assets/images/section-6/sign.png';
-	import Child from '$lib/assets/images/section-6/child.png';
+	import Flag from '$lib/assets/images/section-6/flag1.webp';
+	import Child from '$lib/assets/images/section-6/child.webp';
 
 	import gsap from 'gsap';
 	import ScrollTrigger from 'gsap/ScrollTrigger';
@@ -148,7 +147,7 @@
 	.section-6 .section-6-decor {
 		height: 600px;
 		width: 100%;
-		background-image: url(/src/lib/assets/images/rio.webp);
+		background-image: url(/src/lib/assets/images/section-6/rio.webp);
 		background-size: cover;
 		background-position: center;
 		position: relative;

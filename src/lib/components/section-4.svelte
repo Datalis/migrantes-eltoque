@@ -71,9 +71,9 @@
 		opacity: 0;
 		z-index: 1;
 	}
-	.grid-item .name {
-		/* min-height: 64px; */
-	}
+	/* .grid-item .name {
+		min-height: 64px;
+	} */
 	.memorial-block {
 		background-image: url(/src/lib/assets/images/angel.svg);
 		background-position: top right;

@@ -1,7 +1,7 @@
 <script>
     import Button from "$lib/components/button.svelte";
-    import DeFactoLogo from '$lib/assets/images/1.svg?component';
-    import ElToqueLogo from '$lib/assets/images/2.svg?component';
+    import DeFactoLogo from '$lib/assets/images/defacto.svg?component';
+    import ElToqueLogo from '$lib/assets/images/eltoque.svg?component';
     import CollectivoLogo from '$lib/assets/images/colectivo+voces.svg?component';
     import FacebookIcon from '$lib/assets/images/facebook.svg?component';
     import TwitterIcon from '$lib/assets/images/twitter.svg?component';
