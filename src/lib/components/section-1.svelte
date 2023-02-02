@@ -45,6 +45,7 @@
 	.section-1 .section-1-decor {
 		bottom: -120px;
 		position: absolute;
+        overflow: hidden;
 	}
     .section-1 .section-1-decor .decor-candles {
         z-index: 2;
