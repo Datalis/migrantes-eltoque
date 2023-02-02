@@ -41,27 +41,29 @@
 	<div class="container mx-auto px-10 md:px-0 max-w-3xl">
 		<h2 class="font-sans font-bold text-4xl md:text-6xl text-light my-4 text-center">MIGRAR:</h2>
 		<h2 class="font-sans font-bold text-2xl md:text-4xl text-accent text-center">
-			Una decisión de vida o muerte
+			Una decisión de vida y muerte
 		</h2>
 		<p class="text-gray md:mx-20 mt-20">
-			Desde enero de 2021 y durante el 2022 Cuba ha experimentado la ola migratoria más grande en,
-			al menos, los últimos 60 años. Esto significa que solo entre enero de 2021 y octubre de 2022
-			han llegado a las fronteras estadounidense 283 094 cubanos, según datos de Oficina de Aduanas
-			y Protección Fronteriza norteamericana y los números siguen en aumento.
-			<br />
-			<br />
-			Llegar a Estados Unidos es, desde hace mucho tiempo, la primera opción migratoria para quienes
-			quieren salir de Cuba, aunque no la única. A pesar de la cercanía geográfica, el problema está
-			en cómo hacerlo, pues las vías legales para obtener un visado son muy limitadas. El cierre de la
-			embajada en La Habana en 2017, la pandemia y, sobre todo, la profunda crisis que se vive en Cuba
-			han empujado a los migrantes a buscar vías alternativas —peligrosas e ilegales—para salir de la
-			isla rumbo al norte.
-			<br />
-			<br />
-			Aunque la mayoría de las personas llegan a su destino; para lograrlo emprenden rutas costosas e
-			inseguras, con incidentes violentos o peligros naturales, se exponen a ser interceptados por las
-			autoridades locales y pueden, en el camino, perderlo todo, incluso la vida. Aquí te contaremos
-			las historias de quienes no lo han logrado.
+			Cuba experimenta la ola migratoria más grande en los últimos 60 años. Entre enero de 2021 y
+			diciembre de 2022, 368 326 cubanos llegaron de manera irregular a los Estados Unidos, según
+			datos de la <a
+				class="underline"
+				href="https://www.cbp.gov/newsroom/stats/nationwide-encounters?1649206653428"
+				target="_blank"
+				rel="noreferrer">Oficina de Aduanas y Protección Fronteriza norteamericana</a
+			>, y los números siguen en aumento. 
+			<br><br>
+			Llegar a Estados Unidos es la primera opción migratoria
+			para quienes quieren salir de Cuba, aunque no la única. A pesar de la cercanía geográfica, el
+			problema está en cómo hacerlo, pues las vías legales para obtener un visado han sido muy
+			limitadas. El cierre de la Embajada en La Habana en 2017, la pandemia y, sobre todo, la
+			profunda crisis que se vive en Cuba han empujado a los migrantes a buscar vías alternativas
+			—peligrosas e irregulares— para salir de la isla rumbo al norte. 
+			<br><br>
+			Aunque la mayoría de las
+			personas llegan a su destino; para lograrlo emprenden vías costosas e inseguras, con
+			incidentes violentos o peligros naturales. Se exponen a ser interceptados por las autoridades
+			locales y pueden, en el camino, perderlo todo, incluso la vida.
 		</p>
 	</div>
 	<div class="section-2-decor">
