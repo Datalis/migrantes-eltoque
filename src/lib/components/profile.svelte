@@ -3,7 +3,7 @@
 	import Button from './button.svelte';
 
 	export let data: any;
-	export let onClick;
+	export let onClick: () => void;
 </script>
 
 <div class="profile flex flex-col items-center md:items-start h-full">

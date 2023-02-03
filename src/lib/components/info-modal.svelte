@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import { createEventDispatcher, onDestroy } from "svelte";
 	import Button from "./button.svelte";
 
@@ -6,19 +6,19 @@
     const close = () => dispatch('close')
 
     let modal
-    export let info;
-    let name;
 
-    const handle_keydown = e => {
+    export let info: any[] = [];
+
+    const handle_keydown = (e: { key: string; }) => {
         if (e.key == "Escape") {
             close()
             return
         }
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: any) => {
         const formData = new FormData(e.target)
-        const data = {};
+        const data: any = {};
         for (let field of formData) {
             const [key, value] = field;
             data[key] = value;

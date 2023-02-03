@@ -1,18 +1,18 @@
 <script lang="ts">
+    export let totals: any;
 	export let deceased: any[] = [];
 
-	$: total = deceased?.length || 0;
 	$: male = deceased?.filter((e) => e[4] == 'M')?.length || 0;
 	$: female = deceased?.filter((e) => e[4] == 'F')?.length || 0;
 </script>
 
 <section class="section-3 flex flex-col items-center justify-center bg-dark h-min-screen py-20">
 	<div class="container mx-auto max-w-3xl px-10 md:px-0">
-		<h2 class="font-sans font-extrabold text-6xl md:text-7xl text-accent">+{total}</h2>
+		<h2 class="font-sans font-extrabold text-6xl md:text-7xl text-accent">+{totals?.deceased}</h2>
 		<h2 class="font-sans font-bold text-2xl md:text-4xl text-light my-4">Personas fallecidas</h2>
 		<p class="text-gray md:mx-20 mt-10 md:mt-20">
-			Han sido contabilizados {total} cubanas y cubanos fallecidos en el intento de migrar hacia otro
-			país, la mayoría con destino a los Estados Unidos. Se conoce la identidad de {total} personas:
+			Han sido contabilizados {totals?.deceased} cubanas y cubanos fallecidos en el intento de migrar hacia otro
+			país, la mayoría con destino a los Estados Unidos. Se conoce la identidad de {deceased?.length} personas:
 			{female}
 			mujeres y {male} hombres. El resto de los migrantes se mantiene en el anonimato.
 			<br />

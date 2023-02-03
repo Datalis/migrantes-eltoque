@@ -1,9 +1,9 @@
 <script>
-	import MapBackground from '$lib/assets/images/section-2/mapa.png';
+	import MapBackground from '$lib/assets/images/section-2/mapa.webp';
 	import LinePath from '$lib/assets/images/section-2/line-full.svg?component';
 	import LinePathSmall from '$lib/assets/images/section-2/line-small.svg?component';
-	import Plane from '$lib/assets/images/section-2/plane.png';
-	import Volcano from '$lib/assets/images/section-2/volcano.png';
+	import Plane from '$lib/assets/images/section-2/plane.webp';
+	import Volcano from '$lib/assets/images/section-2/volcano.webp';
 	import gsap from 'gsap';
 	import MotionPathPlugin from 'gsap/MotionPathPlugin';
 	import ScrollTrigger from 'gsap/ScrollTrigger';

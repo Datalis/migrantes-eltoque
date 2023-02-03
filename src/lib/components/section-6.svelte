@@ -1,14 +1,13 @@
 <script lang="ts">
-	import Flag from '$lib/assets/images/section-6/flag1.png';
-	// import Sign from '$lib/assets/images/section-6/sign.png';
-	import Child from '$lib/assets/images/section-6/child.png';
+	import Flag from '$lib/assets/images/section-6/flag1.webp';
+	import Child from '$lib/assets/images/section-6/child.webp';
 
 	import gsap from 'gsap';
 	import ScrollTrigger from 'gsap/ScrollTrigger';
 	import { onMount } from 'svelte';
 	import Map from './map.svelte';
 
-	export let places: any[];
+	export let places: any[] = [];
 
 	let mapComponent: Map;
 
@@ -16,15 +15,15 @@
 		let found = false;
 		let results = [];
 		for (let position = 0; position < places.length; position++) {
-			if (found && !!places[position][0]) {
+			if (found && !!places?.[position][0]) {
 				break;
 			}
-			if (places[position][0] == index + 1) {
+			if (places?.[position][0] == index + 1) {
 				found = true;
 				continue;
 			}
-			if (!places[position][0] && found) {
-				results.push(places[position]);
+			if (!places?.[position][0] && found) {
+				results.push(places?.[position]);
 			}
 		}
 		return results;
@@ -148,7 +147,7 @@
 	.section-6 .section-6-decor {
 		height: 600px;
 		width: 100%;
-		background-image: url(/src/lib/assets/images/rio.webp);
+		background-image: url(/src/lib/assets/images/section-6/rio.webp);
 		background-size: cover;
 		background-position: center;
 		position: relative;

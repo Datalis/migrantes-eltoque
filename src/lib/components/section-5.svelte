@@ -1,9 +1,9 @@
 <script lang="ts">
 	import LinePath from '$lib/assets/images/section-5/line-full.svg?component';
 	import LinePathSmall from '$lib/assets/images/section-5/line-small.svg?component';
-	import SeaBackground from '$lib/assets/images/section-5/mar.png';
-	import Ocean from '$lib/assets/images/section-5/ocean.png';
-	import Map from '$lib/assets/images/section-5/map.png';
+	import SeaBackground from '$lib/assets/images/section-5/mar.webp';
+	import Ocean from '$lib/assets/images/section-5/ocean.webp';
+	import Map from '$lib/assets/images/section-5/map.webp';
 
 	import Button from './button.svelte';
 	import ArrowRightIcon from '$lib/assets/images/arrow-right.svg?component';
@@ -17,11 +17,13 @@
 	import ReportModal from './report-modal.svelte';
 
 	export let data: any[];
-	let showModal = false;
 	let showMissing = false;
-	let selectedPerson;
+	export let totals: any;
+	export let missing: any[] = [];
 	export let articles: any[] = [];
 
+	let showModal = false;
+	let selectedPerson: any;
 	let swiperIndex = 0;
 	let swiper: {
 		[x: string]: any;
@@ -34,7 +36,7 @@
 
 	function onSwiperNext() {
 		swiper.slideNext();
-		swiperIndex !== data.length && ++swiperIndex;
+		swiperIndex !== missing.length && ++swiperIndex;
 	}
 
 	function onSwiperPrev() {
@@ -44,7 +46,7 @@
 </script>
 
 {#if showModal}
-	<InfoModal on:close={() => showModal = false} info={selectedPerson} />
+	<InfoModal on:close={() => (showModal = false)} info={selectedPerson} />
 {/if}
 
 {#if showMissing}
@@ -54,7 +56,7 @@
 <section class="section-5 flex flex-col items-center justify-center bg-light min-h-screen pt-20">
 	<div class="container mx-auto max-w-3xl md:px-0">
 		<div class="mx-10 md:mx-0">
-			<h2 class="font-sans font-extrabold text-7xl text-accent">+{data?.length || 0}</h2>
+			<h2 class="font-sans font-extrabold text-7xl text-accent">+{totals?.missing}</h2>
 			<h2 class="font-sans font-bold text-4xl text-dark my-4">Personas desaparecidas</h2>
 			<p class="text-dark md:mx-20 mt-20">
 				Un migrante se considera desaparecido cuando no se tiene noticias de su llegada, pero
@@ -85,7 +87,7 @@
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<span on:click={onSwiperNext}>
 					<ArrowRightIcon
-						class="control {swiperIndex == data?.length ? 'control-disabled' : ''}"
+						class="control {swiperIndex == missing?.length ? 'control-disabled' : ''}"
 						width="48"
 						height="48"
 					/>
@@ -107,9 +109,15 @@
 					}
 				}}
 			>
-				{#each data as p}
+				{#each missing as p}
 					<SwiperSlide>
-						<Profile data={p} onClick={() => {selectedPerson = p; showModal = true;} } />
+						<Profile
+							data={p}
+							onClick={() => {
+								selectedPerson = p;
+								showModal = true;
+							}}
+						/>
 					</SwiperSlide>
 				{/each}
 			</Swiper>
@@ -126,7 +134,7 @@
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<span on:click={onSwiperNext}>
 					<ArrowRightIcon
-						class="control {swiperIndex == data?.length ? 'control-disabled' : ''}"
+						class="control {swiperIndex == missing?.length ? 'control-disabled' : ''}"
 						width="48"
 						height="48"
 					/>
