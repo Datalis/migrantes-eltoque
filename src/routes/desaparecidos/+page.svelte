@@ -2,25 +2,33 @@
 	import ToggleIcon from '$lib/assets/images/chevron-down-circle.svg?component';
 
 	import Button from '$lib/components/button.svelte';
+	import ReportModal from '$lib/components/report-modal.svelte';
 	import SearchInput from '$lib/components/search-input.svelte';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
 
-	$: missing =
-		data?.missing?.values?.slice(1).reverse().map((e: any) => ({
-			name: e[3],
-			age: e[5],
-			date: e[6],
-			starting: e[9],
-			details: e[10],
-			collapsed: true
-		})) || [];
+	let missing = data.missing || [];
+
+	let showModal = false;
+
+	const onSearch = (query: string) => {
+		if (query == '') missing = data.missing || [];
+		else
+			missing = data.missing?.filter((e) => {
+				return e.name.toLowerCase().indexOf(query.toLowerCase(), 0) != -1;
+			}) || [];
+	};
 </script>
 
 <main class="missing-page bg-dark">
+	{#if showModal}
+		<ReportModal on:close={() => (showModal = false)} />
+	{/if}
 	<div class="max-w-4xl mx-4 md:mx-auto py-20">
-		<h1 class="text-6xl text-accent text-center  md:text-left font-extrabold">+172</h1>
+		<h1 class="text-6xl text-accent text-center  md:text-left font-extrabold">
+			+{data?.missing?.length}
+		</h1>
 		<h3 class="text-4xl text-light text-center md:text-left font-bold">Personas desaparecidas</h3>
 		<div class="bg-accent flex flex-col md:flex-row items-center p-10 rounded-lg mt-10 md:h-52">
 			<p class="text-light md:mr-10 mb-10 md:mb-0">
@@ -29,10 +37,12 @@
 				que no se olvide su historia y ayudar, de acuerdo con nuestras posibilidades, a buscar la
 				información que necesitan sus seres queridos.
 			</p>
-			<Button type="solid" color="light">Reportar desaparecido</Button>
+			<Button type="solid" color="light" onClick={() => (showModal = true)}
+				>Reportar desaparecido</Button
+			>
 		</div>
 		<div class="mt-20">
-			<SearchInput />
+			<SearchInput on:search={(e) => onSearch(e.detail)} />
 		</div>
 		<table class="table table-auto mt-10 w-full text-light">
 			<thead>
@@ -88,6 +98,7 @@
 		fill: #fffffd !important;
 		transition: all 0.4s ease;
 		transform: rotate(180deg);
+		cursor: pointer;
 	}
 	:global(.missing-page .table .toggler.collapsed) {
 		fill: #7856ff !important;
