@@ -3,6 +3,8 @@
 	import { createEventDispatcher } from 'svelte';
     import debounce from 'lodash.debounce';
 
+	export let placeholder: string = "";
+
 	let dispatch = createEventDispatcher();
 
 	let currentQuery = "";
@@ -19,6 +21,7 @@
 
 <div class="search-input w-full">
 	<input
+		{placeholder}
 		class="control w-full border border-accent rounded text-light"
 		type="search"
 		on:keydown={onSearch}

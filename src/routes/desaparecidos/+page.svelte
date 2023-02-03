@@ -42,7 +42,7 @@
 			>
 		</div>
 		<div class="mt-20">
-			<SearchInput on:search={(e) => onSearch(e.detail)} />
+			<SearchInput on:search={(e) => onSearch(e.detail)} placeholder="Escribe el nombre de la persona desaparecida" />
 		</div>
 		<table class="table table-auto mt-10 w-full text-light">
 			<thead>
