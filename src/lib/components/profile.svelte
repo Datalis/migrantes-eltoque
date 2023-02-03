@@ -1,5 +1,4 @@
 <script lang="ts">
-	import PersonImg from '$lib/assets/images/person.png';
 	import Button from './button.svelte';
 
 	export let data: any;
