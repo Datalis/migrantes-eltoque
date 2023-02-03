@@ -1,11 +1,12 @@
 <script lang="ts">
 	import Highcharts from 'highcharts/highmaps';
+	import type { MapChart } from 'highcharts/highmaps';
   
 	import { onMount } from 'svelte';
 
 	export let data: any[] = [];
 
-    let highcharts: Highcharts.MapChart;
+    let highcharts: MapChart;
 
     export const update = (data: any[]) => {
         highcharts?.series[1].update({
@@ -15,8 +16,8 @@
         if (data.length == 1) {
             // Zoom to point
             const item = mapData(data)[0];
-            let point = highcharts?.fromLatLonToPoint({ lat: item?.lat, lon: item?.lon });
-            highcharts?.mapZoom(1, point.x, point.y);
+            // let point = highcharts?.fromLatLonToPoint({ lat: item?.lat, lon: item?.lon });
+            // highcharts?.series[1]?.points[0]?.zoomTo();
         }
     }
 
@@ -42,7 +43,8 @@
 				chart: {
 					renderTo: 'map-component',
 					backgroundColor: 'rgb(120, 86, 255)',
-					map: geoMap
+					map: geoMap,
+					borderWidth: 0,
 				},
 				title: {
 					text: ''
@@ -50,10 +52,16 @@
 				mapNavigation: {
 					enabled: false,
 				},
-                mapView: {
-                    zoom: 4,
-                    center: [-88.58134373081575, 24.750755309124187],
-                },
+				xAxis: {
+
+				},
+				mapView: {
+					zoom: 4,
+					insetOptions: {
+						padding: 0,
+					},
+					center: [-88.58134373081575, 24.750755309124187]
+				},
 				plotOptions: {
 					series: {
 						dataLabels: {
@@ -79,7 +87,6 @@
                                 gridSize: 70
                             }
                         }
-						
 					}
 				},
 				series: [
@@ -87,6 +94,7 @@
 						name: 'Basemap',
 						type: 'map',
 						borderColor: 'rgb(120, 86, 255)',
+						borderWidth: 0,
 						nullColor: 'rgb(76, 52, 164)',
 						showInLegend: false,
 					},
@@ -96,7 +104,7 @@
 						enableMouseTracking: true,
 						colorKey: 'clusterPointsAmount',
 						showInLegend: false,
-						data: mapData(data)
+						data: mapData(data),
 					}
 				]
 			});

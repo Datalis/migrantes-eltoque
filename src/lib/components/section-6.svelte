@@ -36,10 +36,12 @@
 			scrollTrigger: {
 				trigger: '.section-6',
 				start: 'top top',
-				endTrigger: '#map-text',
+				// endTrigger: '#map-text',
+				endTrigger: '.resume',
 				end: 'bottom bottom',
 				pin: '#map-component',
-				pinSpacing: false,
+				// pinSpacing: false,
+				invalidateOnRefresh: true,
 				// markers: true,
 				scrub: true
 			}
@@ -50,6 +52,7 @@
 				scrollTrigger: {
 					trigger: e,
 					start: 'top 80%',
+					invalidateOnRefresh: true,
 					onEnter: () => {
 						const place = getPlace(i);
 						mapComponent?.update(place);
@@ -86,7 +89,7 @@
 			<Map data={places} bind:this={mapComponent} />
 		</div>
 		<div id="map-text" class="block my-20 z-10">
-			<div class="intro bg-black md:px-0">
+			<div class="intro bg-black md:px-0 min-h-screen">
 				<h2 class="title">Rutas Migratorias</h2>
 				<p class="text-gray">
 					Cruzar por el mar las 90 millas —o un poco más dependiendo del punto de salida— que separa
@@ -106,7 +109,7 @@
 			</div>
 			<div class="space h-screen md:h-0" />
 			{#each places.filter((place) => !!place[0]) as p, index}
-				<div id="place-{index}" class="place bg-black text-gray md:px-0">
+				<div id="place-{index}" class="place bg-black text-gray md:px-0 min-h-screen">
 					<div>
 						<h2 class="title">{p[1]}</h2>
 						<p>{p[3] || 'Some text'}</p>
@@ -114,7 +117,7 @@
 				</div>
 				<div class="space h-screen md:h-0" />
 			{/each}
-			<div class="resume text-gray gb-black md:px-0">
+			<div class="resume text-gray gb-black md:px-0 min-h-screen">
 				<p>
 					Estas rutas no son nuevas para los cubanos, ni tampoco exclusiva de ellos; pero no por eso
 					dejan de ser peligrosas. La inexperiencia de quienes las transitan —tanto en tierra como

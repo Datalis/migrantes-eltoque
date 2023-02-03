@@ -3,12 +3,14 @@
 
 	import { createEventDispatcher } from 'svelte';
 	import Button from './button.svelte';
+	import X from '$lib/assets/images/x.svg?component';
 
 	const dispatch = createEventDispatcher();
 	const close = () => dispatch('close');
 
 	let modal;
 	export let isMissing = true;
+	export let name = "";
 
 	const handle_keydown = (/** @type {{ key: string; }} */ e) => {
 		if (e.key == 'Escape') {
@@ -37,31 +39,33 @@
 	aria-modal="true"
 	bind:this={modal}
 >
-	<form method="post" class="flex flex-col max-w-lg mt-8" on:submit|preventDefault={handleSubmit}>
-		<button on:click={close} type="button" class="close absolute right-4 top-4">X</button>
-		<label>
-			<span>Nombre del {isMissing ? "desaparecido" : "fallecido"}</span>
-			<input type="text" required name="missing_name" />
+	<form method="post" class="flex flex-col justify-center max-w-xl mt-8" on:submit|preventDefault={handleSubmit}>
+		<button on:click={close} type="button" class="close absolute right-4 top-4">
+			<X width="32" height="32"></X>
+		</button>
+		<label class="flex flex-col mb-4">
+			<span class="mb-2 italic text-sm">Nombre del {isMissing ? "desaparecido" : "fallecido"} <em class="text-accent">*</em></span>
+			<input type="text" required name="missing_name" value={name} />
 		</label>
-		<label>
-			<span> Nombre del denunciante </span>
+		<label class="flex flex-col mb-4">
+			<span class="mb-2 italic text-sm"> Nombre del denunciante <em class="text-accent">*</em></span>
 			<input type="text" required name="complainant_name" />
 		</label>
-		<div class="flex flex-nowrap flex-col md:flex-row">
-			<label class="flex flex-col w-full md:w-2/3 mr-2">
-				<span> Email </span>
+		<div class="flex flex-nowrap flex-col md:flex-row mb-4">
+			<label class="flex flex-col w-full md:w-2/3 mr-4">
+				<span class="mb-2 italic text-sm"> Email <em class="text-accent">*</em> </span>
 				<input type="email" name="email" id="email" required />
 			</label>
 			<label class="flex flex-col w-full md:w-1/3">
-				<span> Teléfono </span>
+				<span class="mb-2 italic text-sm"> Teléfono </span>
 				<input type="tel" name="phone_number" />
 			</label>
 		</div>
-		<label>
-			<span> Mensaje </span>
-			<textarea name="message" id="message" cols="30" rows="3" required />
+		<label class="flex flex-col">
+			<span class="mb-2 italic text-sm"> Mensaje <em class="text-accent">*</em></span>
+			<textarea name="message" id="message" cols="30" rows="5" required />
 		</label>
-		<Button buttonType={'submit'} classes="mt-2">Enviar</Button>
+		<Button buttonType={'submit'} classes="mt-10">Enviar</Button>
 	</form>
 </div>
 
@@ -70,13 +74,14 @@
 	textarea {
 		border: 1px solid white;
 		background: inherit;
+		min-height: 54px;
 		@apply rounded-md;
 	}
 
-	label:has(> input[required], > textarea[required]) span::after {
+	/* label:has(> input[required], > textarea[required]) span::after {
 		content: '*';
 		color: rgb(120, 86, 255);
-	}
+	} */
 
 	.modal {
 		position: fixed;
@@ -87,11 +92,7 @@
 		z-index: 999;
 	}
 
-	.modal form > label {
-		@apply flex flex-col my-2;
-	}
-
 	button.close {
-		@apply bg-gray w-8 h-8 rounded-full text-dark font-extrabold;
+		@apply bg-gray w-9 h-9 rounded-full text-dark font-extrabold flex items-center justify-center;
 	}
 </style>

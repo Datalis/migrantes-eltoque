@@ -13,17 +13,17 @@
 	import Article from './article.svelte';
 
 	import 'swiper/css';
-	import InfoModal from './info-modal.svelte';
+	// import InfoModal from './info-modal.svelte';
 	import ReportModal from './report-modal.svelte';
 
-	export let data: any[];
-	let showMissing = false;
 	export let totals: any;
 	export let missing: any[] = [];
 	export let articles: any[] = [];
 
+	// let showMissing = false;
 	let showModal = false;
 	let selectedPerson: any;
+
 	let swiperIndex = 0;
 	let swiper: {
 		[x: string]: any;
@@ -45,12 +45,17 @@
 	}
 </script>
 
-{#if showModal}
+<!-- {#if showModal}
 	<InfoModal on:close={() => (showModal = false)} info={selectedPerson} />
-{/if}
+{/if} -->
 
-{#if showMissing}
-	<ReportModal on:close={() => showMissing = false} />
+{#if showModal}
+	{#key selectedPerson}
+		<ReportModal name={selectedPerson?.[3]} on:close={() => {
+			showModal = false;
+			selectedPerson = null;
+		}} />
+	{/key}
 {/if}
 
 <section class="section-5 flex flex-col items-center justify-center bg-light min-h-screen pt-20">
@@ -73,7 +78,7 @@
 		</div>
 		<div class="flex mt-20 mx-10 md:mx-0">
 			<a href="/desaparecidos" class="w-full md:w-auto"
-				><Button classes="w-full">Ver listado</Button></a
+				><Button classes="w-full" type="bordered">Ver listado</Button></a
 			>
 			<div class="swiper-controls hidden md:flex ml-auto">
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -153,7 +158,9 @@
 				conociste alguien que viajaba contigo y se ha denunciado que no llegó, escríbenos. Queremos
 				que no se olvide su historia y poder ayudar, de acuerdo con nuestras posibilidades.
 			</p>
-			<Button classes="w-full md:w-auto" onClick={() => showMissing = true}>Reportar desaparecido</Button>
+			<Button classes="w-full md:w-auto" onClick={() => (showModal = true)}
+				>Reportar desaparecido</Button
+			>
 		</div>
 
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-10 my-10 md:my-20 mx-10 md:mx-0">

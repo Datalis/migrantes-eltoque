@@ -31,18 +31,21 @@
 							{person[10]}
 						</p>
 					</div>
-					<h3 class="name text-center md:text-xl font-bold text-accent w-3/4">{person[2]}</h3>
-					<span class=" text-light font-light my-5">{person[3] !== 'desconocida' ? `${person[3]} años` : 'Edad desconocida'}</span>
-					<DecorDeceased class="mt-4 relative w-3/4" />
+					<h3 class="name text-center md:text-xl font-bold text-accent md:w-3/4">{person[2]}</h3>
+					<span class=" text-light text-center font-light text-xs md:text-sm my-4 md:my-5"
+						>{person[3] !== 'desconocida' ? `${person[3]} años` : 'Edad desconocida'}</span
+					>
+					<DecorDeceased class="relative w-3/4" />
 				</div>
 			{/each}
 		</div>
 		<div
 			class="flex flex-col md:flex-row items-center justify-center mt-10 md:mt-16 mb-10 md:mb-20 px-10 md:px-0"
 		>
-			<Button type="bordered" classes="md:mr-8 mb-8 md:mb-0 w-full md:w-auto">
-				<a href="/fallecidos"> Ver listado </a>
-			</Button>
+			<a href="/fallecidos">
+				<Button type="bordered" classes="md:mr-8 mb-8 md:mb-0 w-full md:w-auto">Ver listado</Button>
+			</a>
+
 			<Button classes="text-light w-full md:w-auto" onClick={() => (showModal = true)}>
 				Reportar fallecido
 			</Button>
@@ -55,7 +58,12 @@
 		background-color: #fffffd0d;
 		cursor: pointer;
 		position: relative;
-        min-height: 300px;
+		min-height: 300px;
+	}
+	@media (max-width: 768px) {
+		.grid-item {
+			min-height: unset;
+		}
 	}
 	.grid-item:hover .overlay {
 		opacity: 1;

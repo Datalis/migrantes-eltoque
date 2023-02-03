@@ -8,13 +8,23 @@
 	import Section_4 from '$lib/components/section-4.svelte';
 	import Section_6 from '$lib/components/section-6.svelte';
 	import { onMount } from 'svelte';
+	import gsap from 'gsap';
+	import ScrollTrigger from 'gsap/ScrollTrigger';
 
 	export let data: PageData;
 
 	const { totals, deceased, missing, articles, places } = data;
 
 	onMount(() => {
-		console.log(data);
+		gsap.registerPlugin(ScrollTrigger);
+		gsap.to('#section-1', {
+			yPercent: 25,
+			scrollTrigger: {
+				trigger: '#section-2',
+				scrub: true,
+				invalidateOnRefresh: true
+			}
+		})
 	});
 </script>
 

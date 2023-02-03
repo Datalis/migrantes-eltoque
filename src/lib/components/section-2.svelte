@@ -1,5 +1,7 @@
 <script>
 	import MapBackground from '$lib/assets/images/section-2/mapa.webp';
+	import Vela from '$lib/assets/images/section-1/vela1.svg?component';
+	import Plano from '$lib/assets/images/section-1/plano.svg?component';
 	import LinePath from '$lib/assets/images/section-2/line-full.svg?component';
 	import LinePathSmall from '$lib/assets/images/section-2/line-small.svg?component';
 	import Plane from '$lib/assets/images/section-2/plane.webp';
@@ -27,8 +29,8 @@
 					align: '#line path',
 					autoRotate: true,
 					alignOrigin: [0.5, 0.5],
-					start: 0.7,
-					end: 0.6
+					start: 0.6,
+					end: 0.5
 				}
 			});
 		}
@@ -37,7 +39,15 @@
 
 <svelte:window bind:innerWidth={windowWidth} />
 
-<section class="section-2 flex flex-col items-center justify-center bg-dark min-h-screen">
+<section id="section-2" class="section-2 flex flex-col items-center justify-center bg-dark min-h-screen">
+	<div class="section-2-upper-decor">
+		<Plano class="decor-plano w-full" />
+		<div class="decor-candles flex justify-center items-center">
+			<Vela height="220px" width="180px" />
+			<Vela height="300px" width="250px" />
+			<Vela height="220px" width="180px" />
+		</div>
+	</div>
 	<div class="container mx-auto px-10 md:px-0 max-w-3xl">
 		<h2 class="font-sans font-bold text-4xl md:text-6xl text-light my-4 text-center">MIGRAR:</h2>
 		<h2 class="font-sans font-bold text-2xl md:text-4xl text-accent text-center">
@@ -51,22 +61,20 @@
 				href="https://www.cbp.gov/newsroom/stats/nationwide-encounters?1649206653428"
 				target="_blank"
 				rel="noreferrer">Oficina de Aduanas y Protección Fronteriza norteamericana</a
-			>, y los números siguen en aumento. 
-			<br><br>
-			Llegar a Estados Unidos es la primera opción migratoria
-			para quienes quieren salir de Cuba, aunque no la única. A pesar de la cercanía geográfica, el
-			problema está en cómo hacerlo, pues las vías legales para obtener un visado han sido muy
-			limitadas. El cierre de la Embajada en La Habana en 2017, la pandemia y, sobre todo, la
-			profunda crisis que se vive en Cuba han empujado a los migrantes a buscar vías alternativas
-			—peligrosas e irregulares— para salir de la isla rumbo al norte. 
-			<br><br>
-			Aunque la mayoría de las
-			personas llegan a su destino; para lograrlo emprenden vías costosas e inseguras, con
-			incidentes violentos o peligros naturales. Se exponen a ser interceptados por las autoridades
-			locales y pueden, en el camino, perderlo todo, incluso la vida.
+			>, y los números siguen en aumento.
+			<br /><br />
+			Llegar a Estados Unidos es la primera opción migratoria para quienes quieren salir de Cuba, aunque
+			no la única. A pesar de la cercanía geográfica, el problema está en cómo hacerlo, pues las vías
+			legales para obtener un visado han sido muy limitadas. El cierre de la Embajada en La Habana en
+			2017, la pandemia y, sobre todo, la profunda crisis que se vive en Cuba han empujado a los migrantes
+			a buscar vías alternativas —peligrosas e irregulares— para salir de la isla rumbo al norte.
+			<br /><br />
+			Aunque la mayoría de las personas llegan a su destino; para lograrlo emprenden vías costosas e
+			inseguras, con incidentes violentos o peligros naturales. Se exponen a ser interceptados por las
+			autoridades locales y pueden, en el camino, perderlo todo, incluso la vida.
 		</p>
 	</div>
-	<div class="section-2-decor">
+	<div class="section-2-bottom-decor">
 		<img class="decor-bg" src={MapBackground} alt="" />
 		<LinePath id="line" class="decor-line w-full hidden md:block" />
 		<LinePathSmall id="line" class="decor-line w-full md:hidden" />
@@ -78,14 +86,32 @@
 <style>
 	.section-2 {
 		padding-top: 200px;
+		position: relative;
 	}
-	.section-2 .section-2-decor {
+
+	.section-2 .section-2-upper-decor {
+		top: -200px;
+		position: absolute;
+		width: 100%;
+	}
+	:global(.section-2 .section-2-upper-decor .decor-plano) {
+		position: absolute;
+		z-index: 1;
+		top: 115px;
+	}
+	.section-2 .section-2-upper-decor .decor-candles {
+		z-index: 2;
+		position: relative;
+	}
+	
+
+	.section-2 .section-2-bottom-decor {
 		position: relative;
 		margin-top: 5rem;
 		width: 100%;
 		height: 736px;
 	}
-	.section-2 .section-2-decor .decor-bg {
+	.section-2 .section-2-bottom-decor .decor-bg {
 		position: absolute;
 		left: 0;
 		bottom: 0;
@@ -96,11 +122,11 @@
 		height: 600px;
 	}
 
-	:global(.section-2 .section-2-decor .decor-line) {
+	:global(.section-2 .section-2-bottom-decor .decor-line) {
 		z-index: 2;
 		position: relative;
 	}
-	.section-2 .section-2-decor .decor-plane {
+	.section-2 .section-2-bottom-decor .decor-plane {
 		position: absolute;
 		width: 400px;
 		height: 400px;
@@ -108,7 +134,7 @@
 		object-position: center;
 		z-index: 9999;
 	}
-	.section-2 .section-2-decor .decor-volcano {
+	.section-2 .section-2-bottom-decor .decor-volcano {
 		position: absolute;
 		width: 50%;
 		top: 30%;
@@ -117,15 +143,15 @@
 	}
 
 	@media (max-width: 768px) {
-		.section-2 .section-2-decor .decor-bg {
+		.section-2 .section-2-bottom-decor .decor-bg {
 			height: 736px;
 		}
 
-		.section-2 .section-2-decor .decor-volcano {
+		.section-2 .section-2-bottom-decor .decor-volcano {
 			width: 100%;
 		}
 
-		.section-2 .section-2-decor .decor-plane {
+		.section-2 .section-2-bottom-decor .decor-plane {
 			width: 300px;
 			height: 300px;
 			transform: rotate(-130deg);
