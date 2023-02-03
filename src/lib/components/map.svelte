@@ -36,7 +36,7 @@
 
 	onMount(() => {
 		// Lazy load GeoJson data & library setup
-		import('@highcharts/map-collection/custom/north-america.topo.json').then((geoMap) => {
+		import('@highcharts/map-collection/custom/world.topo.json').then((geoMap) => {
 
 			highcharts = Highcharts.mapChart({
 				chart: {
