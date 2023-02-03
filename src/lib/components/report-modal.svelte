@@ -8,6 +8,7 @@
 	const close = () => dispatch('close');
 
 	let modal;
+	export let isMissing = true;
 
 	const handle_keydown = (/** @type {{ key: string; }} */ e) => {
 		if (e.key == 'Escape') {
@@ -39,7 +40,7 @@
 	<form method="post" class="flex flex-col max-w-lg mt-8" on:submit|preventDefault={handleSubmit}>
 		<button on:click={close} type="button" class="close absolute right-4 top-4">X</button>
 		<label>
-			<span> Nombre del desaparecido </span>
+			<span>Nombre del {isMissing ? "desaparecido" : "fallecido"}</span>
 			<input type="text" required name="missing_name" />
 		</label>
 		<label>

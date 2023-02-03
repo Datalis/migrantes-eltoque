@@ -8,7 +8,7 @@
 </script>
 
 {#if showModal}
-	<ReportModal on:close={() => (showModal = false)} />
+	<ReportModal on:close={() => (showModal = false)} isMissing={false} />
 {/if}
 
 <div class="flex flex-col h-full xl:container mx-auto">

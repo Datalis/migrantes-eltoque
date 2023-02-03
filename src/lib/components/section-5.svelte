@@ -14,9 +14,11 @@
 
 	import 'swiper/css';
 	import InfoModal from './info-modal.svelte';
+	import ReportModal from './report-modal.svelte';
 
 	export let data: any[];
 	let showModal = false;
+	let showMissing = false;
 	let selectedPerson;
 	export let articles: any[] = [];
 
@@ -43,6 +45,10 @@
 
 {#if showModal}
 	<InfoModal on:close={() => showModal = false} info={selectedPerson} />
+{/if}
+
+{#if showMissing}
+	<ReportModal on:close={() => showMissing = false} />
 {/if}
 
 <section class="section-5 flex flex-col items-center justify-center bg-light min-h-screen pt-20">
@@ -139,7 +145,7 @@
 				conociste alguien que viajaba contigo y se ha denunciado que no llegó, escríbenos. Queremos
 				que no se olvide su historia y poder ayudar, de acuerdo con nuestras posibilidades.
 			</p>
-			<Button classes="w-full md:w-auto">Reportar desaparecido</Button>
+			<Button classes="w-full md:w-auto" onClick={() => showMissing = true}>Reportar desaparecido</Button>
 		</div>
 
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-10 my-10 md:my-20 mx-10 md:mx-0">
