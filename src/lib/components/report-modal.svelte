@@ -39,7 +39,7 @@
 	aria-modal="true"
 	bind:this={modal}
 >
-	<form method="post" class="flex flex-col justify-center max-w-xl mt-8" on:submit|preventDefault={handleSubmit}>
+	<form method="post" class="flex flex-col justify-center max-w-xl mt-20 w-full" on:submit|preventDefault={handleSubmit}>
 		<button on:click={close} type="button" class="close absolute right-4 top-4">
 			<X width="32" height="32"></X>
 		</button>
@@ -52,7 +52,7 @@
 			<input type="text" required name="complainant_name" />
 		</label>
 		<div class="flex flex-nowrap flex-col md:flex-row mb-4">
-			<label class="flex flex-col w-full md:w-2/3 mr-4">
+			<label class="flex flex-col w-full md:w-2/3 mr-5">
 				<span class="mb-2 italic text-sm"> Email <em class="text-accent">*</em> </span>
 				<input type="email" name="email" id="email" required />
 			</label>
