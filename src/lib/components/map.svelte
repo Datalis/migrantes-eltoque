@@ -19,8 +19,14 @@
 		if (data.length == 1) {
 			// Zoom to point
 			const item = mapData(data)[0];
+			console.log('only one object', data, item)
 			// let point = highcharts?.fromLatLonToPoint({ lat: item?.lat, lon: item?.lon });
 			// highcharts?.series[1]?.points[0]?.zoomTo();
+			// highcharts.setView()
+			// highcharts.get(data[1])?.update({
+			// })
+			// const [lat, lon] = 
+			highcharts.mapView.setView([item.lat, item.lon], 3)
 		}
 	};
 
