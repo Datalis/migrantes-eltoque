@@ -26,7 +26,7 @@
 			// highcharts.get(data[1])?.update({
 			// })
 			// const [lat, lon] = 
-			highcharts.mapView.setView([item.lat, item.lon], 3)
+			highcharts.mapView.setView([item.lon, item.lat], 4)
 		}
 	};
 
