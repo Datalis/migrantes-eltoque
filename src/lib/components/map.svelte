@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Highcharts from 'highcharts/highmaps';
+	import * as turf from '@turf/turf';
 	import type { MapChart } from 'highcharts/highmaps';
 
 	import { onMount } from 'svelte';
@@ -19,14 +20,14 @@
 		if (data.length == 1) {
 			// Zoom to point
 			const item = mapData(data)[0];
-			console.log('only one object', data, item)
-			// let point = highcharts?.fromLatLonToPoint({ lat: item?.lat, lon: item?.lon });
-			// highcharts?.series[1]?.points[0]?.zoomTo();
-			// highcharts.setView()
-			// highcharts.get(data[1])?.update({
-			// })
-			// const [lat, lon] = 
 			highcharts.mapView.setView([item.lon, item.lat], 4)
+		} else {
+			const items = mapData(data)
+			console.log('items', items)
+			var features = turf.points(items.map((item) => [item.lon, item.lat]))
+			var middle = turf.center(features)
+			console.log(middle.geometry.coordinates.reverse())
+			highcharts.mapView.setView(middle.geometry.coordinates.reverse(), 3)
 		}
 	};
 
