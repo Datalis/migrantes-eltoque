@@ -23,10 +23,8 @@
 			highcharts.mapView.setView([item.lon, item.lat], 4)
 		} else {
 			const items = mapData(data)
-			console.log('items', items)
 			var features = turf.points(items.map((item) => [item.lon, item.lat]))
 			var middle = turf.center(features)
-			console.log(middle.geometry.coordinates.reverse())
 			highcharts.mapView.setView(middle.geometry.coordinates.reverse(), 3)
 		}
 	};

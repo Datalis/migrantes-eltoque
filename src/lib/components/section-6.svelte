@@ -39,6 +39,7 @@
 				// endTrigger: '#map-text',
 				endTrigger: '.resume',
 				end: 'bottom bottom',
+				pinSpacing: false,
 				pin: '#map-component',
 				// pinSpacing: false,
 				invalidateOnRefresh: true,
