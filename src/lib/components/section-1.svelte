@@ -10,13 +10,13 @@
             class="flex flex-col md:flex-row justify-center items-center md:items-baseline font-sans font-bold  text-light"
         >
             <span class="text-accent-dark md:mr-4 font-extrabold text-6xl lg:text-7xl">+{totals?.deceased}</span>
-            <span class="text-2xl md:text-4xl lg:text-6xl font-bold">MUERTOS</span>
+            <span class="text-2xl md:text-4xl lg:text-6xl font-bold">MUERTES</span>
         </h2>
         <h2
             class="flex flex-col md:flex-row justify-center items-center md:items-baseline font-sans font-bold  text-light mt-4 mb-8"
         >
             <span class="text-accent-dark md:mr-4 font-extrabold text-6xl lg:text-7xl">+{totals?.missing}</span>
-            <span class="text-2xl md:text-4xl lg:text-6xl font-bold">DESAPARECIDOS</span>
+            <span class="text-2xl md:text-4xl lg:text-6xl font-bold">DESAPARICIONES</span>
         </h2>
         <h2 class="font-sans font-bold text-2xl lg:text-4xl text-light">
             En la travesía de Cuba <br /> a Estados Unidos
