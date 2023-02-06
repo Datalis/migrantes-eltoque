@@ -1,4 +1,5 @@
 <script lang="ts">
+	import ChevronLeftIcon from '$lib/assets/images/chevron-left.svg?component';
 	import Button from '$lib/components/button.svelte';
 	import ReportModal from '$lib/components/report-modal.svelte';
 	import SearchInput from '$lib/components/search-input.svelte';
@@ -30,8 +31,12 @@
 	{#if showModal}
 		<ReportModal isMissing={false} on:close={() => (showModal = false)} />
 	{/if}
-	<div class="max-w-4xl mx-4 md:mx-auto py-20">
-		<h1 class="text-6xl text-accent font-extrabold text-center md:text-left">
+	<div class="max-w-4xl mx-4 md:mx-auto py-10">
+		<a href="/" class="flex items-center text-gray">
+			<ChevronLeftIcon fill="rgb(224 224 224 / var(--tw-text-opacity))"></ChevronLeftIcon>
+			Atrás
+		</a>
+		<h1 class="text-6xl text-accent font-extrabold text-center md:text-left mt-10">
 			+{data?.deceased?.length}
 		</h1>
 		<h3 class="text-4xl text-light font-bold text-center md:text-left">Personas fallecidas</h3>
