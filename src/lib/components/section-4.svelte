@@ -16,7 +16,7 @@
 		<ReportModal on:close={() => (showModal = false)} isMissing={false} />
 	{/if}
 	<div class="flex flex-col h-full xl:container mx-auto">
-		<div class="flex-1 grid md:gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
+		<div class="flex-1 grid gap-2 md:gap-3 grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
 			<div
 				class="memorial-block relative col-span-2 row-span-2 bg-accent flex flex-col justify-end p-10"
 			>
@@ -25,7 +25,7 @@
 				</h2>
 			</div>
 			{#each deceased as person}
-				<div class="grid-item flex flex-col items-center justify-center p-4 m-2 md:m-0">
+				<div class="grid-item flex flex-col items-center justify-center p-4 ">
 					<div class="overlay p-4 flex items-center">
 						<p class="font-medium text-xs">
 							{person[10]}
