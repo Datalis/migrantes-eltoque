@@ -39,13 +39,16 @@
 
 <svelte:window bind:innerWidth={windowWidth} />
 
-<section id="section-2" class="section-2 flex flex-col items-center justify-center bg-dark min-h-screen">
+<section
+	id="section-2"
+	class="section-2 flex flex-col items-center justify-center bg-dark min-h-screen"
+>
 	<div class="section-2-upper-decor">
 		<Plano class="decor-plano w-full" />
 		<div class="decor-candles flex justify-center items-center">
-			<Vela height="220px" width="180px" />
-			<Vela height="300px" width="250px" />
-			<Vela height="220px" width="180px" />
+			<Vela class="decor-candles-small" />
+			<Vela class="decor-candles-center" />
+			<Vela class="decor-candles-small" />
 		</div>
 	</div>
 	<div class="container mx-auto px-10 md:px-0 max-w-3xl">
@@ -94,16 +97,28 @@
 		position: absolute;
 		width: 100%;
 	}
+	
 	:global(.section-2 .section-2-upper-decor .decor-plano) {
 		position: absolute;
 		z-index: 1;
 		top: 115px;
 	}
+
 	.section-2 .section-2-upper-decor .decor-candles {
 		z-index: 2;
 		position: relative;
 	}
-	
+
+	:global(.section-2 .section-2-upper-decor .decor-candles .decor-candles-small) {
+		width: 180px;
+		height: 220px;
+	}
+
+	:global(.section-2 .section-2-upper-decor .decor-candles .decor-candles-center) {
+		width: 250px;
+		height: 300px;
+	}
+
 
 	.section-2 .section-2-bottom-decor {
 		position: relative;
