@@ -26,7 +26,7 @@
 			var features = turf.points(items.map((item) => [item.lon, item.lat]))
 			var middle = turf.center(features)
 			// console.log(middle);
-			highcharts.mapView.setView(middle.geometry.coordinates, 3)
+			highcharts.mapView.setView(middle.geometry.coordinates, 4)
 		}
 	};
 
@@ -63,7 +63,11 @@
 				xAxis: {},
 				tooltip: {
 					headerFormat: '',
-					pointFormat: '{point.name}'
+					pointFormat: '{point.name}',
+					style: {
+						fontFamily: "Inter",
+						fontWeight: '500'
+					}
 				},
 				mapView: {
 					zoom: 4,
@@ -80,7 +84,8 @@
 								color: '#fff',
 								textOutline: '',
 								fontSize: '.8rem',
-								textDecoration: 'underline'
+								textDecoration: 'underline',
+								fontFamily: 'Inter',
 							}
 						}
 					},
@@ -88,7 +93,8 @@
 						color: 'rgb(180, 180, 180)',
 						dataLabels: {
 							style: {
-								color: '#fff'
+								color: '#fff',
+								fontFamily: 'Inter',
 							}
 						},
 						cluster: {
