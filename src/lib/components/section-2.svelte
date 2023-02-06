@@ -101,7 +101,7 @@
 	:global(.section-2 .section-2-upper-decor .decor-plano) {
 		position: absolute;
 		z-index: 1;
-		top: 115px;
+		top: 130px;
 	}
 
 	.section-2 .section-2-upper-decor .decor-candles {
