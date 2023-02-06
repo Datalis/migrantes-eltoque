@@ -1,5 +1,6 @@
 <script lang="ts">
 	import ToggleIcon from '$lib/assets/images/chevron-down-circle.svg?component';
+	import ChevronLeftIcon from '$lib/assets/images/chevron-left.svg?component';
 
 	import Button from '$lib/components/button.svelte';
 	import ReportModal from '$lib/components/report-modal.svelte';
@@ -25,8 +26,12 @@
 	{#if showModal}
 		<ReportModal on:close={() => (showModal = false)} />
 	{/if}
-	<div class="max-w-4xl mx-4 md:mx-auto py-20">
-		<h1 class="text-6xl text-accent text-center  md:text-left font-extrabold">
+	<div class="max-w-4xl mx-4 md:mx-auto py-10">
+		<a href="/" class="flex items-center text-gray">
+			<ChevronLeftIcon fill="rgb(224 224 224 / var(--tw-text-opacity))"></ChevronLeftIcon>
+			Atrás
+		</a>
+		<h1 class="text-6xl text-accent text-center  md:text-left font-extrabold mt-10">
 			+{data?.missing?.length}
 		</h1>
 		<h3 class="text-4xl text-light text-center md:text-left font-bold">Personas desaparecidas</h3>
