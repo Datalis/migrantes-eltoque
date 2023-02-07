@@ -79,7 +79,7 @@
 				plotOptions: {
 					series: {
 						dataLabels: {
-							enabled: false,
+							// enabled: false,
 							style: {
 								color: '#fff',
 								textOutline: '',
@@ -151,8 +151,8 @@
 					{
 						name: 'Basemap',
 						type: 'map',
-						borderColor: 'rgb(120, 86, 255)',
-						borderWidth: 0,
+						borderColor: 'white',
+						borderWidth: .5,
 						nullColor: 'rgb(76, 52, 164)',
 						showInLegend: false
 					},
