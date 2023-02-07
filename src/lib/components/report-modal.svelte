@@ -48,7 +48,7 @@
 			<input type="text" required name="missing_name" value={name} />
 		</label>
 		<label class="flex flex-col mb-4">
-			<span class="mb-2 italic text-sm"> Nombre del denunciante <em class="text-accent">*</em></span>
+			<span class="mb-2 italic text-sm"> Nombre de quien reporta <em class="text-accent">*</em></span>
 			<input type="text" required name="complainant_name" />
 		</label>
 		<div class="flex flex-nowrap flex-col md:flex-row mb-4">
