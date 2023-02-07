@@ -4,7 +4,7 @@
     
 
 	import Footer from '$lib/components/footer.svelte';
-	import { navigating } from '$app/stores';
+	import { navigating, page } from '$app/stores';
 	import '../app.css';
     import 'nprogress/nprogress.css'
 
