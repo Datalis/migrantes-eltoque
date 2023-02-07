@@ -25,8 +25,8 @@
 			const items = mapData(data)
 			var features = turf.points(items.map((item) => [item.lon, item.lat]))
 			var middle = turf.center(features)
-			// console.log(middle);
-			highcharts.mapView.setView(middle.geometry.coordinates, 4)
+			const zoom = data.length > 5 ? 4 : 6
+			highcharts.mapView.setView(middle.geometry.coordinates, zoom)
 		}
 	};
 
@@ -46,7 +46,7 @@
 
 	onMount(() => {
 		// Lazy load GeoJson data & library setup
-		import('@highcharts/map-collection/custom/world.topo.json').then((geoMap) => {
+		import('@highcharts/map-collection/custom/world-highres3.topo.json').then((geoMap) => {
 			highcharts = Highcharts.mapChart({
 				chart: {
 					renderTo: 'map-component',
