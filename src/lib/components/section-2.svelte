@@ -5,8 +5,6 @@
 	import Child from '$lib/assets/images/section-6/child.webp';
 </script>
 
-
-
 <section
 	id="section-2"
 	class="section-2 flex flex-col items-center justify-center bg-dark min-h-screen"
@@ -48,11 +46,6 @@
 	<div class="section-2-bottom-decor">
 		<img src={Flag} class="decor-flag" alt="" />
 		<img src={Child} class="decor-child" alt="" />
-		<!-- <img class="decor-bg" src={MapBackground} alt="" />
-		<LinePath id="line" class="decor-line w-full hidden md:block" />
-		<LinePathSmall id="line" class="decor-line w-full md:hidden" />
-		<img id="plane" class="decor-plane" src={Plane} alt="" />
-		<img id="volcano" class="decor-volcano" src={Volcano} alt="" /> -->
 	</div>
 </section>
 

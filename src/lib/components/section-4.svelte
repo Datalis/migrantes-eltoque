@@ -28,12 +28,12 @@
 				<div class="grid-item flex flex-col items-center justify-center p-4 ">
 					<div class="overlay p-4 flex items-center">
 						<p class="font-medium text-xs">
-							{person[10]}
+							{person[11]}
 						</p>
 					</div>
-					<h3 class="name text-center md:text-xl font-bold text-accent md:w-3/4">{person[2]}</h3>
+					<h3 class="name text-center md:text-xl font-bold text-accent md:w-3/4">{person[3]}</h3>
 					<span class=" text-light text-center font-light text-xs md:text-sm my-4 md:my-5"
-						>{person[3] !== 'desconocida' ? `${person[3]} años` : 'Edad desconocida'}</span
+						>{person[4] !== 'desconocida' ? `${person[4]} años` : 'Edad desconocida'}</span
 					>
 					<DecorDeceased class="relative w-3/4" />
 				</div>
