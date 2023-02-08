@@ -4,6 +4,7 @@
 	import { createEventDispatcher } from 'svelte';
 	import Button from './button.svelte';
 	import X from '$lib/assets/images/x.svg?component';
+	import Toast from './toast.svelte';
 
 	const dispatch = createEventDispatcher();
 	const close = () => dispatch('close');
@@ -11,6 +12,7 @@
 	let modal;
 	export let isMissing = true;
 	export let name = '';
+	let showToast = false;
 
 	const handle_keydown = (/** @type {{ key: string; }} */ e) => {
 		if (e.key == 'Escape') {
@@ -24,7 +26,7 @@
 		const data = new FormData(this);
 		await fetch('?/contact', { method: 'POST', body: data });
 		NProgress.done();
-		// Show toast
+		showToast = true;
 	}
 </script>
 
@@ -36,6 +38,7 @@
 	aria-modal="true"
 	bind:this={modal}
 >
+	<Toast show={showToast} />
 	<form
 		method="post"
 		class="flex flex-col justify-center max-w-xl w-full"
@@ -96,7 +99,7 @@
 		top: 0;
 		overflow: auto;
 		padding: 1rem;
-		z-index: 999;
+		z-index: 40;
 	}
 
 	button.close {
