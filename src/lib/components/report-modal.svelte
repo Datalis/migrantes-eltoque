@@ -34,24 +34,24 @@
 <svelte:window on:keydown={handle_keydown} />
 
 <div
-	class="modal bg-dark bg-opacity-100 text-gray w-full h-full flex justify-center"
+	class="modal bg-dark bg-opacity-100 text-gray w-full h-full flex flex-col items-center justify-center"
 	role="dialog"
 	aria-modal="true"
 	bind:this={modal}
 >
-	<form method="post" class="flex flex-col justify-center max-w-xl mt-20 w-full" on:submit|preventDefault={handleSubmit}>
+	<form method="post" class="flex flex-col justify-center max-w-xl w-full" on:submit|preventDefault={handleSubmit}>
 		<button on:click={close} type="button" class="close absolute right-4 top-4">
 			<X width="32" height="32"></X>
 		</button>
-		<label class="flex flex-col mb-4">
+		<label class="flex flex-col mb-2 mt-10 md:mt-0">
 			<span class="mb-2 italic text-sm">Nombre del {isMissing ? "desaparecido" : "fallecido"} <em class="text-accent">*</em></span>
 			<input type="text" required name="missing_name" value={name} />
 		</label>
-		<label class="flex flex-col mb-4">
+		<label class="flex flex-col mb-2">
 			<span class="mb-2 italic text-sm"> Nombre de quien reporta <em class="text-accent">*</em></span>
 			<input type="text" required name="complainant_name" />
 		</label>
-		<div class="flex flex-nowrap flex-col md:flex-row mb-4">
+		<div class="flex flex-nowrap flex-col md:flex-row mb-2">
 			<label class="flex flex-col w-full md:w-2/3 mr-5">
 				<span class="mb-2 italic text-sm"> Email <em class="text-accent">*</em> </span>
 				<input type="email" name="email" id="email" required />
@@ -65,8 +65,9 @@
 			<span class="mb-2 italic text-sm"> Mensaje <em class="text-accent">*</em></span>
 			<textarea name="message" id="message" cols="30" rows="5" required />
 		</label>
-		<Button buttonType={'submit'} classes="mt-10">Enviar</Button>
+		<Button buttonType={'submit'} classes="mt-8">Enviar</Button>
 	</form>
+	<a class="mt-auto text-center text-accent" href="mailto:audiencias@eltoque.com">audiencias@eltoque.com</a>
 </div>
 
 <style>
