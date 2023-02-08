@@ -33,7 +33,7 @@
 	{/if}
 	<div class="max-w-4xl mx-4 md:mx-auto py-10">
 		<a href="/" class="flex items-center text-gray">
-			<ChevronLeftIcon fill="rgb(224 224 224 / var(--tw-text-opacity))"></ChevronLeftIcon>
+			<ChevronLeftIcon fill="rgb(224 224 224 / var(--tw-text-opacity))" />
 			Atrás
 		</a>
 		<h1 class="text-6xl text-accent font-extrabold text-center md:text-left mt-10">
@@ -42,17 +42,19 @@
 		<h3 class="text-4xl text-light font-bold text-center md:text-left">Personas fallecidas</h3>
 		<div class="bg-accent flex flex-col md:flex-row items-center p-10 rounded-lg mt-10 md:h-52">
 			<p class="text-light md:mr-10 mb-10 md:mb-0">
-				Si tienes algún familiar, amigo o conocido que haya desaparecido tratando de migrar o
-				conociste alguien que viajaba contigo y se ha denunciado que no llegó, escríbenos. Queremos
-				que no se olvide su historia y ayudar, de acuerdo con nuestras posibilidades, a buscar la
-				información que necesitan sus seres queridos.
+				Si tienes algún familiar, amigo o conocido que haya fallecido tratando de llegar a los
+				Estados Unidos, cruzando una frontera terrestre o en el mar, escríbenos. Queremos que no se
+				olvide su nombre y su historia.
 			</p>
 			<Button type="solid" color="light" classes="w-full" onClick={() => (showModal = true)}
 				>Reportar fallecido</Button
 			>
 		</div>
 		<div class="mt-20">
-			<SearchInput on:search={(e) => onSearch(e.detail)} placeholder="Escribe el nombre de la persona fallecida" />
+			<SearchInput
+				on:search={(e) => onSearch(e.detail)}
+				placeholder="Escribe el nombre de la persona fallecida"
+			/>
 		</div>
 		<table class="table-auto mt-10 w-full text-light">
 			<thead>
