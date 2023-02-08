@@ -10,6 +10,7 @@ export const load = (async () => {
 		'Todos los eventos!O:P'
 	]);
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const mapTotals = (data: any[][] | null | undefined) =>
 		data?.slice(1).reduce(
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -22,7 +23,7 @@ export const load = (async () => {
 		);
 
 	return {
-		deceased: sheet?.[0]?.values?.slice(1).map((e) => ({ name: e[3], age: e[4], details: e[11] })),
+		deceased: sheet?.[0]?.values?.slice(1).map((e) => ({ name: e[3], age: e[4], details: e[11] }))?.sort((a,b) => a.name.localeCompare(b.name)),
 		totals: mapTotals(sheet?.[1].values)
 	};
 }) satisfies PageServerLoad;
