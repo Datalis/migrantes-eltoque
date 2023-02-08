@@ -10,6 +10,7 @@
 	let showModal = false;
 
 	let deceased = data?.deceased || [];
+	let totals = data?.totals || [];
 
 	const onSearch = (query: string) => {
 		if (query == '') deceased = data.deceased || [];
@@ -37,7 +38,7 @@
 			Atrás
 		</a>
 		<h1 class="text-6xl text-accent font-extrabold text-center md:text-left mt-10">
-			+{data?.deceased?.length}
+			+{totals?.deceased}
 		</h1>
 		<h3 class="text-4xl text-light font-bold text-center md:text-left">Personas fallecidas</h3>
 		<div class="bg-accent flex flex-col md:flex-row items-center p-10 rounded-lg mt-10 md:h-52">
@@ -46,7 +47,7 @@
 				Estados Unidos, cruzando una frontera terrestre o en el mar, escríbenos. Queremos que no se
 				olvide su nombre y su historia.
 			</p>
-			<Button type="solid" color="light" classes="w-full" onClick={() => (showModal = true)}
+			<Button type="solid" color="light" classes="w-full md:w-auto" onClick={() => (showModal = true)}
 				>Reportar fallecido</Button
 			>
 		</div>
