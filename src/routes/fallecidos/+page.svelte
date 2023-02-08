@@ -20,19 +20,13 @@
 					return e.name.toLowerCase().indexOf(query.toLowerCase(), 0) != -1;
 				}) || [];
 	};
-
-	// $: deceased = data?.deceased?.values?.slice(1).map((e: any) => ({
-	// 	name: e[2],
-	// 	age: e[3],
-	// 	details: e[10]
-	// })) || [];
 </script>
 
 <main class="bg-dark">
 	{#if showModal}
 		<ReportModal isMissing={false} on:close={() => (showModal = false)} />
 	{/if}
-	<div class="max-w-4xl mx-4 md:mx-auto py-10">
+	<div class="max-w-6xl mx-4 md:mx-auto py-10">
 		<a href="/" class="flex items-center text-gray">
 			<ChevronLeftIcon fill="rgb(224 224 224 / var(--tw-text-opacity))" />
 			Atrás
@@ -63,32 +57,55 @@
 			>
 			<SearchInput
 				on:search={(e) => onSearch(e.detail)}
-				placeholder="Escribe el nombre de la persona fallecida"
+				placeholder="Buscar..."
 			/>
 		</div>
-		<table class="table-auto mt-10 w-full text-light">
-			<thead>
-				<tr>
-					<th class="font-thin text-left border-b-2 border-accent pb-4">Nombre</th>
-					<th class="font-thin text-left border-b-2 border-accent pb-4">Edad</th>
-					<th class="font-thin text-left border-b-2 border-accent pb-4">Detalles</th>
-				</tr>
-			</thead>
-			<tbody>
-				{#each deceased as person}
-					<tr class="">
-						<td class="border-b-2 border-gray border-opacity-20 text-sm py-4 align-top"
-							>{person?.name}</td
-						>
-						<td class="border-b-2 border-gray border-opacity-20 text-sm py-4 align-top"
-							>{person?.age == 'desconocida' ? '-' : person?.age}</td
-						>
-						<td class="border-b-2 border-gray border-opacity-20 max-w-prose text-sm py-4"
-							>{person?.details || '-'}</td
-						>
+		<div class="table-wrapper">
+			<table id="table" class="table-auto mt-10 w-full text-light">
+				<thead>
+					<tr>
+						<th class="font-thin text-left border-b-2 border-accent pb-4">Nombre</th>
+						<th class="font-thin text-left border-b-2 border-accent pb-4">Edad</th>
+						<th class="font-thin text-left border-b-2 border-accent pb-4">Fecha de muerte</th>
+						<th class="font-thin text-left border-b-2 border-accent pb-4">Causa</th>
+						<th class="font-thin text-left border-b-2 border-accent pb-4">Lugar donde murió</th>
+						<th class="font-thin text-left border-b-2 border-accent pb-4">Lugar de origen</th>
+						<th class="font-thin text-left border-b-2 border-accent pb-4">Detalles</th>
 					</tr>
-				{/each}
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					{#each deceased as person}
+						<tr class="">
+							<td class="border-b-2 border-gray border-opacity-20 text-sm py-4 align-top"
+								>{person?.name}</td
+							>
+							<td class="border-b-2 border-gray border-opacity-20 text-sm py-4 align-top"
+								>{person?.age == 'desconocida' ? '-' : person?.age}</td
+							>
+							<td class="border-b-2 border-gray border-opacity-20 text-sm py-4 align-top"
+								>{person?.death_date == 'desconocida' ? '-' : person?.death_date}</td
+							>
+							<td class="border-b-2 border-gray border-opacity-20 text-sm py-4 align-top"
+								>{person?.death_cause == 'desconocida' ? '-' : person?.death_cause}</td
+							>
+							<td class="border-b-2 border-gray border-opacity-20 text-sm py-4 align-top"
+								>{person?.death_location == 'desconocida' ? '-' : person?.death_location}</td
+							>
+							<td class="border-b-2 border-gray border-opacity-20 text-sm py-4 align-top"
+								>{person?.place_of_origin == 'desconocida' ? '-' : person?.place_of_origin}</td
+							>
+							<td class="border-b-2 border-gray border-opacity-20 max-w-prose text-sm py-4"
+								>{person?.details || '-'}</td
+							>
+						</tr>
+					{/each}
+				</tbody>
+			</table>
+		</div>
 	</div>
 </main>
+<style>
+	.table-wrapper {
+		overflow-x: scroll;
+	}
+</style>

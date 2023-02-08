@@ -42,7 +42,7 @@
 		<div
 			class="flex flex-col md:flex-row items-center justify-center mt-10 md:mt-16 mb-10 md:mb-20 px-10 md:px-0"
 		>
-			<a href="/fallecidos">
+			<a href="/fallecidos" class="w-full md:w-auto">
 				<Button type="bordered" classes="md:mr-8 mb-8 md:mb-0 w-full md:w-auto">Ver listado</Button>
 			</a>
 

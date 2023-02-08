@@ -23,7 +23,15 @@ export const load = (async () => {
 		);
 
 	return {
-		deceased: sheet?.[0]?.values?.slice(1).map((e) => ({ name: e[3], age: e[4], details: e[11] }))?.sort((a,b) => a.name.localeCompare(b.name)),
+		deceased: sheet?.[0]?.values?.slice(1).map((e) => ({ 
+			name: e[3], 
+			age: e[4], 
+			death_date: e[6],
+			death_cause: e[7],
+			death_location: e[8],
+			place_of_origin: e[12],
+			details: e[11] 
+		}))?.sort((a,b) => a.name.localeCompare(b.name)),
 		totals: mapTotals(sheet?.[1].values)
 	};
 }) satisfies PageServerLoad;

@@ -96,7 +96,7 @@
 			>
 				<a href="/" class="text-light leading-loose">Inicio</a>
 				<a href="/fallecidos" class="text-light leading-loose">Listado de Fallecidos</a>
-				<a href="/desaparecidos" class="text-light leading-loose">Listado de Desparecidos</a>
+				<a href="/desaparecidos" class="text-light leading-loose">Listado de Desaparecidos</a>
 				<div class="md:hidden md:ml-auto flex mt-10">
 					<a
 						class="social-icon"
