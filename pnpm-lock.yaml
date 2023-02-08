@@ -2120,8 +2120,8 @@ packages:
       entities: 2.2.0
     dev: true
 
-  /dom7/4.0.4:
-    resolution: {integrity: sha512-DSSgBzQ4rJWQp1u6o+3FVwMNnT5bzQbMb+o31TjYYeRi05uAcpF8koxdfzeoe5ElzPmua7W7N28YJhF7iEKqIw==}
+  /dom7/4.0.6:
+    resolution: {integrity: sha512-emjdpPLhpNubapLFdjNL9tP06Sr+GZkrIHEXLWvOGsytACUrkbeIdjO5g77m00BrHTznnlcNqgmn7pCN192TBA==}
     dependencies:
       ssr-window: 4.0.2
     dev: true
@@ -3603,7 +3603,7 @@ packages:
     engines: {node: '>= 4.7.0'}
     requiresBuild: true
     dependencies:
-      dom7: 4.0.4
+      dom7: 4.0.6
       ssr-window: 4.0.2
     dev: true
 

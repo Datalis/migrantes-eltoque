@@ -20,13 +20,13 @@
 		if (data.length == 1) {
 			// Zoom to point
 			const item = mapData(data)[0];
-			highcharts.mapView.setView([item.lon, item.lat], 4)
+			highcharts?.mapView.setView([item.lon, item.lat], 4)
 		} else {
 			const items = mapData(data)
 			var features = turf.points(items.map((item) => [item.lon, item.lat]))
 			var middle = turf.center(features)
 			const zoom = data.length > 5 ? 4 : 6
-			highcharts.mapView.setView(middle.geometry.coordinates, zoom)
+			highcharts?.mapView.setView(middle.geometry.coordinates, zoom)
 		}
 	};
 

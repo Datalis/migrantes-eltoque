@@ -10,6 +10,7 @@
 	import { onMount } from 'svelte';
 	import gsap from 'gsap';
 	import ScrollTrigger from 'gsap/ScrollTrigger';
+	import Section_7 from '$lib/components/section-7.svelte';
 
 	export let data: PageData;
 
@@ -24,17 +25,18 @@
 				scrub: true,
 				invalidateOnRefresh: true
 			}
-		})
+		});
 	});
 </script>
 
 <main class="overflow-hidden">
 	<Section_1 {totals} />
 	<Section_2 />
-	<Section_3 {totals} {deceased}/>
+	<Section_3 {totals} {deceased} />
 	<Section_4 {deceased} />
-	<Section_5 {missing} {articles} {totals} />
+	<Section_5 {missing} {totals} />
 	<Section_6 {places} />
+	<Section_7 {articles} />
 </main>
 
 <style>

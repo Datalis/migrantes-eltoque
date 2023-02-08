@@ -12,12 +12,13 @@ export const load: PageServerLoad = async () => {
 		'Todos los eventos!O:P'
 	]);
 	const { data: articles } = await get(
-		'https://api.eltoque.com/posts?categories=63daba063c88b2001e980d89&_sort=publish_date:DESC&_limit=6'
+		'https://api.eltoque.com/posts?categories=63daba063c88b2001e980d89&_sort=publish_date:DESC'
 	);
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const mapTotals = (data: any[][] | null | undefined) =>
 		data?.slice(1).reduce(
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			(acc: any, c) => {
 				acc['deceased'] += +(c?.[0] ?? 0);
 				acc['missing'] += +(c?.[1] ?? 0);
