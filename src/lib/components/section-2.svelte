@@ -1,43 +1,9 @@
 <script>
-	import MapBackground from '$lib/assets/images/section-2/mapa.webp';
+	import Flag from '$lib/assets/images/section-6/flag1.webp';
 	import Vela from '$lib/assets/images/section-1/vela1.svg?component';
 	import Plano from '$lib/assets/images/section-1/plano.svg?component';
-	import LinePath from '$lib/assets/images/section-2/line-full.svg?component';
-	import LinePathSmall from '$lib/assets/images/section-2/line-small.svg?component';
-	import Plane from '$lib/assets/images/section-2/plane.webp';
-	import Volcano from '$lib/assets/images/section-2/volcano.webp';
-	import gsap from 'gsap';
-	import MotionPathPlugin from 'gsap/MotionPathPlugin';
-	import ScrollTrigger from 'gsap/ScrollTrigger';
-	import { onMount } from 'svelte';
-
-	let windowWidth = 0;
-
-	onMount(() => {
-		if (windowWidth >= 768) {
-			gsap.registerPlugin(ScrollTrigger);
-			gsap.registerPlugin(MotionPathPlugin);
-
-			gsap.to('#plane', {
-				scrollTrigger: {
-					// markers: true,
-					trigger: '.section-2-decor',
-					scrub: 1
-				},
-				motionPath: {
-					path: '#line path',
-					align: '#line path',
-					autoRotate: true,
-					alignOrigin: [0.5, 0.5],
-					start: 0.6,
-					end: 0.5
-				}
-			});
-		}
-	});
+	import Child from '$lib/assets/images/section-6/child.webp';
 </script>
-
-<svelte:window bind:innerWidth={windowWidth} />
 
 <section
 	id="section-2"
@@ -78,11 +44,8 @@
 		</p>
 	</div>
 	<div class="section-2-bottom-decor">
-		<img class="decor-bg" src={MapBackground} alt="" />
-		<LinePath id="line" class="decor-line w-full hidden md:block" />
-		<LinePathSmall id="line" class="decor-line w-full md:hidden" />
-		<img id="plane" class="decor-plane" src={Plane} alt="" />
-		<img id="volcano" class="decor-volcano" src={Volcano} alt="" />
+		<img src={Flag} class="decor-flag" alt="" />
+		<img src={Child} class="decor-child" alt="" />
 	</div>
 </section>
 
@@ -97,7 +60,7 @@
 		position: absolute;
 		width: 100%;
 	}
-	
+
 	:global(.section-2 .section-2-upper-decor .decor-plano) {
 		position: absolute;
 		z-index: 1;
@@ -119,59 +82,52 @@
 		height: 300px;
 	}
 
-
+	 /* Bottom */
 	.section-2 .section-2-bottom-decor {
 		position: relative;
 		margin-top: 5rem;
 		width: 100%;
-		height: 736px;
-	}
-	.section-2 .section-2-bottom-decor .decor-bg {
-		position: absolute;
-		left: 0;
-		bottom: 0;
-		width: 100%;
-		object-fit: cover;
-		object-position: center;
-		z-index: 1;
 		height: 600px;
+		background-image: url(/src/lib/assets/images/section-6/rio.webp);
+		background-size: cover;
+		background-position: center;
 	}
 
-	:global(.section-2 .section-2-bottom-decor .decor-line) {
+	.section-2 .section-2-bottom-decor .decor-flag,
+    /* .section-6 .section-6-decor .decor-sign, */
+	.section-2 .section-2-bottom-decor .decor-child {
+		position: absolute;
+	}
+
+	.section-2 .section-2-bottom-decor .decor-flag {
+		height: 500px;
+		top: calc(50% - 250px);
+		left: calc(50% - 500px);
 		z-index: 2;
-		position: relative;
 	}
-	.section-2 .section-2-bottom-decor .decor-plane {
-		position: absolute;
-		width: 400px;
-		height: 400px;
-		object-fit: contain;
-		object-position: center;
-		z-index: 9999;
+
+	/* .section-6 .section-6-decor .decor-sign {
+        width: 160px;
+    } */
+
+	.section-2 .section-2-bottom-decor .decor-child {
+		width: 530px;
+		left: calc(50% - 175px);
+		top: calc(50% - 160px);
+		transform: rotate(-15deg);
 	}
-	.section-2 .section-2-bottom-decor .decor-volcano {
-		position: absolute;
-		width: 50%;
-		top: 30%;
-		left: 20%;
-		z-index: 4;
-	}
+
 
 	@media (max-width: 768px) {
-		.section-2 .section-2-bottom-decor .decor-bg {
-			height: 736px;
+		.section-2 .section-2-bottom-decor .decor-child {
+			left: -50px;
+			top: calc(50% - 125px);
 		}
-
-		.section-2 .section-2-bottom-decor .decor-volcano {
-			width: 100%;
-		}
-
-		.section-2 .section-2-bottom-decor .decor-plane {
-			width: 300px;
+		.section-2 .section-2-bottom-decor .decor-flag {
+			top: 5%;
 			height: 300px;
-			transform: rotate(-130deg);
-			left: calc(50% - 200px);
-			bottom: calc(50% - 250px);
+			left: unset;
+			right: 5%;
 		}
 	}
 </style>

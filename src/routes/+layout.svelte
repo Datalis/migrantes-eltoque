@@ -1,12 +1,12 @@
 <script>
 	// @ts-ignore
 	import NProgress from 'nprogress';
-    
-
 	import Footer from '$lib/components/footer.svelte';
 	import { navigating } from '$app/stores';
 	import '../app.css';
-    import 'nprogress/nprogress.css'
+	import 'swiper/css';
+	import 'swiper/css/pagination';
+	import 'nprogress/nprogress.css';
 
 	NProgress.configure({
 		minimum: 0.16,
@@ -27,6 +27,10 @@
 <Footer />
 
 <style>
+	:root {
+		--swiper-theme-color: #7856ff;
+	}
+
 	:global(#nprogress .bar) {
 		background-color: #7856ff;
 	}

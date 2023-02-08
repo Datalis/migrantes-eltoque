@@ -28,12 +28,12 @@
 				<div class="grid-item flex flex-col items-center justify-center p-4 ">
 					<div class="overlay p-4 flex items-center">
 						<p class="font-medium text-xs">
-							{person[10]}
+							{person[11]}
 						</p>
 					</div>
-					<h3 class="name text-center md:text-xl font-bold text-accent md:w-3/4">{person[2]}</h3>
+					<h3 class="name text-center md:text-xl font-bold text-accent md:w-3/4">{person[3]}</h3>
 					<span class=" text-light text-center font-light text-xs md:text-sm my-4 md:my-5"
-						>{person[3] !== 'desconocida' ? `${person[3]} años` : 'Edad desconocida'}</span
+						>{person[4] !== 'desconocida' ? `${person[4]} años` : 'Edad desconocida'}</span
 					>
 					<DecorDeceased class="relative w-3/4" />
 				</div>
@@ -42,7 +42,7 @@
 		<div
 			class="flex flex-col md:flex-row items-center justify-center mt-10 md:mt-16 mb-10 md:mb-20 px-10 md:px-0"
 		>
-			<a href="/fallecidos">
+			<a href="/fallecidos" class="w-full md:w-auto">
 				<Button type="bordered" classes="md:mr-8 mb-8 md:mb-0 w-full md:w-auto">Ver listado</Button>
 			</a>
 

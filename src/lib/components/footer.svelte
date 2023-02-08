@@ -5,7 +5,8 @@
 	import CollectivoLogo from '$lib/assets/images/colectivo+voces.svg?component';
 	import FacebookIcon from '$lib/assets/images/facebook.svg?component';
 	import TwitterIcon from '$lib/assets/images/twitter.svg?component';
-	import InstagramIcon from '$lib/assets/images/instagram.svg?component';
+	// import InstagramIcon from '$lib/assets/images/instagram.svg?component';
+	import TelegramIcon from '$lib/assets/images/telegram.svg?component';
 </script>
 
 <footer class="footer bg-accent">
@@ -24,14 +25,37 @@
 			>
 
 			<div class="hidden ml-auto md:flex">
-				<a href="https://es-la.facebook.com/eltoquecom" target="_blank" rel="noreferrer" class="social-icon">
-					<FacebookIcon fill="#e0e0e0" width="32" height="32" />
+				<!-- Sharingbutton Facebook -->
+				<a
+					class="social-icon"
+					href="https://facebook.com/sharer/sharer.php?u=http%3A%2F%2Fsharingbuttons.io"
+					target="_blank"
+					rel="noopener noreferrer"
+					aria-label=""
+				>
+					<FacebookIcon fill="#e0e0e0" width="28" height="28" />
 				</a>
-				<a href="https://twitter.com/eltoquecom" target="_blank" rel="noreferrer" class="social-icon mx-5">
-					<TwitterIcon fill="#e0e0e0" width="32" height="32" />
+
+				<!-- Sharingbutton Twitter -->
+				<a
+					class="social-icon mx-4"
+					href="https://twitter.com/intent/tweet/?text=Super%20fast%20and%20easy%20Social%20Media%20Sharing%20Buttons.%20No%20JavaScript.%20No%20tracking.&amp;url=http%3A%2F%2Fsharingbuttons.io"
+					target="_blank"
+					rel="noopener noreferrer"
+					aria-label=""
+				>
+					<TwitterIcon fill="#e0e0e0" width="28" height="28" />
 				</a>
-				<a href="https://www.instagram.com/eltoquecom/" target="_blank" rel="noreferrer" class="social-icon">
-					<InstagramIcon fill="#e0e0e0" width="32" height="32" />
+
+				<!-- Sharingbutton Telegram -->
+				<a
+					class="social-icon"
+					href="https://telegram.me/share/url?text=Super%20fast%20and%20easy%20Social%20Media%20Sharing%20Buttons.%20No%20JavaScript.%20No%20tracking.&amp;url=http%3A%2F%2Fsharingbuttons.io"
+					target="_blank"
+					rel="noopener noreferrer"
+					aria-label=""
+				>
+					<TelegramIcon fill="#e0e0e0" width="28" height="28" />
 				</a>
 			</div>
 		</div>
@@ -72,16 +96,38 @@
 			>
 				<a href="/" class="text-light leading-loose">Inicio</a>
 				<a href="/fallecidos" class="text-light leading-loose">Listado de Fallecidos</a>
-				<a href="/desaparecidos" class="text-light leading-loose">Listado de Desparecidos</a>
+				<a href="/desaparecidos" class="text-light leading-loose">Listado de Desaparecidos</a>
 				<div class="md:hidden md:ml-auto flex mt-10">
-					<a href="/" class="social-icon">
+					<a
+						class="social-icon"
+						href="https://facebook.com/sharer/sharer.php?u=http%3A%2F%2Fsharingbuttons.io"
+						target="_blank"
+						rel="noopener noreferrer"
+						aria-label=""
+					>
 						<FacebookIcon fill="#e0e0e0" width="32" height="32" />
 					</a>
-					<a href="/" class="social-icon mx-5">
+
+					<!-- Sharingbutton Twitter -->
+					<a
+						class="social-icon mx-4"
+						href="https://twitter.com/intent/tweet/?text=Super%20fast%20and%20easy%20Social%20Media%20Sharing%20Buttons.%20No%20JavaScript.%20No%20tracking.&amp;url=http%3A%2F%2Fsharingbuttons.io"
+						target="_blank"
+						rel="noopener noreferrer"
+						aria-label=""
+					>
 						<TwitterIcon fill="#e0e0e0" width="32" height="32" />
 					</a>
-					<a href="/" class="social-icon">
-						<InstagramIcon fill="#e0e0e0" width="32" height="32" />
+
+					<!-- Sharingbutton Telegram -->
+					<a
+						class="social-icon"
+						href="https://telegram.me/share/url?text=Super%20fast%20and%20easy%20Social%20Media%20Sharing%20Buttons.%20No%20JavaScript.%20No%20tracking.&amp;url=http%3A%2F%2Fsharingbuttons.io"
+						target="_blank"
+						rel="noopener noreferrer"
+						aria-label=""
+					>
+						<TelegramIcon fill="#e0e0e0" width="32" height="32" />
 					</a>
 				</div>
 			</nav>

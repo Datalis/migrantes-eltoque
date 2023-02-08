@@ -16,9 +16,10 @@
 	const onSearch = (query: string) => {
 		if (query == '') missing = data.missing || [];
 		else
-			missing = data.missing?.filter((e) => {
-				return e.name.toLowerCase().indexOf(query.toLowerCase(), 0) != -1;
-			}) || [];
+			missing =
+				data.missing?.filter((e) => {
+					return e.name.toLowerCase().indexOf(query.toLowerCase(), 0) != -1;
+				}) || [];
 	};
 </script>
 
@@ -26,16 +27,16 @@
 	{#if showModal}
 		<ReportModal on:close={() => (showModal = false)} />
 	{/if}
-	<div class="max-w-4xl mx-4 md:mx-auto py-10">
+	<div class="max-w-6xl mx-4 md:mx-auto py-10">
 		<a href="/" class="flex items-center text-gray">
-			<ChevronLeftIcon fill="rgb(224 224 224 / var(--tw-text-opacity))"></ChevronLeftIcon>
+			<ChevronLeftIcon fill="rgb(224 224 224 / var(--tw-text-opacity))" />
 			Atrás
 		</a>
 		<h1 class="text-6xl text-accent text-center  md:text-left font-extrabold mt-10">
 			+{data?.missing?.length}
 		</h1>
 		<h3 class="text-4xl text-light text-center md:text-left font-bold">Personas desaparecidas</h3>
-		<div class="bg-accent flex flex-col md:flex-row items-center p-10 rounded-lg mt-10 md:h-52">
+		<div class="bg-accent flex flex-col md:flex-row items-center p-10 rounded-lg mt-10">
 			<p class="text-light md:mr-10 mb-10 md:mb-0">
 				Si tienes algún familiar, amigo o conocido que haya desaparecido tratando de migrar o
 				conociste alguien que viajaba contigo y se ha denunciado que no llegó, escríbenos. Queremos
@@ -46,55 +47,80 @@
 				>Reportar desaparecido</Button
 			>
 		</div>
-		<div class="mt-20">
-			<SearchInput on:search={(e) => onSearch(e.detail)} placeholder="Escribe el nombre de la persona desaparecida" />
+		<div class="mt-20 flex flex-col">
+			<span
+				class="text-xs mb-4 text-gray"
+				>*Este es un listado
+				incompleto, que incluye solo los nombres de las personas que hemos podido identificar. Otros
+				todavía permanecen en el anonimato.</span
+			>
+			<SearchInput
+				on:search={(e) => onSearch(e.detail)}
+				placeholder="Escribe el nombre de la persona desaparecida"
+			/>
 		</div>
-		<table class="table table-auto mt-10 w-full text-light">
-			<thead>
-				<tr>
-					<th class="font-thin text-left border-b-2 border-accent pb-4">Nombre</th>
-					<th class="font-thin text-left border-b-2 border-accent pb-4">Edad</th>
-					<th class="font-thin text-left border-b-2 border-accent pb-4">Punto de partida</th>
-					<th class="font-thin text-left border-b-2 border-accent pb-4">Fecha</th>
-					<th class="border-b-2 border-accent pb-4" />
-				</tr>
-			</thead>
-			<tbody>
-				{#each missing as person}
+		<div class="table-wrapper">
+			<table class="table table-auto mt-10 w-full text-light">
+				<thead>
 					<tr>
-						<td class="border-b border-gray border-opacity-20 text-sm py-4 align-top"
-							>{person?.name}</td
+						<th class="font-thin text-left border-b-2 border-accent pb-4">Nombre</th>
+						<th class="font-thin text-left border-b-2 border-accent pb-4">Edad</th>
+						<th class="font-thin text-left border-b-2 border-accent pb-4">Fecha de Nacimiento</th>
+						<th class="font-thin text-left border-b-2 border-accent pb-4">Lugar de origen</th>
+						<th class="font-thin text-left border-b-2 border-accent pb-4">Punto de partida</th>
+						<th class="font-thin text-left border-b-2 border-accent pb-4"
+							>Lugar donde desapareció</th
 						>
-						<td class="border-b border-gray border-opacity-20 text-sm py-4 align-top"
-							>{person?.age}</td
-						>
-						<td class="border-b border-gray border-opacity-20 max-w-prose text-sm py-4"
-							>{person?.starting}</td
-						>
-						<td class="border-b border-gray border-opacity-20 text-sm">
-							{person?.date}
-						</td>
-						<td class="border-b border-gray border-opacity-20">
-							<!-- svelte-ignore a11y-click-events-have-key-events -->
-							<span on:click={() => (person.collapsed = !person.collapsed)}>
-								<ToggleIcon
-									width="32"
-									height="32"
-									class="toggler {person?.collapsed ? 'collapsed' : ''}"
-								/>
-							</span>
-						</td>
+						<th class="font-thin text-left border-b-2 border-accent pb-4">Fecha</th>
+						<th class="border-b-2 border-accent pb-4" />
 					</tr>
-					<tr>
-						<td colspan="4">
-							<p class="collapsible text-sm overflow-hidden" class:collapsed={person.collapsed}>
-								{person?.details}
-							</p>
-						</td>
-					</tr>
-				{/each}
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					{#each missing as person}
+						<tr>
+							<td class="border-b border-gray border-opacity-20 text-sm py-4 align-top"
+								>{person?.name}</td
+							>
+							<td class="border-b border-gray border-opacity-20 text-sm py-4 align-top"
+								>{person?.age}</td
+							>
+							<td class="border-b border-gray border-opacity-20 text-sm py-4 align-top"
+								>{person?.birthdate || '-'}</td
+							>
+							<td class="border-b border-gray border-opacity-20 text-sm py-4 align-top"
+								>{person?.birthplace == 'Desconocido' ? '-' : person?.birthplace}</td
+							>
+							<td class="border-b border-gray border-opacity-20 max-w-prose text-sm py-4"
+								>{person?.starting_point == 'Desconocido' ? '-' : person?.starting_point}</td
+							>
+							<td class="border-b border-gray border-opacity-20 max-w-prose text-sm py-4"
+								>{person?.missing_place == 'Desconocido' ? '-' : person?.missing_place}</td
+							>
+							<td class="border-b border-gray border-opacity-20 text-sm">
+								{person?.missing_date}
+							</td>
+							<td class="border-b border-gray border-opacity-20">
+								<!-- svelte-ignore a11y-click-events-have-key-events -->
+								<span on:click={() => (person.collapsed = !person.collapsed)}>
+									<ToggleIcon
+										width="32"
+										height="32"
+										class="toggler {person?.collapsed ? 'collapsed' : ''}"
+									/>
+								</span>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="4">
+								<p class="collapsible text-sm overflow-hidden" class:collapsed={person.collapsed}>
+									{person?.details}
+								</p>
+							</td>
+						</tr>
+					{/each}
+				</tbody>
+			</table>
+		</div>
 	</div>
 </main>
 
@@ -124,5 +150,13 @@
 		padding-top: 1rem;
 		padding-bottom: 1rem;
 		opacity: 1;
+	}
+	.table-wrapper {
+		overflow-x: scroll;
+	}
+	@media (max-width: 768px) {
+		.table-wrapper td {
+			min-width: 100px;
+		}
 	}
 </style>

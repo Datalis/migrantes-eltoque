@@ -1,15 +1,20 @@
 <script lang="ts">
-	import Flag from '$lib/assets/images/section-6/flag1.webp';
-	import Child from '$lib/assets/images/section-6/child.webp';
+	import LinePath from '$lib/assets/images/section-2/line-full.svg?component';
+	import LinePathSmall from '$lib/assets/images/section-2/line-small.svg?component';
+	import Plane from '$lib/assets/images/section-2/plane.webp';
+	import Volcano from '$lib/assets/images/section-2/volcano.webp';
+	import MapBackground from '$lib/assets/images/section-2/mapa.webp';
 
 	import gsap from 'gsap';
 	import ScrollTrigger from 'gsap/ScrollTrigger';
+	import MotionPathPlugin from 'gsap/MotionPathPlugin';
 	import { onMount } from 'svelte';
 	import Map from './map.svelte';
 
 	export let places: any[] = [];
 
 	let mapComponent: Map;
+	let windowWidth = 0;
 
 	const getPlace = (index: number) => {
 		let found = false;
@@ -30,7 +35,7 @@
 	};
 
 	onMount(() => {
-		gsap.registerPlugin(ScrollTrigger);
+		gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
 		gsap.to('#map-component', {
 			scrollTrigger: {
@@ -81,8 +86,31 @@
 				}
 			}
 		});
+
+		if (windowWidth >= 768) {
+			gsap.registerPlugin(ScrollTrigger);
+			gsap.registerPlugin(MotionPathPlugin);
+
+			gsap.to('#plane', {
+				scrollTrigger: {
+					// markers: true,
+					trigger: '.section-6-decor',
+					scrub: 1
+				},
+				motionPath: {
+					path: '#line path',
+					align: '#line path',
+					autoRotate: true,
+					alignOrigin: [0.5, 0.5],
+					start: 0.6,
+					end: 0.5
+				}
+			});
+		}
 	});
 </script>
+
+<svelte:window bind:innerWidth={windowWidth} />
 
 <section class="section-6 flex flex-col items-center bg-dark" id="section-map">
 	<div class="grid md:grid-cols-2 flex-1 max-w-5xl md:px-0 gap-20">
@@ -131,9 +159,14 @@
 		</div>
 	</div>
 	<div class="section-6-decor">
-		<img src={Flag} class="decor-flag" alt="" />
-		<!-- <img src={Sign} class="decor-sign" alt=""> -->
-		<img src={Child} class="decor-child" alt="" />
+		<!-- <img src={Flag} class="decor-flag" alt="" />
+		<img src={Child} class="decor-child" alt="" /> -->
+
+		<img class="decor-bg" src={MapBackground} alt="" />
+		<LinePath id="line" class="decor-line w-full hidden md:block" />
+		<LinePathSmall id="line" class="decor-line w-full md:hidden" />
+		<img id="plane" class="decor-plane" src={Plane} alt="" />
+		<img id="volcano" class="decor-volcano" src={Volcano} alt="" />
 	</div>
 	<div class="max-w-3xl my-10 md:my-32 px-10">
 		<p class="text-light">
@@ -151,51 +184,63 @@
 	.section-6 .section-6-decor {
 		height: 600px;
 		width: 100%;
-		background-image: url(/src/lib/assets/images/section-6/rio.webp);
 		background-size: cover;
 		background-position: center;
 		position: relative;
 	}
-	.section-6 .section-6-decor .decor-flag,
-    /* .section-6 .section-6-decor .decor-sign, */
-    .section-6 .section-6-decor .decor-child {
+
+	.section-6 .section-6-decor .decor-bg {
 		position: absolute;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		object-fit: cover;
+		object-position: center;
+		z-index: 1;
+		height: 600px;
 	}
 
-	.section-6 .section-6-decor .decor-flag {
-		height: 500px;
-		top: calc(50% - 250px);
-		left: calc(50% - 500px);
+	:global(.section-6 .section-6-decor .decor-line) {
 		z-index: 2;
+		position: relative;
+	}
+	.section-6 .section-6-decor .decor-plane {
+		position: absolute;
+		width: 400px;
+		height: 400px;
+		object-fit: contain;
+		object-position: center;
+		z-index: 9999;
+	}
+	.section-6 .section-6-decor .decor-volcano {
+		position: absolute;
+		width: 50%;
+		top: 30%;
+		left: 20%;
+		z-index: 4;
 	}
 
-	/* .section-6 .section-6-decor .decor-sign {
-        width: 160px;
-    } */
+	@media (max-width: 768px) {
+		.section-6 .section-6-decor .decor-bg {
+			height: 736px;
+		}
 
-	.section-6 .section-6-decor .decor-child {
-		width: 530px;
-		left: calc(50% - 175px);
-		top: calc(50% - 160px);
-		transform: rotate(-15deg);
+		.section-6 .section-6-decor .decor-volcano {
+			width: 100%;
+		}
+
+		.section-6 .section-6-decor .decor-plane {
+			width: 300px;
+			height: 300px;
+			transform: rotate(-130deg);
+			left: calc(50% - 200px);
+			bottom: calc(50% - 250px);
+		}
 	}
 
 	.intro,
 	.place div,
 	.resume {
 		@apply bg-opacity-70 backdrop-blur px-10 py-5;
-	}
-
-	@media (max-width: 768px) {
-		.section-6 .section-6-decor .decor-child {
-			left: -50px;
-			top: calc(50% - 125px);
-		}
-		.section-6 .section-6-decor .decor-flag {
-			top: 5%;
-			height: 300px;
-			left: unset;
-			right: 5%;
-		}
 	}
 </style>

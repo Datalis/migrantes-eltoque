@@ -10,6 +10,7 @@
 	let showModal = false;
 
 	let deceased = data?.deceased || [];
+	let totals = data?.totals || [];
 
 	const onSearch = (query: string) => {
 		if (query == '') deceased = data.deceased || [];
@@ -19,64 +20,92 @@
 					return e.name.toLowerCase().indexOf(query.toLowerCase(), 0) != -1;
 				}) || [];
 	};
-
-	// $: deceased = data?.deceased?.values?.slice(1).map((e: any) => ({
-	// 	name: e[2],
-	// 	age: e[3],
-	// 	details: e[10]
-	// })) || [];
 </script>
 
 <main class="bg-dark">
 	{#if showModal}
 		<ReportModal isMissing={false} on:close={() => (showModal = false)} />
 	{/if}
-	<div class="max-w-4xl mx-4 md:mx-auto py-10">
+	<div class="max-w-6xl mx-4 md:mx-auto py-10">
 		<a href="/" class="flex items-center text-gray">
-			<ChevronLeftIcon fill="rgb(224 224 224 / var(--tw-text-opacity))"></ChevronLeftIcon>
+			<ChevronLeftIcon fill="rgb(224 224 224 / var(--tw-text-opacity))" />
 			Atrás
 		</a>
 		<h1 class="text-6xl text-accent font-extrabold text-center md:text-left mt-10">
-			+{data?.deceased?.length}
+			+{totals?.deceased}
 		</h1>
 		<h3 class="text-4xl text-light font-bold text-center md:text-left">Personas fallecidas</h3>
-		<div class="bg-accent flex flex-col md:flex-row items-center p-10 rounded-lg mt-10 md:h-52">
+		<div class="bg-accent flex flex-col md:flex-row items-center p-10 rounded-lg mt-10">
 			<p class="text-light md:mr-10 mb-10 md:mb-0">
-				Si tienes algún familiar, amigo o conocido que haya desaparecido tratando de migrar o
-				conociste alguien que viajaba contigo y se ha denunciado que no llegó, escríbenos. Queremos
-				que no se olvide su historia y ayudar, de acuerdo con nuestras posibilidades, a buscar la
-				información que necesitan sus seres queridos.
+				Si tienes algún familiar, amigo o conocido que haya fallecido tratando de llegar a los
+				Estados Unidos, cruzando una frontera terrestre o en el mar, escríbenos. Queremos que no se
+				olvide su nombre y su historia.
 			</p>
-			<Button type="solid" color="light" classes="w-full" onClick={() => (showModal = true)}
-				>Reportar fallecido</Button
+			<Button
+				type="solid"
+				color="light"
+				classes="w-full md:w-auto"
+				onClick={() => (showModal = true)}>Reportar fallecido</Button
 			>
 		</div>
-		<div class="mt-20">
-			<SearchInput on:search={(e) => onSearch(e.detail)} placeholder="Escribe el nombre de la persona fallecida" />
+		<div class="mt-20 flex flex-col">
+			<span
+				class="text-xs mb-4 text-gray"
+				>*Este es un listado
+				incompleto, que incluye solo los nombres de las personas que hemos podido identificar. Otros
+				todavía permanecen en el anonimato.</span
+			>
+			<SearchInput
+				on:search={(e) => onSearch(e.detail)}
+				placeholder="Buscar..."
+			/>
 		</div>
-		<table class="table-auto mt-10 w-full text-light">
-			<thead>
-				<tr>
-					<th class="font-thin text-left border-b-2 border-accent pb-4">Nombre</th>
-					<th class="font-thin text-left border-b-2 border-accent pb-4">Edad</th>
-					<th class="font-thin text-left border-b-2 border-accent pb-4">Detalles</th>
-				</tr>
-			</thead>
-			<tbody>
-				{#each deceased as person}
-					<tr class="">
-						<td class="border-b-2 border-gray border-opacity-20 text-sm py-4 align-top"
-							>{person?.name}</td
-						>
-						<td class="border-b-2 border-gray border-opacity-20 text-sm py-4 align-top"
-							>{person?.age == 'desconocida' ? '-' : person?.age}</td
-						>
-						<td class="border-b-2 border-gray border-opacity-20 max-w-prose text-sm py-4"
-							>{person?.details || '-'}</td
-						>
+		<div class="table-wrapper">
+			<table id="table" class="table-auto mt-10 w-full text-light">
+				<thead>
+					<tr>
+						<th class="font-thin text-left border-b-2 border-accent pb-4">Nombre</th>
+						<th class="font-thin text-left border-b-2 border-accent pb-4">Edad</th>
+						<th class="font-thin text-left border-b-2 border-accent pb-4">Fecha de muerte</th>
+						<th class="font-thin text-left border-b-2 border-accent pb-4">Causa</th>
+						<th class="font-thin text-left border-b-2 border-accent pb-4">Lugar donde murió</th>
+						<th class="font-thin text-left border-b-2 border-accent pb-4">Lugar de origen</th>
+						<th class="font-thin text-left border-b-2 border-accent pb-4">Detalles</th>
 					</tr>
-				{/each}
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					{#each deceased as person}
+						<tr class="">
+							<td class="border-b-2 border-gray border-opacity-20 text-sm py-4 align-top"
+								>{person?.name}</td
+							>
+							<td class="border-b-2 border-gray border-opacity-20 text-sm py-4 align-top"
+								>{person?.age == 'desconocida' ? '-' : person?.age}</td
+							>
+							<td class="border-b-2 border-gray border-opacity-20 text-sm py-4 align-top"
+								>{person?.death_date == 'desconocida' ? '-' : person?.death_date}</td
+							>
+							<td class="border-b-2 border-gray border-opacity-20 text-sm py-4 align-top"
+								>{person?.death_cause == 'desconocida' ? '-' : person?.death_cause}</td
+							>
+							<td class="border-b-2 border-gray border-opacity-20 text-sm py-4 align-top"
+								>{person?.death_location == 'desconocida' ? '-' : person?.death_location}</td
+							>
+							<td class="border-b-2 border-gray border-opacity-20 text-sm py-4 align-top"
+								>{person?.place_of_origin == 'desconocida' ? '-' : person?.place_of_origin}</td
+							>
+							<td class="border-b-2 border-gray border-opacity-20 max-w-prose text-sm py-4"
+								>{person?.details || '-'}</td
+							>
+						</tr>
+					{/each}
+				</tbody>
+			</table>
+		</div>
 	</div>
 </main>
+<style>
+	.table-wrapper {
+		overflow-x: scroll;
+	}
+</style>

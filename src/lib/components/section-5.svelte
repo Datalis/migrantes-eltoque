@@ -10,15 +10,12 @@
 	import ArrowLeftIcon from '$lib/assets/images/arrow-left.svg?component';
 	import { Swiper, SwiperSlide } from 'swiper/svelte';
 	import Profile from './profile.svelte';
-	import Article from './article.svelte';
 
-	import 'swiper/css';
 	// import InfoModal from './info-modal.svelte';
 	import ReportModal from './report-modal.svelte';
 
 	export let totals: any;
 	export let missing: any[] = [];
-	export let articles: any[] = [];
 
 	// let showMissing = false;
 	let showModal = false;
@@ -162,12 +159,6 @@
 				>Reportar desaparecido</Button
 			>
 		</div>
-
-		<div class="grid grid-cols-1 md:grid-cols-2 gap-10 my-10 md:my-20 mx-10 md:mx-0">
-			{#each articles as article}
-				<Article data={article} />
-			{/each}
-		</div>
 	</div>
 	<div class="hidden md:block section-5-decor">
 		<img src={SeaBackground} class="decor-bg" alt="" />
@@ -178,7 +169,7 @@
 </section>
 
 <style>
-	:global(.swiper) {
+	:global(.section-5 .swiper) {
 		overflow: unset !important;
 	}
 	:global(.section-5 .swiper-controls .control) {

@@ -1,6 +1,6 @@
 <script>
 	// @ts-nocheck
-
+	import NProgress from 'nprogress';
 	import { createEventDispatcher } from 'svelte';
 	import Button from './button.svelte';
 	import X from '$lib/assets/images/x.svg?component';
@@ -10,7 +10,7 @@
 
 	let modal;
 	export let isMissing = true;
-	export let name = "";
+	export let name = '';
 
 	const handle_keydown = (/** @type {{ key: string; }} */ e) => {
 		if (e.key == 'Escape') {
@@ -19,16 +19,13 @@
 		}
 	};
 
-	const handleSubmit = (/** @type {{ target: HTMLFormElement | undefined; }} */ e) => {
-		const formData = new FormData(e.target);
-		/** @type {any}*/
-		const data = {};
-		for (let field of formData) {
-			const [key, value] = field;
-			data[key] = value;
-		}
-		console.log(data);
-	};
+	async function handleSubmit(/** @type {{ target: HTMLFormElement | undefined; }} */ e) {
+		NProgress.start();
+		const data = new FormData(this);
+		await fetch('?/contact', { method: 'POST', body: data });
+		NProgress.done();
+		// Show toast
+	}
 </script>
 
 <svelte:window on:keydown={handle_keydown} />
@@ -39,17 +36,26 @@
 	aria-modal="true"
 	bind:this={modal}
 >
-	<form method="post" class="flex flex-col justify-center max-w-xl w-full" on:submit|preventDefault={handleSubmit}>
+	<form
+		method="post"
+		class="flex flex-col justify-center max-w-xl w-full"
+		on:submit|preventDefault={handleSubmit}
+	>
+		<input type="hidden" value={isMissing} name="is_missing" />
 		<button on:click={close} type="button" class="close absolute right-4 top-4">
-			<X width="32" height="32"></X>
+			<X width="32" height="32" />
 		</button>
 		<label class="flex flex-col mb-2 mt-10 md:mt-0">
-			<span class="mb-2 italic text-sm">Nombre del {isMissing ? "desaparecido" : "fallecido"} <em class="text-accent">*</em></span>
-			<input type="text" required name="missing_name" value={name} />
+			<span class="mb-2 italic text-sm"
+				>Nombre del {isMissing ? 'desaparecido' : 'fallecido'} <em class="text-accent">*</em></span
+			>
+			<input type="text" required name="person_name" value={name} />
 		</label>
-		<label class="flex flex-col mb-2">
-			<span class="mb-2 italic text-sm"> Nombre de quien reporta <em class="text-accent">*</em></span>
-			<input type="text" required name="complainant_name" />
+		<label class="flex flex-col mb-4">
+			<span class="mb-2 italic text-sm">
+				Nombre de quien reporta <em class="text-accent">*</em></span
+			>
+			<input type="text" required name="contact_name" />
 		</label>
 		<div class="flex flex-nowrap flex-col md:flex-row mb-2">
 			<label class="flex flex-col w-full md:w-2/3 mr-5">
@@ -58,7 +64,7 @@
 			</label>
 			<label class="flex flex-col w-full md:w-1/3">
 				<span class="mb-2 italic text-sm"> Teléfono </span>
-				<input type="tel" name="phone_number" />
+				<input type="tel" name="phone" />
 			</label>
 		</div>
 		<label class="flex flex-col">
