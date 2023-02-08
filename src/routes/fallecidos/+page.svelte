@@ -41,17 +41,26 @@
 			+{totals?.deceased}
 		</h1>
 		<h3 class="text-4xl text-light font-bold text-center md:text-left">Personas fallecidas</h3>
-		<div class="bg-accent flex flex-col md:flex-row items-center p-10 rounded-lg mt-10 md:h-52">
+		<div class="bg-accent flex flex-col md:flex-row items-center p-10 rounded-lg mt-10">
 			<p class="text-light md:mr-10 mb-10 md:mb-0">
 				Si tienes algún familiar, amigo o conocido que haya fallecido tratando de llegar a los
 				Estados Unidos, cruzando una frontera terrestre o en el mar, escríbenos. Queremos que no se
 				olvide su nombre y su historia.
 			</p>
-			<Button type="solid" color="light" classes="w-full md:w-auto" onClick={() => (showModal = true)}
-				>Reportar fallecido</Button
+			<Button
+				type="solid"
+				color="light"
+				classes="w-full md:w-auto"
+				onClick={() => (showModal = true)}>Reportar fallecido</Button
 			>
 		</div>
-		<div class="mt-20">
+		<div class="mt-20 flex flex-col">
+			<span
+				class="text-xs mb-4 text-gray"
+				>*Este es un listado
+				incompleto, que incluye solo los nombres de las personas que hemos podido identificar. Otros
+				todavía permanecen en el anonimato.</span
+			>
 			<SearchInput
 				on:search={(e) => onSearch(e.detail)}
 				placeholder="Escribe el nombre de la persona fallecida"
