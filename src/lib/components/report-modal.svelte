@@ -24,7 +24,7 @@
 	async function handleSubmit(/** @type {{ target: HTMLFormElement | undefined; }} */ e) {
 		NProgress.start();
 		const data = new FormData(this);
-		await fetch('?/contact', { method: 'POST', body: data });
+		await fetch('/contact', { method: 'POST', body: data });
 		NProgress.done();
 		showToast = true;
 	}
