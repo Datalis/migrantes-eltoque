@@ -2,8 +2,11 @@
 	import Button from './button.svelte';
 	import ReportModal from './report-modal.svelte';
 	import DecorDeceased from '$lib/assets/images/ornamental-fallecidos.svg?component';
+	import Toast from './toast.svelte';
 
 	let showModal = false;
+	let showToast = false;
+	let errorSubmit = false;
 
 	/**
 	 * @type {any[]}
@@ -11,9 +14,19 @@
 	export let deceased = [];
 </script>
 
+<Toast show={showToast} isError={errorSubmit} />
+
 <section class="section-4 bg-dark min-h-screen">
 	{#if showModal}
-		<ReportModal on:close={() => (showModal = false)} isMissing={false} />
+		<ReportModal
+			on:close={() => (showModal = false)}
+			isMissing={false}
+			on:submit={(e) => {
+				showToast = true;
+				errorSubmit = e.detail.isError;
+				setInterval(() => {showToast = false}, 8000)
+			}}
+		/>
 	{/if}
 	<div class="flex flex-col h-full xl:container mx-auto">
 		<div class="flex-1 grid gap-2 md:gap-3 grid-cols-2 md:grid-cols-3 lg:grid-cols-5">

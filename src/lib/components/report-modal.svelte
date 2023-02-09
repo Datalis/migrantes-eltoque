@@ -4,15 +4,14 @@
 	import { createEventDispatcher } from 'svelte';
 	import Button from './button.svelte';
 	import X from '$lib/assets/images/x.svg?component';
-	import Toast from './toast.svelte';
 
 	const dispatch = createEventDispatcher();
 	const close = () => dispatch('close');
+	const submitCallback = (isError) => dispatch('submit', { isError });
 
 	let modal;
 	export let isMissing = true;
 	export let name = '';
-	let showToast = false;
 
 	const handle_keydown = (/** @type {{ key: string; }} */ e) => {
 		if (e.key == 'Escape') {
@@ -24,9 +23,15 @@
 	async function handleSubmit(/** @type {{ target: HTMLFormElement | undefined; }} */ e) {
 		NProgress.start();
 		const data = new FormData(this);
-		await fetch('/contact', { method: 'POST', body: data });
+		let isError = false;
+		const response = await fetch('/contact', { method: 'POST', body: data });
+		if (!response.ok) {
+			isError = true;
+			console.error('Error enviando el formulario', response.statusText)
+		}
 		NProgress.done();
-		showToast = true;
+		submitCallback(isError);
+		close();
 	}
 </script>
 
@@ -38,7 +43,6 @@
 	aria-modal="true"
 	bind:this={modal}
 >
-	<Toast show={showToast} />
 	<form
 		method="post"
 		class="flex flex-col justify-center max-w-xl w-full"
