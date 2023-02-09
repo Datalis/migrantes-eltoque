@@ -13,9 +13,13 @@
 
 	// import InfoModal from './info-modal.svelte';
 	import ReportModal from './report-modal.svelte';
+	import Toast from './toast.svelte';
 
 	export let totals: any;
 	export let missing: any[] = [];
+
+	let showToast = false;
+	let errorSubmit = false;
 
 	// let showMissing = false;
 	let showModal = false;
@@ -42,16 +46,20 @@
 	}
 </script>
 
-<!-- {#if showModal}
-	<InfoModal on:close={() => (showModal = false)} info={selectedPerson} />
-{/if} -->
+<Toast show={showToast} isError={errorSubmit} />
 
 {#if showModal}
 	{#key selectedPerson}
 		<ReportModal name={selectedPerson?.[3]} on:close={() => {
 			showModal = false;
 			selectedPerson = null;
-		}} />
+		}}
+			on:submit={(e) => {
+				showToast = true;
+				errorSubmit = e.detail.isError;
+				setInterval(() => {showToast = false}, 8000)
+			}}
+		/>
 	{/key}
 {/if}
 
