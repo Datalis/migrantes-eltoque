@@ -1,7 +1,7 @@
 <script>
 	import Button from './button.svelte';
 	import ReportModal from './report-modal.svelte';
-	import DecorDeceased from '$lib/assets/images/ornamental-fallecidos.svg?component';
+	import DecorDeceased from '$lib/assets/images/fallecidos.svg?component';
 	import Toast from './toast.svelte';
 
 	let showModal = false;
@@ -37,18 +37,20 @@
 					En memoria de quienes no pudieron completar su camino
 				</h2>
 			</div>
-			{#each deceased as person}
-				<div class="grid-item flex flex-col items-center justify-center p-4 ">
+			{#each deceased?.filter(e => e[1] == 'Sí') as person}
+				<div class="grid-item flex flex-col items-center justify-between p-4">
 					<div class="overlay p-4 flex items-center">
 						<p class="font-medium text-xs">
 							{person[11]}
 						</p>
 					</div>
-					<h3 class="name text-center md:text-xl font-bold text-accent md:w-3/4">{person[3]}</h3>
-					<span class=" text-light text-center font-light text-xs md:text-sm my-4 md:my-5"
+					<img class="pic" src={'https://api.eltoque.com' + person[2]} alt="Picture of {[person[3]]}" loading="lazy">
+					<DecorDeceased class="relative w-3/4 my-2" />
+					<h4 class="name text-center leading-tight font-bold text-accent md:w-3/4 my-2">{person[3]}</h4>
+					<span class=" text-light text-center font-light text-xs md:text-sm"
 						>{person[4] !== 'desconocida' ? `${person[4]} años` : 'Edad desconocida'}</span
 					>
-					<DecorDeceased class="relative w-3/4" />
+					<!-- <DecorDeceased class="relative w-3/4" /> -->
 				</div>
 			{/each}
 		</div>
@@ -71,8 +73,18 @@
 		background-color: #fffffd0d;
 		cursor: pointer;
 		position: relative;
-		min-height: 300px;
+		/* min-height: 300px; */
 	}
+
+	.grid-item .pic {
+		margin: auto;
+		width: 100px;
+		height: 100px;
+		object-fit: cover;
+		object-position: center;
+		border-radius: 50%;
+	}
+
 	@media (max-width: 768px) {
 		.grid-item {
 			min-height: unset;
