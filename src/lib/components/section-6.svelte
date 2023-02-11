@@ -218,6 +218,7 @@
 		top: 30%;
 		left: 20%;
 		z-index: 4;
+		max-width: 800px;
 	}
 
 	@media (max-width: 768px) {
