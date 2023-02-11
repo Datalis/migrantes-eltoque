@@ -7,6 +7,7 @@
 	import 'swiper/css';
 	import 'swiper/css/pagination';
 	import 'nprogress/nprogress.css';
+	
 
 	NProgress.configure({
 		minimum: 0.16,

@@ -6,7 +6,7 @@
 </script>
 
 <div class="profile flex flex-col items-center md:items-start h-full">
-	<img src={data[2] ? 'https://api.eltoque.com' + data[2] : 'https://fakeimg.pl/250x250/7856ff/'} class="aspect-square rounded-2xl w-3/4 md:w-full" alt="" />
+	<img src={data[2] ? 'https://api.eltoque.com' + data[2] : 'https://fakeimg.pl/250x250/7856ff/'} class="aspect-square rounded-2xl w-3/4 md:w-full" alt="" loading="lazy" />
 	<span class="font-bold mt-4">{data[3]}</span>
 	<small>{data[11]} / {data[5]} años</small>
 	<p class="text-sm my-4 leading-tight">

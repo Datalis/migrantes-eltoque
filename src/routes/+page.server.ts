@@ -2,6 +2,8 @@ import { batchGetSheet, get, sendMail } from '$lib/data/api';
 import type { Actions } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
+export const prerender = true;
+
 export const load: PageServerLoad = async () => {
 	const {
 		data: { valueRanges: sheet }
@@ -36,17 +38,17 @@ export const load: PageServerLoad = async () => {
 	};
 };
 
-export const actions: Actions = {
-	contact: async ({ request }) => {
-		const data = await request.formData();
+// export const actions: Actions = {
+// 	contact: async ({ request }) => {
+// 		const data = await request.formData();
 
-		const isMissing = data.get('is_missing');
-		const personName = data.get('person_name');
-		const contactName = data.get('contact_name');
-		const email = data.get('email');
-		const phone = data.get('phone');
-		const message = data.get('message');
+// 		const isMissing = data.get('is_missing');
+// 		const personName = data.get('person_name');
+// 		const contactName = data.get('contact_name');
+// 		const email = data.get('email');
+// 		const phone = data.get('phone');
+// 		const message = data.get('message');
 
-		await sendMail({ personName, contactName, email, phone, message, isMissing });
-	}
-};
+// 		await sendMail({ personName, contactName, email, phone, message, isMissing });
+// 	}
+// };

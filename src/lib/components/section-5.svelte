@@ -107,7 +107,10 @@
 		<div class="w-full mt-20 px-10 md:px-0">
 			<Swiper
 				on:swiper={onSwiper}
-				lazy
+				lazy={{
+					loadPrevNext: true,
+					loadPrevNextAmount: 2
+				}}
 				slidesPerView={1}
 				spaceBetween={50}
 				centeredSlides={true}
