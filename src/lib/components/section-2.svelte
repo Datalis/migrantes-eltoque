@@ -77,6 +77,26 @@
 		}
 	}
 
+	@media (max-height: 768px) {
+		.section-2 .section-2-upper-decor {
+			top: -180px;
+		}
+
+		:global(.section-2 .section-2-upper-decor .decor-plano) {
+			top: 140px;
+		}
+
+		:global(.section-2 .section-2-upper-decor .decor-candles .decor-candles-small) {
+			width: 160px !important;
+			height: 200px !important;
+		}
+
+		:global(.section-2 .section-2-upper-decor .decor-candles .decor-candles-center) {
+			width: 230px !important;
+			height: 270px !important;
+		}
+	}
+
 	.section-2 .section-2-upper-decor .decor-candles {
 		z-index: 2;
 		position: relative;
@@ -92,7 +112,7 @@
 		height: 330px;
 	}
 
-	 /* Bottom */
+	/* Bottom */
 	.section-2 .section-2-bottom-decor {
 		position: relative;
 		margin-top: 5rem;
@@ -126,7 +146,6 @@
 		top: calc(50% - 160px);
 		transform: rotate(-15deg);
 	}
-
 
 	@media (max-width: 768px) {
 		.section-2 .section-2-bottom-decor .decor-child {

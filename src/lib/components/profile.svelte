@@ -21,11 +21,13 @@
 		object-position: center;
 	}
 	.profile p {
-		min-height: 140px;
+		height: 140px;
+		
+		/* min-height: 140px;
 		display: -webkit-box;
 		-webkit-line-clamp: 8;
 		-webkit-box-orient: vertical;
 		overflow: hidden;
-		text-overflow: ellipsis;
+		text-overflow: ellipsis; */
 	}
 </style>
