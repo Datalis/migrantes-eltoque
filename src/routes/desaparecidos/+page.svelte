@@ -5,6 +5,7 @@
 	import Button from '$lib/components/button.svelte';
 	import ReportModal from '$lib/components/report-modal.svelte';
 	import SearchInput from '$lib/components/search-input.svelte';
+	import { compareObjects, trimString } from '$lib/utils';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -13,13 +14,27 @@
 
 	let showModal = false;
 
+	function itemExists(haystack: any[], needle: any) {
+		for (let i = 0; i < haystack.length; i++) if (compareObjects(haystack[i], needle)) return true;
+		return false;
+	}
+
+	function searchFor(toSearch: string, data: any[]) {
+		var results = [];
+		toSearch = trimString(toSearch); // trim it
+		for (var i = 0; i < data.length; i++) {
+			for (var key in data[i]) {
+				if (typeof data[i][key] == 'string' && data[i][key]?.indexOf(toSearch) != -1) {
+					if (!itemExists(results, data[i])) results.push(data[i]);
+				}
+			}
+		}
+		return results;
+	}
+
 	const onSearch = (query: string) => {
 		if (query == '') missing = data.missing || [];
-		else
-			missing =
-				data.missing?.filter((e) => {
-					return e.name.toLowerCase().indexOf(query.toLowerCase(), 0) != -1;
-				}) || [];
+		else missing = searchFor(query, data.missing || []);
 	};
 </script>
 
@@ -48,15 +63,13 @@
 			>
 		</div>
 		<div class="mt-20 flex flex-col">
-			<span
-				class="text-xs mb-4 text-gray"
-				>*Este es un listado
-				incompleto, que incluye solo los nombres de las personas que hemos podido identificar. Otros
-				todavía permanecen en el anonimato.</span
+			<span class="text-xs mb-4 text-gray"
+				>*Este es un listado incompleto, que incluye solo los nombres de las personas que hemos
+				podido identificar. Otros todavía permanecen en el anonimato.</span
 			>
 			<SearchInput
 				on:search={(e) => onSearch(e.detail)}
-				placeholder="Escribe el nombre de la persona desaparecida"
+				placeholder="Buscar..."
 			/>
 		</div>
 		<div class="table-wrapper">

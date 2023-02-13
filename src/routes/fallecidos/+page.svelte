@@ -3,6 +3,7 @@
 	import Button from '$lib/components/button.svelte';
 	import ReportModal from '$lib/components/report-modal.svelte';
 	import SearchInput from '$lib/components/search-input.svelte';
+	import { compareObjects, trimString } from '$lib/utils';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -12,13 +13,27 @@
 	let deceased = data?.deceased || [];
 	let totals = data?.totals || [];
 
+	function itemExists(haystack: any[], needle: any) {
+		for (let i = 0; i < haystack.length; i++) if (compareObjects(haystack[i], needle)) return true;
+		return false;
+	}
+
+	function searchFor(toSearch: string, data: any[]) {
+		var results = [];
+		toSearch = trimString(toSearch); // trim it
+		for (var i = 0; i < data.length; i++) {
+			for (var key in data[i]) {
+				if (data[i][key].indexOf(toSearch) != -1) {
+					if (!itemExists(results, data[i])) results.push(data[i]);
+				}
+			}
+		}
+		return results;
+	}
+
 	const onSearch = (query: string) => {
 		if (query == '') deceased = data.deceased || [];
-		else
-			deceased =
-				data.deceased?.filter((e) => {
-					return e.name.toLowerCase().indexOf(query.toLowerCase(), 0) != -1;
-				}) || [];
+		else deceased = searchFor(query, data.deceased || []);
 	};
 </script>
 
@@ -49,16 +64,11 @@
 			>
 		</div>
 		<div class="mt-20 flex flex-col">
-			<span
-				class="text-xs mb-4 text-gray"
-				>*Este es un listado
-				incompleto, que incluye solo los nombres de las personas que hemos podido identificar. Otros
-				todavía permanecen en el anonimato.</span
+			<span class="text-xs mb-4 text-gray"
+				>*Este es un listado incompleto, que incluye solo los nombres de las personas que hemos
+				podido identificar. Otros todavía permanecen en el anonimato.</span
 			>
-			<SearchInput
-				on:search={(e) => onSearch(e.detail)}
-				placeholder="Buscar..."
-			/>
+			<SearchInput on:search={(e) => onSearch(e.detail)} placeholder="Buscar..." />
 		</div>
 		<div class="table-wrapper">
 			<table id="table" class="table-auto mt-10 w-full text-light">
@@ -104,6 +114,7 @@
 		</div>
 	</div>
 </main>
+
 <style>
 	.table-wrapper {
 		overflow-x: scroll;
