@@ -4,6 +4,7 @@
 	import { createEventDispatcher } from 'svelte';
 	import Button from './button.svelte';
 	import X from '$lib/assets/images/x.svg?component';
+	import { CAPTCHA_KEY } from '$env/static/private';
 
 	const dispatch = createEventDispatcher();
 	const close = () => dispatch('close');
@@ -24,6 +25,9 @@
 		NProgress.start();
 		const data = new FormData(this);
 		let isError = false;
+		grecaptcha.ready(() => {
+			grecaptcha.execute(CAPTCHA_KEY, { action: 'submit' })
+		})
 		const response = await fetch('/contact', { method: 'POST', body: data });
 		if (!response.ok) {
 			isError = true;
@@ -78,6 +82,14 @@
 			<span class="mb-2 italic text-sm"> Mensaje <em class="text-accent">*</em></span>
 			<textarea name="message" id="message" cols="30" rows="5" required />
 		</label>
+		<div
+		    class="g-recaptcha"
+		    data-sitekey={CAPTCHA_KEY}
+		    data-callback="handleCaptchaCallback"
+		    data-expired-callback="resetCaptcha"
+		    data-error-callback="handleCaptchaError"
+		    data-size="invisible"
+		/>
 		<Button buttonType={'submit'} classes="mt-8">Enviar</Button>
 	</form>
 	<a class="mt-auto text-center text-accent" href="mailto:audiencias@eltoque.com">audiencias@eltoque.com</a>
