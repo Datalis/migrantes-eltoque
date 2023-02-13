@@ -21,8 +21,8 @@
 		object-position: center;
 	}
 	.profile p {
-		height: 140px;
-		
+		height: 180px;
+		overflow: scroll;
 		/* min-height: 140px;
 		display: -webkit-box;
 		-webkit-line-clamp: 8;
