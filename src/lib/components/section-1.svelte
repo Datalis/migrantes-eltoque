@@ -6,6 +6,7 @@
 
 <section id="section-1" class="section-1 flex flex-col items-center justify-center bg-accent min-h-screen">
     <div class="section-1-wrapper -mt-20 w-full md:w-auto max-w-3xl text-center h-full flex flex-col justify-center">
+        <div class="section-1-wrapper-bg"></div>
         <h2
             class="flex flex-col md:flex-row justify-center items-center md:items-baseline font-sans font-bold  text-light"
         >
@@ -26,12 +27,22 @@
 
 <style>
     .section-1 .section-1-wrapper {
-		background-image: url(/src/lib/assets/images/luz.svg);
+		height: 80vh;
+        position: relative;
+	}
+    .section-1 .section-1-wrapper h2 {
+        z-index: 1;
+    }
+    .section-1 .section-1-wrapper .section-1-wrapper-bg {
+        background-image: url(/src/lib/assets/images/luz.svg);
 		background-position: center;
 		background-repeat: no-repeat;
 		background-size: contain;
-		height: 90vh;
-	}
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0.6;
+    }
     @media (max-width: 768px) {
         .section-1 .section-1-wrapper {
             height: unset;

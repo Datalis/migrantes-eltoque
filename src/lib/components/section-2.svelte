@@ -13,7 +13,7 @@
 		<Plano class="decor-plano w-full" />
 		<div class="decor-candles flex justify-center items-center">
 			<Vela class="decor-candles-small" />
-			<Vela class="decor-candles-center" />
+			<Vela class="decor-candles-center md:mx-4" />
 			<Vela class="decor-candles-small" />
 		</div>
 	</div>
@@ -56,7 +56,7 @@
 	}
 
 	.section-2 .section-2-upper-decor {
-		top: -200px;
+		top: -260px;
 		position: absolute;
 		width: 100%;
 	}
@@ -64,7 +64,17 @@
 	:global(.section-2 .section-2-upper-decor .decor-plano) {
 		position: absolute;
 		z-index: 1;
-		top: 130px;
+		top: 180px;
+		height: auto;
+	}
+
+	@media (max-width: 768px) {
+		.section-2 .section-2-upper-decor {
+			top: -200px;
+		}
+		:global(.section-2 .section-2-upper-decor .decor-plano) {
+			display: none;
+		}
 	}
 
 	.section-2 .section-2-upper-decor .decor-candles {
@@ -73,13 +83,13 @@
 	}
 
 	:global(.section-2 .section-2-upper-decor .decor-candles .decor-candles-small) {
-		width: 180px;
-		height: 220px;
+		width: 200px;
+		height: 240px;
 	}
 
 	:global(.section-2 .section-2-upper-decor .decor-candles .decor-candles-center) {
-		width: 250px;
-		height: 300px;
+		width: 280px;
+		height: 330px;
 	}
 
 	 /* Bottom */

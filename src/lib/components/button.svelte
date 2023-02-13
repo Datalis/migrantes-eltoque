@@ -20,7 +20,7 @@
         line-height: 2.22;
         letter-spacing: normal;
         min-width: 200px;
-        font-size: 12px;
+        font-size: 14px;
         transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
     }
 

@@ -1,10 +1,10 @@
-import { batchGetSheet, get, sendMail } from '$lib/data/api';
-import type { Actions } from '@sveltejs/kit';
+import { batchGetSheet, get } from '$lib/data/api';
 import type { PageServerLoad } from './$types';
 
 export const prerender = true;
 
 export const load: PageServerLoad = async () => {
+
 	const {
 		data: { valueRanges: sheet }
 	} = await batchGetSheet([
