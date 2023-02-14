@@ -11,8 +11,8 @@
 	import { initializeApp } from 'firebase/app';
 	import { initializeAppCheck, ReCaptchaV3Provider } from 'firebase/app-check';
 	import {
-	    CAPTCHA_KEY,
-	} from '$env/static/private';
+	    PUBLIC_CAPTCHA_KEY,
+	} from '$env/static/public';
 	import { firebaseConfig } from '../../firebase-config';
 
 
@@ -33,7 +33,7 @@
 		const app = initializeApp(firebaseConfig);
 
 		const appCheck = initializeAppCheck(app, {
-  			provider: new ReCaptchaV3Provider(CAPTCHA_KEY),
+  			provider: new ReCaptchaV3Provider(PUBLIC_CAPTCHA_KEY),
 
 			// Optional argument. If true, the SDK automatically refreshes App Check
 			// tokens as needed.

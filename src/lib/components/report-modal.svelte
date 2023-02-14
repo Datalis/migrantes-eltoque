@@ -4,7 +4,7 @@
 	import { createEventDispatcher } from 'svelte';
 	import Button from './button.svelte';
 	import X from '$lib/assets/images/x.svg?component';
-	import { CAPTCHA_KEY } from '$env/static/private';
+	import { PUBLIC_CAPTCHA_KEY } from '$env/static/public';
 
 	const dispatch = createEventDispatcher();
 	const close = () => dispatch('close');
@@ -26,7 +26,7 @@
 		const data = new FormData(this);
 		let isError = false;
 		grecaptcha.ready(() => {
-			grecaptcha.execute(CAPTCHA_KEY, { action: 'submit' })
+			grecaptcha.execute(PUBLIC_CAPTCHA_KEY, { action: 'submit' })
 		})
 		const response = await fetch('/contact', { method: 'POST', body: data });
 		if (!response.ok) {
@@ -84,7 +84,7 @@
 		</label>
 		<div
 		    class="g-recaptcha"
-		    data-sitekey={CAPTCHA_KEY}
+		    data-sitekey={PUBLIC_CAPTCHA_KEY}
 		    data-callback="handleCaptchaCallback"
 		    data-expired-callback="resetCaptcha"
 		    data-error-callback="handleCaptchaError"

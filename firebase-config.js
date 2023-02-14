@@ -1,12 +1,13 @@
+import { API_KEY, APP_ID, PROJECT_ID } from '$env/static/private'
 // self.FIREBASE_APPCHECK_DEBUG_TOKEN = process.env.NODE_ENV == "development";
 
 export const firebaseConfig = {
-    apiKey: "AIzaSyCIQUWhbCz-Gsir-kAvp9ManvI83PItFAM",
+    apiKey: API_KEY,
     authDomain: "apollo-exercise-2023.firebaseapp.com",
-    projectId: "apollo-exercise-2023",
+    projectId: PROJECT_ID,
     storageBucket: "apollo-exercise-2023.appspot.com",
     messagingSenderId: "874427320168",
-    appId: "1:874427320168:web:3d907c8b77625ec472f8dd"
+    appId: APP_ID
 };
 
 
