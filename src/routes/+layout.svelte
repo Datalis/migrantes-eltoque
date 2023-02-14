@@ -1,5 +1,6 @@
 <script>
 	// @ts-ignore
+	import { onMount } from 'svelte';
 	import NProgress from 'nprogress';
 	import Footer from '$lib/components/footer.svelte';
 	import { navigating } from '$app/stores';
@@ -7,7 +8,12 @@
 	import 'swiper/css';
 	import 'swiper/css/pagination';
 	import 'nprogress/nprogress.css';
-	
+	import { initializeApp } from 'firebase/app';
+	import { initializeAppCheck, ReCaptchaV3Provider } from 'firebase/app-check';
+	import {
+	    PUBLIC_CAPTCHA_KEY,
+	} from '$env/static/public';
+	import { firebaseConfig } from '../../firebase-config';
 
 	NProgress.configure({
 		minimum: 0.16,
@@ -21,6 +27,18 @@
 			NProgress.done();
 		}
 	}
+
+	onMount(() => {
+		const app = initializeApp(firebaseConfig);
+
+		const appCheck = initializeAppCheck(app, {
+  			provider: new ReCaptchaV3Provider(PUBLIC_CAPTCHA_KEY),
+
+			// Optional argument. If true, the SDK automatically refreshes App Check
+			// tokens as needed.
+			isTokenAutoRefreshEnabled: true
+		});
+	})
 </script>
 
 <svelte:head />
