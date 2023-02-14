@@ -39,7 +39,7 @@
 				<!-- Sharingbutton Twitter -->
 				<a
 					class="social-icon mx-4"
-					href="https://twitter.com/intent/tweet/?text=Super%20fast%20and%20easy%20Social%20Media%20Sharing%20Buttons.%20No%20JavaScript.%20No%20tracking.&amp;url=https%3A%2F%2Flatravesia.eltoque.com%2F"
+					href="https://twitter.com/intent/tweet/?url=https%3A%2F%2Flatravesia.eltoque.com%2F"
 					target="_blank"
 					rel="noopener noreferrer"
 					aria-label=""
@@ -50,7 +50,7 @@
 				<!-- Sharingbutton Telegram -->
 				<a
 					class="social-icon"
-					href="https://telegram.me/share/url?text=Super%20fast%20and%20easy%20Social%20Media%20Sharing%20Buttons.%20No%20JavaScript.%20No%20tracking.&amp;url=https%3A%2F%2Flatravesia.eltoque.com%2F"
+					href="https://telegram.me/share/url?url=https%3A%2F%2Flatravesia.eltoque.com%2F"
 					target="_blank"
 					rel="noopener noreferrer"
 					aria-label=""
@@ -100,7 +100,7 @@
 				<div class="md:hidden md:ml-auto flex mt-10">
 					<a
 						class="social-icon"
-						href="https://facebook.com/sharer/sharer.php?u=http%3A%2F%2Fsharingbuttons.io"
+						href="https://facebook.com/sharer/sharer.php?u=https%3A%2F%2Flatravesia.eltoque.com%2F"
 						target="_blank"
 						rel="noopener noreferrer"
 						aria-label=""
@@ -111,7 +111,7 @@
 					<!-- Sharingbutton Twitter -->
 					<a
 						class="social-icon mx-4"
-						href="https://twitter.com/intent/tweet/?text=Super%20fast%20and%20easy%20Social%20Media%20Sharing%20Buttons.%20No%20JavaScript.%20No%20tracking.&amp;url=http%3A%2F%2Fsharingbuttons.io"
+						href="https://twitter.com/intent/tweet/?url=https%3A%2F%2Flatravesia.eltoque.com%2F"
 						target="_blank"
 						rel="noopener noreferrer"
 						aria-label=""
@@ -122,7 +122,7 @@
 					<!-- Sharingbutton Telegram -->
 					<a
 						class="social-icon"
-						href="https://telegram.me/share/url?text=Super%20fast%20and%20easy%20Social%20Media%20Sharing%20Buttons.%20No%20JavaScript.%20No%20tracking.&amp;url=http%3A%2F%2Fsharingbuttons.io"
+						href="https://telegram.me/share/url?url=https%3A%2F%2Flatravesia.eltoque.com%2F"
 						target="_blank"
 						rel="noopener noreferrer"
 						aria-label=""
