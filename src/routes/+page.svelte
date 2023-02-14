@@ -14,20 +14,25 @@
 
 	export let data: PageData;
 
+	let windowWidth = 0;
+
 	const { totals, deceased, missing, articles, places } = data;
 
 	onMount(() => {
 		gsap.registerPlugin(ScrollTrigger);
-		gsap.to('#section-1', {
-			yPercent: 25,
-			scrollTrigger: {
-				trigger: '#section-2',
-				scrub: true,
-				invalidateOnRefresh: true
-			}
-		});
+		windowWidth > 768 &&
+			gsap.to('#section-1', {
+				yPercent: 25,
+				scrollTrigger: {
+					trigger: '#section-2',
+					scrub: true,
+					invalidateOnRefresh: true
+				}
+			});
 	});
 </script>
+
+<svelte:window bind:innerWidth={windowWidth} />
 
 <main class="overflow-hidden">
 	<Section_1 {totals} />

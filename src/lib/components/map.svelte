@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Highcharts from 'highcharts/highmaps';
-	import * as turf from '@turf/turf';
+	import { points, center } from '@turf/turf';
 	import type { MapChart } from 'highcharts/highmaps';
 
 	import { onMount } from 'svelte';
@@ -23,8 +23,8 @@
 			highcharts?.mapView.setView([item.lon, item.lat], 4)
 		} else {
 			const items = mapData(data)
-			var features = turf.points(items.map((item) => [item.lon, item.lat]))
-			var middle = turf.center(features)
+			var features = points(items.map((item) => [item.lon, item.lat]))
+			var middle = center(features)
 			const zoom = data.length > 5 ? 4 : 6
 			highcharts?.mapView.setView(middle.geometry.coordinates, zoom)
 		}

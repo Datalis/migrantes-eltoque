@@ -1,6 +1,8 @@
 import { batchGetSheet } from '$lib/data/api';
 import type { PageServerLoad } from './$types';
 
+export const prerender = true;
+
 export const load = (async () => {
 	// const { data } = await getSheet('Personas fallecidas');
 	const {
