@@ -37,6 +37,9 @@
 </script>
 
 <svelte:window on:keydown={handle_keydown} />
+<svelte:head>
+	<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+</svelte:head>
 
 <div
 	class="modal bg-dark bg-opacity-100 text-gray w-full h-full flex flex-col items-center justify-center"
@@ -79,7 +82,7 @@
 			<span class="mb-2 italic text-sm"> Mensaje <em class="text-accent">*</em></span>
 			<textarea name="message" id="message" cols="30" rows="5" required />
 		</label>
-		<div class="cf-turnstile" data-sitekey="{PUBLIC_SITE_KEY}" data-callback="javascriptCallback"></div>
+		<div class="cf-turnstile" data-sitekey="{PUBLIC_SITE_KEY}"></div>
 
 		<Button buttonType={'submit'} classes="mt-8">Enviar</Button>
 	</form>
