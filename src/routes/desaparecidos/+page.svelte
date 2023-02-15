@@ -1,6 +1,8 @@
 <script lang="ts">
 	import ToggleIcon from '$lib/assets/images/chevron-down-circle.svg?component';
 	import ChevronLeftIcon from '$lib/assets/images/chevron-left.svg?component';
+	//@ts-ignore
+	import SvelteTable from 'svelte-table';
 
 	import Button from '$lib/components/button.svelte';
 	import ReportModal from '$lib/components/report-modal.svelte';
@@ -36,6 +38,51 @@
 		if (query == '') missing = data.missing || [];
 		else missing = searchFor(query, data.missing || []);
 	};
+
+	const cols = [
+		{
+			key: 'name',
+			title: 'Nombre',
+			value: (v: any) => v.name,
+			sortable: true
+		},
+		{
+			key: 'age',
+			title: 'Edad',
+			value: (v: any) => v.age,
+			sortable: true
+		},
+		{
+			key: 'birthdate',
+			title: 'Fecha de Nacimiento',
+			value: (v: any) => v.birthdate,
+			sortable: true
+		},
+		{
+			key: 'birthplace',
+			title: 'Lugar de origen',
+			value: (v: any) => v.birthplace,
+			sortable: true
+		},
+		{
+			key: 'starting_point',
+			title: 'Punto de partida',
+			value: (v: any) => v.starting_point,
+			sortable: true
+		},
+		{
+			key: 'missing_place',
+			title: 'Lugar donde desapareció',
+			value: (v: any) => v.missing_place,
+			sortable: true
+		},
+		{
+			key: 'missing_date',
+			title: 'Fecha',
+			value: (v: any) => v.missing_date,
+			sortable: true
+		}
+	];
 </script>
 
 <main class="missing-page bg-dark">
@@ -67,109 +114,42 @@
 				>*Este es un listado incompleto, que incluye solo los nombres de las personas que hemos
 				podido identificar. Otros todavía permanecen en el anonimato.</span
 			>
-			<SearchInput
-				on:search={(e) => onSearch(e.detail)}
-				placeholder="Buscar..."
-			/>
+			<SearchInput on:search={(e) => onSearch(e.detail)} placeholder="Buscar..." />
 		</div>
-		<div class="table-wrapper">
-			<table class="table table-auto mt-10 w-full text-light">
-				<thead>
-					<tr>
-						<th class="font-thin text-left border-b-2 border-accent pb-4">Nombre</th>
-						<th class="font-thin text-left border-b-2 border-accent pb-4">Edad</th>
-						<th class="font-thin text-left border-b-2 border-accent pb-4">Fecha de Nacimiento</th>
-						<th class="font-thin text-left border-b-2 border-accent pb-4">Lugar de origen</th>
-						<th class="font-thin text-left border-b-2 border-accent pb-4">Punto de partida</th>
-						<th class="font-thin text-left border-b-2 border-accent pb-4"
-							>Lugar donde desapareció</th
-						>
-						<th class="font-thin text-left border-b-2 border-accent pb-4">Fecha</th>
-						<th class="border-b-2 border-accent pb-4" />
-					</tr>
-				</thead>
-				<tbody>
-					{#each missing as person}
-						<tr>
-							<td class="border-b border-gray border-opacity-20 text-sm py-4 align-top"
-								>{person?.name}</td
-							>
-							<td class="border-b border-gray border-opacity-20 text-sm py-4 align-top"
-								>{person?.age}</td
-							>
-							<td class="border-b border-gray border-opacity-20 text-sm py-4 align-top"
-								>{person?.birthdate || '-'}</td
-							>
-							<td class="border-b border-gray border-opacity-20 text-sm py-4 align-top"
-								>{person?.birthplace == 'Desconocido' ? '-' : person?.birthplace}</td
-							>
-							<td class="border-b border-gray border-opacity-20 max-w-prose text-sm py-4"
-								>{person?.starting_point == 'Desconocido' ? '-' : person?.starting_point}</td
-							>
-							<td class="border-b border-gray border-opacity-20 max-w-prose text-sm py-4"
-								>{person?.missing_place == 'Desconocido' ? '-' : person?.missing_place}</td
-							>
-							<td class="border-b border-gray border-opacity-20 text-sm">
-								{person?.missing_date}
-							</td>
-							<td class="border-b border-gray border-opacity-20">
-								<!-- svelte-ignore a11y-click-events-have-key-events -->
-								<span on:click={() => (person.collapsed = !person.collapsed)}>
-									<ToggleIcon
-										width="32"
-										height="32"
-										class="toggler {person?.collapsed ? 'collapsed' : ''}"
-									/>
-								</span>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="4">
-								<p class="collapsible text-sm overflow-hidden" class:collapsed={person.collapsed}>
-									{person?.details}
-								</p>
-							</td>
-						</tr>
-					{/each}
-				</tbody>
-			</table>
+		<div class="table-wrapper mt-10">
+			<SvelteTable
+				rowKey="name"
+				rows={missing}
+				showExpandIcon={true}
+				expandSingle={true}
+				columns={cols}
+				classNameExpandedContent={'border-t'}
+			>
+				<svelte:fragment slot="expanded" let:row>{row.details}</svelte:fragment>
+			</SvelteTable>
 		</div>
+		
 	</div>
 </main>
 
 <style>
-	:global(.missing-page .table .toggler) {
-		fill: #fffffd !important;
-		transition: all 0.4s ease;
-		transform: rotate(180deg);
-		cursor: pointer;
-	}
-	:global(.missing-page .table .toggler.collapsed) {
-		fill: #7856ff !important;
-		transform: rotate(0);
-	}
-	.missing-page .table .collapsible.collapsed {
-		max-height: 0;
-		padding-top: 0;
-		padding-bottom: 0;
-		opacity: 0;
-		visibility: collapse;
-	}
-	.missing-page .table .collapsible {
-		height: auto;
-		max-height: 50vh;
-		transition: padding 0.25s, height 0.5s, opacity 0.4s ease;
-		display: block;
-		padding-top: 1rem;
-		padding-bottom: 1rem;
-		opacity: 1;
-	}
+
 	.table-wrapper {
 		overflow-x: scroll;
+		color: #fffffd;
 	}
-	@media (max-width: 768px) {
-		.table-wrapper td {
-			min-width: 100px;
-		}
+
+	:global(.table-wrapper thead tr) {
+		border-bottom: 2px solid #7856ff;
+	}
+
+	:global(.table-wrapper thead th) {
+		text-align: left;
+		padding: 1rem 0.5rem;
+	}
+
+	:global(.table-wrapper tbody td) {
+		font-size: 14px;
+		padding: 1rem 0.5rem;
 	}
 </style>
