@@ -34,7 +34,8 @@
 	<div class="container mx-auto max-w-3xl px-10 md:px-0">
 		<Swiper
 			modules={[Pagination]}
-			lazy
+			preloadImages={false}
+			lazy={true}
 			slidesPerView={1}
 			spaceBetween={50}
 			centeredSlides={true}

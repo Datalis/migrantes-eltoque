@@ -1,9 +1,15 @@
 <script>
-	import Flag from '$lib/assets/images/section-6/flag1.webp';
-	import Vela from '$lib/assets/images/section-1/vela1.svg?component';
+	// @ts-ignore
+	import Flag from '$lib/assets/images/section-6/flag1.webp?webp';
+	import VelaImg from '$lib/assets/images/section-1/vela1.webp';
 	import Plano from '$lib/assets/images/section-1/plano.svg?component';
-	import Child from '$lib/assets/images/section-6/child.webp';
+	// @ts-ignore
+	import Child from '$lib/assets/images/section-6/child.webp?w=600&webp';
 </script>
+
+<svelte:head>
+	<link rel="preload" as="image" href={VelaImg} />
+</svelte:head>
 
 <section
 	id="section-2"
@@ -11,10 +17,13 @@
 >
 	<div class="section-2-upper-decor">
 		<Plano class="decor-plano w-full" />
+		<!-- svelte-ignore a11y-missing-attribute -->
 		<div class="decor-candles flex justify-center items-center">
-			<Vela class="decor-candles-small" />
-			<Vela class="decor-candles-center md:mx-4" />
-			<Vela class="decor-candles-small" />
+			<!-- svelte-ignore a11y-missing-attribute -->
+			<img class="decor-candles-small object-contain" src={VelaImg} />
+			<!-- svelte-ignore a11y-missing-attribute -->
+			<img class="decor-candles-center md:mx-4 object-contain" src={VelaImg} />
+			<img class="decor-candles-small object-contain" src={VelaImg} />
 		</div>
 	</div>
 	<div class="container mx-auto px-10 md:px-0 max-w-3xl">
@@ -44,8 +53,8 @@
 		</p>
 	</div>
 	<div class="section-2-bottom-decor">
-		<img src={Flag} class="decor-flag" alt="" />
-		<img src={Child} class="decor-child" alt="" />
+		<img src={Flag} class="decor-flag" alt="" loading="lazy" />
+		<img src={Child} class="decor-child" alt="" loading="lazy" />
 	</div>
 </section>
 
@@ -75,6 +84,16 @@
 		:global(.section-2 .section-2-upper-decor .decor-plano) {
 			display: none;
 		}
+
+		.section-2 .section-2-upper-decor .decor-candles .decor-candles-small {
+			width: 100px !important;
+			height: 240px !important;
+		}
+
+		.section-2 .section-2-upper-decor .decor-candles .decor-candles-center {
+			width: 170px !important;
+			height: 330px !important;
+		}
 	}
 
 	@media (max-height: 768px) {
@@ -86,12 +105,12 @@
 			top: 140px;
 		}
 
-		:global(.section-2 .section-2-upper-decor .decor-candles .decor-candles-small) {
+		.section-2 .section-2-upper-decor .decor-candles .decor-candles-small {
 			width: 160px !important;
 			height: 200px !important;
 		}
 
-		:global(.section-2 .section-2-upper-decor .decor-candles .decor-candles-center) {
+		.section-2 .section-2-upper-decor .decor-candles .decor-candles-center {
 			width: 230px !important;
 			height: 270px !important;
 		}
@@ -102,12 +121,12 @@
 		position: relative;
 	}
 
-	:global(.section-2 .section-2-upper-decor .decor-candles .decor-candles-small) {
+	.section-2 .section-2-upper-decor .decor-candles .decor-candles-small {
 		width: 200px;
 		height: 240px;
 	}
 
-	:global(.section-2 .section-2-upper-decor .decor-candles .decor-candles-center) {
+	.section-2 .section-2-upper-decor .decor-candles .decor-candles-center {
 		width: 280px;
 		height: 330px;
 	}

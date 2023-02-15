@@ -1,6 +1,7 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import svg from '@poppanator/sveltekit-svg';
 import { imagetools } from 'vite-imagetools';
+import { compression } from 'vite-plugin-compression2'
 
 /** @type {import('vite').UserConfig} */
 const config = {
@@ -8,6 +9,7 @@ const config = {
 		sveltekit(),
 		imagetools({
 			removeMetadata: true,
+			
 		}),
 		svg({
 			includePaths: ['./src/lib/assets/images/'],
@@ -21,6 +23,9 @@ const config = {
 					// { name: 'removeAttrs', params: { attrs: '(fill|stroke)' } }
 				]
 			}
+		}),
+		compression({
+			algorithm: 'gzip'
 		})
 	],
 	test: {

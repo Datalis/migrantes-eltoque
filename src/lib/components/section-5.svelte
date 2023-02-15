@@ -1,9 +1,12 @@
 <script lang="ts">
 	import LinePath from '$lib/assets/images/section-5/line-full.svg?component';
 	import LinePathSmall from '$lib/assets/images/section-5/line-small.svg?component';
-	import SeaBackground from '$lib/assets/images/section-5/mar.webp';
-	import Ocean from '$lib/assets/images/section-5/ocean.webp';
-	import Map from '$lib/assets/images/section-5/map.webp';
+	// @ts-ignore
+	import SeaBackground from '$lib/assets/images/section-5/mar.webp?webp';
+	// @ts-ignore
+	import Ocean from '$lib/assets/images/section-5/ocean.webp?w=600&webp';
+	// @ts-ignore
+	import Map from '$lib/assets/images/section-5/map.webp?w=400&webp';
 
 	import Button from './button.svelte';
 	import ArrowRightIcon from '$lib/assets/images/arrow-right.svg?component';
@@ -50,14 +53,18 @@
 
 {#if showModal}
 	{#key selectedPerson}
-		<ReportModal name={selectedPerson?.[3]} on:close={() => {
-			showModal = false;
-			selectedPerson = null;
-		}}
+		<ReportModal
+			name={selectedPerson?.[3]}
+			on:close={() => {
+				showModal = false;
+				selectedPerson = null;
+			}}
 			on:submit={(e) => {
 				showToast = true;
 				errorSubmit = e.detail.isError;
-				setInterval(() => {showToast = false}, 8000)
+				setInterval(() => {
+					showToast = false;
+				}, 8000);
 			}}
 		/>
 	{/key}
@@ -107,6 +114,7 @@
 		<div class="w-full mt-20 px-10 md:px-0">
 			<Swiper
 				on:swiper={onSwiper}
+				preloadImages={false}
 				lazy={{
 					loadPrevNext: true,
 					loadPrevNextAmount: 2
@@ -155,10 +163,10 @@
 			</div>
 		</div>
 		<div class="section-5-decor section-5-decor-sm md:hidden mt-10">
-			<img src={SeaBackground} class="decor-bg" alt="" />
+			<img src={SeaBackground} class="decor-bg" alt="" loading="lazy" />
 			<LinePathSmall class="decor-line" />
-			<img src={Ocean} class="decor-ocean" alt="" />
-			<img src={Map} class="decor-map" alt="" />
+			<img src={Ocean} class="decor-ocean" alt="" loading="lazy" />
+			<img src={Map} class="decor-map" alt="" loading="lazy" />
 		</div>
 		<div class="bg-dark flex flex-col md:flex-row items-center p-10 md:mt-20 md:rounded-lg">
 			<p class="text-light text-lg md:text-sm mb-8 md:mb-0">
@@ -172,10 +180,10 @@
 		</div>
 	</div>
 	<div class="hidden md:block section-5-decor">
-		<img src={SeaBackground} class="decor-bg" alt="" />
+		<img src={SeaBackground} class="decor-bg" alt="" loading="lazy" />
 		<LinePath class="decor-line w-full" />
-		<img src={Ocean} class="decor-ocean" alt="" />
-		<img src={Map} class="decor-map" alt="" />
+		<img src={Ocean} class="decor-ocean" alt="" loading="lazy" />
+		<img src={Map} class="decor-map" alt="" loading="lazy" />
 	</div>
 </section>
 

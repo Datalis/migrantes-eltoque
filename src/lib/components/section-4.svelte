@@ -1,6 +1,8 @@
 <script>
 	import Button from './button.svelte';
 	import ReportModal from './report-modal.svelte';
+	// @ts-ignore
+	import AngelImg from '$lib/assets/images/angel.webp?w=500';
 	import DecorDeceased from '$lib/assets/images/fallecidos.svg?component';
 	import Toast from './toast.svelte';
 
@@ -30,7 +32,8 @@
 	{/if}
 	<div class="flex flex-col h-full xl:container mx-auto">
 		<div class="flex-1 grid gap-2 md:gap-3 grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-			<div
+			<div 
+				style="background-image: url({AngelImg});"
 				class="memorial-block relative col-span-2 row-span-2 bg-accent flex flex-col justify-end p-10"
 			>
 				<h2 class="text-light text-center md:text-left font-bold text-4xl md:mb-10 z-10">
@@ -108,7 +111,6 @@
 		min-height: 64px;
 	} */
 	.memorial-block {
-		background-image: url(/src/lib/assets/images/angel.svg);
 		background-position: top right;
 		background-size: contain;
 		background-repeat: no-repeat;
