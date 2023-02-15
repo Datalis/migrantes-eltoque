@@ -32,6 +32,7 @@
 
 <section class="section-7 py-10 md:py-20">
 	<div class="container mx-auto max-w-3xl px-10 md:px-0">
+		<h2 class="font-sans font-bold text-4xl text-dark mb-14 text-center">También hemos publicado</h2>
 		<Swiper
 			modules={[Pagination]}
 			preloadImages={false}
