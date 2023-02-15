@@ -87,9 +87,14 @@
 						class="font-light ml-0 md:ml-2">Datalis</a
 					></span
 				>
-				<Button type="bordered" color="gray" classes="text-gray mt-10"
-					>Descarga la base de datos</Button
+				<a
+					download
+					href="https://docs.google.com/spreadsheets/d/e/2PACX-1vTSm3z6JsEWDvnC2-nHDVIkpqvOMq_J3_IltrEPXhtNvjsLunEJ8qM-517CvhrUcmipZT8LArPQZtjH/pub?output=xlsx"
 				>
+					<Button type="bordered" color="gray" classes="text-gray mt-10"
+						>Descarga la base de datos</Button
+					>
+				</a>
 			</div>
 			<nav
 				class="flex flex-col items-center md:items-end bg-dark md:bg-accent w-full md:w-auto md:py-0 py-5"
