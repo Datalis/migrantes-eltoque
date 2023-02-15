@@ -1,6 +1,9 @@
 <script lang="ts">
 	import Highcharts from 'highcharts/highmaps';
-	import { points, center } from '@turf/turf';
+
+	import { points } from '@turf/helpers';
+	import center from '@turf/center';
+
 	import type { MapChart } from 'highcharts/highmaps';
 
 	import { onMount } from 'svelte';

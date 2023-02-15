@@ -1,9 +1,12 @@
 <script lang="ts">
 	import LinePath from '$lib/assets/images/section-2/line-full.svg?component';
 	import LinePathSmall from '$lib/assets/images/section-2/line-small.svg?component';
-	import Plane from '$lib/assets/images/section-2/plane.webp';
-	import Volcano from '$lib/assets/images/section-2/volcano.webp';
-	import MapBackground from '$lib/assets/images/section-2/mapa.webp';
+	// @ts-ignore
+	import Plane from '$lib/assets/images/section-2/plane.webp?w=400&webp';
+	// @ts-ignore
+	import Volcano from '$lib/assets/images/section-2/volcano.webp?w=700&webp';
+	// @ts-ignore
+	import MapBackground from '$lib/assets/images/section-2/mapa.webp?webp';
 
 	import gsap from 'gsap';
 	import ScrollTrigger from 'gsap/ScrollTrigger';
@@ -162,11 +165,11 @@
 		<!-- <img src={Flag} class="decor-flag" alt="" />
 		<img src={Child} class="decor-child" alt="" /> -->
 
-		<img class="decor-bg" src={MapBackground} alt="" />
+		<img class="decor-bg" src={MapBackground} alt="" loading="lazy" />
 		<LinePath id="line" class="decor-line w-full hidden md:block" />
 		<LinePathSmall id="line" class="decor-line w-full md:hidden" />
-		<img id="plane" class="decor-plane" src={Plane} alt="" />
-		<img id="volcano" class="decor-volcano" src={Volcano} alt="" />
+		<img id="plane" class="decor-plane" src={Plane} alt="" loading="lazy" />
+		<img id="volcano" class="decor-volcano" src={Volcano} alt="" loading="lazy" />
 	</div>
 	<div class="max-w-3xl my-10 md:my-32 px-10">
 		<p class="text-light">

@@ -1,12 +1,16 @@
 <script lang="ts">
-   
+    import LuzImg from '$lib/assets/images/luz.svg?url';
     export let totals: any;
 
 </script>
 
+<svelte:head>
+    <link rel="preload" as="image" href={LuzImg}>
+</svelte:head>
+
 <section id="section-1" class="section-1 flex flex-col items-center justify-center bg-accent min-h-screen">
     <div class="section-1-wrapper -mt-20 w-full md:w-auto max-w-3xl text-center h-full flex flex-col justify-center">
-        <div class="section-1-wrapper-bg"></div>
+        <div class="section-1-wrapper-bg" style="background-image: url({LuzImg});"></div>
         <h2
             class="flex flex-col md:flex-row justify-center items-center md:items-baseline font-sans font-bold  text-light"
         >
@@ -34,7 +38,7 @@
         z-index: 1;
     }
     .section-1 .section-1-wrapper .section-1-wrapper-bg {
-        background-image: url(/src/lib/assets/images/luz.svg);
+        /* background-image: url(/src/lib/assets/images/luz.svg); */
 		background-position: center;
 		background-repeat: no-repeat;
 		background-size: contain;

@@ -12,7 +12,7 @@
 	<span class="font-bold my-4 text-lg">
 		{data?.title}
 	</span>
-	<small class="text-accent font-bold">Revisar -></small>
+	<small class="text-accent font-bold">Leer más -></small>
 </a>
 
 <style>
