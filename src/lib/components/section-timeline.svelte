@@ -22,8 +22,18 @@
 	</div>
 	<div class="mx-10 flex min-h-screen py-10">
 		<div class="w-1/3 bg-accent rounded-xl flex flex-col justify-center text-light">
-            <p class="px-3">
-                Te mostramos la distrubución del presupuesto regional durante los años 2010 al 2021.
+            <p class="px-10 text-justify">
+                Te mostramos la distribucion del presupuesto regional
+                durante los años 2010 al 2021. Puedes observar tanto
+                el gasto presupuestado total, como el presupuesto por
+                habitante. También puedes ver las cantidades por area
+                funcional, como por ejemplo Sanidad, referidas a cada
+                region o a todo el territorio nacional. Ten en cuenta que
+                nlgunas comunidades autonomas tienen competencias
+                que otras no tienen -pasa, por ejemplo, en Justicia,
+                que en ocasiones estă transferida y en otras no-, por lo
+                que el gasto total no es comparable sin tener en
+                cuenta esas diferencias.
             </p>
         </div>
 		<div class="w-2/3 ml-2">
