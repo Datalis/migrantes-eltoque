@@ -21,10 +21,12 @@
     }
 
     onMount(() => {
+        let data: any[] = [];
         document.querySelectorAll(".month").forEach((value, key) => {
             const month = 11 - key;
-            months.push(getDataByMonth(events, month));
+            data.push(getDataByMonth(events, month));
         })
+        months = data;
         console.log(months)
     })
 </script>
@@ -50,36 +52,47 @@
             <span>Diciembre</span> 
         </div>
         <div class="line month november">
+            <TimelineItem data={months[1]} />
             <span>Noviembre</span>
         </div>
         <div class="line month octuber">
+            <TimelineItem data={months[2]} />
             <span>Octubre</span>
         </div>
         <div class="line month semptember">
+            <TimelineItem data={months[3]} />
             <span>Septiembre</span>
         </div>
         <div class="line month agust">
+            <TimelineItem data={months[4]} />
             <span>Agosto</span>
         </div>
         <div class="line month july">
+            <TimelineItem data={months[5]} />
             <span>Julio</span>
         </div>
         <div class="line month june">
+            <TimelineItem data={months[6]} />
             <span>Junio</span>
         </div>
         <div class="line month may">
+            <TimelineItem data={months[7]} />
             <span>Mayo</span>
         </div>
         <div class="line month april">
+            <TimelineItem data={months[8]} />
             <span>Abril</span>
         </div>
         <div class="line month march">
+            <TimelineItem data={months[9]} />
             <span>Marzo</span>
         </div>
         <div class="line month february">
+            <TimelineItem data={months[10]} />
             <span>Febrero</span>
         </div>
         <div class="line month noline january">
+            <TimelineItem data={months[11]} />
             <span>Enero</span>
         </div>
     </div>
