@@ -1,9 +1,11 @@
 <script lang="ts">
 	import { onMount } from "svelte";
+	import TimelineItem from "./timeline-item.svelte";
 
 
     export let events: any[] = [];
     let selectedYear = 2021;
+    let months: any[] = [];
 
     const getDataByMonth = (data: any[], month: number): any[] => {
         return data.filter(value => {
@@ -14,8 +16,9 @@
     onMount(() => {
         document.querySelectorAll(".month").forEach((value, key) => {
             const month = 11 - key;
-            const talla = getDataByMonth(events, month);
+            months.push(getDataByMonth(events, month));
         })
+        console.log(months)
     })
 </script>
 
@@ -36,6 +39,7 @@
             <span>{selectedYear}</span>
         </div>
         <div class="line month december">
+            <TimelineItem data={months[0]} />
             <span>Diciembre</span> 
         </div>
         <div class="line month november">
@@ -97,4 +101,6 @@
     .division {
         @apply absolute w-11/12 border-b-2 border-light top-1/2 right-0;
     }
+
+    
 </style>
