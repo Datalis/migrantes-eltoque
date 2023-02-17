@@ -1,8 +1,9 @@
 <script lang="ts">
     export let data: any[] = [];
+    const top = data.length % 2 == 0 ? (data.length * 32) / 2 : (data.length - 1) * 32 / 2;
 </script>
 
-<div class="container" style="top: calc(50% - {(data.length * 32) / 2}px)">
+<div class="container" style="top: calc(50% - {top}px)">
     {#each data as data}
         <div class="ball"></div>
     {/each}
