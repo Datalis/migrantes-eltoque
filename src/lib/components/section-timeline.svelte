@@ -1,5 +1,42 @@
-<script>
+<script lang="ts">
+	import { onMount } from 'svelte';
     import TimeLine from './timeline.svelte';
+
+    export let events: any[] = [];
+
+    const emptyToNull = (value: string): string | null => value === "" ? null : value;
+    const stringToDate = (value: string): Date => {
+        const [day, month, year] = value.split("/");
+        return new Date(Date.UTC(parseInt(year), parseInt(month), parseInt(day)))
+    }
+
+    onMount(() => {
+        events = events.map((value) => {
+            return {
+                id: parseInt(value[0]),
+                date: stringToDate(value[1]),
+                name: emptyToNull(value[2]),
+                description: emptyToNull(value[3]),
+                eventType: emptyToNull(value[4]),
+                migrationType: emptyToNull(value[5]),
+                country: emptyToNull(value[6]),
+                location: emptyToNull(value[7]),
+                coordenates: emptyToNull(value[8]),
+                names: emptyToNull(value[9]),
+                personsNo: emptyToNull(value[10]) || 0,
+                womenNo: emptyToNull(value[11]) || 0,
+                menNo: emptyToNull(value[12]) || 0,
+                childrenNo: emptyToNull(value[13]) || 0,
+                deaths: emptyToNull(value[14]) || 0,
+                missingsNo: emptyToNull(value[15]) || 0,
+                history: emptyToNull(value[16]),
+                source: emptyToNull(value[17]),
+                multimedia: emptyToNull(value[18]),
+                links: emptyToNull(value[19]),
+            }
+        })
+        console.log(events)
+    })
 </script>
 
 <section id="section-timeline" class="section-timeline bg-dark md:pb-20">
