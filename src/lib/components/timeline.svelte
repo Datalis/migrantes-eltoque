@@ -5,8 +5,9 @@
 
     export let events: any[] = [];
     let selectedYear = 2021;
-    let months: any[] = [];
-    let filters: string[] = ['detención'];
+    let eventsPerMonths: any[] = [];
+    let selectedFilter: string = "detención";
+    const months = ["Diciembre", "Noviembre", "Octubre", "Septiembre", "Agosto", "Julio", "Junio", "Mayo", "Abril", "Marzo", "Febrero", "Enero"]
 
     const getDataByMonth = (data: any[], month: number): any[] => {
         return data.filter(value => {
@@ -15,7 +16,32 @@
     }
 
     const activeFilter = (e: any) => {
-        e.target.classList.toggle('active')
+        switch (e.target.innerText) {
+            case "Detenciones":
+                selectedFilter = "detención"
+                break
+            case "Rescates":
+                selectedFilter = "rescate"
+                break
+            case "Intercepciones":
+                selectedFilter = "intercepción"
+                break
+            case "Transferencias":
+                selectedFilter = "transferencia"
+                break
+            case "Expulsión":
+                selectedFilter = "expulsión"
+                break
+            case "Repatriación":
+                selectedFilter = "repatriación"
+                break
+            case "Muerte":
+                selectedFilter = "muerte"
+                break
+            case "Desapariciones":
+                selectedFilter = "desaparición"
+                break
+        }
     }
 
     onMount(() => {
@@ -24,75 +50,32 @@
             const month = 11 - key;
             data.push(getDataByMonth(events, month));
         })
-        months = data;
-        console.log(months)
+        eventsPerMonths = data;
     })
 </script>
 
 <div class="flex flex-col h-full">
     <div class="flex justify-between">
-        <button class="button active" on:click={activeFilter}>Detenciones</button>
-		<button class="button" on:click={activeFilter}>Rescates</button>
-		<button class="button" on:click={activeFilter}>Intercepciones</button>
-		<button class="button" on:click={activeFilter}>Transferencias</button>
-		<button class="button" on:click={activeFilter}>Expulsión</button>
-		<button class="button" on:click={activeFilter}>Repatriación</button>
-		<button class="button" on:click={activeFilter}>Muerte</button>
-		<button class="button" on:click={activeFilter}>Desapariciones</button>
+        <button class="button {selectedFilter === "detención" ? 'active': ''}" on:click={activeFilter}>Detenciones</button>
+		<button class="button {selectedFilter === "rescate" ? 'active': ''}" on:click={activeFilter}>Rescates</button>
+		<button class="button {selectedFilter === "intercepción" ? 'active': ''}" on:click={activeFilter}>Intercepciones</button>
+		<button class="button {selectedFilter === "transferencia" ? 'active': ''}" on:click={activeFilter}>Transferencias</button>
+		<button class="button {selectedFilter === "expulsión" ? 'active': ''}" on:click={activeFilter}>Expulsión</button>
+		<button class="button {selectedFilter === "repatriación" ? 'active': ''}" on:click={activeFilter}>Repatriación</button>
+		<button class="button {selectedFilter === "muerte" ? 'active': ''}" on:click={activeFilter}>Muerte</button>
+		<button class="button {selectedFilter === "desaparición" ? 'active': ''}" on:click={activeFilter}>Desapariciones</button>
 	</div>
-	<div class="flex border border-light h-full rounded-xl mt-3 pt-5 relative">
+	<div id="timelineContainer" class="flex border border-light h-full rounded-xl mt-3 pt-5 relative">
         <div class="division"></div>
         <div class="line year">
             <span>{selectedYear}</span>
         </div>
-        <div class="line month december">
-            <TimelineItem data={months[0]} />
-            <span>Diciembre</span> 
-        </div>
-        <div class="line month november">
-            <TimelineItem data={months[1]} />
-            <span>Noviembre</span>
-        </div>
-        <div class="line month octuber">
-            <TimelineItem data={months[2]} />
-            <span>Octubre</span>
-        </div>
-        <div class="line month semptember">
-            <TimelineItem data={months[3]} />
-            <span>Septiembre</span>
-        </div>
-        <div class="line month agust">
-            <TimelineItem data={months[4]} />
-            <span>Agosto</span>
-        </div>
-        <div class="line month july">
-            <TimelineItem data={months[5]} />
-            <span>Julio</span>
-        </div>
-        <div class="line month june">
-            <TimelineItem data={months[6]} />
-            <span>Junio</span>
-        </div>
-        <div class="line month may">
-            <TimelineItem data={months[7]} />
-            <span>Mayo</span>
-        </div>
-        <div class="line month april">
-            <TimelineItem data={months[8]} />
-            <span>Abril</span>
-        </div>
-        <div class="line month march">
-            <TimelineItem data={months[9]} />
-            <span>Marzo</span>
-        </div>
-        <div class="line month february">
-            <TimelineItem data={months[10]} />
-            <span>Febrero</span>
-        </div>
-        <div class="line month noline january">
-            <TimelineItem data={months[11]} />
-            <span>Enero</span>
-        </div>
+        {#each months as month, i}
+            <div class="line month">
+                <TimelineItem data={eventsPerMonths[i]} filter={selectedFilter} />
+                <span>{month}</span> 
+            </div>
+        {/each}
     </div>
 </div>
 
@@ -123,7 +106,7 @@
     .year span {
         @apply text-accent border-l-4 opacity-100;
     }
-    .noline span {
+    #timelineContainer div:last-child > span {
         @apply border-0;
     }
     .division {
