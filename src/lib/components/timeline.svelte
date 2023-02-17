@@ -1,4 +1,22 @@
-<script>
+<script lang="ts">
+	import { onMount } from "svelte";
+
+
+    export let events: any[] = [];
+    let selectedYear = 2021;
+
+    const getDataByMonth = (data: any[], month: number): any[] => {
+        return data.filter(value => {
+            return value.date?.getMonth() === month && value.date?.getFullYear() === selectedYear;
+        })
+    }
+
+    onMount(() => {
+        document.querySelectorAll(".month").forEach((value, key) => {
+            const month = 11 - key;
+            const talla = getDataByMonth(events, month);
+        })
+    })
 </script>
 
 <div class="flex flex-col h-full">
@@ -14,19 +32,45 @@
 	</div>
 	<div class="flex border border-light h-full rounded-xl mt-3 pt-5 relative">
         <div class="division"></div>
-        <div class="line year">2022</div>
-        <div class="line">Diciembre</div>
-        <div class="line">Noviembre</div>
-        <div class="line">Octubre</div>
-        <div class="line">Septiembre</div>
-        <div class="line">Agosto</div>
-        <div class="line">Julio</div>
-        <div class="line">Junio</div>
-        <div class="line">Mayo</div>
-        <div class="line">Abril</div>
-        <div class="line">Marzo</div>
-        <div class="line">Febrero</div>
-        <div class="line noline">Enero</div>
+        <div class="line year">
+            <span>{selectedYear}</span>
+        </div>
+        <div class="line month december">
+            <span>Diciembre</span> 
+        </div>
+        <div class="line month november">
+            <span>Noviembre</span>
+        </div>
+        <div class="line month octuber">
+            <span>Octubre</span>
+        </div>
+        <div class="line month semptember">
+            <span>Septiembre</span>
+        </div>
+        <div class="line month agust">
+            <span>Agosto</span>
+        </div>
+        <div class="line month july">
+            <span>Julio</span>
+        </div>
+        <div class="line month june">
+            <span>Junio</span>
+        </div>
+        <div class="line month may">
+            <span>Mayo</span>
+        </div>
+        <div class="line month april">
+            <span>Abril</span>
+        </div>
+        <div class="line month march">
+            <span>Marzo</span>
+        </div>
+        <div class="line month february">
+            <span>Febrero</span>
+        </div>
+        <div class="line month noline january">
+            <span>Enero</span>
+        </div>
     </div>
 </div>
 
@@ -36,14 +80,18 @@
 	}
 
     .line {
+        @apply w-1/12 flex justify-end;
+    }
+
+    .line span {
         writing-mode: vertical-lr;
         transform: rotate(180deg);
-        @apply text-gray opacity-50 text-sm w-1/12 border-l-2 border-light text-end h-full;
+        @apply text-gray opacity-50 text-sm border-l-2 border-light text-end h-full;
     }
-    .year {
+    .year span {
         @apply text-accent border-l-4 opacity-100;
     }
-    .noline {
+    .noline span {
         @apply border-0;
     }
     .division {

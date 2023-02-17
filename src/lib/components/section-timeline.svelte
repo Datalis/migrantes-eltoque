@@ -9,9 +9,8 @@
         const [day, month, year] = value.split("/");
         return new Date(Date.UTC(parseInt(year), parseInt(month), parseInt(day)))
     }
-
-    onMount(() => {
-        events = events.map((value) => {
+    const dataToObject = (data: any[][]) => {
+        let values: any[] = data.map((value: any[]) => {
             return {
                 id: parseInt(value[0]),
                 date: stringToDate(value[1]),
@@ -35,7 +34,10 @@
                 links: emptyToNull(value[19]),
             }
         })
-        console.log(events)
+        return values.sort((a, b) => Date.parse(a.date) - Date.parse(b.date))
+    }
+
+    onMount(() => {
     })
 </script>
 
@@ -74,7 +76,7 @@
             </p>
         </div>
 		<div class="w-2/3 ml-2">
-            <TimeLine />
+            <TimeLine events={dataToObject(events)} />
         </div>
 	</div>
 </section>
