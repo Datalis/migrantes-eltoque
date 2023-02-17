@@ -8,7 +8,6 @@
     let months: any[] = [];
     let filters: string[] = ['detención'];
 
-    console.log(filters.find(value => value === 'detención'))
     const getDataByMonth = (data: any[], month: number): any[] => {
         return data.filter(value => {
             return value.date?.getMonth() === month && value.date?.getFullYear() === selectedYear;
@@ -16,7 +15,6 @@
     }
 
     const activeFilter = (e: any) => {
-        console.log(e.target)
         e.target.classList.toggle('active')
     }
 
