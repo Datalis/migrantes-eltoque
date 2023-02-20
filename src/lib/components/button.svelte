@@ -15,12 +15,12 @@
         appearance: none;
         border-radius: 5px;
         padding: 10px 12px;
-        font-weight: 600;
+        font-weight: 500;
         font-stretch: normal;
         line-height: 2.22;
         letter-spacing: normal;
         min-width: 200px;
-        font-size: 14px;
+        font-size: 16px;
         transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
     }
 
