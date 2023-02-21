@@ -4,7 +4,7 @@
 
 
     export let events: any[] = [];
-    let selectedYear = 2021;
+    let selectedYear = 2023;
     let eventsPerMonths: any[] = [];
     let selectedFilter: string = "";
     let ballsize = 0;
@@ -12,7 +12,7 @@
 
     const getDataByMonth = (data: any[], month: number): any[] => {
         return data.filter(value => {
-            return value.date?.getMonth() === month && value.date?.getFullYear() === selectedYear;
+            return value.date?.getMonth() - 1 === month && value.date?.getFullYear() === selectedYear;
         })
     }
 
