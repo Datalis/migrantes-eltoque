@@ -5,6 +5,8 @@
 	import SearchInput from '$lib/components/search-input.svelte';
 	import { compareObjects, trimString } from '$lib/utils';
 	import type { PageData } from './$types';
+	//@ts-ignore
+	import SvelteTable from 'svelte-table';
 
 	export let data: PageData;
 
@@ -35,6 +37,51 @@
 		if (query == '') deceased = data.deceased || [];
 		else deceased = searchFor(query, data.deceased || []);
 	};
+
+	const cols = [
+		{
+			key: 'name',
+			title: 'Nombre',
+			value: (v: any) => v.name,
+			sortable: true
+		},
+		{
+			key: 'age',
+			title: 'Edad',
+			value: (v: any) => v.age,
+			sortable: true
+		},
+		{
+			key: 'death_date',
+			title: 'Fecha de Muerte',
+			value: (v: any) => v.death_date,
+			sortable: true
+		},
+		{
+			key: 'death_cause',
+			title: 'Causa',
+			value: (v: any) => v.death_cause,
+			sortable: true
+		},
+		{
+			key: 'death_location',
+			title: 'Lugar donde murió',
+			value: (v: any) => v.death_location,
+			sortable: true
+		},
+		{
+			key: 'place_of_origin',
+			title: 'Lugar de origen',
+			value: (v: any) => v.place_of_origin,
+			sortable: true
+		},
+		{
+			key: 'details',
+			title: 'Detalles',
+			value: (v: any) => v.details,
+			sortable: true
+		}
+	];
 </script>
 
 <main class="bg-dark">
@@ -71,7 +118,8 @@
 			<SearchInput on:search={(e) => onSearch(e.detail)} placeholder="Buscar..." />
 		</div>
 		<div class="table-wrapper">
-			<table id="table" class="table-auto mt-10 w-full text-light">
+			<SvelteTable rowKey="name" rows={deceased} columns={cols} />
+			<!-- <table id="table" class="table-auto mt-10 w-full text-light">
 				<thead>
 					<tr>
 						<th class="font-thin text-left border-b-2 border-accent pb-4">Nombre</th>
@@ -110,7 +158,7 @@
 						</tr>
 					{/each}
 				</tbody>
-			</table>
+			</table> -->
 		</div>
 	</div>
 </main>
@@ -118,5 +166,20 @@
 <style>
 	.table-wrapper {
 		overflow-x: scroll;
+		color: #fffffd;
+	}
+
+	:global(.table-wrapper thead tr) {
+		border-bottom: 2px solid #7856ff;
+	}
+
+	:global(.table-wrapper thead th) {
+		text-align: left;
+		padding: 1rem 0.5rem;
+	}
+
+	:global(.table-wrapper tbody td) {
+		font-size: 14px;
+		padding: 1rem 0.5rem;
 	}
 </style>

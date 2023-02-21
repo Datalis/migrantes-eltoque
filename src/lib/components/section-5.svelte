@@ -17,6 +17,7 @@
 	// import InfoModal from './info-modal.svelte';
 	import ReportModal from './report-modal.svelte';
 	import Toast from './toast.svelte';
+	import Counter from './counter.svelte';
 
 	export let totals: any;
 	export let missing: any[] = [];
@@ -71,24 +72,28 @@
 {/if}
 
 <section class="section-5 flex flex-col items-center justify-center bg-light min-h-screen pt-20">
-	<div class="container mx-auto max-w-3xl md:px-0">
-		<div class="mx-10 md:mx-0">
-			<h2 class="font-sans font-extrabold text-7xl text-accent">+{totals?.missing}</h2>
+	<div class="container mx-auto  md:px-0">
+		<div class="max-w-3xl mx-10 md:mx-auto">
+			<h2 class="font-sans font-extrabold text-7xl text-accent">
+				<Counter amount={totals?.missing} />
+			</h2>
 			<h2 class="font-sans font-bold text-4xl text-dark my-4">Personas desaparecidas</h2>
-			<p class="text-dark md:mx-20 mt-20">
-				Un migrante se considera desaparecido cuando no se tiene noticias de su llegada, pero
-				tampoco existe un cuerpo que pueda confirmar la muerte. En el mejor de los casos, solo están
-				retenidos por las autoridades e, incluso, pueden estar bajo custodia durante meses sin que
-				se sepa nada de ellos. El protocolo para la búsqueda e identificación es complicado y la
-				desesperación de la familia aumenta. Por ello, se recomienda a los familiares ponerse en
-				contacto con las autoridades del país o de la zona donde se supone desapareció la persona.
+			<p class="text-dark mt-10">
+				Una persona migrante se considera desaparecida cuando no se tienen noticias de su llegada,
+				pero tampoco existe un cuerpo que pueda confirmar la muerte. En el mejor de los casos, solo
+				están retenidos por las autoridades e, incluso, pueden estar bajo custodia durante meses sin
+				que se sepa nada de ellos. El protocolo para la búsqueda e identificación es complicado, en
+				cada país puede ser diferente y la desesperación de la familia aumenta. Por ello, se
+				recomienda a los familiares ponerse en contacto con las autoridades del país o de la zona
+				donde se supone desapareció la persona.
 				<br />
 				<br />
-				El proceso de búsqueda de información puede ser muy difícil, por eso se ofrece este espacio para
-				publicar los datos y tratar de ayudar a despejar la incertidumbre.
+				Sabemos que el proceso de búsqueda de información puede ser difícil y por eso ofrecemos este
+				espacio para publicar los datos y fotos de quienes están desaparecidos y tratar de ayudar a despejar
+				la incertidumbre.
 			</p>
 		</div>
-		<div class="flex mt-20 mx-10 md:mx-0">
+		<div class="max-w-3xl flex mt-20 mx-10 md:mx-auto">
 			<a href="/desaparecidos" class="w-full md:w-auto"
 				><Button classes="w-full" type="bordered">Ver listado</Button></a
 			>
@@ -111,9 +116,10 @@
 				</span>
 			</div>
 		</div>
-		<div class="w-full mt-20 px-10 md:px-0">
+		<div class="max-w-4xl mt-20 px-10 md:px-0">
 			<Swiper
 				on:swiper={onSwiper}
+				autoHeight={true}
 				preloadImages={false}
 				lazy={{
 					loadPrevNext: true,
@@ -124,7 +130,12 @@
 				centeredSlides={true}
 				breakpoints={{
 					'768': {
-						slidesPerView: 2.6,
+						slidesPerView: 2.5,
+						spaceBetween: 30,
+						centeredSlides: false
+					},
+					'1024': {
+						slidesPerView: 3,
 						spaceBetween: 30,
 						centeredSlides: false
 					}
@@ -168,11 +179,13 @@
 			<img src={Ocean} class="decor-ocean" alt="" loading="lazy" />
 			<img src={Map} class="decor-map" alt="" loading="lazy" />
 		</div>
-		<div class="bg-dark flex flex-col md:flex-row items-center p-10 md:mt-20 md:rounded-lg">
+		<div
+			class="max-w-3xl mx-auto bg-dark flex flex-col md:flex-row items-center p-10 md:mt-20 md:rounded-lg"
+		>
 			<p class="text-light text-lg md:text-sm mb-8 md:mb-0">
 				Si tienes algún familiar, amigo o conocido que haya desaparecido tratando de migrar o
-				conociste alguien que viajaba contigo y se ha denunciado que no llegó, escríbenos. Queremos
-				que no se olvide su historia y poder ayudar, de acuerdo con nuestras posibilidades.
+				conociste a alguien que viajaba contigo y se ha denunciado que no llegó, escríbenos.
+				Queremos que no se olvide su historia y ayudar, de acuerdo con nuestras posibilidades.
 			</p>
 			<Button classes="w-full md:w-auto" onClick={() => (showModal = true)}
 				>Reportar desaparecido</Button

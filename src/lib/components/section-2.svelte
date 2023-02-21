@@ -31,25 +31,26 @@
 		<h2 class="font-sans font-bold text-2xl md:text-4xl text-accent text-center">
 			Una decisión de vida y muerte
 		</h2>
-		<p class="text-gray md:mx-20 mt-20">
-			Cuba experimenta la ola migratoria más grande en los últimos 60 años. Entre enero de 2021 y
-			diciembre de 2022, 368 326 cubanos llegaron de manera irregular a los Estados Unidos, según
-			datos de la <a
-				class="underline"
-				href="https://www.cbp.gov/newsroom/stats/nationwide-encounters?1649206653428"
-				target="_blank"
-				rel="noreferrer">Oficina de Aduanas y Protección Fronteriza norteamericana</a
-			>, y los números siguen en aumento.
+		<p class="text-gray mt-10">
+			Desde enero de 2021 hasta la fecha, miles de cubanas y cubanos han emprendido una peligrosa
+			travesía hacia los Estados Unidos; algunos por mar, otros por tierra, protagonizando la ola
+			migratoria más grande de los últimos 60 años. Aunque la mayoría ha logrado su objetivo, la
+			emigración no siempre termina con un final feliz.
 			<br /><br />
-			Llegar a Estados Unidos es la primera opción migratoria para quienes quieren salir de Cuba, aunque
-			no la única. A pesar de la cercanía geográfica, el problema está en cómo hacerlo, pues las vías
-			legales para obtener un visado han sido muy limitadas. El cierre de la Embajada en La Habana en
-			2017, la pandemia y, sobre todo, la profunda crisis que se vive en Cuba han empujado a los migrantes
-			a buscar vías alternativas —peligrosas e irregulares— para salir de la isla rumbo al norte.
-			<br /><br />
-			Aunque la mayoría de las personas llegan a su destino; para lograrlo emprenden vías costosas e
-			inseguras, con incidentes violentos o peligros naturales. Se exponen a ser interceptados por las
-			autoridades locales y pueden, en el camino, perderlo todo, incluso la vida.
+			De quienes no llegan, porque mueren o desaparecen en el intento, se habla poco. Sus nombres, muchas
+			veces desconocidos, se diluyen en estadísticas imprecisas. Sin embargo, detrás de los números hay
+			familias que sufren, historias truncadas y sueños incompletos.
+			<br />
+			<br />
+			Durante más de un año, hemos realizado un seguimiento de los artículos de prensa, reportes oficiales
+			e informales y publicaciones en redes sociales sobre diferentes eventos migratorios para hacer
+			una base de datos que además compila identidades de personas fallecidas y desaparecidas en sus
+			travesías migratorias de Cuba a Estados Unidos.
+			<br />
+			<br />
+			Sabemos que contar las víctimas de este drama humano y ponerles rostro no las devolverá; pero nos
+			permitirá, como sociedad, no olvidar. Queremos que este espacio de memoria y tributo sirva de ayuda
+			y acompañamiento a los familiares que continúan su búsqueda.
 		</p>
 	</div>
 	<div class="section-2-bottom-decor">
