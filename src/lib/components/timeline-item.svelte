@@ -1,10 +1,14 @@
 <script lang="ts">
+	import { onMount } from "svelte";
+
+
     export let data: any[] = [];
     export let filter: string = "";
     export let ballsize = 32;
 
     $: top = data.length % 2 == 0 ? (data.length * ballsize) / 2 : (data.length - 1) * ballsize / 2;
-    console.log(data)
+    onMount(() => {
+    })
 </script>
 
 <div class="container" style="top: calc(50% - {top}px); --tw-translate-x: {ballsize / 2}px">

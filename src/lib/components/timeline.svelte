@@ -50,7 +50,7 @@
         document.querySelectorAll(".month").forEach((value, key) => {
             const month = 11 - key;
             const info = getDataByMonth(events, month)
-            ballsize = data.length > ballsize ? data.length : ballsize
+            ballsize = info.length > ballsize ? info.length : ballsize
             data.push(info);
         })
         eventsPerMonths = data;
@@ -78,7 +78,7 @@
                 <TimelineItem
                     data={eventsPerMonths[i]}
                     filter={selectedFilter}
-                    ballsize={parseInt((250 / ballsize).toFixed(0))}
+                    ballsize={parseInt((600 / ballsize).toFixed(0))}
                 />
                 <span>{month}</span> 
             </div>
