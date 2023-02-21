@@ -43,8 +43,6 @@
 		bottom: 0;
 		width: 100%;
 		height: 100%;
-		/* background: -webkit-linear-gradient(transparent 150px, #f5f6f9);
-		background: -moz-linear-gradient(transparent 150px, #f5f6f9); */
 		background: linear-gradient(rgba(255,255,255,0) 120px, #f5f6f9);
 		pointer-events: none;
 	}
