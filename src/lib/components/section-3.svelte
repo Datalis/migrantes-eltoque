@@ -1,5 +1,5 @@
 <script lang="ts">
-    export let totals: any;
+	export let totals: any;
 	export let deceased: any[] = [];
 
 	$: male = deceased?.filter((e) => e[4] == 'M')?.length || 0;
@@ -10,9 +10,10 @@
 	<div class="container mx-auto max-w-3xl px-10 md:px-0">
 		<h2 class="font-sans font-extrabold text-6xl md:text-7xl text-accent">+{totals?.deceased}</h2>
 		<h2 class="font-sans font-bold text-2xl md:text-4xl text-light my-4">Personas fallecidas</h2>
-		<p class="text-gray md:mx-20 mt-10 md:mt-20">
-			Han sido contabilizados {totals?.deceased} cubanas y cubanos fallecidos en el intento de migrar hacia otro
-			país, la mayoría con destino a los Estados Unidos. Se conoce la identidad de {deceased?.length} personas:
+		<p class="text-gray mt-10">
+			Han sido contabilizados {totals?.deceased} cubanas y cubanos fallecidos en el intento de migrar
+			hacia otro país, la mayoría con destino a los Estados Unidos. Se conoce la identidad de {deceased?.length}
+			personas:
 			{female}
 			mujeres y {male} hombres. El resto de los migrantes se mantiene en el anonimato.
 			<br />

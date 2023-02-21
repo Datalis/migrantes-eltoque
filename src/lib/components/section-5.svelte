@@ -75,7 +75,7 @@
 		<div class="max-w-3xl mx-10 md:mx-auto">
 			<h2 class="font-sans font-extrabold text-7xl text-accent">+{totals?.missing}</h2>
 			<h2 class="font-sans font-bold text-4xl text-dark my-4">Personas desaparecidas</h2>
-			<p class="text-dark md:mx-20 mt-20">
+			<p class="text-dark mt-10">
 				Un migrante se considera desaparecido cuando no se tiene noticias de su llegada, pero
 				tampoco existe un cuerpo que pueda confirmar la muerte. En el mejor de los casos, solo están
 				retenidos por las autoridades e, incluso, pueden estar bajo custodia durante meses sin que

@@ -31,7 +31,7 @@
 		<h2 class="font-sans font-bold text-2xl md:text-4xl text-accent text-center">
 			Una decisión de vida y muerte
 		</h2>
-		<p class="text-gray md:mx-20 mt-20">
+		<p class="text-gray mt-10">
 			Cuba experimenta la ola migratoria más grande en los últimos 60 años. Entre enero de 2021 y
 			diciembre de 2022, 368 326 cubanos llegaron de manera irregular a los Estados Unidos, según
 			datos de la <a
