@@ -12,6 +12,7 @@
 
 <style lang="css">
     .btn {
+        white-space: nowrap;
         appearance: none;
         border-radius: 5px;
         padding: 10px 12px;

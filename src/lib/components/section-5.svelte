@@ -71,8 +71,8 @@
 {/if}
 
 <section class="section-5 flex flex-col items-center justify-center bg-light min-h-screen pt-20">
-	<div class="container mx-auto max-w-3xl md:px-0">
-		<div class="mx-10 md:mx-0">
+	<div class="container mx-auto  md:px-0">
+		<div class="max-w-3xl mx-10 md:mx-auto">
 			<h2 class="font-sans font-extrabold text-7xl text-accent">+{totals?.missing}</h2>
 			<h2 class="font-sans font-bold text-4xl text-dark my-4">Personas desaparecidas</h2>
 			<p class="text-dark md:mx-20 mt-20">
@@ -88,7 +88,7 @@
 				publicar los datos y tratar de ayudar a despejar la incertidumbre.
 			</p>
 		</div>
-		<div class="flex mt-20 mx-10 md:mx-0">
+		<div class="max-w-3xl flex mt-20 mx-10 md:mx-auto">
 			<a href="/desaparecidos" class="w-full md:w-auto"
 				><Button classes="w-full" type="bordered">Ver listado</Button></a
 			>
@@ -111,9 +111,10 @@
 				</span>
 			</div>
 		</div>
-		<div class="w-full mt-20 px-10 md:px-0">
+		<div class="max-w-4xl mt-20 px-10 md:px-0">
 			<Swiper
 				on:swiper={onSwiper}
+				autoHeight={true}
 				preloadImages={false}
 				lazy={{
 					loadPrevNext: true,
@@ -124,7 +125,12 @@
 				centeredSlides={true}
 				breakpoints={{
 					'768': {
-						slidesPerView: 2.6,
+						slidesPerView: 2.5,
+						spaceBetween: 30,
+						centeredSlides: false
+					},
+					'1024': {
+						slidesPerView: 3,
 						spaceBetween: 30,
 						centeredSlides: false
 					}
@@ -168,7 +174,7 @@
 			<img src={Ocean} class="decor-ocean" alt="" loading="lazy" />
 			<img src={Map} class="decor-map" alt="" loading="lazy" />
 		</div>
-		<div class="bg-dark flex flex-col md:flex-row items-center p-10 md:mt-20 md:rounded-lg">
+		<div class="max-w-3xl mx-auto bg-dark flex flex-col md:flex-row items-center p-10 md:mt-20 md:rounded-lg">
 			<p class="text-light text-lg md:text-sm mb-8 md:mb-0">
 				Si tienes algún familiar, amigo o conocido que haya desaparecido tratando de migrar o
 				conociste alguien que viajaba contigo y se ha denunciado que no llegó, escríbenos. Queremos
