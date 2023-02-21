@@ -78,7 +78,7 @@
                 <TimelineItem
                     data={eventsPerMonths[i]}
                     filter={selectedFilter}
-                    ballsize={250 / ballsize}
+                    ballsize={parseInt((250 / ballsize).toFixed(0))}
                 />
                 <span>{month}</span> 
             </div>
