@@ -17,6 +17,7 @@
 	// import InfoModal from './info-modal.svelte';
 	import ReportModal from './report-modal.svelte';
 	import Toast from './toast.svelte';
+	import Counter from './counter.svelte';
 
 	export let totals: any;
 	export let missing: any[] = [];
@@ -73,7 +74,9 @@
 <section class="section-5 flex flex-col items-center justify-center bg-light min-h-screen pt-20">
 	<div class="container mx-auto  md:px-0">
 		<div class="max-w-3xl mx-10 md:mx-auto">
-			<h2 class="font-sans font-extrabold text-7xl text-accent">+{totals?.missing}</h2>
+			<h2 class="font-sans font-extrabold text-7xl text-accent">
+				<Counter amount={totals?.missing}></Counter>
+			</h2>
 			<h2 class="font-sans font-bold text-4xl text-dark my-4">Personas desaparecidas</h2>
 			<p class="text-dark mt-10">
 				Un migrante se considera desaparecido cuando no se tiene noticias de su llegada, pero
