@@ -6,7 +6,8 @@
     export let events: any[] = [];
     let selectedYear = 2021;
     let eventsPerMonths: any[] = [];
-    let selectedFilter: string = "detención";
+    let selectedFilter: string = "";
+    let ballsize = 0;
     const months = ["Diciembre", "Noviembre", "Octubre", "Septiembre", "Agosto", "Julio", "Junio", "Mayo", "Abril", "Marzo", "Febrero", "Enero"]
 
     const getDataByMonth = (data: any[], month: number): any[] => {
@@ -48,7 +49,9 @@
         let data: any[] = [];
         document.querySelectorAll(".month").forEach((value, key) => {
             const month = 11 - key;
-            data.push(getDataByMonth(events, month));
+            const info = getDataByMonth(events, month)
+            ballsize = data.length > ballsize ? data.length : ballsize
+            data.push(info);
         })
         eventsPerMonths = data;
     })
@@ -72,7 +75,11 @@
         </div>
         {#each months as month, i}
             <div class="line month">
-                <TimelineItem data={eventsPerMonths[i]} filter={selectedFilter} />
+                <TimelineItem
+                    data={eventsPerMonths[i]}
+                    filter={selectedFilter}
+                    ballsize={250 / ballsize}
+                />
                 <span>{month}</span> 
             </div>
         {/each}
