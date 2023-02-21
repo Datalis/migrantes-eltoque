@@ -9,7 +9,7 @@
 		class="aspect-3/4 bg-accent rounded-2xl"
 		alt={data?.feature_image?.alternativeText}
 	/>
-	<span class="font-bold my-4 text-lg">
+	<span class="font-bold my-4 text-lg leading-tight">
 		{data?.title}
 	</span>
 	<small class="text-accent font-bold">Leer más -></small>

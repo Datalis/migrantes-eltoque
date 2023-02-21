@@ -6,13 +6,22 @@
 </script>
 
 <div class="profile flex flex-col items-center md:items-start h-full">
-	<img src={data[2] ? 'https://api.eltoque.com' + data[2] : 'https://fakeimg.pl/250x250/7856ff/'} class="aspect-square rounded-2xl w-3/4 md:w-full" alt="" loading="lazy" />
+	<img
+		src={data[2] ? 'https://api.eltoque.com' + data[2] : 'https://fakeimg.pl/250x250/7856ff/'}
+		class="aspect-square rounded-2xl w-3/4 md:w-full"
+		alt=""
+		loading="lazy"
+	/>
 	<span class="font-bold mt-4">{data[3]}</span>
 	<small>{data[11]} / {data[5]} años</small>
-	<p class="text-sm my-4 leading-tight">
-		{data[10]}
-	</p>
-	<Button classes="mt-4 self-start w-full md:w-auto" onClick={onClick}>Ofrecer información</Button>
+	<div class="text-wrapper">
+		<p class="text-sm my-4 leading-tight">
+			{data[10]}
+			<br />
+			<br />
+		</p>
+	</div>
+	<Button classes="mt-4 self-start w-full md:w-auto" {onClick}>Ofrecer información</Button>
 </div>
 
 <style>
@@ -22,12 +31,21 @@
 	}
 	.profile p {
 		height: 180px;
-		overflow: scroll;
-		/* min-height: 140px;
-		display: -webkit-box;
-		-webkit-line-clamp: 8;
-		-webkit-box-orient: vertical;
-		overflow: hidden;
-		text-overflow: ellipsis; */
+		overflow-y: auto;
+		margin-bottom: 0;
+	}
+	.profile .text-wrapper {
+		position: relative;
+	}
+	.profile .text-wrapper::before {
+		content: ' ';
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		height: 100%;
+		/* background: -webkit-linear-gradient(transparent 150px, #f5f6f9);
+		background: -moz-linear-gradient(transparent 150px, #f5f6f9); */
+		background: linear-gradient(rgba(255,255,255,0) 120px, #f5f6f9);
+		pointer-events: none;
 	}
 </style>
