@@ -60,7 +60,7 @@
 			</div>
 		</div>
 		<div class="flex flex-col md:flex-row items-center md:items-start mt-14">
-			<div class="flex flex-col flex-1 items-center md:items-start mb-10 md:mb-0 px-4">
+			<div class="flex flex-col flex-1 items-center md:items-start mb-10 md:mb-0 px-4 md:px-0">
 				<span class="text-gray font-bold flex flex-col md:flex-row items-center leading-loose"
 					>Coordinación editorial: <span class="font-light ml-0 md:ml-2"
 						>Jessica Dominguez Delgado</span
