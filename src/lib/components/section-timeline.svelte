@@ -50,19 +50,19 @@
     onMount(() => {
         gsap.registerPlugin(ScrollTrigger)
 
-        // let sections = gsap.utils.toArray('.panel')
-        // gsap.to(sections, {
-        //     xPercent: -100 * (sections.length - 1),
-        //     ease: "none",
-        //     scrollTrigger: {
-        //         trigger: ".panel-container",
-        //         pin: true,
-        //         scrub: 1,
-        //         snap: 1 / (sections.length - 1),
-        //         //@ts-ignore
-        //         end: () => "+=" + document.querySelector(".panel-container").offsetWidth
-        //     }
-        // })
+        let sections = gsap.utils.toArray('.panel')
+        gsap.to(sections, {
+            xPercent: -100 * (sections.length - 1),
+            ease: "none",
+            scrollTrigger: {
+                trigger: ".panel-container",
+                pin: true,
+                scrub: .1,
+                snap: 1 / (sections.length - 1),
+                //@ts-ignore
+                end: () => "+=" + document.querySelector(".panel-container").offsetWidth
+            }
+        })
     })
 </script>
 
@@ -84,7 +84,7 @@
 			</p>
 		</div>
 	</div>
-    <div class="panel-container">
+    <div class="inline-flex panel-container">
         {#each events.filter(event => event.isFeature) as featuredEvent}
         <div class="panel flex h-screen w-screen py-6 px-10">
             <div class="w-1/3 bg-accent rounded-xl flex flex-col justify-center text-light">
@@ -93,7 +93,7 @@
                 </p>
             </div>
             <div class="w-2/3 ml-2">
-                <TimeLine events={events} selectedYear={years[years.length - 1]}/>
+                <TimeLine events={events} selectedYear={featuredEvent.date.getFullYear()}/>
             </div>
         </div>
         {/each}
