@@ -33,7 +33,7 @@
 					rel="noopener noreferrer"
 					aria-label=""
 				>
-					<FacebookIcon fill="#e0e0e0" width="28" height="28" />
+					<FacebookIcon fill="#fefefe" width="28" height="28" />
 				</a>
 
 				<!-- Sharingbutton Twitter -->
@@ -44,7 +44,7 @@
 					rel="noopener noreferrer"
 					aria-label=""
 				>
-					<TwitterIcon fill="#e0e0e0" width="28" height="28" />
+					<TwitterIcon fill="#fefefe" width="28" height="28" />
 				</a>
 
 				<!-- Sharingbutton Telegram -->
@@ -55,31 +55,31 @@
 					rel="noopener noreferrer"
 					aria-label=""
 				>
-					<TelegramIcon fill="#e0e0e0" width="28" height="28" />
+					<TelegramIcon fill="#fefefe" width="28" height="28" />
 				</a>
 			</div>
 		</div>
 		<div class="flex flex-col md:flex-row items-center md:items-start mt-14">
 			<div class="flex flex-col flex-1 items-center md:items-start mb-10 md:mb-0 px-4 md:px-0">
-				<span class="text-gray font-bold flex flex-col md:flex-row items-center leading-loose"
+				<span class="text-light font-bold flex flex-col md:flex-row items-center leading-loose"
 					>Coordinación editorial: <span class="font-light ml-0 md:ml-2"
 						>Jessica Dominguez Delgado</span
 					></span
 				>
-				<span class="text-gray font-bold flex flex-col md:flex-row items-center leading-loose"
+				<span class="text-light font-bold flex flex-col md:flex-row items-center leading-loose"
 					>Compilación y análisis de datos: <span class="font-light ml-0 md:ml-2"
 						>Equipo DeFacto</span
 					></span
 				>
-				<span class="text-gray font-bold flex flex-col md:flex-row items-center leading-loose"
+				<span class="text-light font-bold flex flex-col md:flex-row items-center leading-loose"
 					>Coordinación de Marketing: <span class="font-light ml-0 md:ml-2"
 						>Roberto Pablo Jiménez</span
 					></span
 				>
-				<span class="text-gray font-bold flex flex-col md:flex-row items-center leading-loose"
+				<span class="text-light font-bold flex flex-col md:flex-row items-center leading-loose"
 					>Diseño: <span class="font-light ml-0 md:ml-2">Janet Aguilar (Catao Studio)</span></span
 				>
-				<span class="text-gray font-bold flex flex-col md:flex-row items-center leading-loose"
+				<span class="text-light font-bold flex flex-col md:flex-row items-center leading-loose"
 					>Programación: <a
 						href="http://datalis.dev"
 						target="_blank"
@@ -91,7 +91,7 @@
 					download
 					href="https://docs.google.com/spreadsheets/d/e/2PACX-1vTSm3z6JsEWDvnC2-nHDVIkpqvOMq_J3_IltrEPXhtNvjsLunEJ8qM-517CvhrUcmipZT8LArPQZtjH/pub?output=xlsx"
 				>
-					<Button type="bordered" color="gray" classes="text-gray mt-10"
+					<Button type="bordered" color="light" classes="text-light mt-10"
 						>Descarga la base de datos</Button
 					>
 				</a>
@@ -144,11 +144,11 @@
 	.footer .dot {
 		width: 8px;
 		height: 8px;
-		background-color: #e0e0e0;
+		background-color: #fefefe;
 		border-radius: 50%;
 	}
 	.footer .social-icon {
-		border: 1px solid #e0e0e0;
+		border: 1px solid #fefefe;
 		border-radius: 50%;
 		width: 42px;
 		height: 42px;
@@ -158,6 +158,6 @@
 		cursor: pointer;
 	}
 	:global(.footer .logo path) {
-		fill: #e0e0e0;
+		fill: #fefefe;
 	}
 </style>
