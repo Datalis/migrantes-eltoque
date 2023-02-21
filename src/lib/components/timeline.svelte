@@ -4,7 +4,7 @@
 
 
     export let events: any[] = [];
-    let selectedYear = 2023;
+    export let selectedYear = 2023;
     let eventsPerMonths: any[] = [];
     let selectedFilter: string = "";
     let ballsize = 0;
@@ -57,7 +57,7 @@
     })
 </script>
 
-<div class="flex flex-col h-full">
+<div class="h-full">
     <div class="flex justify-between">
         <button class="button {selectedFilter === "detención" ? 'active': ''}" on:click={activeFilter}>Detenciones</button>
 		<button class="button {selectedFilter === "rescate" ? 'active': ''}" on:click={activeFilter}>Rescates</button>
@@ -68,7 +68,7 @@
 		<button class="button {selectedFilter === "muerte" ? 'active': ''}" on:click={activeFilter}>Muerte</button>
 		<button class="button {selectedFilter === "desaparición" ? 'active': ''}" on:click={activeFilter}>Desapariciones</button>
 	</div>
-	<div id="timelineContainer" class="flex border border-light h-full rounded-xl mt-3 pt-5 relative">
+	<div id="timelineContainer" class="flex border border-light rounded-xl mt-3 pt-5 relative" style="height: calc(100% - 30px - 0.75rem);">
         <div class="division"></div>
         <div class="line year">
             <span>{selectedYear}</span>

@@ -1,8 +1,11 @@
 <script lang="ts">
+	import gsap from 'gsap';
+	import ScrollTrigger from 'gsap/ScrollTrigger';
 	import { onMount } from 'svelte';
     import TimeLine from './timeline.svelte';
 
     export let events: any[] = [];
+    let years: number[] = [];
 
     const emptyToNull = (value: string): string | null => value === "" ? null : value;
     const stringToDate = (value: string): Date => {
@@ -11,9 +14,14 @@
     }
     const dataToObject = (data: any[][]) => {
         let values: any[] = data.map((value: any[]) => {
+            const date = stringToDate(value[1]);
+            if (years.length == 0 || (years[years.length - 1] != date.getFullYear())) {
+                years.push(date.getFullYear())
+            }
+
             return {
                 id: parseInt(value[0]),
-                date: stringToDate(value[1]),
+                date,
                 name: emptyToNull(value[2]),
                 description: emptyToNull(value[3]),
                 eventType: emptyToNull(value[4]),
@@ -32,12 +40,29 @@
                 source: emptyToNull(value[17]),
                 multimedia: emptyToNull(value[18]),
                 links: emptyToNull(value[19]),
+                isFeature: emptyToNull(value[20]),
             }
         })
         return values.sort((a, b) => Date.parse(a.date) - Date.parse(b.date))
     }
+    events = dataToObject(events)
 
     onMount(() => {
+        gsap.registerPlugin(ScrollTrigger)
+
+        // let sections = gsap.utils.toArray('.panel')
+        // gsap.to(sections, {
+        //     xPercent: -100 * (sections.length - 1),
+        //     ease: "none",
+        //     scrollTrigger: {
+        //         trigger: ".panel-container",
+        //         pin: true,
+        //         scrub: 1,
+        //         snap: 1 / (sections.length - 1),
+        //         //@ts-ignore
+        //         end: () => "+=" + document.querySelector(".panel-container").offsetWidth
+        //     }
+        // })
     })
 </script>
 
@@ -59,24 +84,18 @@
 			</p>
 		</div>
 	</div>
-	<div class="mx-10 flex min-h-screen py-10">
-		<div class="w-1/3 bg-accent rounded-xl flex flex-col justify-center text-light">
-            <p class="px-10 text-justify">
-                Te mostramos la distribucion del presupuesto regional
-                durante los años 2010 al 2021. Puedes observar tanto
-                el gasto presupuestado total, como el presupuesto por
-                habitante. También puedes ver las cantidades por area
-                funcional, como por ejemplo Sanidad, referidas a cada
-                region o a todo el territorio nacional. Ten en cuenta que
-                nlgunas comunidades autonomas tienen competencias
-                que otras no tienen -pasa, por ejemplo, en Justicia,
-                que en ocasiones estă transferida y en otras no-, por lo
-                que el gasto total no es comparable sin tener en
-                cuenta esas diferencias.
-            </p>
+    <div class="panel-container">
+        {#each events.filter(event => event.isFeature) as featuredEvent}
+        <div class="panel flex h-screen w-screen py-6 px-10">
+            <div class="w-1/3 bg-accent rounded-xl flex flex-col justify-center text-light">
+                <p class="px-10 text-justify">
+                    {featuredEvent.description}
+                </p>
+            </div>
+            <div class="w-2/3 ml-2">
+                <TimeLine events={events} selectedYear={years[years.length - 1]}/>
+            </div>
         </div>
-		<div class="w-2/3 ml-2">
-            <TimeLine events={dataToObject(events)} />
-        </div>
-	</div>
+        {/each}
+    </div>
 </section>
