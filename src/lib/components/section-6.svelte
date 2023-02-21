@@ -124,19 +124,18 @@
 			<div class="intro bg-black md:px-0 min-h-screen">
 				<h2 class="title">Rutas Migratorias</h2>
 				<p class="text-gray">
-					Cruzar por el mar las 90 millas —o un poco más dependiendo del punto de salida— que separa
-					a Cuba de los Estados Unidos en balsas o embarcaciones rústicas es una vía usada desde
-					hace mucho por cubanas y cubanos. Durante la nueva oleada no ha dejado de utilizarse, a
-					pesar de estar muy vigilado por las autoridades de ambas naciones y no tener ninguna
-					garantía de éxito.
+					Las rutas terrestres que cruzan el Darién o parten desde Nicaragua —país al que las
+					cubanas y los cubanos pueden llegar sin necesidad de visado— y que atraviesan
+					Centroamérica han resultado más efectivas en el nuevo contexto. Aunque esto podría
+					cambiar.
+					<br /><br />
+					Cruzar por mar las 90 millas —o un poco más dependiendo del punto de salida— que separa a Cuba
+					de los Estados Unidos en balsas o embarcaciones rústicas es una vía usada desde hace mucho
+					tiempo. Durante la nueva oleada no ha dejado de utilizarse, a pesar de estar muy vigilada por
+					las autoridades de ambas naciones y no tener ninguna garantía de éxito.
 					<br /> <br />
-					Cruzar por el mar las 90 millas —o un poco más dependiendo del punto de salida— que separa
-					a Cuba de los Estados Unidos en balsas o embarcaciones rústicas es una vía usada desde hace
-					mucho por cubanas y cubanos. Durante la nueva oleada no ha dejado de utilizarse, a pesar de
-					estar muy vigilado por las autoridades de ambas naciones y no tener ninguna garantía de éxito.
-					<br /> <br />
-					Han sido identificadas las zonas más peligrosas de los recorridos y dónde ha ocurrido la mayor
-					cantidad de incidentes con migrantes cubanos.
+					Estas han sido las zonas más peligrosas de los recorridos y donde ha ocurrido la mayor cantidad
+					de incidentes con migrantes cubanos.
 				</p>
 			</div>
 			<div class="space h-screen md:h-0" />
@@ -151,11 +150,11 @@
 			{/each}
 			<div class="resume text-gray gb-black md:px-0 min-h-screen">
 				<p>
-					Estas rutas no son nuevas para los cubanos, ni tampoco exclusiva de ellos; pero no por eso
-					dejan de ser peligrosas. La inexperiencia de quienes las transitan —tanto en tierra como
-					el mar—, las condiciones previas de salud y los accidentes llevan muchas veces a finales
-					trágicos y la intervención de las autoridades migratorias en labores de rescates y
-					devolución en distintos países de la región.
+					Las rutas no son nuevas para los cubanos ni tampoco exclusiva de ellos; pero no por eso
+					dejan de ser peligrosas. La inexperiencia de quienes se aventuran, sus condiciones previas
+					de salud y los accidentes llevan muchas veces a finales trágicos y a la intervención de
+					las autoridades migratorias en labores de rescate y devolución en distintos países de la
+					región.
 				</p>
 			</div>
 			<div class="space h-screen md:h-0" />
@@ -173,12 +172,35 @@
 	</div>
 	<div class="max-w-3xl my-10 md:my-32 px-10">
 		<p class="text-light">
-			Entre enero de 2021 y noviembre de 2022 más de 10 385 personas han sido repatriadas a Cuba: 9
-			134 desde Estados Unidos, 933 desde México, 16 desde Guatemala y 195 desde Bahamas. Han sido
-			interceptados en el mar 619 y 215 rescatados por las autoridades marítimas.
+			Desde octubre de 2020 hasta enero de 2023, la Guardia Costera de los Estados Unidos <a
+				class="underline"
+				target="_blank"
+				rel="noreferrer"
+				href="https://www.news.uscg.mil/Press-Releases/Article/3265898/coast-guard-repatriates-177-people-to-cuba/"
+				>interceptó</a
+			>
+			a 11 937 migrantes cubanos en el mar cuando intentaban llegar a territorio estadounidense. La mayoría
+			de ellos fueron repatriados a la isla. Según los datos recopilados por nuestro equipo durante ese
+			período, las autoridades nacionales regresaron a Cuba al menos a 8 643 personas desde Estados Unidos,
+			<a
+				class="underline"
+				target="_blank"
+				rel="noreferrer"
+				href="http://www.politicamigratoria.gob.mx/es/PoliticaMigratoria/Boletines_Estadisticos"
+				>5 902</a
+			>
+			desde México, 16 desde Guatemala y 195 desde Bahamas.
 			<br /><br />
-			Aunque muchos consiguen llegar a su destino, la migración irregular no es una vía segura y muchas
-			veces no tiene un final feliz.
+			Los eventos dramáticos que involucran a migrantes incluyen una serie de hechos como deportaciones,
+			rescates, que, si bien no siempre terminan con la vida de las personas, frustran sus planes y las
+			ponen en una situación de vulnerabilidad. Algunas de ellas invirtieron todos sus ahorros, vendieron
+			sus pertenencias o renunciaron a sus trabajos y no tienen otras alternativas legales para migrar.
+			<br /><br />
+			La migración irregular es, en primer lugar, una elección personal; pero también es el reflejo de
+			la falta de oportunidades en la isla y una expresión clara de inconformidad con la realidad que
+			viven en Cuba. Es una decisión económica y también política. Cuando alguien a pesar de todos los
+			riesgos emprende este camino, sus motivaciones van más allá de los peligros. Toma una decisión
+			de vida, que también puede llevarle a la muerte.
 		</p>
 	</div>
 </section>

@@ -31,6 +31,7 @@
         <h2 class="font-sans font-bold text-2xl lg:text-4xl text-light">
             En la travesía de Cuba <br /> a Estados Unidos
         </h2>
+		<span class="font-sans font-bold text-xs md:text-base text-light z-10 mt-10">entre el primero de enero de 2021 <br> y la actualidad </span>
     </div>
 </section>
 
