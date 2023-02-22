@@ -7,6 +7,7 @@
 	import 'swiper/css';
 	import 'swiper/css/pagination';
 	import 'nprogress/nprogress.css';
+	import ShareBtn from '$lib/components/share-btn.svelte';
 	
 
 	NProgress.configure({
@@ -26,6 +27,7 @@
 <svelte:head />
 <slot />
 <Footer />
+<ShareBtn></ShareBtn>
 
 <style>
 	:root {
