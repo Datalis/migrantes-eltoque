@@ -134,7 +134,10 @@
 			>
 				{#each featureds as featured}
 					<SwiperSlide>
-						<p class="px-10 mt-2">{featured.description}</p>
+						<p class="px-10">{featured.description}</p>
+                        <p class="px-10 mt-2">
+                            Fuente: <a class="underline underline-offset-2" href="{featured.links}" target="_blank" rel="noreferrer">{featured.source}</a>
+                        </p>
 					</SwiperSlide>
 				{/each}
 			</Swiper>
@@ -156,9 +159,7 @@
 					/>
 				</span>
 			</div>       
-            <p class="px-10">
-                <!-- Fuente: <a href="{featuredEvent.links}" target="_blank" rel="noreferrer">{featuredEvent.source}</a> -->
-            </p>
+            
         </div>
         <div class="w-2/3 ml-2">
             <TimeLine events={events} years={years}/>
