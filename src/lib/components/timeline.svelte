@@ -4,16 +4,17 @@
 
 
     export let events: any[] = [];
-    export let selectedYear = 2023;
-    let eventsPerMonths: any[] = [];
+    export let years: number[] = [];
     let selectedFilter: string = "";
     let ballsize = 0;
     const months = ["Diciembre", "Noviembre", "Octubre", "Septiembre", "Agosto", "Julio", "Junio", "Mayo", "Abril", "Marzo", "Febrero", "Enero"]
 
-    const getDataByMonth = (data: any[], month: number): any[] => {
-        return data.filter(value => {
-            return value.date?.getMonth() - 1 === month && value.date?.getFullYear() === selectedYear;
+    const getDataByMonth = (data: any[], month: number, year: number): any[] => {
+        const results = data.filter(value => {
+            return value.date?.getMonth() - 1 === month && value.date?.getFullYear() === year;
         })
+        ballsize = results.length > ballsize ? results.length : ballsize
+        return results;
     }
 
     const activeFilter = (e: any) => {
@@ -46,14 +47,6 @@
     }
 
     onMount(() => {
-        let data: any[] = [];
-        document.querySelectorAll(".month").forEach((value, key) => {
-            const month = 11 - key;
-            const info = getDataByMonth(events, month)
-            ballsize = info.length > ballsize ? info.length : ballsize
-            data.push(info);
-        })
-        eventsPerMonths = data;
     })
 </script>
 
@@ -68,25 +61,34 @@
 		<button class="button {selectedFilter === "muerte" ? 'active': ''}" on:click={activeFilter}>Muerte</button>
 		<button class="button {selectedFilter === "desaparición" ? 'active': ''}" on:click={activeFilter}>Desapariciones</button>
 	</div>
-	<div id="timelineContainer" class="flex border border-light rounded-xl mt-3 pt-5 relative" style="height: calc(100% - 30px - 0.75rem);">
+	<div id="timelineContainer" class="border border-light rounded-xl mt-3 pt-5 relative" style="height: calc(100% - 30px - 0.75rem);">
         <div class="division"></div>
-        <div class="line year">
-            <span>{selectedYear}</span>
+        <div class="flex h-full">
+            {#each years as year}
+                <div class="flex w-full year-container">
+                    <div class="line year">
+                        <span>{year}</span>
+                    </div>
+                    {#each months as month, i}
+                        <div class="line month w-1/12">
+                            <TimelineItem
+                                data={getDataByMonth(events, i, year)}
+                                filter={selectedFilter}
+                                ballsize={parseInt((600 / ballsize).toFixed(0))}
+                            />
+                            <span>{month}</span> 
+                        </div>
+                    {/each}
+                </div>
+            {/each}
         </div>
-        {#each months as month, i}
-            <div class="line month">
-                <TimelineItem
-                    data={eventsPerMonths[i]}
-                    filter={selectedFilter}
-                    ballsize={parseInt((600 / ballsize).toFixed(0))}
-                />
-                <span>{month}</span> 
-            </div>
-        {/each}
     </div>
 </div>
 
 <style>
+    .year-container {
+        @apply shrink-0;
+    }
 	.button {
 		@apply rounded-xl text-light bg-dark px-2 py-1 border border-accent text-sm transition-all duration-200;
 	}
