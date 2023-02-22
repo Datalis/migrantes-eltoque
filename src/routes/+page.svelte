@@ -11,12 +11,13 @@
 	import gsap from 'gsap';
 	import ScrollTrigger from 'gsap/ScrollTrigger';
 	import Section_7 from '$lib/components/section-7.svelte';
+	import Section_timeline from '$lib/components/section-timeline.svelte';
 
 	export let data: PageData;
 
 	let windowWidth = 0;
 
-	const { totals, deceased, missing, articles, places } = data;
+	const { totals, deceased, missing, articles, places, events } = data;
 
 	onMount(() => {
 		gsap.registerPlugin(ScrollTrigger);
@@ -41,6 +42,7 @@
 	<Section_4 {deceased} />
 	<Section_5 {missing} {totals} />
 	<Section_6 {places} />
+	<Section_timeline {events} />
 	<Section_7 {articles} />
 </main>
 

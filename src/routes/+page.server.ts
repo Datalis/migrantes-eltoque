@@ -11,7 +11,8 @@ export const load: PageServerLoad = async () => {
 		'Personas fallecidas',
 		'Personas desaparecidas',
 		'Lugares peligrosos',
-		'Todos los eventos!O:P'
+		'Todos los eventos!O:P',
+		'Todos los eventos'
 	]);
 	const { data: articles } = await get(
 		'https://api.eltoque.com/posts?categories=63daba063c88b2001e980d89&_sort=publish_date:DESC'
@@ -34,6 +35,7 @@ export const load: PageServerLoad = async () => {
 		missing: sheet?.[1]?.values?.slice(1)?.reverse(),
 		places: sheet?.[2]?.values?.slice(1),
 		totals: mapTotals(sheet?.[3].values),
+		events: sheet?.[4]?.values?.slice(1),
 		articles
 	};
 };
