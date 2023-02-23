@@ -14,6 +14,13 @@
 	 * @type {any[]}
 	 */
 	export let deceased = [];
+
+	const formatAge = (/** @type {string} */ ageText) => {
+		if (ageText == 'desconocida') return 'Edad desconocida';
+		else if (ageText.includes('meses')) return ageText;
+		else return `${ageText} años`;
+	}
+
 </script>
 
 <Toast show={showToast} isError={errorSubmit} />
@@ -51,7 +58,7 @@
 					<DecorDeceased class="relative w-3/4 my-2" />
 					<h4 class="name text-center leading-tight font-bold text-accent md:w-3/4 my-2">{person[3]}</h4>
 					<span class=" text-light text-center font-light text-xs md:text-sm"
-						>{person[4] !== 'desconocida' ? `${person[4]} años` : 'Edad desconocida'}</span
+						>{formatAge(person[4])}</span
 					>
 					<!-- <DecorDeceased class="relative w-3/4" /> -->
 				</div>
