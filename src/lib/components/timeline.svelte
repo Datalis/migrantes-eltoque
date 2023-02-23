@@ -1,18 +1,32 @@
 <script lang="ts">
-	import { onMount } from "svelte";
+	import gsap from "gsap";
+	import ScrollTrigger from "gsap/ScrollTrigger";
+	import { createEventDispatcher, onMount } from "svelte";
 	import TimelineItem from "./timeline-item.svelte";
-
 
     export let events: any[] = [];
     export let years: number[] = [];
+    export let selected: any;
+
+    export const changeSelected = () => {
+        const tl = gsap.timeline()
+        // console.log(selected)
+        // console.log(years.findIndex((value) => value == selected.date.getFullYear()))
+        // console.log(selected.date.getFullYear())
+        // console.log(years)
+        // tl.from('#yearsContainer', {xPercent: -100})
+    };
+
     let selectedFilter: string = "";
     let ballsize = 0;
+    let selectedYear = 0;
     const months = ["Diciembre", "Noviembre", "Octubre", "Septiembre", "Agosto", "Julio", "Junio", "Mayo", "Abril", "Marzo", "Febrero", "Enero"]
 
     const getDataByMonth = (data: any[], month: number, year: number): any[] => {
         const results = data.filter(value => {
             return value.date?.getMonth() - 1 === month && value.date?.getFullYear() === year;
         })
+        
         ballsize = results.length > ballsize ? results.length : ballsize
         return results;
     }
@@ -47,6 +61,20 @@
     }
 
     onMount(() => {
+        gsap.registerPlugin(ScrollTrigger)
+        // let sections = gsap.utils.toArray('.panel')
+        // gsap.to(sections, {
+        //     xPercent: -100 * (sections.length - 1),
+        //     ease: "none",
+        //     scrollTrigger: {
+        //         trigger: ".panel-container",
+        //         pin: true,
+        //         scrub: .1,
+        //         snap: 1 / (sections.length - 1),
+        //         //@ts-ignore
+        //         end: () => "+=" + document.querySelector(".panel-container").offsetWidth
+        //     }
+        // })
     })
 </script>
 
@@ -63,7 +91,7 @@
 	</div>
 	<div id="timelineContainer" class="border border-light rounded-xl mt-3 pt-5 relative" style="height: calc(100% - 30px - 0.75rem);">
         <div class="division"></div>
-        <div class="flex h-full">
+        <div id="yearsContainer" class="flex h-full">
             {#each years as year}
                 <div class="flex w-full year-container">
                     <div class="line year">
@@ -75,6 +103,7 @@
                                 data={getDataByMonth(events, i, year)}
                                 filter={selectedFilter}
                                 ballsize={parseInt((600 / ballsize).toFixed(0))}
+                                selected={selected.id}
                             />
                             <span>{month}</span> 
                         </div>

@@ -9,6 +9,7 @@
 
     export let events: any[] = [];
     let years: number[] = [];
+    let timeline: any;
 
     let swiperIndex = 0;
 	let swiper: {
@@ -22,6 +23,7 @@
 
     function onSlideNext(e: any) {
         swiperIndex !== featureds.length && ++swiperIndex;
+        timeline.changeSelected();
     }
 
     function onSlidePrev(e: any) {
@@ -30,12 +32,12 @@
 
 	function onSwiperNext() {
 		swiper.slideNext();
-		swiperIndex !== featureds.length && ++swiperIndex;
+		// swiperIndex !== featureds.length && ++swiperIndex;
 	}
 
 	function onSwiperPrev() {
 		swiper.slidePrev();
-		swiperIndex !== 0 && --swiperIndex;
+		// swiperIndex !== 0 && --swiperIndex;
 	}
 
     const emptyToNull = (value: string): string | null => value === "" ? null : value;
@@ -162,7 +164,7 @@
             
         </div>
         <div class="w-2/3 ml-2">
-            <TimeLine events={events} years={years}/>
+            <TimeLine bind:this={timeline} events={events} years={years} selected={featureds[swiperIndex]}/>
         </div>
     </div>
 </section>
