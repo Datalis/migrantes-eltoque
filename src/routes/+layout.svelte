@@ -6,6 +6,7 @@
 	import '../app.css';
 	import 'swiper/css';
 	import 'swiper/css/pagination';
+	// import 'swiper/css/navigation';
 	import 'nprogress/nprogress.css';
 	import ShareBtn from '$lib/components/share-btn.svelte';
 	
