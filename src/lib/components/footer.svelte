@@ -77,8 +77,12 @@
 					></span
 				>
 				<span class="text-light font-bold flex flex-col md:flex-row items-center leading-loose"
+					>Gestión de información y comunidades: <span class="font-light ml-0 md:ml-2">Loraine Morales Pino</span></span
+				>
+				<span class="text-light font-bold flex flex-col md:flex-row items-center leading-loose"
 					>Diseño: <span class="font-light ml-0 md:ml-2">Janet Aguilar (Catao Studio)</span></span
 				>
+				
 				<span class="text-light font-bold flex flex-col md:flex-row items-center leading-loose"
 					>Programación: <a
 						href="http://datalis.dev"
