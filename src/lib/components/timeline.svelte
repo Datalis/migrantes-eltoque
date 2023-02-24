@@ -1,6 +1,8 @@
 <script lang="ts">
 	import gsap from "gsap";
 	import ScrollTrigger from "gsap/ScrollTrigger";
+    import ScrollToPlugin from "gsap/ScrollToPlugin";
+	import { start } from "nprogress";
 	import { createEventDispatcher, onMount } from "svelte";
 	import TimelineItem from "./timeline-item.svelte";
 
@@ -8,13 +10,18 @@
     export let years: number[] = [];
     export let selected: any;
 
-    export const changeSelected = () => {
-        const tl = gsap.timeline()
-        // console.log(selected)
-        // console.log(years.findIndex((value) => value == selected.date.getFullYear()))
-        // console.log(selected.date.getFullYear())
-        // console.log(years)
-        // tl.from('#yearsContainer', {xPercent: -100})
+    export const changeSelected = (featured: any, isPrev: boolean = false) => {
+        if (selectedYear !== featured.date.getFullYear()) {
+            //@ts-ignore
+            let x = document.querySelector('.year-container').offsetWidth;
+            if (isPrev) {
+                 x = -x;
+            }
+            selectedYear = featured.date.getFullYear();
+            console.log(selectedYear)
+            
+            gsap.to('#yearsContainer', {duration: 1, scrollTo: {x}});
+        }
     };
 
     let selectedFilter: string = "";
@@ -23,10 +30,10 @@
     const months = ["Diciembre", "Noviembre", "Octubre", "Septiembre", "Agosto", "Julio", "Junio", "Mayo", "Abril", "Marzo", "Febrero", "Enero"]
 
     const getDataByMonth = (data: any[], month: number, year: number): any[] => {
+
         const results = data.filter(value => {
-            return value.date?.getMonth() - 1 === month && value.date?.getFullYear() === year;
+            return value.date?.getMonth() === 11 - month && value.date?.getFullYear() === year;
         })
-        
         ballsize = results.length > ballsize ? results.length : ballsize
         return results;
     }
@@ -62,19 +69,9 @@
 
     onMount(() => {
         gsap.registerPlugin(ScrollTrigger)
-        // let sections = gsap.utils.toArray('.panel')
-        // gsap.to(sections, {
-        //     xPercent: -100 * (sections.length - 1),
-        //     ease: "none",
-        //     scrollTrigger: {
-        //         trigger: ".panel-container",
-        //         pin: true,
-        //         scrub: .1,
-        //         snap: 1 / (sections.length - 1),
-        //         //@ts-ignore
-        //         end: () => "+=" + document.querySelector(".panel-container").offsetWidth
-        //     }
-        // })
+        gsap.registerPlugin(ScrollToPlugin)
+
+        selectedYear = years[0];
     })
 </script>
 
@@ -98,7 +95,7 @@
                         <span>{year}</span>
                     </div>
                     {#each months as month, i}
-                        <div class="line month w-1/12">
+                        <div class="line month w-1/12 relative">
                             <TimelineItem
                                 data={getDataByMonth(events, i, year)}
                                 filter={selectedFilter}
@@ -115,6 +112,10 @@
 </div>
 
 <style>
+    #yearsContainer {
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
     .year-container {
         @apply shrink-0;
     }

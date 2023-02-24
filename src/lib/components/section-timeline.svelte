@@ -23,11 +23,12 @@
 
     function onSlideNext(e: any) {
         swiperIndex !== featureds.length && ++swiperIndex;
-        timeline.changeSelected();
+        timeline.changeSelected(featureds[swiperIndex]);
     }
 
     function onSlidePrev(e: any) {
         swiperIndex !== 0 && --swiperIndex;
+        timeline.changeSelected(featureds[swiperIndex], true);
     }
 
 	function onSwiperNext() {
@@ -79,7 +80,7 @@
         return values.sort((a, b) => Date.parse(a.date) - Date.parse(b.date))
     }
     events = dataToObject(events)
-    $: featureds = events.filter(event => event.isFeature)
+    const featureds = events.filter(event => event.isFeature)
 
     onMount(() => {
         gsap.registerPlugin(ScrollTrigger)
@@ -122,8 +123,8 @@
         <div class="w-1/3 relative bg-accent rounded-xl flex flex-col justify-center text-light">
             <Swiper
 				on:swiper={onSwiper}
-                on:slideNextTransitionEnd={onSlideNext}
-                on:slidePrevTransitionEnd={onSlidePrev}
+                on:slideNextTransitionStart={onSlideNext}
+                on:slidePrevTransitionStart={onSlidePrev}
 				autoHeight={true}
 				preloadImages={false}
 				lazy={{
@@ -140,6 +141,8 @@
                         <p class="px-10 mt-2">
                             Fuente: <a class="underline underline-offset-2" href="{featured.links}" target="_blank" rel="noreferrer">{featured.source}</a>
                         </p>
+                        <!-- TODO: remove this -->
+                        <p>{featured.date}</p>
 					</SwiperSlide>
 				{/each}
 			</Swiper>
@@ -170,17 +173,17 @@
 </section>
 
 <style>
-    :global(.swiper) {
+    :global(.section-timeline .swiper) {
         width: 100%;
     }
 
-    :global(.swiper-controls .control) {
+    :global(.section-timeline .swiper-controls .control) {
 		cursor: pointer;
 	}
-    :global(.swiper-controls .control g) {
+    :global(.section-timeline .swiper-controls .control g) {
         @apply stroke-light;
     }
-	:global(.swiper-controls .control.control-disabled) {
+	:global(.section-timeline .swiper-controls .control.control-disabled) {
 		opacity: 0.4;
 	}
 </style>

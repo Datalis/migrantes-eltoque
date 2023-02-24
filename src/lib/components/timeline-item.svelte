@@ -8,7 +8,8 @@
 	export let selected: number;
 
 	$: top = data.length % 2 == 0 ? (data.length * ballsize) / 2 : ((data.length - 1) * ballsize) / 2;
-	onMount(() => {});
+	onMount(() => {
+    });
 </script>
 
 <div
@@ -17,10 +18,10 @@
 	in:fly={{ y: -20 }}
 >
 	{#key selected}
-		{#each data as data}
+		{#each data as date}
 			<div
-				class="ball {data.eventType == filter || data.id == selected ? 'selected' : ''}"
-				style="{data.eventType == filter
+				class="ball {date.eventType == filter || date.id == selected ? 'selected' : ''}"
+				style="{date.eventType == filter
 					? `--ballsize:${(ballsize / 2 - 2).toFixed(0)}`
 					: `--ballsize:${ballsize}`}px"
 			/>
