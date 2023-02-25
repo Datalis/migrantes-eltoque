@@ -13,7 +13,7 @@
 		<h2 class="font-sans font-extrabold text-6xl md:text-7xl text-accent">
 			<Counter amount={totals?.deceased} delay={100} />
 		</h2>
-		<h2 class="font-sans font-bold text-2xl md:text-4xl text-light my-4">Personas fallecidas</h2>
+		<h2 class="font-sans font-semibold text-2xl md:text-4xl text-light my-4">Personas fallecidas</h2>
 		<p class="text-gray mt-10">
 			Entre enero de 2021 y la fecha actual hemos hallado que, al menos, {totals?.deceased} cubanas y
 			cubanos han fallecido en el intento de migrar a Estados Unidos. Hasta el momento, hemos podido

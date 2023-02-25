@@ -77,7 +77,7 @@
 			<h2 class="font-sans font-extrabold text-7xl text-accent">
 				<Counter amount={totals?.missing} />
 			</h2>
-			<h2 class="font-sans font-bold text-4xl text-dark my-4">Personas desaparecidas</h2>
+			<h2 class="font-sans font-semibold text-4xl text-dark my-4">Personas desaparecidas</h2>
 			<p class="text-dark mt-10">
 				Una persona migrante se considera desaparecida cuando no se tienen noticias de su llegada,
 				pero tampoco existe un cuerpo que pueda confirmar la muerte. En el mejor de los casos, solo

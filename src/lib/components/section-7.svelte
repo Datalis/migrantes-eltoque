@@ -34,7 +34,7 @@
 
 <section class="section-7 py-10 md:py-20">
 	<div class="container mx-auto max-w-4xl px-10 lg:px-0">
-		<h2 class="font-sans font-bold text-4xl text-dark mb-14 text-center">
+		<h2 class="font-sans font-semibold text-4xl text-dark mb-14 text-center">
 			También hemos publicado
 		</h2>
 		<div class="swiper-wrapper relative">

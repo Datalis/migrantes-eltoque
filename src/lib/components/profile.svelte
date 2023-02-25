@@ -18,7 +18,7 @@
 		alt=""
 		loading="lazy"
 	/>
-	<span class="font-bold mt-4">{data[3]}</span>
+	<span class="font-semibold mt-4">{data[3]}</span>
 	<small>{data[11]} / {formatAge(data[5])}</small>
 	<div class="text-wrapper">
 		<p class="text-sm my-4 leading-tight">

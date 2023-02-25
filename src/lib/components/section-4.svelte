@@ -43,7 +43,7 @@
 				style="background-image: url({AngelImg});"
 				class="memorial-block relative col-span-2 row-span-2 bg-accent flex flex-col justify-end p-10"
 			>
-				<h2 class="text-light text-center md:text-left font-bold text-4xl md:mb-10 z-10">
+				<h2 class="text-light text-center md:text-left font-semibold text-4xl md:mb-10 z-10">
 					En memoria de quienes no pudieron completar su camino
 				</h2>
 			</div>
@@ -56,7 +56,7 @@
 					</div>
 					<img class="pic" src={'https://api.eltoque.com' + person[2]} alt="Picture of {[person[3]]}" loading="lazy">
 					<DecorDeceased class="relative w-3/4 my-2" />
-					<h4 class="name text-center leading-tight font-bold text-accent md:w-3/4 my-2">{person[3]}</h4>
+					<h4 class="name text-center leading-tight font-semibold text-accent md:w-3/4 my-2">{person[3]}</h4>
 					<span class=" text-light text-center font-light text-xs md:text-sm"
 						>{formatAge(person[4])}</span
 					>
