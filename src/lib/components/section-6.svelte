@@ -116,12 +116,12 @@
 <svelte:window bind:innerWidth={windowWidth} />
 
 <section class="section-6 flex flex-col items-center bg-dark" id="section-map">
-	<div class="grid md:grid-cols-2 flex-1 md:px-0 gap-10">
-		<div class="map h-screen flex flex-col px-5 md:pr-0">
+	<div class="container grid md:grid-cols-2 flex-1 md:px-0 gap-10">
+		<div class="map h-screen flex flex-col">
 			<Map data={places} bind:this={mapComponent} />
 		</div>
 		<div id="map-text" class="block my-20 z-10">
-			<div class="intro bg-black px-10 md:pl-0 min-h-screen">
+			<div class="intro bg-black min-h-screen">
 				<h2 class="title">Rutas Migratorias</h2>
 				<p class="text-gray">
 					Las rutas terrestres que cruzan el Darién o parten desde Nicaragua —país al que las
@@ -141,14 +141,14 @@
 			<div class="space h-screen md:h-0" />
 			{#each places.filter((place) => !!place[0]) as p, index}
 				<div id="place-{index}" class="place bg-black text-gray md:px-0 min-h-screen">
-					<div class="px-10 md:pl-0">
+					<div class="">
 						<h2 class="title">{p[1]}</h2>
 						<p>{@html p[3]}</p>
 					</div>
 				</div>
 				<div class="space h-screen md:h-0" />
 			{/each}
-			<div class="resume text-gray gb-black px-10 md:pr-10 md:px-0 min-h-screen">
+			<div class="resume text-gray gb-black md:px-0 min-h-screen">
 				<p>
 					Las rutas no son nuevas para los cubanos ni tampoco exclusiva de ellos; pero no por eso
 					dejan de ser peligrosas. La inexperiencia de quienes se aventuran, sus condiciones previas
@@ -267,6 +267,6 @@
 	.intro,
 	.place div,
 	.resume {
-		@apply bg-opacity-70 backdrop-blur py-5;
+		@apply bg-opacity-70 backdrop-blur;
 	}
 </style>
