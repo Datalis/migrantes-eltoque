@@ -86,7 +86,8 @@
 							style: {
 								color: '#fff',
 								textOutline: '',
-								fontSize: '.8rem',
+								fontSize: '1rem',
+								fontWeight: '600',
 								textDecoration: 'underline',
 								fontFamily: 'Inter',
 							}
