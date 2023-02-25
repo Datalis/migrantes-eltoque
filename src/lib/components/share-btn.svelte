@@ -38,7 +38,7 @@
 		<TwitterIcon width="24" height="24" />
 	</a>
 	<button class="share-btn" on:click={() => (isExpanded = !isExpanded)}>
-		<ShareIcon />
+		<ShareIcon width="28" height="28" />
 	</button>
 </div>
 
@@ -76,9 +76,17 @@
 		transition-delay: 150ms;
 	}
 
+	.share-btn-wrapper .share-btn {
+		width: 48px;
+		height: 48px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
 	.share-btn-wrapper a {
-		width: 32px;
-		height: 32px;
+		width: 38px;
+		height: 38px;
 		padding: 4px;
 		position: absolute;
 		opacity: 0;
