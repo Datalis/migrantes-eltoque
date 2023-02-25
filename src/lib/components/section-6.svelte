@@ -120,7 +120,7 @@
 		<div class="map h-screen flex flex-col">
 			<Map data={places} bind:this={mapComponent} />
 		</div>
-		<div id="map-text" class="block my-20 z-10">
+		<div id="map-text" class="block my-20 z-10 text-lg">
 			<div class="intro bg-black min-h-screen">
 				<h2 class="title">Rutas Migratorias</h2>
 				<p class="text-gray">
