@@ -31,11 +31,11 @@
 </script>
 
 <div use:inViewport on:enter={() => visible=true}>
-    <i class="invisible">+ {amount}</i>
+    <i class="invisible">+{amount}</i>
     {#if visible}
         <span in:counter={{amount, delay}}>{amount}</span>
     {:else}
-        <span>+ {amount - threshold}</span>    
+        <span>+{amount - threshold}</span>    
     {/if}
 </div>
 
