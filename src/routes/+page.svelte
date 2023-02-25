@@ -42,7 +42,6 @@
 	<Section_4 {deceased} />
 	<Section_5 {missing} {totals} />
 	<Section_6 {places} />
-	<Section_timeline />
 	<Section_7 {articles} />
 </main>
 
