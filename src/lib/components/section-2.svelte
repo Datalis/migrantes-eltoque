@@ -27,8 +27,8 @@
 		</div>
 	</div>
 	<div class="container mx-auto px-10 md:px-0 max-w-3xl">
-		<h2 class="font-sans font-bold text-4xl md:text-6xl text-light my-4 text-center">MIGRAR:</h2>
-		<h2 class="font-sans font-bold text-2xl md:text-4xl text-accent text-center">
+		<h2 class="font-sans font-semibold text-4xl md:text-6xl text-light my-4 text-center">MIGRAR:</h2>
+		<h2 class="font-sans font-semibold text-2xl md:text-4xl text-accent text-center">
 			Una decisión de vida y muerte
 		</h2>
 		<p class="text-gray mt-10">

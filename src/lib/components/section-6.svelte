@@ -143,7 +143,7 @@
 				<div id="place-{index}" class="place bg-black text-gray md:px-0 min-h-screen">
 					<div>
 						<h2 class="title">{p[1]}</h2>
-						<p>{p[3] || 'Some text'}</p>
+						<p>{@html p[3]}</p>
 					</div>
 				</div>
 				<div class="space h-screen md:h-0" />
