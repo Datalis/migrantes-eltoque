@@ -2,7 +2,7 @@
 	import LinePath from '$lib/assets/images/section-2/line-full.svg?component';
 	import LinePathSmall from '$lib/assets/images/section-2/line-small.svg?component';
 	// @ts-ignore
-	import Plane from '$lib/assets/images/section-2/plane.webp?w=400&webp';
+	import Plane from '$lib/assets/images/section-2/plane1.webp?w=400&webp';
 	// @ts-ignore
 	import Volcano from '$lib/assets/images/section-2/volcano.webp?w=700&webp';
 	// @ts-ignore
