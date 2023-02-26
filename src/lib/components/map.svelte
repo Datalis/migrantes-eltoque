@@ -155,7 +155,7 @@
 					{
 						name: 'Basemap',
 						type: 'map',
-						borderColor: 'white',
+						borderColor: 'rgb(120, 86, 255)',
 						borderWidth: .5,
 						nullColor: 'rgb(76, 52, 164)',
 						showInLegend: false
