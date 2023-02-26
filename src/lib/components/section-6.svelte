@@ -68,7 +68,7 @@
 					},
 					onLeaveBack: () => {
 						if (i == 0) {
-							mapComponent?.update(places);
+							mapComponent?.update(places, false);
 						} else {
 							mapComponent?.update(getPlace(i - 1));
 						}
@@ -82,7 +82,7 @@
 				trigger: '.resume',
 				start: 'top 80%',
 				onEnter: () => {
-					mapComponent?.update(places);
+					mapComponent?.update(places, false);
 				},
 				onLeaveBack: () => {
 					mapComponent?.update(getPlace(gsap.utils.toArray('.place').length - 1));

@@ -12,11 +12,14 @@
 
 	let highcharts: MapChart;
 
-	export const update = (data: any[]) => {
+	export const update = (data: any[], show_legend: boolean = true) => {
 		highcharts?.series[1].update(
 			{
 				data: mapData(data),
-				type: 'mappoint'
+				type: 'mappoint',
+				dataLabels: {
+					enabled: show_legend
+				}
 			},
 			true
 		);
@@ -82,7 +85,7 @@
 				plotOptions: {
 					series: {
 						dataLabels: {
-							// enabled: false,
+							enabled: false,
 							style: {
 								color: '#fff',
 								textOutline: '',
