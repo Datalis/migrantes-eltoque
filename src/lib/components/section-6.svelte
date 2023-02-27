@@ -196,11 +196,11 @@
 			ponen en una situación de vulnerabilidad. Algunas de ellas invirtieron todos sus ahorros, vendieron
 			sus pertenencias o renunciaron a sus trabajos y no tienen otras alternativas legales para migrar.
 			<br /><br />
-			La migración irregular es, en primer lugar, una elección personal; pero también es el reflejo de
-			la falta de oportunidades en la isla y una expresión clara de inconformidad con la realidad que
-			viven en Cuba. Es una decisión económica y también política. Cuando alguien a pesar de todos los
-			riesgos emprende este camino, sus motivaciones van más allá de los peligros. Toma una decisión
-			de vida, que también puede llevarle a la muerte.
+			La migración es una elección personal; pero sobre todo es el reflejo de la falta de oportunidades 
+			en la isla y una expresión clara de inconformidad con la realidad que viven en Cuba. Es una decisión 
+			económica y también política. Cuando alguien, a pesar de todos los riesgos, opta por salir de manera 
+			irregular —porque no tiene otra opción— sus motivaciones van más allá de los peligros. Toma una 
+			decisión de vida, que también puede llevarle a la muerte.
 		</p>
 	</div>
 </section>
