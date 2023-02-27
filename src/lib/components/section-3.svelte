@@ -21,8 +21,8 @@
 			la esperanza de conocer la identidad de otros fallecidos con la colaboración de sus familiares,
 			amigos y organizaciones sensibles a esta tragedia.
 			<br /><br />
-			Los datos sobre la edad de quienes han fallecido en la travesía confirman que la mayoría que decide
-			emigrar son jóvenes y las dos principales causas de muerte han sido naufragio y ahogamiento, como
+			Los datos sobre la edad de quienes han fallecido en la travesía confirman que la mayoría
+			son jóvenes y las dos principales causas de muerte han sido naufragio y ahogamiento, como
 			resultado de las formas en las que se trasladan los migrantes de un punto a otro.
 		</p>
 	</div>
