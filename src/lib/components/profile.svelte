@@ -3,6 +3,12 @@
 
 	export let data: any;
 	export let onClick: () => void;
+
+	const formatAge = (ageText: string | string[]) => {
+		if (!ageText || ageText == '') return 'Edad desconocida';
+		else if (ageText.includes('meses')) return ageText;
+		else return `${ageText} años`;
+	}
 </script>
 
 <div class="profile flex flex-col items-center md:items-start h-full">
@@ -12,8 +18,8 @@
 		alt=""
 		loading="lazy"
 	/>
-	<span class="font-bold mt-4">{data[3]}</span>
-	<small>{data[11]} / {data[5]} años</small>
+	<span class="font-semibold mt-4">{data[3]}</span>
+	<small>{data[11]} / {formatAge(data[5])}</small>
 	<div class="text-wrapper">
 		<p class="text-sm my-4 leading-tight">
 			{data[10]}

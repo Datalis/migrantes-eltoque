@@ -27,14 +27,14 @@
 		</div>
 	</div>
 	<div class="container mx-auto px-10 md:px-0 max-w-3xl">
-		<h2 class="font-sans font-bold text-4xl md:text-6xl text-light my-4 text-center">MIGRAR:</h2>
-		<h2 class="font-sans font-bold text-2xl md:text-4xl text-accent text-center">
+		<h2 class="font-sans font-semibold text-4xl md:text-6xl text-light my-4 text-center">MIGRAR:</h2>
+		<h2 class="font-sans font-semibold text-2xl md:text-4xl text-accent text-center">
 			Una decisión de vida y muerte
 		</h2>
 		<p class="text-gray mt-10">
 			Desde enero de 2021 hasta la fecha, miles de cubanas y cubanos han emprendido una peligrosa
-			travesía hacia los Estados Unidos; algunos por mar, otros por tierra, protagonizando la ola
-			migratoria más grande de los últimos 60 años. Aunque la mayoría ha logrado su objetivo, la
+			travesía hacia los Estados Unidos; algunos por mar, otros por tierra, protagonizando el
+			éxodo más grande de los últimos 60 años. Aunque la mayoría ha logrado su objetivo, la
 			emigración no siempre termina con un final feliz.
 			<br /><br />
 			De quienes no llegan, porque mueren o desaparecen en el intento, se habla poco. Sus nombres, muchas

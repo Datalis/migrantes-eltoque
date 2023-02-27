@@ -2,7 +2,7 @@
 	import LinePath from '$lib/assets/images/section-2/line-full.svg?component';
 	import LinePathSmall from '$lib/assets/images/section-2/line-small.svg?component';
 	// @ts-ignore
-	import Plane from '$lib/assets/images/section-2/plane.webp?w=400&webp';
+	import Plane from '$lib/assets/images/section-2/plane1.webp?w=400&webp';
 	// @ts-ignore
 	import Volcano from '$lib/assets/images/section-2/volcano.webp?w=700&webp';
 	// @ts-ignore
@@ -68,7 +68,7 @@
 					},
 					onLeaveBack: () => {
 						if (i == 0) {
-							mapComponent?.update(places);
+							mapComponent?.update(places, false);
 						} else {
 							mapComponent?.update(getPlace(i - 1));
 						}
@@ -82,7 +82,7 @@
 				trigger: '.resume',
 				start: 'top 80%',
 				onEnter: () => {
-					mapComponent?.update(places);
+					mapComponent?.update(places, false);
 				},
 				onLeaveBack: () => {
 					mapComponent?.update(getPlace(gsap.utils.toArray('.place').length - 1));
@@ -116,12 +116,12 @@
 <svelte:window bind:innerWidth={windowWidth} />
 
 <section class="section-6 flex flex-col items-center bg-dark" id="section-map">
-	<div class="grid md:grid-cols-2 flex-1 max-w-5xl md:px-0 gap-20">
-		<div class="map h-screen flex flex-col px-5 md:px-10">
+	<div class="container grid md:grid-cols-2 flex-1 md:px-0 gap-10">
+		<div class="map h-screen flex flex-col">
 			<Map data={places} bind:this={mapComponent} />
 		</div>
-		<div id="map-text" class="block my-20 z-10">
-			<div class="intro bg-black md:px-0 min-h-screen">
+		<div id="map-text" class="block my-20 z-10 text-lg">
+			<div class="intro bg-black min-h-screen">
 				<h2 class="title">Rutas Migratorias</h2>
 				<p class="text-gray">
 					Las rutas terrestres que cruzan el Darién o parten desde Nicaragua —país al que las
@@ -141,9 +141,9 @@
 			<div class="space h-screen md:h-0" />
 			{#each places.filter((place) => !!place[0]) as p, index}
 				<div id="place-{index}" class="place bg-black text-gray md:px-0 min-h-screen">
-					<div>
+					<div class="">
 						<h2 class="title">{p[1]}</h2>
-						<p>{p[3] || 'Some text'}</p>
+						<p>{@html p[3]}</p>
 					</div>
 				</div>
 				<div class="space h-screen md:h-0" />
@@ -196,16 +196,16 @@
 			ponen en una situación de vulnerabilidad. Algunas de ellas invirtieron todos sus ahorros, vendieron
 			sus pertenencias o renunciaron a sus trabajos y no tienen otras alternativas legales para migrar.
 			<br /><br />
-			La migración irregular es, en primer lugar, una elección personal; pero también es el reflejo de
-			la falta de oportunidades en la isla y una expresión clara de inconformidad con la realidad que
-			viven en Cuba. Es una decisión económica y también política. Cuando alguien a pesar de todos los
-			riesgos emprende este camino, sus motivaciones van más allá de los peligros. Toma una decisión
-			de vida, que también puede llevarle a la muerte.
+			La migración es una elección personal; pero sobre todo es el reflejo de la falta de oportunidades 
+			en la isla y una expresión clara de inconformidad con la realidad que viven en Cuba. Es una decisión 
+			económica y también política. Cuando alguien, a pesar de todos los riesgos, opta por salir de manera 
+			irregular —porque no tiene otra opción— sus motivaciones van más allá de los peligros. Toma una 
+			decisión de vida, que también puede llevarle a la muerte.
 		</p>
 	</div>
 </section>
 
-<style>
+<style >
 	.section-6 .section-6-decor {
 		height: 600px;
 		width: 100%;
@@ -267,6 +267,6 @@
 	.intro,
 	.place div,
 	.resume {
-		@apply bg-opacity-70 backdrop-blur px-10 py-5;
+		@apply bg-opacity-70 backdrop-blur;
 	}
 </style>

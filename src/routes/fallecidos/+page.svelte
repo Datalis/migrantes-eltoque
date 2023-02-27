@@ -119,46 +119,7 @@
 		</div>
 		<div class="table-wrapper">
 			<SvelteTable rowKey="name" rows={deceased} columns={cols} />
-			<!-- <table id="table" class="table-auto mt-10 w-full text-light">
-				<thead>
-					<tr>
-						<th class="font-thin text-left border-b-2 border-accent pb-4">Nombre</th>
-						<th class="font-thin text-left border-b-2 border-accent pb-4">Edad</th>
-						<th class="font-thin text-left border-b-2 border-accent pb-4">Fecha de muerte</th>
-						<th class="font-thin text-left border-b-2 border-accent pb-4">Causa</th>
-						<th class="font-thin text-left border-b-2 border-accent pb-4">Lugar donde murió</th>
-						<th class="font-thin text-left border-b-2 border-accent pb-4">Lugar de origen</th>
-						<th class="font-thin text-left border-b-2 border-accent pb-4">Detalles</th>
-					</tr>
-				</thead>
-				<tbody>
-					{#each deceased as person}
-						<tr class="">
-							<td class="border-b-2 border-gray border-opacity-20 text-sm py-4 align-top"
-								>{person?.name}</td
-							>
-							<td class="border-b-2 border-gray border-opacity-20 text-sm py-4 align-top"
-								>{person?.age == 'desconocida' ? '-' : person?.age}</td
-							>
-							<td class="border-b-2 border-gray border-opacity-20 text-sm py-4 align-top"
-								>{person?.death_date == 'desconocida' ? '-' : person?.death_date}</td
-							>
-							<td class="border-b-2 border-gray border-opacity-20 text-sm py-4 align-top"
-								>{person?.death_cause == 'desconocida' ? '-' : person?.death_cause}</td
-							>
-							<td class="border-b-2 border-gray border-opacity-20 text-sm py-4 align-top"
-								>{person?.death_location == 'desconocida' ? '-' : person?.death_location}</td
-							>
-							<td class="border-b-2 border-gray border-opacity-20 text-sm py-4 align-top"
-								>{person?.place_of_origin == 'desconocida' ? '-' : person?.place_of_origin}</td
-							>
-							<td class="border-b-2 border-gray border-opacity-20 max-w-prose text-sm py-4"
-								>{person?.details || '-'}</td
-							>
-						</tr>
-					{/each}
-				</tbody>
-			</table> -->
+			
 		</div>
 	</div>
 </main>

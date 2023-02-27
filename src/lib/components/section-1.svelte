@@ -15,29 +15,30 @@
         <h2
             class="flex flex-col md:flex-row justify-center items-center md:items-baseline font-sans font-bold  text-light"
         >
-            <span class="text-accent-dark md:mr-4 font-extrabold text-6xl lg:text-7xl">
+            <span class="text-accent-dark mr-2 font-extrabold text-6xl lg:text-7xl">
 				<Counter amount={totals?.deceased} />
 			</span>
-            <span class="text-2xl md:text-4xl lg:text-6xl font-bold">MUERTES</span>
+            <span class="text-2xl md:text-4xl lg:text-5xl font-semibold">MUERTES</span>
         </h2>
         <h2
-            class="flex flex-col md:flex-row justify-center items-center md:items-baseline font-sans font-bold  text-light mt-4 mb-8"
+            class="flex flex-col md:flex-row justify-center items-center md:items-baseline font-sans font-bold  text-light mt-2 mb-4"
         >
-            <span class="text-accent-dark md:mr-4 font-extrabold text-6xl lg:text-7xl">
+            <span class="text-accent-dark mr-2 font-extrabold text-6xl lg:text-7xl">
 				<Counter amount={totals?.missing} delay={50} threshold={80} />
 			</span>
-            <span class="text-2xl md:text-4xl lg:text-6xl font-bold">DESAPARICIONES</span>
+            <span class="text-2xl md:text-4xl lg:text-5xl font-semibold">DESAPARICIONES</span>
         </h2>
-        <h2 class="font-sans font-bold text-2xl lg:text-4xl text-light">
+        <h2 class="font-sans font-semibold text-2xl lg:text-4xl text-light">
             En la travesía de Cuba <br /> a Estados Unidos
         </h2>
-		<span class="font-sans font-bold text-xs md:text-base text-gray z-10 mt-10">entre el primero de enero de 2021 <br> y la actualidad </span>
+		<span class="font-sans font-semibold text-xs md:text-2xl text-accent-dark z-10 mt-2">2021 - actualidad </span>
     </div>
 </section>
 
 <style>
     .section-1 .section-1-wrapper {
 		height: 80vh;
+        width: 80vw;
         position: relative;
 	}
     .section-1 .section-1-wrapper h2 {
@@ -53,10 +54,10 @@
         height: 100%;
         opacity: 0.6;
     }
-    @media (max-width: 768px) {
+    /* @media (max-width: 768px) {
         .section-1 .section-1-wrapper {
             height: unset;
         }
-    }
+    } */
 	
 </style>

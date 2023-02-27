@@ -12,11 +12,14 @@
 
 	let highcharts: MapChart;
 
-	export const update = (data: any[]) => {
+	export const update = (data: any[], show_legend: boolean = true) => {
 		highcharts?.series[1].update(
 			{
 				data: mapData(data),
-				type: 'mappoint'
+				type: 'mappoint',
+				dataLabels: {
+					enabled: show_legend
+				}
 			},
 			true
 		);
@@ -82,11 +85,12 @@
 				plotOptions: {
 					series: {
 						dataLabels: {
-							// enabled: false,
+							enabled: false,
 							style: {
 								color: '#fff',
 								textOutline: '',
-								fontSize: '.8rem',
+								fontSize: '1rem',
+								fontWeight: '600',
 								textDecoration: 'underline',
 								fontFamily: 'Inter',
 							}
@@ -154,7 +158,7 @@
 					{
 						name: 'Basemap',
 						type: 'map',
-						borderColor: 'white',
+						borderColor: 'rgb(120, 86, 255)',
 						borderWidth: .5,
 						nullColor: 'rgb(76, 52, 164)',
 						showInLegend: false
