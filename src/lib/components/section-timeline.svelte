@@ -140,7 +140,8 @@
 					<SwiperSlide>
 						<p class="px-10">{featured.description}</p>
                         <p class="px-10 mt-2">
-                            Fuente: <a class="underline underline-offset-2" href="{featured.links}" target="_blank" rel="noreferrer">{featured.source}</a>
+                            <span class="font-bold uppercase">Fuente:</span>
+                            <a class="underline underline-offset-2" href="{featured.links}" target="_blank" rel="noreferrer">{featured.source}</a>
                         </p>
 					</SwiperSlide>
 				{/each}
