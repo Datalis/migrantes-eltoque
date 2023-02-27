@@ -96,20 +96,22 @@
         <div class="division"></div>
         <div id="yearsContainer" class="flex h-full">
             {#each years as year}
-                <div class="flex w-full year-container">
+                <div class="flex max-w-full year-container">
                     <div class="line year">
                         <span>{year}</span>
                     </div>
                     {#each months as month, i}
-                        <div class="line month w-1/12 relative">
-                            <TimelineItem
-                                data={getDataByMonth(events, i, year)}
-                                filter={selectedFilter}
-                                ballsize={parseInt((600 / ballsize).toFixed(0))}
-                                selected={selected.id}
-                            />
-                            <span>{month}</span> 
-                        </div>
+                        {#if getDataByMonth(events, i, year).length != 0}
+                            <div class="line month min-w-max relative">
+                                <TimelineItem
+                                    data={getDataByMonth(events, i, year)}
+                                    filter={selectedFilter}
+                                    ballsize={parseInt((600 / ballsize).toFixed(0))}
+                                    selected={selected.id}
+                                />
+                                <span>{month}</span> 
+                            </div>
+                        {/if}
                     {/each}
                 </div>
             {/each}
@@ -140,7 +142,7 @@
     }
 
     .line {
-        @apply w-1/12 flex justify-end;
+        @apply w-9 flex justify-end;
     }
 
     .line span {
@@ -149,10 +151,10 @@
         @apply text-gray opacity-50 text-sm border-l-2 border-light text-end h-full;
     }
     .year span {
-        @apply text-accent border-l-4 opacity-100;
+        @apply text-accent border-l-4 opacity-100 w-9;
     }
     #timelineContainer div:last-child > span {
-        @apply border-0;
+        /* @apply border-0; */
     }
     .division {
         @apply absolute w-11/12 border-b-2 border-light top-1/2 right-0;
