@@ -1,11 +1,14 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { fly } from 'svelte/transition';
 
 	export let data: any[] = [];
 	export let filter: string = '';
 	export let ballsize = 32;
 	export let selected: number;
+
+	const show_info = (date: any) => {
+		console.log(date)
+	}
 
 	$: top = data.length % 2 == 0 ? (data.length * ballsize) / 2 : ((data.length - 1) * ballsize) / 2;
 	onMount(() => {
@@ -14,19 +17,18 @@
 
 <div
 	class="container"
-	style="top: calc(50% - {top}px); --tw-translate-x: {ballsize / 2}px"
-	in:fly={{ y: -20 }}
+	style="top: calc(50% - {top}px); --tw-translate-x: {ballsize / 2}px"	
 >
-	{#key selected}
-		{#each data as date}
-			<div
-				class="ball {date.eventType == filter || date.id == selected ? 'selected' : ''}"
-				style="{date.eventType == filter
-					? `--ballsize:${(ballsize / 2 - 2).toFixed(0)}`
-					: `--ballsize:${ballsize}`}px"
-			/>
-		{/each}
-	{/key}
+	{#each data as date}
+		<!-- svelte-ignore a11y-mouse-events-have-key-events -->
+		<div
+			on:mouseover={show_info(date)}
+			class="ball {date.eventType == filter || date.id == selected ? 'selected' : ''}"
+			style="{date.eventType == filter
+				? `--ballsize:${(ballsize / 2 - 2).toFixed(0)}`
+				: `--ballsize:${ballsize}`}px"
+		/>
+	{/each}
 </div>
 
 <style>

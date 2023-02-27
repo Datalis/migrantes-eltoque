@@ -2,8 +2,7 @@
 	import gsap from "gsap";
 	import ScrollTrigger from "gsap/ScrollTrigger";
     import ScrollToPlugin from "gsap/ScrollToPlugin";
-	import { start } from "nprogress";
-	import { createEventDispatcher, onMount } from "svelte";
+	import { onMount } from "svelte";
 	import TimelineItem from "./timeline-item.svelte";
 
     export let events: any[] = [];
@@ -12,27 +11,33 @@
 
     export const changeSelected = (featured: any, isPrev: boolean = false) => {
         if (selectedYear !== featured.date.getFullYear()) {
+            selectedYear = featured.date.getFullYear();
+            const index = years.findIndex(value => value == selectedYear)
+
             //@ts-ignore
-            let x = document.querySelector('.year-container').offsetWidth;
+            let x = -document.querySelector('.year-container').offsetWidth * index;
             if (isPrev) {
                  x = -x;
             }
-            selectedYear = featured.date.getFullYear();
-            console.log(selectedYear)
+            console.log(selectedYear, index, x)
             
-            gsap.to('#yearsContainer', {duration: 1, scrollTo: {x}});
+            moveYearContainer(x);
         }
     };
+
+    const moveYearContainer = (x: number) => {
+        gsap.to('#yearsContainer', { duration: 1, scrollTo: { x } })
+    }
 
     let selectedFilter: string = "";
     let ballsize = 0;
     let selectedYear = 0;
-    const months = ["Diciembre", "Noviembre", "Octubre", "Septiembre", "Agosto", "Julio", "Junio", "Mayo", "Abril", "Marzo", "Febrero", "Enero"]
+    const months = ["Enero", "Febero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
 
     const getDataByMonth = (data: any[], month: number, year: number): any[] => {
 
         const results = data.filter(value => {
-            return value.date?.getMonth() === 11 - month && value.date?.getFullYear() === year;
+            return value.date?.getMonth() === month && value.date?.getFullYear() === year;
         })
         ballsize = results.length > ballsize ? results.length : ballsize
         return results;
@@ -72,6 +77,7 @@
         gsap.registerPlugin(ScrollToPlugin)
 
         selectedYear = years[0];
+        changeSelected(selected, true)
     })
 </script>
 

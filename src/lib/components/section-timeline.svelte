@@ -23,12 +23,12 @@
 
     function onSlideNext(e: any) {
         swiperIndex !== featureds.length && ++swiperIndex;
-        timeline.changeSelected(featureds[swiperIndex]);
+        timeline.changeSelected(featureds[swiperIndex], true);
     }
 
     function onSlidePrev(e: any) {
         swiperIndex !== 0 && --swiperIndex;
-        timeline.changeSelected(featureds[swiperIndex], true);
+        timeline.changeSelected(featureds[swiperIndex]);
     }
 
 	function onSwiperNext() {
@@ -77,6 +77,7 @@
                 isFeature: emptyToNull(value[20]),
             }
         })
+        years.reverse()
         return values.sort((a, b) => Date.parse(a.date) - Date.parse(b.date))
     }
     events = dataToObject(events)
@@ -141,8 +142,6 @@
                         <p class="px-10 mt-2">
                             Fuente: <a class="underline underline-offset-2" href="{featured.links}" target="_blank" rel="noreferrer">{featured.source}</a>
                         </p>
-                        <!-- TODO: remove this -->
-                        <p>{featured.date}</p>
 					</SwiperSlide>
 				{/each}
 			</Swiper>
