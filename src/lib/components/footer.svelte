@@ -7,6 +7,15 @@
 	import TwitterIcon from '$lib/assets/images/twitter.svg?component';
 	// import InstagramIcon from '$lib/assets/images/instagram.svg?component';
 	import TelegramIcon from '$lib/assets/images/telegram.svg?component';
+
+	/**
+	 * @type {any}
+	 */
+	export let published_at;
+	/**
+	 * @type {any}
+	 */
+	export let updated_at;
 </script>
 
 <footer class="footer bg-accent">
@@ -77,12 +86,14 @@
 					></span
 				>
 				<span class="text-light font-semibold flex flex-col md:flex-row items-center leading-loose"
-					>Gestión de información y comunidades: <span class="font-light ml-0 md:ml-2">Loraine Morales Pino</span></span
+					>Gestión de información y comunidades: <span class="font-light ml-0 md:ml-2"
+						>Loraine Morales Pino</span
+					></span
 				>
 				<span class="text-light font-semibold flex flex-col md:flex-row items-center leading-loose"
 					>Diseño: <span class="font-light ml-0 md:ml-2">Janet Aguilar (Catao Studio)</span></span
 				>
-				
+
 				<span class="text-light font-semibold flex flex-col md:flex-row items-center leading-loose"
 					>Programación: <a
 						href="http://datalis.dev"
@@ -91,6 +102,18 @@
 						class="font-light ml-0 md:ml-2">Datalis</a
 					></span
 				>
+
+				<span
+					class="text-light font-semibold leading-loose flex flex-col md:flex-row items-center mt-8"
+				>
+					Fecha de publicación: <span class="font-light ml-0 md:ml-2">{published_at}</span>
+				</span>
+				<span
+					class=" text-light font-semibold leading-loose flex flex-col md:flex-row items-center"
+				>
+					Fecha de actualización: <span class="font-light ml-0 md:ml-2">{updated_at}</span>
+				</span>
+
 				<a
 					download
 					href="https://docs.google.com/spreadsheets/d/e/2PACX-1vTSm3z6JsEWDvnC2-nHDVIkpqvOMq_J3_IltrEPXhtNvjsLunEJ8qM-517CvhrUcmipZT8LArPQZtjH/pub?output=xlsx"

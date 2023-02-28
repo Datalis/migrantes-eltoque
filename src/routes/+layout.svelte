@@ -9,6 +9,10 @@
 	// import 'swiper/css/navigation';
 	import 'nprogress/nprogress.css';
 	import ShareBtn from '$lib/components/share-btn.svelte';
+
+	export let data;
+
+	const { published_at, updated_at } = data;
 	
 
 	NProgress.configure({
@@ -27,7 +31,7 @@
 
 <svelte:head />
 <slot />
-<Footer />
+<Footer {published_at} {updated_at} />
 <ShareBtn></ShareBtn>
 
 <style>
