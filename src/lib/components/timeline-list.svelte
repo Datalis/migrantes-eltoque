@@ -6,16 +6,9 @@
     export let selected: any;
     export let month: string;
 
-// console.log(data)
-const talla = (d: any) => {
-
-    console.log(d)
-    return ""
-}
 </script>
 
 {#each data as d}
-{talla(d), talla(data)}
     <div class="line month min-w-max relative">
         <TimelineItem
             data={d}

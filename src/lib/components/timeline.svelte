@@ -17,7 +17,7 @@
             const index = years.findIndex(value => value == selectedYear)
 
             //@ts-ignore
-            let x = -document.querySelector('.year-container').offsetWidth * index;
+            let x = -document.querySelectorAll('.year-container')[index].offsetWidth * index;
             if (isPrev) {
                  x = -x;
             }

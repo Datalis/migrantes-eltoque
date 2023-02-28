@@ -158,7 +158,7 @@
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<span on:click={onSwiperNext}>
 					<ArrowRightIcon
-						class="control {swiperIndex == featureds?.length ? 'control-disabled' : ''}"
+						class="control {swiperIndex == featureds?.length - 1 ? 'control-disabled' : ''}"
 						width="48"
 						height="48"
 					/>
@@ -185,5 +185,6 @@
     }
 	:global(.section-timeline .swiper-controls .control.control-disabled) {
 		opacity: 0.4;
+        @apply cursor-auto;
 	}
 </style>
