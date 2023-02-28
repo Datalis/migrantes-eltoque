@@ -121,7 +121,6 @@
 		</div>
 		<div class="table-wrapper">
 			<SvelteTable rowKey="name" rows={deceased} columns={cols} />
-			
 		</div>
 	</div>
 </main>
@@ -139,6 +138,19 @@
 	:global(.table-wrapper thead th) {
 		text-align: left;
 		padding: 1rem 0.5rem;
+	}
+
+	:global(.table-wrapper tbody td) {
+		min-width: 100px;
+	}
+
+	:global(.table-wrapper tbody td:first-child),
+	:global(.table-wrapper tbody td:nth-child(5))  {
+		min-width: 150px;
+	}
+
+	:global(.table-wrapper thead th:last-child) {
+		min-width: 100vw;
 	}
 
 	:global(.table-wrapper tbody td) {

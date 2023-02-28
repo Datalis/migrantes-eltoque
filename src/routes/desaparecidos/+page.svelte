@@ -127,6 +127,7 @@
 				expandSingle={true}
 				columns={cols}
 				classNameExpandedContent={'border-t'}
+				classNameCellExpand={'expand'}
 			>
 				<svelte:fragment slot="expanded" let:row>{row.details}</svelte:fragment>
 			</SvelteTable>
@@ -149,6 +150,10 @@
 	:global(.table-wrapper thead th) {
 		text-align: left;
 		padding: 1rem 0.5rem;
+	}
+
+	:global(.table-wrapper tbody td:not(.expand)) {
+		min-width: 100px;
 	}
 
 	:global(.table-wrapper tbody td) {
