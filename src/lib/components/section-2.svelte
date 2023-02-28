@@ -32,7 +32,7 @@
 			Una decisión de vida y muerte
 		</h2>
 		<p class="text-gray mt-10">
-			Desde enero de 2021 hasta la fecha, miles de cubanas y cubanos han emprendido una peligrosa
+			Desde enero de 2021, miles de cubanas y cubanos han emprendido una peligrosa
 			travesía hacia los Estados Unidos; algunos por mar, otros por tierra, protagonizando el
 			éxodo más grande de los últimos 60 años. Aunque la mayoría ha logrado su objetivo, la
 			emigración no siempre termina con un final feliz.

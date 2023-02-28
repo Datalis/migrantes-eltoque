@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ToggleIcon from '$lib/assets/images/chevron-down-circle.svg?component';
+	// import ToggleIcon from '$lib/assets/images/chevron-down-circle.svg?component';
 	import ChevronLeftIcon from '$lib/assets/images/chevron-left.svg?component';
 	//@ts-ignore
 	import SvelteTable from 'svelte-table';
@@ -7,7 +7,7 @@
 	import Button from '$lib/components/button.svelte';
 	import ReportModal from '$lib/components/report-modal.svelte';
 	import SearchInput from '$lib/components/search-input.svelte';
-	import { compareObjects, trimString } from '$lib/utils';
+	import { compareObjects, parseDate, trimString } from '$lib/utils';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -49,13 +49,15 @@
 		{
 			key: 'age',
 			title: 'Edad',
-			value: (v: any) => v.age,
+			value: (v: any) => +v.age,
+			renderValue: (v: any) => v.age || '-',
 			sortable: true
 		},
 		{
 			key: 'birthdate',
 			title: 'Fecha de Nacimiento',
-			value: (v: any) => v.birthdate,
+			value: (v: any) => parseDate(v.birthdate),
+			renderValue: (v: any) => v.birthdate || '-',
 			sortable: true
 		},
 		{
@@ -79,7 +81,8 @@
 		{
 			key: 'missing_date',
 			title: 'Fecha',
-			value: (v: any) => v.missing_date,
+			value: (v: any) => parseDate(v.missing_date),
+			renderValue: (v: any) => v.missing_date,
 			sortable: true
 		}
 	];

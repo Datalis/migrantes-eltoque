@@ -3,7 +3,7 @@
 	import Button from '$lib/components/button.svelte';
 	import ReportModal from '$lib/components/report-modal.svelte';
 	import SearchInput from '$lib/components/search-input.svelte';
-	import { compareObjects, trimString } from '$lib/utils';
+	import { compareObjects, parseDate, trimString } from '$lib/utils';
 	import type { PageData } from './$types';
 	//@ts-ignore
 	import SvelteTable from 'svelte-table';
@@ -48,13 +48,15 @@
 		{
 			key: 'age',
 			title: 'Edad',
-			value: (v: any) => v.age,
+			value: (v: any) => +v.age,
+			renderValue: (v: any) => v.age || '-',
 			sortable: true
 		},
 		{
 			key: 'death_date',
 			title: 'Fecha de Muerte',
-			value: (v: any) => v.death_date,
+			value: (v: any) => parseDate(v.death_date),
+			renderValue: (v: any) => v.death_date || '-',
 			sortable: true
 		},
 		{
@@ -79,7 +81,7 @@
 			key: 'details',
 			title: 'Detalles',
 			value: (v: any) => v.details,
-			sortable: true
+			sortable: false
 		}
 	];
 </script>
