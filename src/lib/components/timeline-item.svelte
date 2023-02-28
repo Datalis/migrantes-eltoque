@@ -7,7 +7,7 @@
 	export let selected: number;
 
 	const show_info = (date: any) => {
-		console.log(date)
+		// console.log(date)
 	}
 
 	$: top = data.length % 2 == 0 ? (data.length * ballsize) / 2 : ((data.length - 1) * ballsize) / 2;
@@ -22,6 +22,7 @@
 	{#each data as date}
 		<!-- svelte-ignore a11y-mouse-events-have-key-events -->
 		<div
+			id="ball-{date.id}"
 			on:mouseover={show_info(date)}
 			class="ball {date.eventType == filter || date.id == selected ? 'selected' : ''}"
 			style="{date.eventType == filter
