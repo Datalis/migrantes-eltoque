@@ -4,10 +4,12 @@
     import ScrollToPlugin from "gsap/ScrollToPlugin";
 	import { onMount } from "svelte";
 	import TimelineItem from "./timeline-item.svelte";
+	import TimelineList from "./timeline-list.svelte";
 
     export let events: any[] = [];
     export let years: number[] = [];
     export let selected: any;
+    const MAX_BALL_PER_MONTH = 16;
 
     export const changeSelected = (featured: any, isPrev: boolean = false) => {
         if (selectedYear !== featured.date.getFullYear()) {
@@ -19,8 +21,6 @@
             if (isPrev) {
                  x = -x;
             }
-            console.log(selectedYear, index, x)
-            
             moveYearContainer(x);
         }
     };
@@ -35,11 +35,29 @@
     const months = ["Enero", "Febero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
 
     const getDataByMonth = (data: any[], month: number, year: number): any[] => {
+        /**
+         * Returns chunks of size n.
+         * @param {Array<any>} array any array
+         * @param {number} n size of chunk 
+         */
+        function chunks(array: any[], n: number){
+            let chunk_array = [];
+            for(let i = 0; i < array.length; i += n) chunk_array.push(array.slice(i, i + n));
+            return chunk_array;
+        }
 
-        const results = data.filter(value => {
+        let results = data.filter(value => {
             return value.date?.getMonth() === month && value.date?.getFullYear() === year;
         })
-        ballsize = results.length > ballsize ? results.length : ballsize
+
+        if (results.length > MAX_BALL_PER_MONTH) {
+            results = chunks(results, MAX_BALL_PER_MONTH)
+            // console.log(results)
+        } else {
+            results = [results]
+        }
+
+        ballsize = 30; //results.length > ballsize ? results.length : ballsize
         return results;
     }
 
@@ -96,21 +114,19 @@
         <div class="division"></div>
         <div id="yearsContainer" class="flex h-full">
             {#each years as year}
-                <div class="flex max-w-full year-container">
+                <div class="flex year-container">
                     <div class="line year">
                         <span>{year}</span>
                     </div>
                     {#each months as month, i}
-                        {#if getDataByMonth(events, i, year).length != 0}
-                            <div class="line month min-w-max relative">
-                                <TimelineItem
-                                    data={getDataByMonth(events, i, year)}
-                                    filter={selectedFilter}
-                                    ballsize={parseInt((600 / ballsize).toFixed(0))}
-                                    selected={selected.id}
-                                />
-                                <span>{month}</span> 
-                            </div>
+                        {#if getDataByMonth(events, i, year)[0].length != 0}
+                            <TimelineList
+                                data={getDataByMonth(events, i, year)}
+                                {selectedFilter}
+                                {ballsize}
+                                {selected}
+                                {month}
+                            />
                         {/if}
                     {/each}
                 </div>

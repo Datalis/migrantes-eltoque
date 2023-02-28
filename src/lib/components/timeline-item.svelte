@@ -44,7 +44,8 @@
 		@apply bg-light border-light transition-all duration-150;
 	}
 	.ball.selected {
-		@apply bg-light border-0 border-dark m-2;
+		@apply bg-light border-0 border-dark;
+		--ballsize: calc(var(--ballsize) - 12px)
 		box-shadow: 0px 0px 0px 6px rgb(31, 32, 67), 0px 0px 0px 8px rgb(120,86,255);
     }
 </style>
