@@ -205,9 +205,9 @@
 	.year span {
 		@apply text-accent border-l-4 opacity-100 w-9;
 	}
-	#timelineContainer div:last-child > span {
-		/* @apply border-0; */
-	}
+	/* #timelineContainer div:last-child > span {
+		@apply border-0;
+	} */
 	.division {
 		width: calc(100% - 32px);
 		@apply absolute border-b-2 border-light top-1/2 right-0;
