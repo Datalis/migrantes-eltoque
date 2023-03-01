@@ -170,39 +170,6 @@
 		<img id="plane" class="decor-plane" src={Plane} alt="" loading="lazy" />
 		<img id="volcano" class="decor-volcano" src={Volcano} alt="" loading="lazy" />
 	</div>
-	<div class="max-w-3xl my-10 md:my-32 px-10">
-		<p class="text-light">
-			Desde octubre de 2020 hasta enero de 2023, la Guardia Costera de los Estados Unidos <a
-				class="underline"
-				target="_blank"
-				rel="noreferrer"
-				href="https://www.news.uscg.mil/Press-Releases/Article/3265898/coast-guard-repatriates-177-people-to-cuba/"
-				>interceptó</a
-			>
-			a 11 937 migrantes cubanos en el mar cuando intentaban llegar a territorio estadounidense. La mayoría
-			de ellos fueron repatriados a la isla. Según los datos recopilados por nuestro equipo durante ese
-			período, las autoridades nacionales regresaron a Cuba al menos a 8 643 personas desde Estados Unidos,
-			<a
-				class="underline"
-				target="_blank"
-				rel="noreferrer"
-				href="http://www.politicamigratoria.gob.mx/es/PoliticaMigratoria/Boletines_Estadisticos"
-				>5 902</a
-			>
-			desde México, 16 desde Guatemala y 195 desde Bahamas.
-			<br /><br />
-			Los eventos dramáticos que involucran a migrantes incluyen una serie de hechos como deportaciones,
-			rescates, que, si bien no siempre terminan con la vida de las personas, frustran sus planes y las
-			ponen en una situación de vulnerabilidad. Algunas de ellas invirtieron todos sus ahorros, vendieron
-			sus pertenencias o renunciaron a sus trabajos y no tienen otras alternativas legales para migrar.
-			<br /><br />
-			La migración es una elección personal; pero sobre todo es el reflejo de la falta de oportunidades 
-			en la isla y una expresión clara de inconformidad con la realidad que viven en Cuba. Es una decisión 
-			económica y también política. Cuando alguien, a pesar de todos los riesgos, opta por salir de manera 
-			irregular —porque no tiene otra opción— sus motivaciones van más allá de los peligros. Toma una 
-			decisión de vida, que también puede llevarle a la muerte.
-		</p>
-	</div>
 </section>
 
 <style >
