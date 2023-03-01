@@ -75,15 +75,22 @@
 		position: absolute;
 		z-index: 1;
 		top: 180px;
-		height: auto;
+		/* height: auto; */
 	}
 
 	@media (max-width: 768px) {
+
+		.section-2 {
+			padding-top: 100px;
+		}
+
 		.section-2 .section-2-upper-decor {
-			top: -200px;
+			top: -270px;
 		}
 		:global(.section-2 .section-2-upper-decor .decor-plano) {
-			display: none;
+			/* display: none; */
+			/* height: unset; */
+			background-color: #201F25;
 		}
 
 		.section-2 .section-2-upper-decor .decor-candles .decor-candles-small {
@@ -97,7 +104,7 @@
 		}
 	}
 
-	@media (max-height: 768px) {
+	/* @media (max-height: 768px) {
 		.section-2 .section-2-upper-decor {
 			top: -180px;
 		}
@@ -115,11 +122,12 @@
 			width: 230px !important;
 			height: 270px !important;
 		}
-	}
+	} */
 
 	.section-2 .section-2-upper-decor .decor-candles {
 		z-index: 2;
 		position: relative;
+		max-width: 100vw;
 	}
 
 	.section-2 .section-2-upper-decor .decor-candles .decor-candles-small {
