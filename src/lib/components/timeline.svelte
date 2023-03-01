@@ -3,7 +3,6 @@
 	import ScrollTrigger from 'gsap/ScrollTrigger';
 	import ScrollToPlugin from 'gsap/ScrollToPlugin';
 	import { onMount } from 'svelte';
-	import TimelineItem from './timeline-item.svelte';
 	import TimelineList from './timeline-list.svelte';
 
 	export let events: any[] = [];
@@ -17,6 +16,7 @@
 		//@ts-ignore
 		const offset = document.querySelector('#timelineContainer')?.clientWidth - element?.clientWidth;
 
+		//@ts-ignore
         gsap.to('#yearsContainer', { duration: 1, scrollTo: {x: element, offsetX: offset / 2 } })
 
 		if (selectedYear !== featured.date.getFullYear()) {
@@ -29,18 +29,18 @@
 	let ballsize = 0;
 	let selectedYear = 0;
 	const months = [
-		'Enero',
-		'Febero',
-		'Marzo',
-		'Abril',
-		'Mayo',
-		'Junio',
-		'Julio',
-		'Agosto',
-		'Septiembre',
-		'Octubre',
+		'Diciembre',
 		'Noviembre',
-		'Diciembre'
+		'Octubre',
+		'Septiembre',
+		'Agosto',
+		'Julio',
+		'Junio',
+		'Mayo',
+		'Abril',
+		'Marzo',
+		'Febrero',
+		'Enero'
 	];
 
 	const getDataByMonth = (data: any[], month: number, year: number): any[] => {
@@ -56,7 +56,7 @@
 		}
 
 		let results = data.filter((value) => {
-			return value.date?.getMonth() === month && value.date?.getFullYear() === year;
+			return value.date?.getMonth() === 11 - month && value.date?.getFullYear() === year;
 		});
 
 		if (results.length > MAX_BALL_PER_MONTH) {
@@ -209,6 +209,7 @@
 		/* @apply border-0; */
 	}
 	.division {
+		width: calc(100% - 32px);
 		@apply absolute border-b-2 border-light top-1/2 right-0;
 	}
 </style>
