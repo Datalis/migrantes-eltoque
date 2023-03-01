@@ -14,27 +14,14 @@
 	export const changeSelected = (featured: any, isPrev: boolean = false) => {
         const selector = `#ball-${featured.id}`;
         const element = document.querySelector(selector);
-        console.log(selector)
-        console.log(element)
-        console.log(featured.id)
-        gsap.to('#yearsContainer', { duration: 1, scrollTo: element })
+		//@ts-ignore
+		const offset = document.querySelector('#timelineContainer')?.clientWidth - element?.clientWidth;
 
-        // element.scrollIntoView({
-        //     behavior: 'smooth',
-        //     block: 'nearest',
-        //     inline: 'center'
-        // });
+        gsap.to('#yearsContainer', { duration: 1, scrollTo: {x: element, offsetX: offset / 2 } })
 
 		if (selectedYear !== featured.date.getFullYear()) {
 			selectedYear = featured.date.getFullYear();
 			const index = years.findIndex((value) => value == selectedYear);
-
-			//@ts-ignore
-			// let x = -document.querySelectorAll('.year-container')[index].offsetWidth * index;
-			// if (isPrev) {
-			//      x = -x;
-			// }
-			// moveYearContainer(x);
 		}
 	};
 
@@ -118,6 +105,8 @@
 
 		selectedYear = years[0];
 		changeSelected(selected, true);
+		const division = document.querySelector('division')
+		division?.parentElement?.scrollWidth
 	});
 </script>
 
@@ -157,8 +146,8 @@
 		class="border border-light rounded-xl mt-3 pt-5 relative"
 		style="height: calc(100% - 30px - 0.75rem);"
 	>
-		<div class="division" />
-		<div id="yearsContainer" class="flex h-full">
+		<div id="yearsContainer" class="flex relative h-full">
+			<div class="division" />
 			{#each years as year}
 				<div class="flex year-container">
 					<div class="line year">
@@ -220,6 +209,6 @@
 		/* @apply border-0; */
 	}
 	.division {
-		@apply absolute w-11/12 border-b-2 border-light top-1/2 right-0;
+		@apply absolute border-b-2 border-light top-1/2 right-0;
 	}
 </style>
