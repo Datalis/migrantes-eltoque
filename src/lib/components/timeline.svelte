@@ -9,15 +9,16 @@
 	export let years: number[] = [];
 	export let selected: any;
 	const MAX_BALL_PER_MONTH = 16;
+	export let isDisabled = true;
 
 	export const changeSelected = (featured: any, isPrev: boolean = false) => {
-        const selector = `#ball-${featured.id}`;
-        const element = document.querySelector(selector);
+		const selector = `#ball-${featured.id}`;
+		const element = document.querySelector(selector);
 		//@ts-ignore
 		const offset = document.querySelector('#timelineContainer')?.clientWidth - element?.clientWidth;
 
 		//@ts-ignore
-        gsap.to('#yearsContainer', { duration: 1, scrollTo: {x: element, offsetX: offset / 2 } })
+		gsap.to('#yearsContainer', { duration: 1, scrollTo: { x: element, offsetX: offset / 2 } });
 
 		if (selectedYear !== featured.date.getFullYear()) {
 			selectedYear = featured.date.getFullYear();
@@ -105,39 +106,52 @@
 
 		selectedYear = years[0];
 		changeSelected(selected, true);
-		const division = document.querySelector('division')
-		division?.parentElement?.scrollWidth
 	});
 </script>
 
 <div class="h-full">
-	<div class="flex justify-between">
-		<button class="button {selectedFilter === 'detención' ? 'active' : ''}" on:click={activeFilter}
-			>Detenciones</button
+	<div class="flex justify-between {isDisabled ? 'disabled' : ''}">
+		<button
+			class="button {selectedFilter === 'detención' ? 'active' : ''}"
+			on:click={activeFilter}
+			disabled={isDisabled}
 		>
-		<button class="button {selectedFilter === 'rescate' ? 'active' : ''}" on:click={activeFilter}
-			>Rescates</button
+			Detenciones
+		</button>
+		<button
+			class="button {selectedFilter === 'rescate' ? 'active' : ''}"
+			on:click={activeFilter}
+			disabled={isDisabled}
+		>
+			Rescates
+		</button
 		>
 		<button
 			class="button {selectedFilter === 'intercepción' ? 'active' : ''}"
+			disabled={isDisabled}
 			on:click={activeFilter}>Intercepciones</button
 		>
 		<button
 			class="button {selectedFilter === 'transferencia' ? 'active' : ''}"
+			disabled={isDisabled}
 			on:click={activeFilter}>Transferencias</button
 		>
 		<button class="button {selectedFilter === 'expulsión' ? 'active' : ''}" on:click={activeFilter}
+			disabled={isDisabled}
 			>Expulsión</button
 		>
 		<button
 			class="button {selectedFilter === 'repatriación' ? 'active' : ''}"
+			disabled={isDisabled}
 			on:click={activeFilter}>Repatriación</button
 		>
 		<button class="button {selectedFilter === 'muerte' ? 'active' : ''}" on:click={activeFilter}
+			disabled={isDisabled}
 			>Muerte</button
 		>
 		<button
 			class="button {selectedFilter === 'desaparición' ? 'active' : ''}"
+			disabled={isDisabled}
 			on:click={activeFilter}>Desapariciones</button
 		>
 	</div>
@@ -171,6 +185,9 @@
 </div>
 
 <style>
+	.disabled, .disabled button {
+		@apply cursor-not-allowed;
+	}
 	#yearsContainer {
 		overflow-x: auto;
 		overflow-y: hidden;
@@ -178,7 +195,7 @@
 	.year-container {
 		@apply shrink-0;
 	}
-	.button {
+	.button, .button:hover:disabled {
 		@apply rounded-xl text-light bg-dark px-2 py-1 border border-accent text-sm transition-all duration-200;
 	}
 

@@ -10,6 +10,8 @@
 	export let events: any[] = [];
 	let years: number[] = [];
 	let timeline: any;
+	let counter: number = 0;
+	let isDisabled: boolean = true;
 
 	let swiperIndex = 0;
 	let swiper: {
@@ -31,14 +33,21 @@
 		timeline.changeSelected(featureds[swiperIndex]);
 	}
 
-	function onSwiperNext() {
-		swiper.slideNext();
-		// swiperIndex !== featureds.length && ++swiperIndex;
+	function onSwiperNext(e: any, allowToSweep: boolean | null = null) {
+		if (allowToSweep) {
+			swiper.slideNext();
+		} else if (!isDisabled) {
+			console.log(isDisabled, allowToSweep)
+			swiper.slideNext();
+		}
 	}
 
-	function onSwiperPrev() {
-		swiper.slidePrev();
-		// swiperIndex !== 0 && --swiperIndex;
+	function onSwiperPrev(e: any, allowToSweep: boolean | null = null) {
+		if (allowToSweep) {
+			swiper.slidePrev();
+		} else if (!isDisabled) {
+			swiper.slidePrev();
+		}
 	}
 
 	const emptyToNull = (value: string): string | null => (value === '' ? null : value);
@@ -86,10 +95,32 @@
 
 	onMount(() => {
 		gsap.registerPlugin(ScrollTrigger);
+
+		gsap.to('#events', {
+			scrollTrigger: {
+				trigger: '#events',
+				start: 'top top',
+				// pinSpacing: false,
+				pin: '#events',
+				end: '+=3000',
+				markers: true,
+				onUpdate: (self) => {
+					const progress = parseFloat(self.progress.toFixed(1));
+					if (progress > counter) {
+						counter = progress;
+						onSwiperNext(null, true);
+					} else if (progress < counter) {
+						counter = progress;
+						onSwiperPrev(null, true);
+					}
+				}
+			}
+		});
 	});
+
 </script>
 
-<section id="section-timeline" class="section-timeline bg-dark md:pb-20 px-10">
+<section id="section-timeline" class="relative section-timeline bg-dark md:pb-20 px-10">
 	<div class="flex flex-col justify-center items-center pt-10 md:pt-32">
 		<div class="max-w-3xl md:mb-10 px-10">
 			<h2 class="font-sans font-extrabold text-5xl md:text-5xl text-light mb-7">
@@ -107,7 +138,7 @@
 			</p>
 		</div>
 	</div>
-	<div class="flex panel-container py-10 h-screen">
+	<div id="events" class="flex panel-container py-10 h-screen">
 		<div class="w-1/3 relative bg-accent rounded-xl flex flex-col justify-center text-light">
 			<Swiper
 				on:swiper={onSwiper}
@@ -142,7 +173,7 @@
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<span on:click={onSwiperPrev}>
 					<ArrowLeftIcon
-						class="control mr-4 {swiperIndex == 0 ? 'control-disabled' : ''}"
+						class="control mr-4 {swiperIndex == 0 || isDisabled ? 'control-disabled' : ''}"
 						width="48"
 						height="48"
 					/>
@@ -150,7 +181,7 @@
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<span on:click={onSwiperNext}>
 					<ArrowRightIcon
-						class="control {swiperIndex == featureds?.length - 1 ? 'control-disabled' : ''}"
+						class="control {swiperIndex == featureds?.length - 1 || isDisabled ? 'control-disabled' : ''}"
 						width="48"
 						height="48"
 					/>
@@ -161,6 +192,7 @@
 			<TimeLine bind:this={timeline} {events} {years} selected={featureds[swiperIndex]} />
 		</div>
 	</div>
+
 	<div class="max-w-3xl px-10">
 		<p class="text-light">
 			Desde octubre de 2020 hasta enero de 2023, la Guardia Costera de los Estados Unidos <a
@@ -187,10 +219,10 @@
 			ponen en una situación de vulnerabilidad. Algunas de ellas invirtieron todos sus ahorros, vendieron
 			sus pertenencias o renunciaron a sus trabajos y no tienen otras alternativas legales para migrar.
 			<br /><br />
-			La migración es una elección personal; pero sobre todo es el reflejo de la falta de oportunidades 
-			en la isla y una expresión clara de inconformidad con la realidad que viven en Cuba. Es una decisión 
-			económica y también política. Cuando alguien, a pesar de todos los riesgos, opta por salir de manera 
-			irregular —porque no tiene otra opción— sus motivaciones van más allá de los peligros. Toma una 
+			La migración es una elección personal; pero sobre todo es el reflejo de la falta de oportunidades
+			en la isla y una expresión clara de inconformidad con la realidad que viven en Cuba. Es una decisión
+			económica y también política. Cuando alguien, a pesar de todos los riesgos, opta por salir de manera
+			irregular —porque no tiene otra opción— sus motivaciones van más allá de los peligros. Toma una
 			decisión de vida, que también puede llevarle a la muerte.
 		</p>
 	</div>
