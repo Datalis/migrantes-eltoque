@@ -42,9 +42,10 @@
 	}
 
 	const emptyToNull = (value: string): string | null => (value === '' ? null : value);
+
 	const stringToDate = (value: string): Date => {
 		const [day, month, year] = value.split('/');
-		return new Date(Date.UTC(parseInt(year), parseInt(month), parseInt(day)));
+		return new Date(Date.UTC(parseInt(year), parseInt(month) - 1, parseInt(day), 12));
 	};
 	const dataToObject = (data: any[][]) => {
 		let values: any[] = data.map((value: any[]) => {
@@ -85,20 +86,6 @@
 
 	onMount(() => {
 		gsap.registerPlugin(ScrollTrigger);
-
-		// let sections = gsap.utils.toArray('.panel')
-		// gsap.to(sections, {
-		//     xPercent: -100 * (sections.length - 1),
-		//     ease: "none",
-		//     scrollTrigger: {
-		//         trigger: ".panel-container",
-		//         pin: true,
-		//         scrub: .1,
-		//         snap: 1 / (sections.length - 1),
-		//         //@ts-ignore
-		//         end: () => "+=" + document.querySelector(".panel-container").offsetWidth
-		//     }
-		// })
 	});
 </script>
 
