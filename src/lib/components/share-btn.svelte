@@ -4,34 +4,37 @@
 	import TwitterIcon from '$lib/assets/images/twitter.svg?component';
 	import TelegramIcon from '$lib/assets/images/telegram.svg?component';
 	import WhatsappIcon from '$lib/assets/images/whatsapp.svg?component';
+	import { page } from '$app/stores';
 
 	let isExpanded = false;
+
+	$: url = $page.route.id || '/';
 </script>
 
 <div class="share-btn-wrapper" class:expanded={isExpanded}>
 	<a
-		href="https://facebook.com/sharer/sharer.php?u=https%3A%2F%2Flatravesia.eltoque.com%2F"
+		href="https://facebook.com/sharer/sharer.php?u=https%3A%2F%2Flatravesia.eltoque.com{encodeURIComponent(url)}"
 		target="_blank"
 		rel="noopener noreferrer"
 	>
 		<FacebookIcon width="24" height="24" />
 	</a>
 	<a
-		href="whatsapp://send?text=%20https%3A%2F%2Flatravesia.eltoque.com%2F"
+		href="whatsapp://send?text=%20https%3A%2F%2Flatravesia.eltoque.com{encodeURIComponent(url)}"
 		target="_blank"
 		rel="noopener noreferrer"
 	>
 		<WhatsappIcon width="24" height="24" />
 	</a>
 	<a
-		href="https://telegram.me/share/url?url=https%3A%2F%2Flatravesia.eltoque.com%2F"
+		href="https://telegram.me/share/url?url=https%3A%2F%2Flatravesia.eltoque.com{encodeURIComponent(url)}"
 		target="_blank"
 		rel="noopener noreferrer"
 	>
 		<TelegramIcon width="24" height="24" />
 	</a>
 	<a
-		href="https://twitter.com/intent/tweet/?url=https%3A%2F%2Flatravesia.eltoque.com%2F"
+		href="https://twitter.com/intent/tweet/?url=https%3A%2F%2Flatravesia.eltoque.com{encodeURIComponent(url)}"
 		target="_blank"
 		rel="noopener noreferrer"
 	>

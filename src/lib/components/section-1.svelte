@@ -10,7 +10,7 @@
 </svelte:head>
 
 <section id="section-1" class="section-1 flex flex-col items-center justify-center bg-accent min-h-screen">
-    <div class="section-1-wrapper -mt-20 w-full md:w-auto max-w-3xl text-center h-full flex flex-col justify-center">
+    <div class="section-1-wrapper -mt-40 w-full md:w-auto max-w-3xl text-center h-full flex flex-col justify-center">
         <div class="section-1-wrapper-bg" style="background-image: url({LuzImg});"></div>
         <h2
             class="flex flex-col md:flex-row justify-center items-center md:items-baseline font-sans font-bold  text-light"
@@ -31,13 +31,14 @@
         <h2 class="font-sans font-semibold text-2xl lg:text-4xl text-light">
             En la travesía de Cuba <br /> a Estados Unidos
         </h2>
-		<span class="font-sans font-semibold text-xs md:text-2xl text-accent-dark z-10 mt-2">2021 - actualidad </span>
+		<span class="font-sans font-semibold text-lg md:text-2xl text-accent-dark z-10 mt-2">desde 2021</span>
     </div>
 </section>
 
 <style>
     .section-1 .section-1-wrapper {
-		height: 80vh;
+        height: 80vh;
+		height: 80vmin;
         width: 80vw;
         position: relative;
 	}

@@ -43,3 +43,15 @@ export function inViewport(node: HTMLElement, params: any = {}) {
 		}
 	};
 }
+
+
+export function parseDate(v: string) {
+	if (!v || v == '' || v == '-') return null;
+	const match = v.match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+	// console.log(match);
+	if (!match) return null;
+	return new Date(+match[3],  // year
+		+match[2] - 1,  // monthIndex
+		+match[1],  // day
+	);
+}

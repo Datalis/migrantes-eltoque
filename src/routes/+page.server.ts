@@ -1,7 +1,7 @@
 import { batchGetSheet, get } from '$lib/data/api';
 import type { PageServerLoad } from './$types';
 
-export const prerender = true;
+export const prerender = false;
 
 export const load: PageServerLoad = async () => {
 
