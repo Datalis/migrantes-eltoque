@@ -11,6 +11,7 @@
 	}
 
 	$: top = data.length % 2 == 0 ? (data.length * ballsize) / 2 : ((data.length - 1) * ballsize) / 2;
+
 	onMount(() => {
     });
 </script>
@@ -24,8 +25,8 @@
 		<div
 			id="ball-{date.id}"
 			on:mouseover={show_info(date)}
-			class="ball {date.eventType == filter || date.id == selected ? 'selected' : ''}"
-			style="{date.eventType == filter
+			class="ball {date.id == selected ? 'selected' : date.eventType == filter ? 'highlight' : ''}"
+			style="{date.eventType == filter && date.id != selected
 				? `--ballsize:${(ballsize / 2 - 2).toFixed(0)}`
 				: `--ballsize:${ballsize}`}px"
 		/>
@@ -45,8 +46,11 @@
 		@apply bg-light border-light transition-all duration-150;
 	}
 	.ball.selected {
+		@apply bg-light border-0 border-dark;
+  }
+	.ball.highlight {
 		@apply bg-light border-0 border-dark my-2;
 		--ballsize: calc(var(--ballsize) - 12px);
 		box-shadow: 0px 0px 0px 6px rgb(31, 32, 67), 0px 0px 0px 8px rgb(120,86,255);
-    }
+	}
 </style>
