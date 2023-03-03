@@ -103,22 +103,20 @@
 				trigger: '#events',
 				start: 'top top',
 				pin: '#events',
-				end: '+=4000',
-				markers: true,
+				end: '+=5000',
+				// markers: true,
 				onUpdate: (self) => {
 					const progress = parseFloat(self.progress.toFixed(2)) * 100;
 					const value =  parseFloat((80 / featureds.length).toFixed(0));
-					console.log(progress, value, counter)
+
 					if (progress > 90) {
 						isDisabled = false;
-					} else if (progress > counter && progress < value + counter) {
+					} else if (progress >= counter && progress < value + counter) {
 						isDisabled = true;
-					} else if (progress >= counter) {
-						console.log('sumo', progress, counter)
+					} else if (progress > counter) {
 						counter += value;
 						onSwiperNext(null, true);
 					} else if (progress < counter) {
-						console.log('resto', progress, counter)
 						counter -= value;
 						onSwiperPrev(null, true);
 					}
