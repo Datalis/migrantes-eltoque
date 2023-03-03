@@ -13,6 +13,7 @@
 	export let data: PageData;
 
 	let missing = data.missing || [];
+	let totals = data?.totals || [];
 
 	let showModal = false;
 
@@ -98,7 +99,7 @@
 			Atrás
 		</a>
 		<h1 class="text-6xl text-accent text-center  md:text-left font-extrabold mt-10">
-			+{data?.missing?.length}
+			+{totals?.missing}
 		</h1>
 		<h3 class="text-4xl text-light text-center md:text-left font-bold">Personas desaparecidas</h3>
 		<div class="bg-accent flex flex-col md:flex-row items-center p-10 rounded-lg mt-10">
