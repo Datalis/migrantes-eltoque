@@ -96,26 +96,35 @@
 	onMount(() => {
 		gsap.registerPlugin(ScrollTrigger);
 
-		gsap.to('#events', {
+		const tl = gsap.timeline();
+
+		tl.to('#events', {
 			scrollTrigger: {
 				trigger: '#events',
 				start: 'top top',
-				// pinSpacing: false,
 				pin: '#events',
-				end: '+=3000',
+				end: '+=4000',
 				markers: true,
 				onUpdate: (self) => {
-					const progress = parseFloat(self.progress.toFixed(1));
-					if (progress > counter) {
-						counter = progress;
+					const progress = parseFloat(self.progress.toFixed(2)) * 100;
+					const value =  parseFloat((80 / featureds.length).toFixed(0));
+					console.log(progress, value, counter)
+					if (progress > 90) {
+						isDisabled = false;
+					} else if (progress > counter && progress < value + counter) {
+						isDisabled = true;
+					} else if (progress >= counter) {
+						console.log('sumo', progress, counter)
+						counter += value;
 						onSwiperNext(null, true);
 					} else if (progress < counter) {
-						counter = progress;
+						console.log('resto', progress, counter)
+						counter -= value;
 						onSwiperPrev(null, true);
 					}
 				}
 			}
-		});
+		})
 	});
 
 </script>
@@ -189,7 +198,7 @@
 			</div>
 		</div>
 		<div class="w-2/3 ml-2">
-			<TimeLine bind:this={timeline} {events} {years} selected={featureds[swiperIndex]} />
+			<TimeLine bind:this={timeline} {events} {years} {isDisabled} selected={featureds[swiperIndex]} />
 		</div>
 	</div>
 
