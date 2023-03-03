@@ -9,6 +9,7 @@
 	let showModal = false;
 	let showToast = false;
 	let errorSubmit = false;
+	let errorMessage = "";
 
 	/**
 	 * @type {any[]}
@@ -23,7 +24,7 @@
 
 </script>
 
-<Toast show={showToast} isError={errorSubmit} />
+<Toast show={showToast} isError={errorSubmit} message={errorMessage} />
 
 <section class="section-4 bg-dark min-h-screen">
 	{#if showModal}
@@ -31,9 +32,11 @@
 			on:close={() => (showModal = false)}
 			isMissing={false}
 			on:submit={(e) => {
-				showToast = true;
-				errorSubmit = e.detail.isError;
-				setInterval(() => {showToast = false}, 8000)
+				console.log(e.detail)
+				// showToast = true;
+				// errorSubmit = e.detail.isError;
+				// errorMessage = e.detail.message;
+				// setInterval(() => {showToast = false}, 8000)
 			}}
 		/>
 	{/if}

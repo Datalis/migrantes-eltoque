@@ -1,11 +1,12 @@
 <script>
 	export let show = false;
 	export let isError = false;
+	export let message = "";
 </script>
 
 <div
 	id="toast-simple"
-	class="flex items-center w-fit p-4 space-x-4 text-gray bg-accent-dark divide-x divide-gray-200 rounded-lg shadow space-x fixed bottom-2 right-2 transition-all duration-500 ease-in"
+	class="z-50 flex items-center w-fit p-4 space-x-4 text-gray {isError ? 'bg-error' : 'bg-accent-dark'} divide-x divide-gray-200 rounded-lg shadow space-x fixed bottom-2 right-2 transition-all duration-500 ease-in"
 	style="visibility: {show ? 'initial' : 'hidden'};"
 	role="alert"
 >
@@ -24,6 +25,10 @@
 		/></svg
 	>
 	<div class="pl-4 text-sm font-normal">
-		{isError ? 'Error enviando el mensaje.' : 'Mensaje enviado.'}
+		{
+			message
+			? message
+			:	isError ? 'Error enviando el mensaje.' : 'Mensaje enviado.'
+		}
 	</div>
 </div>

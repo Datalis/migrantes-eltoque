@@ -8,7 +8,7 @@
 
 	const dispatch = createEventDispatcher();
 	const close = () => dispatch('close');
-	const submitCallback = (isError) => dispatch('submit', { isError });
+	const submitCallback = (isError, message) => dispatch('submit', { isError, message });
 
 	let modal;
 	export let isMissing = true;
@@ -24,15 +24,21 @@
 	async function handleSubmit(/** @type {{ target: HTMLFormElement | undefined; }} */ e) {
 		NProgress.start();
 		const data = new FormData(this);
-		let isError = false;
-		const response = await fetch('/contact', { method: 'POST', body: data });
-		if (!response.ok) {
-			isError = true;
-			console.error('Error enviando el formulario', response.statusText)
+		const email = data.get('email')
+		const phone = data.get('phone')
+		if (email || phone) {
+				let isError = false;
+				const response = await fetch('/contact', { method: 'POST', body: data });
+				if (!response.ok) {
+					isError = true;
+					console.error('Error enviando el formulario', response.statusText)
+				}
+				submitCallback(isError);
+				close();
+		} else {
+			submitCallback(true, 'Debe poner el email o el número de teléfono')
 		}
 		NProgress.done();
-		submitCallback(isError);
-		close();
 	}
 </script>
 
@@ -71,7 +77,7 @@
 		<div class="flex flex-nowrap flex-col md:flex-row mb-2">
 			<label class="flex flex-col w-full md:w-2/3 mr-5">
 				<span class="mb-2 italic text-sm"> Email <em class="text-accent">*</em> </span>
-				<input type="email" name="email" id="email" required />
+				<input type="email" name="email" id="email" />
 			</label>
 			<label class="flex flex-col w-full md:w-1/3">
 				<span class="mb-2 italic text-sm"> Teléfono </span>
