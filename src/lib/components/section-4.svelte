@@ -33,10 +33,10 @@
 			isMissing={false}
 			on:submit={(e) => {
 				console.log(e.detail)
-				// showToast = true;
-				// errorSubmit = e.detail.isError;
-				// errorMessage = e.detail.message;
-				// setInterval(() => {showToast = false}, 8000)
+				showToast = true;
+				errorSubmit = e.detail.isError;
+				errorMessage = e.detail.message;
+				setInterval(() => {showToast = false}, 8000)
 			}}
 		/>
 	{/if}
