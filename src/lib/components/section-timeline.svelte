@@ -7,6 +7,11 @@
 	import ArrowLeftIcon from '$lib/assets/images/arrow-left.svg?component';
 	import TimeLine from './timeline.svelte';
 
+	import DetencionImg from '$lib/assets/images/section-timeline/detencion.png?w=400&webp';
+	import MuerteImg from '$lib/assets/images/section-timeline/muerte.png?w=400&webp';
+	import RepatriacionImg from '$lib/assets/images/section-timeline/repatriacion.png?w=400&webp';
+	import RescateImg from '$lib/assets/images/section-timeline/rescates.png?w=400&webp';
+
 	export let events: any[] = [];
 	let years: number[] = [];
 	let timeline: any;
@@ -61,6 +66,19 @@
 			swiper.slidePrev();
 		} else if (!isDisabled) {
 			swiper.slidePrev();
+		}
+	}
+	
+	const getImageFromEvent = (event: any) => {
+		switch (event.eventType) {
+			case "repatriación":
+				return RepatriacionImg;
+			case "detención":
+				return DetencionImg;
+			case "muerte":
+				return MuerteImg;
+			case "rescates":
+				return RescateImg;
 		}
 	}
 
@@ -180,7 +198,8 @@
 				>
 					{#each featureds as featured}
 						<SwiperSlide>
-							<div class="px-8 mt-24">
+							<img class="p-2 absolute z-0" src={getImageFromEvent(featured)} alt="{featured.name}" loading="lazy" />
+							<div class="px-8 mt-24 relative z-10">
 								<h3 class="uppercase font-bold mb-2">
 									{months[featured.date.getMonth()]} {featured.date.getFullYear()}
 								</h3>
