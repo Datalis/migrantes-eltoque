@@ -18,6 +18,20 @@
 		[x: string]: any;
 		activeIndex: number;
 	};
+	const months = [
+		'Enero',
+		'Febrero',
+		'Marzo',
+		'Abril',
+		'Mayo',
+		'Junio',
+		'Julio',
+		'Agosto',
+		'Septiembre',
+		'Octubre',
+		'Noviembre',
+		'Diciembre'
+	];
 
 	function onSwiper(e: any) {
 		swiper = e.detail[0];
@@ -149,7 +163,7 @@
 			</div>
 		</div>
 		<div id="events" class="flex panel-container py-10 h-screen">
-			<div class="w-1/3 relative bg-accent rounded-xl flex flex-col justify-center text-light">
+			<div class="w-1/3 relative bg-accent rounded-xl text-light">
 				<Swiper
 					on:swiper={onSwiper}
 					on:slideNextTransitionStart={onSlideNext}
@@ -166,16 +180,21 @@
 				>
 					{#each featureds as featured}
 						<SwiperSlide>
-							<p class="px-10">{featured.description}</p>
-							<p class="px-10 mt-2">
-								<span class="font-bold uppercase">Fuente:</span>
-								<a
-									class="underline underline-offset-2"
-									href={featured.links}
-									target="_blank"
-									rel="noreferrer">{featured.source}</a
-								>
-							</p>
+							<div class="px-8 mt-24">
+								<h3 class="uppercase font-bold mb-2">
+									{months[featured.date.getMonth()]} {featured.date.getFullYear()}
+								</h3>
+								<p class="">{featured.description}</p>
+								<p class="mt-2">
+									<span class="font-bold uppercase">Fuente:</span>
+									<a
+										class="underline underline-offset-2"
+										href={featured.links}
+										target="_blank"
+										rel="noreferrer">{featured.source}</a
+									>
+								</p>
+							</div>
 						</SwiperSlide>
 					{/each}
 				</Swiper>
