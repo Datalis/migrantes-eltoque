@@ -5,9 +5,13 @@
 	export let filter: string = '';
 	export let ballsize = 32;
 	export let selected: number;
+	export let show_event: (e: any) => void;
+	export let isDisabled = true;
 
 	const show_info = (date: any) => {
-		// console.log(date)
+		if (!isDisabled) {
+			show_event(date);
+		}
 	}
 
 	$: top = data.length % 2 == 0 ? (data.length * ballsize) / 2 : ((data.length - 1) * ballsize) / 2;
@@ -24,8 +28,8 @@
 		<!-- svelte-ignore a11y-mouse-events-have-key-events -->
 		<div
 			id="ball-{date.id}"
-			on:mouseover={show_info(date)}
-			class="ball {date.id == selected ? 'selected' : date.eventType == filter ? 'highlight' : ''}"
+			on:click={show_info(date)}
+			class="ball {date.id == selected ? 'selected' : date.eventType == filter ? 'highlight' : ''} {isDisabled ? '' : 'hover'}"
 			style="{date.eventType == filter && date.id != selected
 				? `--ballsize:${(ballsize / 2 - 2).toFixed(0)}`
 				: `--ballsize:${ballsize}`}px"
@@ -42,7 +46,7 @@
 		width: var(--ballsize);
 		height: var(--ballsize);
 	}
-	.ball:hover {
+	.ball.hover:hover {
 		@apply bg-light border-light transition-all duration-150;
 	}
 	.ball.selected {

@@ -10,8 +10,9 @@
 	export let selected: any;
 	const MAX_BALL_PER_MONTH = 16;
 	export let isDisabled = true;
+	export let show_event: (e: any) => void;
 
-	export const changeSelected = (featured: any, isPrev: boolean = false) => {
+	export const changeSelected = (featured: any) => {
 		const selector = `#ball-${featured.id}`;
 		const element = document.querySelector(selector);
 		//@ts-ignore
@@ -19,11 +20,6 @@
 
 		//@ts-ignore
 		gsap.to('#yearsContainer', { duration: 1, scrollTo: { x: element, offsetX: offset / 2 } });
-
-		if (selectedYear !== featured.date.getFullYear()) {
-			selectedYear = featured.date.getFullYear();
-			const index = years.findIndex((value) => value == selectedYear);
-		}
 	};
 
 	let selectedFilter: string = '';
@@ -106,6 +102,7 @@
 
 		selectedYear = years[0];
 		changeSelected(selected, true);
+		console.log(years)
 	});
 </script>
 
@@ -175,6 +172,8 @@
 								{ballsize}
 								{selected}
 								{month}
+								{isDisabled}
+								{show_event}
 							/>
 						{/if}
 					{/each}

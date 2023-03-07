@@ -5,6 +5,8 @@
     export let ballsize: number = 30;
     export let selected: any;
     export let month: string;
+    export let show_event: (e: any) => void;
+    export let isDisabled;
 
 </script>
 
@@ -15,12 +17,10 @@
             filter={selectedFilter}
             ballsize={parseInt((600 / ballsize).toFixed(0))}
             selected={selected.id}
+            {show_event}
+            {isDisabled}
         />
-        {#if d === data[0]}
-            <span class="w-9">{month}</span>
-        {:else}
-            <span></span>
-        {/if}
+        <span class="w-9">{d === data[0] ? month : ''}</span>
     </div>
 {/each}
 

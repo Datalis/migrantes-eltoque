@@ -44,27 +44,24 @@
 
 	function onSlideNext(e: any) {
 		swiperIndex !== featureds.length && ++swiperIndex;
-		timeline.changeSelected(featureds[swiperIndex], true);
+		console.log('next')
+		timeline.changeSelected(featureds[swiperIndex]);
 	}
 
 	function onSlidePrev(e: any) {
 		swiperIndex !== 0 && --swiperIndex;
+		console.log('prev')
 		timeline.changeSelected(featureds[swiperIndex]);
 	}
 
 	function onSwiperNext(e: any, allowToSweep: boolean | null = null) {
-		if (allowToSweep) {
-			swiper.slideNext();
-		} else if (!isDisabled) {
-			console.log(isDisabled, allowToSweep);
+		if (allowToSweep || !isDisabled) {
 			swiper.slideNext();
 		}
 	}
 
 	function onSwiperPrev(e: any, allowToSweep: boolean | null = null) {
-		if (allowToSweep) {
-			swiper.slidePrev();
-		} else if (!isDisabled) {
+		if (allowToSweep || !isDisabled) {
 			swiper.slidePrev();
 		}
 	}
@@ -79,6 +76,8 @@
 				return MuerteImg;
 			case "rescates":
 				return RescateImg;
+			default:
+				return RepatriacionImg; // TODO: add other images
 		}
 	}
 
@@ -119,11 +118,18 @@
 				isFeature: emptyToNull(value[20])
 			};
 		});
-		years.reverse();
+		years = [...new Set(years)].reverse();
 		return values.sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
 	};
 	events = dataToObject(events);
-	const featureds = events.filter((event) => event.isFeature);
+	let featureds = events.filter((event) => event.isFeature);
+
+	const show_event = (event: any) => {
+		const index = featureds.findIndex(value => value.id == event.id)
+		swiperIndex = index + 1 - 1;
+		swiper.slideTo(index);
+		timeline.changeSelected(featureds[swiperIndex])
+	}
 
 	onMount(() => {
 		gsap.registerPlugin(ScrollTrigger);
@@ -142,7 +148,12 @@
 					const value = parseFloat((80 / featureds.length).toFixed(0));
 
 					if (progress > 90) {
-						isDisabled = false;
+						if (isDisabled) {
+							isDisabled = false;
+							featureds = events;
+							swiper.slidePrev();
+						}
+						return;
 					} else if (progress >= counter && progress < value + counter) {
 						isDisabled = true;
 					} else if (progress > counter) {
@@ -152,6 +163,7 @@
 						counter -= value;
 						onSwiperPrev(null, true);
 					}
+					featureds = events.filter(event => event.isFeature)
 				}
 			}
 		});
@@ -244,6 +256,7 @@
 					{events}
 					{years}
 					{isDisabled}
+					{show_event}
 					selected={featureds[swiperIndex]}
 				/>
 			</div>
