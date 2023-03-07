@@ -147,7 +147,7 @@
 				trigger: '#events',
 				start: 'top top',
 				pin: '#events',
-				end: '+=5000',
+				end: '+=10000',
 				// markers: true,
 				onUpdate: (self) => {
 					const progress = parseFloat(self.progress.toFixed(2)) * 100;
