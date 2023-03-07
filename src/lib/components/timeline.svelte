@@ -105,8 +105,8 @@
 	});
 </script>
 
-<div class="h-full">
-	<div class="flex justify-between {isDisabled ? 'disabled' : ''}">
+<div class="md:h-full">
+	<div class="flex justify-between overflow-x-scroll md:overflow-x-hidden {isDisabled ? 'disabled' : ''}">
 		<button
 			class="button {selectedFilter === 'detención' ? 'active' : ''}"
 			on:click={activeFilter}

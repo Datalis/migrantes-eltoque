@@ -198,8 +198,8 @@
 				</p>
 			</div>
 		</div>
-		<div id="events" class="flex panel-container py-10 h-screen">
-			<div class="w-1/3 relative bg-accent rounded-xl text-light">
+		<div id="events" class="flex flex-col mt-3 md:mt-0 md:flex-row panel-container py-0 md:py-10 md:h-screen">
+			<div class="h-screen shrink-0 md:shrink md:h-full md:w-1/3 relative bg-accent md:rounded-xl text-light">
 				<Swiper
 					on:swiper={onSwiper}
 					on:slideNextTransitionStart={onSlideNext}
@@ -217,7 +217,7 @@
 					{#each featureds as featured}
 						<SwiperSlide>
 							<img class="p-2 absolute z-0" src={getImageFromEvent(featured)} alt="{featured.name}" loading="lazy" />
-							<div class="px-8 mt-24 relative z-10">
+							<div class="px-8 mt-40 md:mt-24 relative z-10">
 								<h3 class="uppercase font-bold mb-2">
 									{months[featured.date.getMonth()]} {featured.date.getFullYear()}
 								</h3>
@@ -256,15 +256,17 @@
 					</span>
 				</div>
 			</div>
-			<div class="w-2/3 ml-2">
-				<TimeLine
-					bind:this={timeline}
-					{events}
-					{years}
-					{isDisabled}
-					{show_event}
-					selected={featureds[swiperIndex]}
-				/>
+			<div class="w-full md:w-2/3 ml-2 mt-5 md:mt-0">
+				<div class="h-full">
+					<TimeLine
+						bind:this={timeline}
+						{events}
+						{years}
+						{isDisabled}
+						{show_event}
+						selected={featureds[swiperIndex]}
+					/>
+				</div>
 			</div>
 		</div>
 
