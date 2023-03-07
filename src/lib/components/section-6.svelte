@@ -121,7 +121,7 @@
 			<Map data={places} bind:this={mapComponent} />
 		</div>
 		<div id="map-text" class="block my-20 z-10 text-lg">
-			<div class="intro bg-black min-h-screen">
+			<div class="intro px-4 md:px-0 bg-black min-h-screen">
 				<h2 class="title">Rutas Migratorias</h2>
 				<p class="text-gray">
 					Las rutas terrestres que cruzan el Darién o parten desde Nicaragua —país al que las
@@ -140,7 +140,7 @@
 			</div>
 			<div class="space h-screen md:h-0" />
 			{#each places.filter((place) => !!place[0]) as p, index}
-				<div id="place-{index}" class="place bg-black text-gray md:px-0 min-h-screen">
+				<div id="place-{index}" class="place bg-black text-gray px-4 md:px-0 min-h-screen">
 					<div class="">
 						<h2 class="title">{p[1]}</h2>
 						<p>{@html p[3]}</p>
@@ -148,7 +148,7 @@
 				</div>
 				<div class="space h-screen md:h-0" />
 			{/each}
-			<div class="resume text-gray gb-black md:px-0 min-h-screen">
+			<div class="resume text-gray gb-black px-4 md:px-0 min-h-screen">
 				<p>
 					Las rutas no son nuevas para los cubanos ni tampoco exclusiva de ellos; pero no por eso
 					dejan de ser peligrosas. La inexperiencia de quienes se aventuran, sus condiciones previas
@@ -234,6 +234,6 @@
 	.intro,
 	.place div,
 	.resume {
-		@apply bg-opacity-70 backdrop-blur;
+		@apply bg-opacity-90 backdrop-blur;
 	}
 </style>
