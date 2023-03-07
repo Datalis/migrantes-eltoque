@@ -101,8 +101,7 @@
 		gsap.registerPlugin(ScrollToPlugin);
 
 		selectedYear = years[0];
-		changeSelected(selected, true);
-		console.log(years)
+		changeSelected(selected);
 	});
 </script>
 

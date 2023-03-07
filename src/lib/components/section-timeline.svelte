@@ -43,12 +43,18 @@
 	}
 
 	function onSlideNext(e: any) {
+		if (swiperIndex >= featureds.length) {
+			swiperIndex = featureds.length - 1
+		}
 		swiperIndex !== featureds.length && ++swiperIndex;
 		console.log('next')
 		timeline.changeSelected(featureds[swiperIndex]);
 	}
 
 	function onSlidePrev(e: any) {
+		if (swiperIndex >= featureds.length) {
+			swiperIndex = featureds.length - 1
+		}
 		swiperIndex !== 0 && --swiperIndex;
 		console.log('prev')
 		timeline.changeSelected(featureds[swiperIndex]);
@@ -128,7 +134,7 @@
 		const index = featureds.findIndex(value => value.id == event.id)
 		swiperIndex = index + 1 - 1;
 		swiper.slideTo(index);
-		timeline.changeSelected(featureds[swiperIndex])
+		timeline.changeSelected(featureds[index])
 	}
 
 	onMount(() => {
