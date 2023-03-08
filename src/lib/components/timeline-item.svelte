@@ -29,7 +29,10 @@
 		<div
 			id="ball-{date.id}"
 			on:click={show_info(date)}
-			class="ball {date.id == selected ? 'selected' : date.eventType == filter ? 'highlight' : ''} {isDisabled ? '' : 'hover'}"
+			class="ball
+				{isDisabled ? '' : 'hover'}
+				{date.id == selected ? 'selected' : date.eventType == filter ? 'highlight' : ''}
+			"
 			style="{date.eventType == filter && date.id != selected
 				? `--ballsize:${(ballsize / 2 - 2).toFixed(0)}`
 				: `--ballsize:${ballsize}`}px"
@@ -47,7 +50,7 @@
 		height: var(--ballsize);
 	}
 	.ball.hover:hover {
-		@apply bg-light border-light transition-all duration-150;
+		@apply bg-light border-light transition-all duration-500;
 	}
 	.ball.selected {
 		@apply bg-light border-0 border-dark;

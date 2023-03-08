@@ -6,7 +6,7 @@
     export let selected: any;
     export let month: string;
     export let show_event: (e: any) => void;
-    export let isDisabled;
+    export let isDisabled: boolean;
 
 </script>
 
@@ -16,7 +16,7 @@
             data={d}
             filter={selectedFilter}
             ballsize={parseInt((600 / ballsize).toFixed(0))}
-            selected={selected.id}
+            selected={selected?.id}
             {show_event}
             {isDisabled}
         />

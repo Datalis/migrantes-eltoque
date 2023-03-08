@@ -7,12 +7,13 @@
 
 	export let events: any[] = [];
 	export let years: number[] = [];
-	export let selected: any;
+	let selected: any;
 	const MAX_BALL_PER_MONTH = 16;
 	export let isDisabled = true;
 	export let show_event: (e: any) => void;
 
 	export const changeSelected = (featured: any) => {
+		selected = featured;
 		const selector = `#ball-${featured.id}`;
 		const element = document.querySelector(selector);
 		//@ts-ignore
@@ -24,7 +25,6 @@
 
 	let selectedFilter: string = '';
 	let ballsize = 0;
-	let selectedYear = 0;
 	const months = [
 		'Diciembre',
 		'Noviembre',
@@ -99,9 +99,6 @@
 	onMount(() => {
 		gsap.registerPlugin(ScrollTrigger);
 		gsap.registerPlugin(ScrollToPlugin);
-
-		selectedYear = years[0];
-		changeSelected(selected);
 	});
 </script>
 

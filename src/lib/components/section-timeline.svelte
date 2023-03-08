@@ -132,15 +132,16 @@
 
 	const show_event = (event: any) => {
 		const index = featureds.findIndex(value => value.id == event.id)
-		swiperIndex = index + 1 - 1;
+		swiperIndex = index;
 		swiper.slideTo(index);
 		timeline.changeSelected(featureds[index])
 	}
 
 	onMount(() => {
 		gsap.registerPlugin(ScrollTrigger);
-
 		const tl = gsap.timeline();
+
+		timeline.changeSelected(featureds[swiperIndex])
 
 		tl.to('#events', {
 			scrollTrigger: {
@@ -264,7 +265,6 @@
 						{years}
 						{isDisabled}
 						{show_event}
-						selected={featureds[swiperIndex]}
 					/>
 				</div>
 			</div>
