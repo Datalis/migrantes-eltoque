@@ -65,7 +65,7 @@
 		swiperIndex = index;
 		timelineSwiper.slideTo(index);
 		timeline.changeSelected(featureds[index]);
-		showModal = windowWidth >= 768;
+		showModal = windowWidth <= 768;
 	};
 
 	onMount(() => {
