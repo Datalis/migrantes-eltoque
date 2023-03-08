@@ -2,6 +2,7 @@
 	import gsap from 'gsap';
 	import ScrollTrigger from 'gsap/ScrollTrigger';
 	import { onMount } from 'svelte';
+	import TimelineModal from './timeline-modal.svelte';
 	import TimelineSwiper from './timeline-swiper.svelte';
 	import TimeLine from './timeline.svelte';
 
@@ -11,6 +12,8 @@
 	let timelineSwiper: any;
 	let counter: number = 0;
 	let isDisabled: boolean = true;
+	let showModal: boolean = false;
+	let windowWidth = 0;
 
 	let swiperIndex = 0;
 
@@ -58,17 +61,18 @@
 	let featureds = events.filter((event) => event.isFeature);
 
 	const show_event = (event: any) => {
-		const index = featureds.findIndex(value => value.id == event.id)
+		const index = featureds.findIndex((value) => value.id == event.id);
 		swiperIndex = index;
 		timelineSwiper.slideTo(index);
-		timeline.changeSelected(featureds[index])
-	}
+		timeline.changeSelected(featureds[index]);
+		showModal = windowWidth >= 768;
+	};
 
 	onMount(() => {
 		gsap.registerPlugin(ScrollTrigger);
 		const tl = gsap.timeline();
 
-		timeline.changeSelected(featureds[swiperIndex])
+		timeline.changeSelected(featureds[swiperIndex]);
 
 		tl.to('#events', {
 			scrollTrigger: {
@@ -97,12 +101,24 @@
 						counter -= value;
 						timelineSwiper.onSwiperPrev(null, true);
 					}
-					featureds = events.filter(event => event.isFeature)
+					featureds = events.filter((event) => event.isFeature);
 				}
 			}
 		});
 	});
 </script>
+
+{#if showModal}
+	<TimelineModal
+		on:close={() => (showModal = false)}
+		events={featureds}
+		{timeline}
+		{isDisabled}
+		{swiperIndex}
+	/>
+{/if}
+
+<svelte:window bind:innerWidth={windowWidth} />
 
 <section
 	id="section-timeline"
@@ -126,25 +142,24 @@
 				</p>
 			</div>
 		</div>
-		<div id="events" class="flex flex-col mt-3 md:mt-0 md:flex-row panel-container py-0 md:py-10 md:h-screen">
-			<div class="h-screen shrink-0 md:shrink md:h-full md:w-1/3 relative bg-accent md:rounded-xl text-light">
+		<div
+			id="events"
+			class="flex flex-col mt-3 md:mt-0 md:flex-row panel-container py-0 md:py-10 md:h-screen"
+		>
+			<div
+				class="h-screen shrink-0 md:shrink md:h-full md:w-1/3 relative bg-accent md:rounded-xl text-light"
+			>
 				<TimelineSwiper
 					events={featureds}
 					{timeline}
 					{isDisabled}
-					{swiperIndex} 
+					{swiperIndex}
 					bind:this={timelineSwiper}
 				/>
 			</div>
 			<div class="w-full md:w-2/3 ml-2 mt-5 md:mt-0">
 				<div class="h-full">
-					<TimeLine
-						bind:this={timeline}
-						{events}
-						{years}
-						{isDisabled}
-						{show_event}
-					/>
+					<TimeLine bind:this={timeline} {events} {years} {isDisabled} {show_event} />
 				</div>
 			</div>
 		</div>
