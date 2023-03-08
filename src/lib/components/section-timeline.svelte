@@ -2,90 +2,17 @@
 	import gsap from 'gsap';
 	import ScrollTrigger from 'gsap/ScrollTrigger';
 	import { onMount } from 'svelte';
-	import { Swiper, SwiperSlide } from 'swiper/svelte';
-	import ArrowRightIcon from '$lib/assets/images/arrow-right.svg?component';
-	import ArrowLeftIcon from '$lib/assets/images/arrow-left.svg?component';
+	import TimelineSwiper from './timeline-swiper.svelte';
 	import TimeLine from './timeline.svelte';
-
-	import DetencionImg from '$lib/assets/images/section-timeline/detencion.png?w=400&webp';
-	import MuerteImg from '$lib/assets/images/section-timeline/muerte.png?w=400&webp';
-	import RepatriacionImg from '$lib/assets/images/section-timeline/repatriacion.png?w=400&webp';
-	import RescateImg from '$lib/assets/images/section-timeline/rescates.png?w=400&webp';
 
 	export let events: any[] = [];
 	let years: number[] = [];
 	let timeline: any;
+	let timelineSwiper: any;
 	let counter: number = 0;
 	let isDisabled: boolean = true;
 
 	let swiperIndex = 0;
-	let swiper: {
-		[x: string]: any;
-		activeIndex: number;
-	};
-	const months = [
-		'Enero',
-		'Febrero',
-		'Marzo',
-		'Abril',
-		'Mayo',
-		'Junio',
-		'Julio',
-		'Agosto',
-		'Septiembre',
-		'Octubre',
-		'Noviembre',
-		'Diciembre'
-	];
-
-	function onSwiper(e: any) {
-		swiper = e.detail[0];
-	}
-
-	function onSlideNext(e: any) {
-		if (swiperIndex >= featureds.length) {
-			swiperIndex = featureds.length - 1
-		}
-		swiperIndex !== featureds.length && ++swiperIndex;
-		console.log('next')
-		timeline.changeSelected(featureds[swiperIndex]);
-	}
-
-	function onSlidePrev(e: any) {
-		if (swiperIndex >= featureds.length) {
-			swiperIndex = featureds.length - 1
-		}
-		swiperIndex !== 0 && --swiperIndex;
-		console.log('prev')
-		timeline.changeSelected(featureds[swiperIndex]);
-	}
-
-	function onSwiperNext(e: any, allowToSweep: boolean | null = null) {
-		if (allowToSweep || !isDisabled) {
-			swiper.slideNext();
-		}
-	}
-
-	function onSwiperPrev(e: any, allowToSweep: boolean | null = null) {
-		if (allowToSweep || !isDisabled) {
-			swiper.slidePrev();
-		}
-	}
-	
-	const getImageFromEvent = (event: any) => {
-		switch (event.eventType) {
-			case "repatriación":
-				return RepatriacionImg;
-			case "detención":
-				return DetencionImg;
-			case "muerte":
-				return MuerteImg;
-			case "rescates":
-				return RescateImg;
-			default:
-				return RepatriacionImg; // TODO: add other images
-		}
-	}
 
 	const emptyToNull = (value: string): string | null => (value === '' ? null : value);
 
@@ -133,7 +60,7 @@
 	const show_event = (event: any) => {
 		const index = featureds.findIndex(value => value.id == event.id)
 		swiperIndex = index;
-		swiper.slideTo(index);
+		timelineSwiper.slideTo(index);
 		timeline.changeSelected(featureds[index])
 	}
 
@@ -158,17 +85,17 @@
 						if (isDisabled) {
 							isDisabled = false;
 							featureds = events;
-							swiper.slidePrev();
+							timelineSwiper.slidePrev();
 						}
 						return;
 					} else if (progress >= counter && progress < value + counter) {
 						isDisabled = true;
 					} else if (progress > counter) {
 						counter += value;
-						onSwiperNext(null, true);
+						timelineSwiper.onSwiperNext(null, true);
 					} else if (progress < counter) {
 						counter -= value;
-						onSwiperPrev(null, true);
+						timelineSwiper.onSwiperPrev(null, true);
 					}
 					featureds = events.filter(event => event.isFeature)
 				}
@@ -201,61 +128,13 @@
 		</div>
 		<div id="events" class="flex flex-col mt-3 md:mt-0 md:flex-row panel-container py-0 md:py-10 md:h-screen">
 			<div class="h-screen shrink-0 md:shrink md:h-full md:w-1/3 relative bg-accent md:rounded-xl text-light">
-				<Swiper
-					on:swiper={onSwiper}
-					on:slideNextTransitionStart={onSlideNext}
-					on:slidePrevTransitionStart={onSlidePrev}
-					autoHeight={true}
-					preloadImages={false}
-					lazy={{
-						loadPrevNext: true,
-						loadPrevNextAmount: 2
-					}}
-					slidesPerView={1}
-					spaceBetween={50}
-					centeredSlides={true}
-				>
-					{#each featureds as featured}
-						<SwiperSlide>
-							<img class="p-2 absolute z-0" src={getImageFromEvent(featured)} alt="{featured.name}" loading="lazy" />
-							<div class="px-8 mt-40 md:mt-24 relative z-10">
-								<h3 class="uppercase font-bold mb-2">
-									{months[featured.date.getMonth()]} {featured.date.getFullYear()}
-								</h3>
-								<p class="">{featured.description}</p>
-								<p class="mt-2">
-									<span class="font-bold uppercase">Fuente:</span>
-									<a
-										class="underline underline-offset-2"
-										href={featured.links}
-										target="_blank"
-										rel="noreferrer">{featured.source}</a
-									>
-								</p>
-							</div>
-						</SwiperSlide>
-					{/each}
-				</Swiper>
-				<div class="swiper-controls absolute bottom-3 w-full justify-center hidden md:flex ml-auto">
-					<!-- svelte-ignore a11y-click-events-have-key-events -->
-					<span on:click={onSwiperPrev}>
-						<ArrowLeftIcon
-							class="control mr-4 {swiperIndex == 0 || isDisabled ? 'control-disabled' : ''}"
-							width="48"
-							height="48"
-						/>
-					</span>
-					<!-- svelte-ignore a11y-click-events-have-key-events -->
-					<span on:click={onSwiperNext}>
-						<ArrowRightIcon
-							class="control {swiperIndex == featureds?.length - 1 || isDisabled
-								? 'control-disabled'
-								: ''}"
-							width="48"
-							height="48"
-						/>
-					</span>
-				</div>
+				<TimelineSwiper
+					events={featureds}
+					{timeline}
+					{isDisabled}
+					{swiperIndex} 
+					bind:this={timelineSwiper}
+				/>
 			</div>
 			<div class="w-full md:w-2/3 ml-2 mt-5 md:mt-0">
 				<div class="h-full">
