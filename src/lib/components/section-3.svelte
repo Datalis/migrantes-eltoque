@@ -4,8 +4,10 @@
 	export let totals: any;
 	export let deceased: any[] = [];
 
-	$: male = deceased?.filter((e) => e[5] == 'M')?.length || 0;
-	$: female = deceased?.filter((e) => e[5] == 'F')?.length || 0;
+	let withPic = deceased?.filter(e => e[1] == 'Sí');
+
+	$: male = withPic?.filter((e) => e[5] == 'M')?.length || 0;
+	$: female = withPic?.filter((e) => e[5] == 'F')?.length || 0;
 </script>
 
 <section class="section-3 flex flex-col items-center justify-center bg-dark h-min-screen py-20">
@@ -17,7 +19,7 @@
 		<p class="text-gray mt-10">
 			Al menos {totals?.deceased} cubanas y cubanos han fallecido en el intento de migrar a Estados Unidos, 
 			desde enero de 2021. Hasta el momento, hemos podido
-			identificar a {deceased?.length} personas de ese total: {female} mujeres y {male} hombres. Tenemos
+			identificar a {withPic?.length} personas de ese total: {female} mujeres y {male} hombres. Tenemos
 			la esperanza de conocer la identidad de otros fallecidos con la colaboración de sus familiares,
 			amigos y organizaciones sensibles a esta tragedia.
 			<br /><br />
