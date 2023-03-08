@@ -154,7 +154,7 @@
 		style="height: calc(100% - 30px - 0.75rem);"
 	>
 		<div id="yearsContainer" class="flex relative h-full">
-			<div class="division" />
+			<!-- <div class="division" /> -->
 			{#each years as year}
 				<div class="flex year-container">
 					<div class="line year">
