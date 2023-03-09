@@ -16,6 +16,8 @@
 	 */
 	export let deceased = [];
 
+	$: data = deceased?.reverse().filter(e => e[1] == 'Sí');
+
 	const formatAge = (/** @type {string} */ ageText) => {
 		if (ageText == 'desconocida') return 'Edad desconocida';
 		else if (ageText.includes('meses')) return ageText;
@@ -50,7 +52,7 @@
 					En memoria de quienes no pudieron completar su camino
 				</h2>
 			</div>
-			{#each deceased?.filter(e => e[1] == 'Sí') as person}
+			{#each data as person}
 				<div class="grid-item flex flex-col items-center justify-between p-4">
 					<div class="overlay p-4 flex items-center">
 						<p class="font-medium text-xs">
