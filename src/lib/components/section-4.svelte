@@ -16,7 +16,7 @@
 	 */
 	export let deceased = [];
 
-	$: data = deceased?.reverse().filter(e => e[1] == 'Sí');
+	$: data = deceased?.filter(e => e[1] == 'Sí').reverse();
 
 	const formatAge = (/** @type {string} */ ageText) => {
 		if (ageText == 'desconocida') return 'Edad desconocida';
