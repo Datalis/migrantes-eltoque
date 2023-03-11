@@ -136,20 +136,20 @@
 	});
 </script>
 
-{#if showModal}
-	<TimelineModal
-		bind:this={modal}
-		on:close={() => showModal = false}
-		events={featureds}
-	/>
-{/if}
 
 <svelte:window bind:innerWidth={windowWidth} />
 
 <section
-	id="section-timeline"
-	class="flex flex-col items-center relative section-timeline bg-dark md:pb-20"
+id="section-timeline"
+class="flex flex-col items-center relative section-timeline bg-dark md:pb-20"
 >
+{#if showModal}
+	<TimelineModal
+		bind:this={modal}
+		on:close={() => (showModal = false)}
+		event={featureds[swiperIndex]}
+	/>
+{/if}
 	<div class="container">
 		<div class="flex flex-col justify-center items-center pt-10 md:pt-32">
 			<div class="max-w-3xl md:mb-10 px-10">
