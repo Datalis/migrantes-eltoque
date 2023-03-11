@@ -1,18 +1,16 @@
 <script lang="ts">
-	// @ts-nocheck
-	import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher, onMount } from 'svelte';
 	import X from '$lib/assets/images/x.svg?component';
-	import TimelineSwiper from './timeline-swiper.svelte';
+	import TimelineEvents from './timeline-events.svelte';
 
 	const dispatch = createEventDispatcher();
 	const close = () => dispatch('close');
 
 	export let events: any[];
-	export let isDisabled: boolean;
-	export let timeline: any;
-	export let swiperIndex = 0;
+  export let isInvisible: boolean = true;
 
 	let modal;
+  let eventModal: any;
 
 	const handle_keydown = (/** @type {{ key: string; }} */ e) => {
 		if (e.key == 'Escape') {
@@ -20,6 +18,11 @@
 			return;
 		}
 	};
+
+  export const update = (id: number) => {
+    eventModal.update(id)
+  }
+
 </script>
 
 <svelte:window on:keydown={handle_keydown} />
@@ -34,7 +37,7 @@
 		<X width="32" height="32" />
 	</button>
 	<div class="h-full w-full bg-accent text-light">
-		<TimelineSwiper {events} {timeline} {isDisabled} {swiperIndex} />
+		<TimelineEvents bind:this={eventModal} {events} {update} />
 	</div>
 </div>
 

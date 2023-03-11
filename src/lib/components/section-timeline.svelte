@@ -2,6 +2,7 @@
 	import gsap from 'gsap';
 	import ScrollTrigger from 'gsap/ScrollTrigger';
 	import { onMount } from 'svelte';
+	import TimelineEvents from './timeline-events.svelte';
 	import TimelineModal from './timeline-modal.svelte';
 	import TimelineSwiper from './timeline-swiper.svelte';
 	import TimeLine from './timeline.svelte';
@@ -14,6 +15,7 @@
 	let isDisabled: boolean = true;
 	let showModal: boolean = false;
 	let windowWidth = 0;
+	let modal: any;
 
 	let swiperIndex = 0;
 
@@ -63,9 +65,15 @@
 	const show_event = (event: any) => {
 		const index = featureds.findIndex((value) => value.id == event.id);
 		swiperIndex = index;
-		timelineSwiper.slideTo(index);
+		console.log(index, featureds[index])
 		timeline.changeSelected(featureds[index]);
-		showModal = windowWidth <= 768;
+		if (windowWidth <= 768) {
+			isDisabled = false;
+			modal?.update(featureds[index].id)
+			showModal = true;
+		} else {
+			timelineSwiper.slideTo(index);
+		}
 	};
 
 	onMount(() => {
@@ -74,47 +82,65 @@
 
 		timeline.changeSelected(featureds[swiperIndex]);
 
-		tl.to('#events', {
-			scrollTrigger: {
-				trigger: '#events',
-				start: 'top top',
-				pin: '#events',
-				end: '+=10000',
-				// markers: true,
-				onUpdate: (self) => {
-					const progress = parseFloat(self.progress.toFixed(2)) * 100;
-					const value = parseFloat((80 / featureds.length).toFixed(0));
+		if (windowWidth >= 768) {
+			tl.to('#events', {
+				scrollTrigger: {
+					trigger: '#events',
+					start: 'top top',
+					pin: '#events',
+					end: '+=10000',
+					// markers: true,
+					onUpdate: (self) => {
+						const progress = parseFloat(self.progress.toFixed(2)) * 100;
+						const value = parseFloat((80 / featureds.length).toFixed(0));
 
-					if (progress > 90) {
-						if (isDisabled) {
-							isDisabled = false;
-							featureds = events;
-							timelineSwiper.slidePrev();
+						if (progress > 90) {
+							if (isDisabled) {
+								isDisabled = false;
+								featureds = events;
+								timelineSwiper.slidePrev();
+							}
+							return;
+						} else if (progress >= counter && progress < value + counter) {
+							isDisabled = true;
+						} else if (progress > counter) {
+							counter += value;
+							timelineSwiper.onSwiperNext(null, true);
+						} else if (progress < counter) {
+							counter -= value;
+							timelineSwiper.onSwiperPrev(null, true);
 						}
-						return;
-					} else if (progress >= counter && progress < value + counter) {
-						isDisabled = true;
-					} else if (progress > counter) {
-						counter += value;
-						timelineSwiper.onSwiperNext(null, true);
-					} else if (progress < counter) {
-						counter -= value;
-						timelineSwiper.onSwiperPrev(null, true);
+						featureds = events.filter((event) => event.isFeature);
 					}
-					featureds = events.filter((event) => event.isFeature);
 				}
-			}
-		});
+			});
+		} else {
+			// mobile view
+			const eventsDivs = gsap.utils.toArray('.event-info')
+			tl.to(eventsDivs, {
+				xPercent: -100 * (eventsDivs.length - 1),
+				ease: "none",
+				scrollTrigger: {
+					trigger: '#events',
+					pin: true,
+					scrub: 1,
+					snap: 1 / (eventsDivs.length - 1),
+					end: () => '+=10000', // + document.querySelector('#event-container').offsetWidth
+					onLeave: () => {
+						isDisabled = false;
+						featureds = events;
+					}
+				}
+			});
+		}
 	});
 </script>
 
 {#if showModal}
 	<TimelineModal
-		on:close={() => (showModal = false)}
+		bind:this={modal}
+		on:close={() => showModal = false}
 		events={featureds}
-		{timeline}
-		{isDisabled}
-		{swiperIndex}
 	/>
 {/if}
 
@@ -149,13 +175,17 @@
 			<div
 				class="h-screen shrink-0 md:shrink md:h-full md:w-1/3 relative bg-accent md:rounded-xl text-light"
 			>
-				<TimelineSwiper
-					events={featureds}
-					{timeline}
-					{isDisabled}
-					{swiperIndex}
-					bind:this={timelineSwiper}
-				/>
+				{#if windowWidth >= 768}
+					<TimelineSwiper
+						events={featureds}
+						{timeline}
+						{isDisabled}
+						{swiperIndex}
+						bind:this={timelineSwiper}
+					/>
+				{:else}
+					<TimelineEvents events={featureds} />
+				{/if}
 			</div>
 			<div class="w-full md:w-2/3 ml-2 mt-5 md:mt-0">
 				<div class="h-full">
