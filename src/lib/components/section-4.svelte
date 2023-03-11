@@ -56,7 +56,7 @@
 				<div class="grid-item flex flex-col items-center justify-between p-4">
 					<div class="overlay p-4 flex items-center">
 						<p class="font-medium text-xs">
-							{person[11]}
+							{person[11] || ''}
 						</p>
 					</div>
 					<img class="pic" src={'https://api.eltoque.com' + person[2]} alt="Picture of {[person[3]]}" loading="lazy">
