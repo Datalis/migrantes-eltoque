@@ -58,7 +58,6 @@
 
 		if (results.length > MAX_BALL_PER_MONTH) {
 			results = chunks(results, MAX_BALL_PER_MONTH);
-			// console.log(results)
 		} else {
 			results = [results];
 		}

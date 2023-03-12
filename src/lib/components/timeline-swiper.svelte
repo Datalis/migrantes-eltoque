@@ -41,8 +41,6 @@
     if (swiperIndex >= events.length) {
       swiperIndex = events.length - 1
     }
-    swiperIndex !== events.length && ++swiperIndex;
-    console.log('next')
     timeline.changeSelected(events[swiperIndex]);
   }
 
@@ -50,24 +48,27 @@
     if (swiperIndex >= events.length) {
       swiperIndex = events.length - 1
     }
-    swiperIndex !== 0 && --swiperIndex;
-    console.log('prev')
     timeline.changeSelected(events[swiperIndex]);
   }
 
   export function onSwiperNext(e: any, allowToSweep: boolean | null = null) {
     if (allowToSweep || !isDisabled) {
+      swiperIndex !== events.length && ++swiperIndex;
+      console.log(swiperIndex, events, events[swiperIndex])
       swiper.slideNext();
     }
   }
 
   export function onSwiperPrev(e: any, allowToSweep: boolean | null = null) {
     if (allowToSweep || !isDisabled) {
+      swiperIndex !== 0 && --swiperIndex;
+      console.log(swiperIndex, events, events[swiperIndex])
       swiper.slidePrev();
     }
   }
 
   export function slideTo(index: number) {
+    swiperIndex = index;
     swiper.slideTo(index);
   }
 
@@ -89,6 +90,7 @@
         return RepatriacionImg; // TODO: add other images
     }
   }
+  console.log(events)
 </script>
 
 <Swiper

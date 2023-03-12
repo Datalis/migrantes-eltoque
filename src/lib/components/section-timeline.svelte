@@ -64,10 +64,9 @@
 
 	const show_event = (event: any) => {
 		const index = featureds.findIndex((value) => value.id == event.id);
-		swiperIndex = index;
-		console.log(index, featureds[index])
-		timeline.changeSelected(featureds[index]);
+		swiperIndex = index + 1 - 1;
 		if (windowWidth <= 768) {
+			timeline.changeSelected(featureds[index]);
 			isDisabled = false;
 			modal?.update(featureds[index].id)
 			showModal = true;
@@ -92,7 +91,7 @@
 					// markers: true,
 					onUpdate: (self) => {
 						const progress = parseFloat(self.progress.toFixed(2)) * 100;
-						const value = parseFloat((80 / featureds.length).toFixed(0));
+						const value = parseFloat((90 / featureds.length).toFixed(0));
 
 						if (progress > 90) {
 							if (isDisabled) {

@@ -10,6 +10,7 @@
 
 	const show_info = (date: any) => {
 		if (!isDisabled) {
+			// console.log('item', date)
 			show_event(date);
 		}
 	}
