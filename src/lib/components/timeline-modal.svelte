@@ -58,7 +58,7 @@
 	aria-modal="true"
 	bind:this={modal}
 >
-	<button on:click={close} type="button" class="close absolute right-4 top-4">
+	<button on:click={close} type="button" class="close absolute right-4 top-4 z-50">
 		<X width="32" height="32" />
 	</button>
 	<div class="event-info bg-accent text-light w-screen h-screen shrink-0 event-{event.id}">
