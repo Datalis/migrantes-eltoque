@@ -54,7 +54,6 @@
   export function onSwiperNext(e: any, allowToSweep: boolean | null = null) {
     if (allowToSweep || !isDisabled) {
       swiperIndex !== events.length && ++swiperIndex;
-      console.log(swiperIndex, events, events[swiperIndex])
       swiper.slideNext();
     }
   }
@@ -62,7 +61,6 @@
   export function onSwiperPrev(e: any, allowToSweep: boolean | null = null) {
     if (allowToSweep || !isDisabled) {
       swiperIndex !== 0 && --swiperIndex;
-      console.log(swiperIndex, events, events[swiperIndex])
       swiper.slidePrev();
     }
   }
@@ -90,7 +88,6 @@
         return RepatriacionImg; // TODO: add other images
     }
   }
-  console.log(events)
 </script>
 
 <Swiper
