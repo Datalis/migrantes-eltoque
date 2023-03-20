@@ -159,7 +159,7 @@ class="flex flex-col items-center relative section-timeline bg-dark md:pb-20"
 					del camino
 				</h2>
 				<p class="text-light">
-					Hasta el momento hemos identificado más de 580 incidentes que han ocurrido desde enero de
+					Hasta el momento hemos identificado {events.length} incidentes que han ocurrido desde enero de
 					2021 que involucran a migrantes cubanos en diferentes zonas geográficas. Las historias no
 					solo reflejan la tragedia que significa que alguien muera o desaparezca, también han sido
 					rescatados o interceptados en el mar, detenidos por las autoridades de los países donde se
