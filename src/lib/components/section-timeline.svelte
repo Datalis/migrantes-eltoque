@@ -81,13 +81,13 @@
 
 		timeline.changeSelected(featureds[swiperIndex]);
 
-		if (windowWidth >= 768) {
+		if (windowWidth >= 768) { // desktop
 			tl.to('#events', {
 				scrollTrigger: {
 					trigger: '#events',
 					start: 'top top',
 					pin: '#events',
-					end: '+=10000',
+					end: '+=7000',
 					// markers: true,
 					onUpdate: (self) => {
 						const progress = parseFloat(self.progress.toFixed(2)) * 100;
@@ -113,8 +113,7 @@
 					}
 				}
 			});
-		} else {
-			// mobile view
+		} else { // mobile view
 			const eventsDivs = gsap.utils.toArray('.event-info')
 			tl.to(eventsDivs, {
 				xPercent: -100 * (eventsDivs.length - 1),
