@@ -41,14 +41,14 @@
     if (swiperIndex >= events.length) {
       swiperIndex = events.length - 1
     }
-    timeline.changeSelected(events[swiperIndex]);
+    timeline.changeSelected(events[swiperIndex], isDisabled);
   }
 
   function onSlidePrev(e: any) {
     if (swiperIndex >= events.length) {
       swiperIndex = events.length - 1
     }
-    timeline.changeSelected(events[swiperIndex]);
+    timeline.changeSelected(events[swiperIndex], isDisabled);
   }
 
   export function onSwiperNext(e: any, allowToSweep: boolean | null = null) {

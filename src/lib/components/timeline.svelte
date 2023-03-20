@@ -12,8 +12,12 @@
 	export let isDisabled = true;
 	export let show_event: (e: any) => void;
 
-	export const changeSelected = (featured: any) => {
+	export const changeSelected = (featured: any, updateFilter: boolean = false) => {
 		selected = featured;
+		if (updateFilter) {
+			console.log('update')
+			selectedFilter = featured.eventType;
+		}
 		const selector = `#ball-${featured.id}`;
 		const element = document.querySelector(selector);
 		//@ts-ignore

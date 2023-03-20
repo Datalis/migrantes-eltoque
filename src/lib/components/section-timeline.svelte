@@ -79,7 +79,7 @@
 		gsap.registerPlugin(ScrollTrigger);
 		const tl = gsap.timeline();
 
-		timeline.changeSelected(featureds[swiperIndex]);
+		timeline.changeSelected(featureds[swiperIndex], isDisabled);
 
 		if (windowWidth >= 768) { // desktop
 			tl.to('#events', {
