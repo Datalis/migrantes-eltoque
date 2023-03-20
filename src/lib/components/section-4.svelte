@@ -9,11 +9,14 @@
 	let showModal = false;
 	let showToast = false;
 	let errorSubmit = false;
+	let errorMessage = "";
 
 	/**
 	 * @type {any[]}
 	 */
 	export let deceased = [];
+
+	$: data = deceased?.filter(e => e[1] == 'Sí').reverse();
 
 	const formatAge = (/** @type {string} */ ageText) => {
 		if (ageText == 'desconocida') return 'Edad desconocida';
@@ -23,7 +26,7 @@
 
 </script>
 
-<Toast show={showToast} isError={errorSubmit} />
+<Toast show={showToast} isError={errorSubmit} message={errorMessage} />
 
 <section class="section-4 bg-dark min-h-screen">
 	{#if showModal}
@@ -31,8 +34,10 @@
 			on:close={() => (showModal = false)}
 			isMissing={false}
 			on:submit={(e) => {
+				console.log(e.detail)
 				showToast = true;
 				errorSubmit = e.detail.isError;
+				errorMessage = e.detail.message;
 				setInterval(() => {showToast = false}, 8000)
 			}}
 		/>
@@ -47,11 +52,11 @@
 					En memoria de quienes no pudieron completar su camino
 				</h2>
 			</div>
-			{#each deceased?.filter(e => e[1] == 'Sí') as person}
+			{#each data as person}
 				<div class="grid-item flex flex-col items-center justify-between p-4">
 					<div class="overlay p-4 flex items-center">
 						<p class="font-medium text-xs">
-							{person[11]}
+							{person[11] || ''}
 						</p>
 					</div>
 					<img class="pic" src={'https://api.eltoque.com' + person[2]} alt="Picture of {[person[3]]}" loading="lazy">

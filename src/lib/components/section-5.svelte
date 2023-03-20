@@ -24,6 +24,7 @@
 
 	let showToast = false;
 	let errorSubmit = false;
+	let errorMessage = "";
 
 	// let showMissing = false;
 	let showModal = false;
@@ -50,7 +51,7 @@
 	}
 </script>
 
-<Toast show={showToast} isError={errorSubmit} />
+<Toast show={showToast} message={errorMessage} isError={errorSubmit} />
 
 {#if showModal}
 	{#key selectedPerson}
@@ -63,6 +64,7 @@
 			on:submit={(e) => {
 				showToast = true;
 				errorSubmit = e.detail.isError;
+				errorMessage = e.detail.message;
 				setInterval(() => {
 					showToast = false;
 				}, 8000);
