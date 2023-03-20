@@ -57,7 +57,7 @@
 			};
 		});
 		years = [...new Set(years)].reverse().filter(value => value);
-		return values.filter(value => value.date).sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
+		return values.filter(value => !isNaN(value.date)).sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
 	};
 	events = dataToObject(events);
 	let featureds = events.filter((event) => event.isFeature);

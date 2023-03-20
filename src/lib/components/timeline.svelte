@@ -15,7 +15,6 @@
 	export const changeSelected = (featured: any, updateFilter: boolean = false) => {
 		selected = featured;
 		if (updateFilter) {
-			console.log('update')
 			selectedFilter = featured.eventType;
 		}
 		const selector = `#ball-${featured.id}`;

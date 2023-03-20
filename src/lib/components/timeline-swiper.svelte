@@ -132,7 +132,7 @@
   {/each}
 </Swiper>
 {#if !isDisabled}
-  <div class="swiper-controls absolute bottom-3 w-full justify-center hidden md:flex ml-auto">
+  <div class="swiper-controls absolute bottom-3 w-full justify-center z-20 hidden md:flex ml-auto">
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <span on:click={onSwiperPrev}>
       <ArrowLeftIcon
