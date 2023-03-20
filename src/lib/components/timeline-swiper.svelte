@@ -131,21 +131,23 @@
     </SwiperSlide>
   {/each}
 </Swiper>
-<div class="swiper-controls absolute bottom-3 w-full justify-center hidden md:flex ml-auto">
-  <!-- svelte-ignore a11y-click-events-have-key-events -->
-  <span on:click={onSwiperPrev}>
-    <ArrowLeftIcon
-      class="control mr-4 {swiperIndex == 0 || isDisabled ? 'control-disabled' : ''}"
-      width="48"
-      height="48"
-    />
-  </span>
-  <!-- svelte-ignore a11y-click-events-have-key-events -->
-  <span on:click={onSwiperNext}>
-    <ArrowRightIcon
-      class="control {swiperIndex == events?.length - 1 || isDisabled ? 'control-disabled' : ''}"
-      width="48"
-      height="48"
-    />
-  </span>
-</div>
+{#if !isDisabled}
+  <div class="swiper-controls absolute bottom-3 w-full justify-center hidden md:flex ml-auto">
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <span on:click={onSwiperPrev}>
+      <ArrowLeftIcon
+        class="control mr-4 {swiperIndex == 0 ? 'control-disabled' : ''}"
+        width="48"
+        height="48"
+      />
+    </span>
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <span on:click={onSwiperNext}>
+      <ArrowRightIcon
+        class="control {swiperIndex == events?.length - 1 ? 'control-disabled' : ''}"
+        width="48"
+        height="48"
+      />
+    </span>
+  </div>
+  {/if}
