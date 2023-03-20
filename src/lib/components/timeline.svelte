@@ -69,28 +69,60 @@
 	const activeFilter = (e: any) => {
 		switch (e.target.innerText) {
 			case 'Detenciones':
-				selectedFilter = 'detención';
+				if (selectedFilter == 'detención') {
+					selectedFilter = ''
+				} else {
+					selectedFilter = 'detención';
+				}
 				break;
 			case 'Rescates':
-				selectedFilter = 'rescate';
+				if (selectedFilter == 'rescate') {
+					selectedFilter = ''
+				} else {
+					selectedFilter = 'rescate';
+				}
 				break;
 			case 'Intercepciones':
-				selectedFilter = 'intercepción';
+				if (selectedFilter == 'intercepción') {
+					selectedFilter = ''
+				} else {
+					selectedFilter = 'intercepción';
+				}
 				break;
 			case 'Transferencias':
-				selectedFilter = 'transferencia';
+				if (selectedFilter == 'transferencia') {
+					selectedFilter = ''
+				} else {
+					selectedFilter = 'transferencia';
+				}
 				break;
 			case 'Expulsión':
-				selectedFilter = 'expulsión';
+				if (selectedFilter == 'expulsión') {
+					selectedFilter = ''
+				} else {
+					selectedFilter = 'expulsión';
+				}
 				break;
 			case 'Repatriación':
-				selectedFilter = 'repatriación';
+				if (selectedFilter == 'repatriación') {
+					selectedFilter = ''
+				} else {
+					selectedFilter = 'repatriación';
+				}
 				break;
 			case 'Muerte':
-				selectedFilter = 'muerte';
+				if (selectedFilter == 'muerte') {
+					selectedFilter = ''
+				} else {
+					selectedFilter = 'muerte';
+				}
 				break;
 			case 'Desapariciones':
-				selectedFilter = 'desaparición';
+				if (selectedFilter == 'desaparición') {
+					selectedFilter = ''
+				} else {
+					selectedFilter = 'desaparición';
+				}
 				break;
 		}
 	};
