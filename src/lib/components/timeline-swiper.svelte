@@ -74,7 +74,7 @@
     events = e;
     // swiperIndex = events.length - 1;
     // timeline.changeSelected(events[events.length - 1])
-    swiper.slideTo(events.length - 1)
+    swiper.slideTo(0)
   }
 
   export function slidePrev() {
