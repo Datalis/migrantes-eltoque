@@ -70,6 +70,13 @@
     swiper.slideTo(index);
   }
 
+  export const update = (e: any[]) => {
+    events = e;
+    // swiperIndex = events.length - 1;
+    // timeline.changeSelected(events[events.length - 1])
+    swiper.slideTo(events.length - 1)
+  }
+
   export function slidePrev() {
     swiper.slidePrev();
   }

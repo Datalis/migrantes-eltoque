@@ -130,6 +130,10 @@
 		}
 	};
 
+	export const resetFilter = () => {
+		selectedFilter = "";
+	}
+
 	onMount(() => {
 		gsap.registerPlugin(ScrollTrigger);
 		gsap.registerPlugin(ScrollToPlugin);

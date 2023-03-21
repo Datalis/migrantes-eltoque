@@ -97,7 +97,9 @@
 							if (isDisabled) {
 								isDisabled = false;
 								featureds = events;
-								timelineSwiper.slidePrev();
+								timeline.resetFilter();
+								// timelineSwiper.slidePrev();
+								timelineSwiper.update(events);
 							}
 							return;
 						} else if (progress >= counter && progress < value + counter) {
