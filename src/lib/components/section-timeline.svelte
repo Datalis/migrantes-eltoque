@@ -18,6 +18,8 @@
 	let modal: any;
 
 	let swiperIndex = 0;
+	let eventIndex = 0;
+	$: selected = featureds[swiperIndex];
 
 	const emptyToNull = (value: string): string | null => (value === '' ? null : value);
 
@@ -65,13 +67,13 @@
 	const show_event = (event: any) => {
 		const index = featureds.findIndex((value) => value.id == event.id);
 		swiperIndex = index + 1 - 1;
+		timeline.changeSelected(featureds[index]);
 		if (windowWidth <= 768) {
-			timeline.changeSelected(featureds[index]);
 			isDisabled = false;
 			modal?.update(featureds[index].id)
 			showModal = true;
 		} else {
-			timelineSwiper.slideTo(index);
+			selected = featureds[swiperIndex]
 		}
 	};
 
@@ -79,7 +81,7 @@
 		gsap.registerPlugin(ScrollTrigger);
 		const tl = gsap.timeline();
 
-		timeline.changeSelected(featureds[swiperIndex], isDisabled);
+		timeline.changeSelected(featureds[eventIndex], isDisabled);
 
 		if (windowWidth >= 768) { // desktop
 			tl.to('#events', {
@@ -93,12 +95,12 @@
 						const progress = parseFloat(self.progress.toFixed(2)) * 100;
 						const value = parseFloat((90 / featureds.length).toFixed(0));
 
-						if (progress > 90) {
+						if (progress >= 90) {
 							if (isDisabled) {
 								isDisabled = false;
 								featureds = events;
-								timelineSwiper.slidePrev();
-								timelineSwiper.update(events);
+								swiperIndex = featureds.length - 1;
+								eventIndex = swiperIndex;
 								timeline.resetFilter();
 							}
 							return;
@@ -106,12 +108,17 @@
 							isDisabled = true;
 						} else if (progress > counter) {
 							counter += value;
-							timelineSwiper.onSwiperNext(null, true);
+							swiperIndex += 1;
+							eventIndex = events.indexOf(featureds[swiperIndex])
+							timeline.changeSelected(events[eventIndex], isDisabled);
 						} else if (progress < counter) {
 							counter -= value;
-							timelineSwiper.onSwiperPrev(null, true);
+							swiperIndex -= 1;
+							eventIndex = events.indexOf(featureds[swiperIndex])
+							timeline.changeSelected(events[eventIndex], isDisabled);
 						}
 						featureds = events.filter((event) => event.isFeature);
+						selected = featureds[swiperIndex]
 					}
 				}
 			});
@@ -178,6 +185,7 @@ class="flex flex-col items-center relative section-timeline bg-dark md:pb-20"
 				{#if windowWidth >= 768}
 					<TimelineSwiper
 						events={featureds}
+						{selected}
 						{timeline}
 						{isDisabled}
 						{swiperIndex}
