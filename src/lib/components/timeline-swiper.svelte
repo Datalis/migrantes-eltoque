@@ -14,11 +14,6 @@
   export let swiperIndex = 0;
   export let selected: any;
 
-  // let swiper: {
-  //   [x: string]: any;
-  //   activeIndex: number;
-  // };
-
   const months = [
     'Enero',
     'Febrero',
@@ -34,12 +29,21 @@
     'Diciembre'
   ];
 
-  // export const update = (e: any[]) => {
-  //   events = e;
-  //   // swiperIndex = events.length - 1;
-  //   // timeline.changeSelected(events[events.length - 1])
-  //   swiper.slideTo(0)
-  // }
+  const handleNext = () => {
+    if (swiperIndex !== events.length - 1) {
+      swiperIndex++;
+      selected = events[swiperIndex];
+      timeline.changeSelected(selected);
+    }
+  }
+
+  const handlePrev = () => {
+    if (swiperIndex !== 0) {
+      swiperIndex--;
+      selected = events[swiperIndex];
+      timeline.changeSelected(selected);
+    }
+  }
 
   const getImageFromEvent = (event: any) => {
     switch (event.eventType) {
@@ -85,7 +89,7 @@
 {#if !isDisabled}
   <div class="swiper-controls absolute bottom-3 w-full justify-center z-20 hidden md:flex ml-auto">
     <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <span on:click={() => swiperIndex--}>
+    <span on:click={handlePrev}>
       <ArrowLeftIcon
         class="control mr-4 {swiperIndex == 0 ? 'control-disabled' : ''}"
         width="48"
@@ -93,7 +97,7 @@
       />
     </span>
     <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <span on:click={() => swiperIndex++}>
+    <span on:click={handleNext}>
       <ArrowRightIcon
         class="control {swiperIndex == events?.length - 1 ? 'control-disabled' : ''}"
         width="48"

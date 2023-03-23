@@ -101,6 +101,7 @@
 								featureds = events;
 								swiperIndex = featureds.length - 1;
 								eventIndex = swiperIndex;
+								timeline.changeSelected(featureds[eventIndex]);
 								timeline.resetFilter();
 							}
 							return;
@@ -113,7 +114,11 @@
 							timeline.changeSelected(events[eventIndex], isDisabled);
 						} else if (progress < counter) {
 							counter -= value;
-							swiperIndex -= 1;
+							if (swiperIndex >= featureds.length) {
+								swiperIndex = featureds.length - 1
+							} else {
+								swiperIndex -= 1;
+							}
 							eventIndex = events.indexOf(featureds[swiperIndex])
 							timeline.changeSelected(events[eventIndex], isDisabled);
 						}
