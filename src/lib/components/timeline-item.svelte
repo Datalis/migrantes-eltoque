@@ -56,6 +56,6 @@
   }
   .ball.highlight {
     @apply bg-light border-none border-0;
-    box-shadow: inset 0 0 0 3px rgb(31, 32, 67), inset 0 0 0 6px rgb(120,86,255);
+    box-shadow: inset 0 0 0 2px rgb(120,86,255), inset 0 0 0 6px rgb(31, 32, 67);
   }
 </style>
