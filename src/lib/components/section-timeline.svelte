@@ -109,9 +109,24 @@
 							isDisabled = true;
 						} else if (progress > counter) {
 							counter += value;
-							swiperIndex += 1;
+							if (swiperIndex >= featureds.length) {
+								swiperIndex = featureds.length - 1
+							} else {
+								swiperIndex += 1;
+							}
 							eventIndex = events.indexOf(featureds[swiperIndex])
-							timeline.changeSelected(events[eventIndex], isDisabled);
+							if (eventIndex === -1) {
+								console.log('progress', progress)
+								console.log('counter', counter)
+								console.log('swiperIndex', swiperIndex)
+								console.log('featureds', featureds.length)
+								console.log('swiperIndex >= featureds.length:', swiperIndex >= featureds.length)
+								console.log('eventIndex', eventIndex)
+								console.log('events', events.length)
+								console.log('isDisabled', isDisabled)
+							} else {
+								timeline.changeSelected(events[eventIndex], isDisabled);
+							}
 						} else if (progress < counter) {
 							counter -= value;
 							if (swiperIndex >= featureds.length) {
@@ -120,10 +135,14 @@
 								swiperIndex -= 1;
 							}
 							eventIndex = events.indexOf(featureds[swiperIndex])
+							console.log('featureds', swiperIndex, 'of', featureds.length)
+							console.log('events', eventIndex, 'of', events.length)
 							timeline.changeSelected(events[eventIndex], isDisabled);
 						}
 						featureds = events.filter((event) => event.isFeature);
-						selected = featureds[swiperIndex]
+						if (swiperIndex != -1) {
+							selected = featureds[swiperIndex]
+						}
 					}
 				}
 			});

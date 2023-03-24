@@ -229,7 +229,7 @@
 		@apply shrink-0;
 	}
 	.button, .button:hover:disabled {
-		@apply rounded-xl text-light bg-dark px-2 py-1 border border-accent text-sm transition-all duration-200;
+		@apply rounded-xl text-light bg-dark m-1 px-2 py-1 border border-accent text-sm transition-all duration-200;
 	}
 
 	.button:hover,
