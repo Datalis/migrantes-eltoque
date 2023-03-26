@@ -116,14 +116,6 @@
 							}
 							eventIndex = events.indexOf(featureds[swiperIndex])
 							if (eventIndex === -1) {
-								console.log('progress', progress)
-								console.log('counter', counter)
-								console.log('swiperIndex', swiperIndex)
-								console.log('featureds', featureds.length)
-								console.log('swiperIndex >= featureds.length:', swiperIndex >= featureds.length)
-								console.log('eventIndex', eventIndex)
-								console.log('events', events.length)
-								console.log('isDisabled', isDisabled)
 							} else {
 								timeline.changeSelected(events[eventIndex], isDisabled);
 							}
@@ -135,8 +127,6 @@
 								swiperIndex -= 1;
 							}
 							eventIndex = events.indexOf(featureds[swiperIndex])
-							console.log('featureds', swiperIndex, 'of', featureds.length)
-							console.log('events', eventIndex, 'of', events.length)
 							timeline.changeSelected(events[eventIndex], isDisabled);
 						}
 						featureds = events.filter((event) => event.isFeature);
@@ -163,6 +153,12 @@
 					}
 				}
 			});
+            // isDisabled = false;
+            featureds = events;
+            swiperIndex = featureds.length - 1;
+            eventIndex = swiperIndex;
+            timeline.changeSelected(featureds[eventIndex]);
+            timeline.resetFilter();
 		}
 	});
 </script>
