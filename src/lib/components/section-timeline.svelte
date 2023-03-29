@@ -95,6 +95,10 @@
 						const progress = parseFloat(self.progress.toFixed(2)) * 100;
 						const value = parseFloat((90 / featureds.length).toFixed(0));
 
+                        if (!isDisabled) {
+                                return
+                            }
+
 						if (progress >= 90) {
 							if (isDisabled) {
 								isDisabled = false;
@@ -106,7 +110,6 @@
 							}
 							return;
 						} else if (progress >= counter && progress < value + counter) {
-							isDisabled = true;
 						} else if (progress > counter) {
 							counter += value;
 							if (swiperIndex >= featureds.length) {
