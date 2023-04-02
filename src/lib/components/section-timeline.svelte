@@ -23,13 +23,22 @@
 
 	const emptyToNull = (value: string): string | null => (value === '' ? null : value);
 
-	const stringToDate = (value: string): Date => {
-		const [day, month, year] = value.split('/');
-		return new Date(Date.UTC(parseInt(year), parseInt(month) - 1, parseInt(day), 12));
+	const stringToDate = (value: string): Date | NaN => {
+		try {
+			const [day, month, year] = value.split('/');
+			return new Date(Date.UTC(parseInt(year), parseInt(month) - 1, parseInt(day), 12));
+		} catch (error) {
+			return NaN;	
+		}
 	};
 	const dataToObject = (data: any[][]) => {
 		let values: any[] = data.map((value: any[]) => {
 			const date = stringToDate(value[1]);
+
+			if (isNaN(date)) {
+				return { date }
+			}
+
 			if (years.length == 0 || years[years.length - 1] != date.getFullYear()) {
 				years.push(date.getFullYear());
 			}
