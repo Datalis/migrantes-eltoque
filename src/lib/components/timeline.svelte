@@ -136,7 +136,7 @@
 
 	onMount(() => {
 		gsap.registerPlugin(ScrollToPlugin);
-		MAX_BALL_PER_MONTH = Math.floor((document.querySelector("#yearsContainer")?.clientHeight - 40) / ballsize);
+		MAX_BALL_PER_MONTH = Math.floor((document.querySelector("#yearsContainer")?.clientHeight - 20) / ballsize);
 		hasRendered = true;
 	});
 </script>
