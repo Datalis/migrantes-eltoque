@@ -1,5 +1,6 @@
 <script lang="ts">
 	import gsap from 'gsap';
+	import ScrollToPlugin from 'gsap/ScrollToPlugin';
 	import ScrollTrigger from 'gsap/ScrollTrigger';
 	import { onMount } from 'svelte';
 	import TimelineEvents from './timeline-events.svelte';
@@ -90,6 +91,7 @@
 
 	onMount(() => {
 		gsap.registerPlugin(ScrollTrigger);
+		gsap.registerPlugin(ScrollToPlugin);
 		const tl = gsap.timeline();
 
 		timeline.changeSelected(featureds[eventIndex], isDisabled);
