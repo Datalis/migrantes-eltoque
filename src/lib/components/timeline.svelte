@@ -1,6 +1,5 @@
 <script lang="ts">
 	import gsap from 'gsap';
-	import ScrollTrigger from 'gsap/ScrollTrigger';
 	import ScrollToPlugin from 'gsap/ScrollToPlugin';
 	import { onMount } from 'svelte';
 	import TimelineList from './timeline-list.svelte';
@@ -8,7 +7,8 @@
 	export let events: any[] = [];
 	export let years: number[] = [];
 	let selected: any;
-	const MAX_BALL_PER_MONTH = 16;
+	let MAX_BALL_PER_MONTH = 16;
+	let hasRendered = false;
 	export let isDisabled = true;
 	export let show_event: (e: any) => void;
 
@@ -27,7 +27,7 @@
 	};
 
 	let selectedFilter: string = '';
-	let ballsize = 0;
+	let ballsize = 30;
 	const months = [
 		'Diciembre',
 		'Noviembre',
@@ -135,8 +135,9 @@
 	}
 
 	onMount(() => {
-		gsap.registerPlugin(ScrollTrigger);
 		gsap.registerPlugin(ScrollToPlugin);
+		MAX_BALL_PER_MONTH = Math.floor((document.querySelector("#yearsContainer")?.clientHeight - 40) / ballsize);
+		hasRendered = true;
 	});
 </script>
 
@@ -198,19 +199,21 @@
 					<div class="line year">
 						<span>{year}</span>
 					</div>
-					{#each months as month, i}
-						{#if getDataByMonth(events, i, year)[0].length != 0}
-							<TimelineList
-								data={getDataByMonth(events, i, year)}
-								{selectedFilter}
-								{ballsize}
-								{selected}
-								{month}
-								{isDisabled}
-								{show_event}
-							/>
-						{/if}
-					{/each}
+					{#if hasRendered}
+						{#each months as month, i}
+							{#if getDataByMonth(events, i, year)[0].length != 0}
+								<TimelineList
+									data={getDataByMonth(events, i, year)}
+									{selectedFilter}
+									{ballsize}
+									{selected}
+									{month}
+									{isDisabled}
+									{show_event}
+								/>
+							{/if}
+						{/each}
+					{/if}
 				</div>
 			{/each}
 		</div>
@@ -258,8 +261,8 @@
 	/* #timelineContainer div:last-child > span {
 		@apply border-0;
 	} */
-	.division {
+	/* .division {
 		width: calc(100% - 32px);
 		@apply absolute border-b-2 border-light top-1/2 right-0;
-	}
+	} */
 </style>
