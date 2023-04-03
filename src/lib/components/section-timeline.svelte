@@ -28,7 +28,7 @@
 			const [day, month, year] = value.split('/');
 			return new Date(Date.UTC(parseInt(year), parseInt(month) - 1, parseInt(day), 12));
 		} catch (error) {
-			return NaN;	
+			return NaN;
 		}
 	};
 	const dataToObject = (data: any[][]) => {
@@ -36,7 +36,7 @@
 			const date = stringToDate(value[1]);
 
 			if (isNaN(date)) {
-				return { date }
+				return { date };
 			}
 
 			if (years.length == 0 || years[years.length - 1] != date.getFullYear()) {
@@ -67,8 +67,10 @@
 				isFeature: emptyToNull(value[20])
 			};
 		});
-		years = [...new Set(years)].reverse().filter(value => value);
-		return values.filter(value => !isNaN(value.date)).sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
+		years = [...new Set(years)].reverse().filter((value) => value);
+		return values
+			.filter((value) => !isNaN(value.date))
+			.sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
 	};
 	events = dataToObject(events);
 	let featureds = events.filter((event) => event.isFeature);
@@ -79,10 +81,10 @@
 		timeline.changeSelected(featureds[index]);
 		if (windowWidth <= 768) {
 			isDisabled = false;
-			modal?.update(featureds[index].id)
+			modal?.update(featureds[index].id);
 			showModal = true;
 		} else {
-			selected = featureds[swiperIndex]
+			selected = featureds[swiperIndex];
 		}
 	};
 
@@ -92,7 +94,8 @@
 
 		timeline.changeSelected(featureds[eventIndex], isDisabled);
 
-		if (windowWidth >= 768) { // desktop
+		if (windowWidth >= 768) {
+			// desktop
 			tl.to('#events', {
 				scrollTrigger: {
 					trigger: '#events',
@@ -104,9 +107,11 @@
 						const progress = parseFloat(self.progress.toFixed(2)) * 100;
 						const value = parseFloat((90 / featureds.length).toFixed(0));
 
-                        if (!isDisabled) {
-                                return
-                            }
+						if (!isDisabled) {
+							self.disable();
+							gsap.to(window, {transition: 1, scrollTo: '#events'});
+							return;
+						}
 
 						if (progress >= 90) {
 							if (isDisabled) {
@@ -122,11 +127,11 @@
 						} else if (progress > counter) {
 							counter += value;
 							if (swiperIndex >= featureds.length) {
-								swiperIndex = featureds.length - 1
+								swiperIndex = featureds.length - 1;
 							} else {
 								swiperIndex += 1;
 							}
-							eventIndex = events.indexOf(featureds[swiperIndex])
+							eventIndex = events.indexOf(featureds[swiperIndex]);
 							if (eventIndex === -1) {
 							} else {
 								timeline.changeSelected(events[eventIndex], isDisabled);
@@ -134,25 +139,26 @@
 						} else if (progress < counter) {
 							counter -= value;
 							if (swiperIndex >= featureds.length) {
-								swiperIndex = featureds.length - 1
+								swiperIndex = featureds.length - 1;
 							} else {
 								swiperIndex -= 1;
 							}
-							eventIndex = events.indexOf(featureds[swiperIndex])
+							eventIndex = events.indexOf(featureds[swiperIndex]);
 							timeline.changeSelected(events[eventIndex], isDisabled);
 						}
 						featureds = events.filter((event) => event.isFeature);
 						if (swiperIndex != -1) {
-							selected = featureds[swiperIndex]
+							selected = featureds[swiperIndex];
 						}
 					}
 				}
 			});
-		} else { // mobile view
-			const eventsDivs = gsap.utils.toArray('.event-info')
+		} else {
+			// mobile view
+			const eventsDivs = gsap.utils.toArray('.event-info');
 			tl.to(eventsDivs, {
 				xPercent: -100 * (eventsDivs.length - 1),
-				ease: "none",
+				ease: 'none',
 				scrollTrigger: {
 					trigger: '#events',
 					pin: true,
@@ -165,30 +171,29 @@
 					}
 				}
 			});
-            // isDisabled = false;
-            featureds = events;
-            swiperIndex = featureds.length - 1;
-            eventIndex = swiperIndex;
-            timeline.changeSelected(featureds[eventIndex]);
-            timeline.resetFilter();
+			// isDisabled = false;
+			featureds = events;
+			swiperIndex = featureds.length - 1;
+			eventIndex = swiperIndex;
+			timeline.changeSelected(featureds[eventIndex]);
+			timeline.resetFilter();
 		}
 	});
 </script>
 
-
 <svelte:window bind:innerWidth={windowWidth} />
 
 <section
-id="section-timeline"
-class="flex flex-col items-center relative section-timeline bg-dark md:pb-20"
+	id="section-timeline"
+	class="flex flex-col items-center relative section-timeline bg-dark md:pb-20"
 >
-{#if showModal}
-	<TimelineModal
-		bind:this={modal}
-		on:close={() => (showModal = false)}
-		event={featureds[swiperIndex]}
-	/>
-{/if}
+	{#if showModal}
+		<TimelineModal
+			bind:this={modal}
+			on:close={() => (showModal = false)}
+			event={featureds[swiperIndex]}
+		/>
+	{/if}
 	<div class="container">
 		<div class="flex flex-col justify-center items-center pt-10 md:pt-32">
 			<div class="max-w-3xl md:mb-10 px-10">
@@ -199,11 +204,11 @@ class="flex flex-col items-center relative section-timeline bg-dark md:pb-20"
 					del camino
 				</h2>
 				<p class="text-light">
-					Hasta el momento hemos identificado {events.length} incidentes que han ocurrido desde enero de
-					2021 que involucran a migrantes cubanos en diferentes zonas geográficas. Las historias no
-					solo reflejan la tragedia que significa que alguien muera o desaparezca, también han sido
-					rescatados o interceptados en el mar, detenidos por las autoridades de los países donde se
-					encuentra, devueltos o repatriados.
+					Hasta el momento hemos identificado {events.length} incidentes que han ocurrido desde enero
+					de 2021 que involucran a migrantes cubanos en diferentes zonas geográficas. Las historias no
+					solo reflejan la tragedia que significa que alguien muera o desaparezca, también han sido rescatados
+					o interceptados en el mar, detenidos por las autoridades de los países donde se encuentra,
+					devueltos o repatriados.
 				</p>
 			</div>
 		</div>
