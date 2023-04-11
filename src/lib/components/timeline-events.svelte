@@ -65,7 +65,7 @@
 					{event.date.getFullYear()}
 				</h3>
 				<p class="">{event.description}</p>
-				{#if event.source == null}
+				{#if event.source}
 					<p class="mt-2">
 						<span class="font-bold uppercase">Fuente:</span>
 						<a
