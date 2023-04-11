@@ -19,7 +19,7 @@
 		loading="lazy"
 	/>
 	<span class="font-semibold mt-4">{data[3]}</span>
-	<small>{data[12]} / {formatAge(data[5])}</small>
+	<small>{data[12] || 'Origen Desconocido'} / {formatAge(data[5])}</small>
 	<div class="text-wrapper">
 		<p class="text-sm my-4 leading-tight">
 			{data[10]}
