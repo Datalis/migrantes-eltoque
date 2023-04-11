@@ -73,12 +73,14 @@
 		{selected.date.getFullYear()}
 	</h3>
 	<p class="">{selected.description}</p>
-	<p class="mt-2">
-		<span class="font-bold uppercase">Fuente:</span>
-		<a class="underline underline-offset-2" href={selected.links} target="_blank" rel="noreferrer"
-			>{selected.source}</a
-		>
-	</p>
+	{#if selected.source}
+		<p class="mt-2">
+			<span class="font-bold uppercase">Fuente:</span>
+			<a class="underline underline-offset-2" href={selected.links} target="_blank" rel="noreferrer"
+				>{selected.source}</a
+			>
+		</p>
+	{/if}
 </div>
 
 {#if !isDisabled}
