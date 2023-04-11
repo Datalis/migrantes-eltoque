@@ -20,7 +20,7 @@
             {show_event}
             {isDisabled}
         />
-        <span class="w-9">{d === data[0] ? month : ''}</span>
+        <span class="w-9 {d === data[0] ? '' : 'second'}">{month}</span>
     </div>
 {/each}
 
@@ -33,5 +33,9 @@
         writing-mode: vertical-lr;
         transform: rotate(180deg);
         @apply text-gray opacity-50 text-sm border-l-2 border-light text-end h-full;
+    }
+
+    .line span.second {
+        @apply opacity-25 border-opacity-80 border-dashed;
     }
 </style>
