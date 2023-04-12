@@ -67,7 +67,7 @@
 	alt={selected.name}
 	loading="lazy"
 />
-<div class="px-8 mt-40 md:mt-24 relative z-10">
+<div class="px-8 mt-40 md:mt-[40%] relative z-10">
 	<h3 class="uppercase font-bold mb-2">
 		{months[selected.date.getMonth()]}
 		{selected.date.getFullYear()}
