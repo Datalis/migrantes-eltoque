@@ -5,6 +5,11 @@
 	import MuerteImg from '$lib/assets/images/section-timeline/muerte.png?w=400&webp';
 	import RepatriacionImg from '$lib/assets/images/section-timeline/repatriacion.png?w=400&webp';
 	import RescateImg from '$lib/assets/images/section-timeline/rescates.png?w=400&webp';
+	import DesaparicionImg from '$lib/assets/images/section-timeline/desaparicion.png?w=400&webp';
+	import ExpulsionImg from '$lib/assets/images/section-timeline/expulsion.png?w=400&webp';
+	import IntercepcionImg from '$lib/assets/images/section-timeline/intercepcion.png?w=400&webp';
+	import TransferenciaImg from '$lib/assets/images/section-timeline/transferencia.png?w=400&webp';
+
 
 	export let events: any[];
 
@@ -33,6 +38,16 @@
 				return MuerteImg;
 			case 'rescates':
 				return RescateImg;
+			case 'desaparición':
+				return DesaparicionImg;
+			case 'rescate':
+				return RescateImg;
+			case 'intercepción':
+				return IntercepcionImg;
+			case 'transferencia':
+				return TransferenciaImg;
+			case 'expulsión':
+				return ExpulsionImg;
 			default:
 				return RepatriacionImg; // TODO: add other images
 		}
@@ -60,13 +75,13 @@
 				loading="lazy"
 			/>
 			<div class="px-8 mt-40 md:mt-24 relative z-10">
-				<h3 class="uppercase font-bold mb-2">
+				<h3 class="uppercase font-bold mb-4">
 					{months[event.date.getMonth()]}
-					{event.date.getFullYear()}
+					{event.date.getFullYear()} / {event.eventType}
 				</h3>
 				<p class="">{event.description}</p>
 				{#if event.source}
-					<p class="mt-2">
+					<p class="mt-4">
 						<span class="font-bold uppercase">Fuente:</span>
 						<a
 							class="underline underline-offset-2"
