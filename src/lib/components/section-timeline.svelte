@@ -7,6 +7,7 @@
 	import TimelineModal from './timeline-modal.svelte';
 	import TimelineSwiper from './timeline-swiper.svelte';
 	import TimeLine from './timeline.svelte';
+	import TimelineEventModal from './timeline-event-modal.svelte';
 
 	export let events: any[] = [];
 	let years: number[] = [];
@@ -17,6 +18,7 @@
 	let showModal: boolean = false;
 	let windowWidth = 0;
 	let modal: any;
+	let showEndScroll: boolean = false;
 
 	let swiperIndex = 0;
 	let eventIndex = 0;
@@ -124,6 +126,11 @@
 								timeline.changeSelected(featureds[eventIndex]);
 								timeline.resetFilter();
 							}
+							showEndScroll = true;
+							const x = setInterval(() => {
+								showEndScroll = false;
+								clearInterval(x)
+							}, 3000)
 							return;
 						} else if (progress >= counter && progress < value + counter) {
 						} else if (progress > counter) {
@@ -194,6 +201,11 @@
 			bind:this={modal}
 			on:close={() => (showModal = false)}
 			event={featureds[swiperIndex]}
+		/>
+	{/if}
+	{#if showEndScroll}
+		<TimelineEventModal 
+			on:close={() => showEndScroll = false}
 		/>
 	{/if}
 	<div class="container">
