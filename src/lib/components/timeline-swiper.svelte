@@ -7,6 +7,10 @@
 	import MuerteImg from '$lib/assets/images/section-timeline/muerte.png?w=400&webp';
 	import RepatriacionImg from '$lib/assets/images/section-timeline/repatriacion.png?w=400&webp';
 	import RescateImg from '$lib/assets/images/section-timeline/rescates.png?w=400&webp';
+	import DesaparicionImg from '$lib/assets/images/section-timeline/desaparicion.png?w=400&webp';
+	import ExpulsionImg from '$lib/assets/images/section-timeline/expulsion.png?w=400&webp';
+	import IntercepcionImg from '$lib/assets/images/section-timeline/intercepcion.png?w=400&webp';
+	import TransferenciaImg from '$lib/assets/images/section-timeline/transferencia.png?w=400&webp';
 
 	export let events: any[];
 	export let isDisabled: boolean;
@@ -55,6 +59,16 @@
 				return MuerteImg;
 			case 'rescates':
 				return RescateImg;
+			case 'desaparición':
+				return DesaparicionImg;
+			case 'rescate':
+				return RescateImg;
+			case 'intercepción':
+				return IntercepcionImg;
+			case 'transferencia':
+				return TransferenciaImg;
+			case 'expulsión':
+				return ExpulsionImg;
 			default:
 				return RepatriacionImg; // TODO: add other images
 		}
