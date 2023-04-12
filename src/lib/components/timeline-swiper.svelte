@@ -82,13 +82,13 @@
 	loading="lazy"
 />
 <div class="px-8 mt-40 md:mt-[40%] relative z-10">
-	<h3 class="uppercase font-bold mb-2">
+	<h3 class="uppercase font-bold mb-4">
 		{months[selected.date.getMonth()]}
-		{selected.date.getFullYear()}
+		{selected.date.getFullYear()} / {selected.eventType}
 	</h3>
 	<p class="">{selected.description}</p>
 	{#if selected.source}
-		<p class="mt-2">
+		<p class="mt-4">
 			<span class="font-bold uppercase">Fuente:</span>
 			<a class="underline underline-offset-2" href={selected.links} target="_blank" rel="noreferrer"
 				>{selected.source}</a
