@@ -127,10 +127,6 @@
 								timeline.resetFilter();
 							}
 							showEndScroll = true;
-							const x = setInterval(() => {
-								showEndScroll = false;
-								clearInterval(x)
-							}, 3000)
 							return;
 						} else if (progress >= counter && progress < value + counter) {
 						} else if (progress > counter) {

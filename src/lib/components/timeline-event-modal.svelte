@@ -16,7 +16,7 @@
 	};
 </script>
 
-<svelte:window on:keydown={handle_keydown} />
+<svelte:window on:keydown={handle_keydown} on:click={close}/>
 
 <div
 	class="modal bg-dark bg-opacity-100 text-gray w-full h-full flex flex-col items-center justify-center"
@@ -28,7 +28,8 @@
 	<!-- <button on:click={close} type="button" class="close absolute right-4 top-4 z-50">
 		<X width="32" height="32" />
 	</button> -->
-  <div class="w-96">
+  <div class="w-96 text-center">
+    <h2 class="font-sans font-extrabold text-3xl text-light mb-7">Tenemos más historias que contarte</h2>
     Cada círculo corresponde a un evento migratorio. Puedes seguir explorando cada uno de ellos en esta herramienta interactiva y seleccionar las categorías que quieras ver.
   </div>
 </div>
