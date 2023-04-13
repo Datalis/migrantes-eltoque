@@ -173,6 +173,7 @@
 					onLeave: () => {
 						isDisabled = false;
 						featureds = events;
+						showEndScroll = true;
 					}
 				}
 			});
