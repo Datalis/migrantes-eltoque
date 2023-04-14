@@ -248,7 +248,7 @@
 			class="flex flex-col mt-3 md:mt-0 md:flex-row panel-container py-0 md:py-10 md:h-screen"
 		>
 			<div
-				class="h-screen shrink-0 md:shrink md:h-full md:w-1/3 relative bg-accent md:rounded-xl text-light"
+				class="h-screen shrink-0 md:shrink md:h-full md:w-1/3 relative bg-accent md:rounded-xl text-light flex justify-center"
 			>
 				{#if windowWidth >= 768}
 					<TimelineSwiper
