@@ -265,7 +265,7 @@
 						bind:this={timelineSwiper}
 					/>
 				{:else}
-					<TimelineEvents events={featureds} />
+					<TimelineEvents events={events.filter((event) => event.isFeature)} />
 				{/if}
 			</div>
 			{#if windowWidth < 780}
