@@ -106,21 +106,25 @@
 					trigger: '#events',
 					start: 'top top',
 					pin: '#events',
-					end: '+=7000',
+					end: '+=10000',
 					// markers: true,
 					onUpdate: (self) => {
+						const endPercents = 80;
 						const progress = parseFloat(self.progress.toFixed(2)) * 100;
-						const value = parseFloat((90 / featureds.length).toFixed(0));
+						const value = parseFloat((endPercents / featureds.length).toFixed(0));
 
 						if (!isDisabled) {
 							self.disable();
+							showEndScroll = false;
 							gsap.to(window, { transition: 1, scrollTo: '#events' });
 							return;
 						}
-
-						if (progress >= 90) {
+						if (progress >= 95) {
+							console.log('entro')
+							isDisabled = false;
+							return;
+						} else if (progress >= endPercents) {
 							if (isDisabled) {
-								isDisabled = false;
 								featureds = events;
 								swiperIndex = featureds.length - 1;
 								eventIndex = swiperIndex;
@@ -156,7 +160,7 @@
 						if (swiperIndex != -1) {
 							selected = featureds[swiperIndex];
 						}
-					}
+					},
 				}
 			});
 		} else {

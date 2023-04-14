@@ -20,6 +20,7 @@
 <svelte:window on:keydown={handle_keydown} on:click={close}/>
 
 <div
+	id="timeline-event-modal"
 	class="modal bg-dark bg-opacity-100 text-gray w-full h-full flex flex-col items-center justify-center"
 	role="dialog"
 	aria-modal="true"
