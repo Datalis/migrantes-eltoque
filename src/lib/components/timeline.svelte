@@ -224,13 +224,8 @@
 </div>
 
 <style>
-	#filtersContainer::-webkit-scrollbar {
-		display: none;
-		width: 0 !important;
-	}
 	#filtersContainer {
 		height: 52px;
-		scrollbar-width: none;
 	}
 
 	#filtersContainer .disabled,
@@ -254,19 +249,29 @@
 		/* box-shadow: 0px 0px 0px 2px rgba(120, 86, 255, 0.75); */
 	}
 
-	#timelineContainer::-webkit-scrollbar {
-		/* @media screen and (max-width: 768px) {
-			
-		} */
+	@media (hover: none) {
+		#filtersContainer {
+			scrollbar-width: none;
+		}
 
-		display: none;
-		width: 0 !important;
+		#filtersContainer::-webkit-scrollbar {
+			display: none;
+			width: 0 !important;
+		}
+
+		#timelineContainer::-webkit-scrollbar {
+			display: none;
+			width: 0 !important;
+		}
+
+		#timelineContainer {
+			scrollbar-width: none;
+		}
 	}
 
 	#timelineContainer {
 		overflow-x: auto;
 		overflow-y: hidden;
-		scrollbar-width: none;
 	}
 
 	#timelineContainer .timeline-wrapper {
