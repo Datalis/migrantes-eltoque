@@ -73,56 +73,56 @@
 		switch (e.target.innerText) {
 			case 'Detenciones':
 				if (selectedFilter == 'detención') {
-					selectedFilter = ''
+					selectedFilter = '';
 				} else {
 					selectedFilter = 'detención';
 				}
 				break;
 			case 'Rescates':
 				if (selectedFilter == 'rescate') {
-					selectedFilter = ''
+					selectedFilter = '';
 				} else {
 					selectedFilter = 'rescate';
 				}
 				break;
 			case 'Intercepciones':
 				if (selectedFilter == 'intercepción') {
-					selectedFilter = ''
+					selectedFilter = '';
 				} else {
 					selectedFilter = 'intercepción';
 				}
 				break;
 			case 'Transferencias':
 				if (selectedFilter == 'transferencia') {
-					selectedFilter = ''
+					selectedFilter = '';
 				} else {
 					selectedFilter = 'transferencia';
 				}
 				break;
 			case 'Expulsión':
 				if (selectedFilter == 'expulsión') {
-					selectedFilter = ''
+					selectedFilter = '';
 				} else {
 					selectedFilter = 'expulsión';
 				}
 				break;
 			case 'Repatriación':
 				if (selectedFilter == 'repatriación') {
-					selectedFilter = ''
+					selectedFilter = '';
 				} else {
 					selectedFilter = 'repatriación';
 				}
 				break;
 			case 'Muerte':
 				if (selectedFilter == 'muerte') {
-					selectedFilter = ''
+					selectedFilter = '';
 				} else {
 					selectedFilter = 'muerte';
 				}
 				break;
 			case 'Desapariciones':
 				if (selectedFilter == 'desaparición') {
-					selectedFilter = ''
+					selectedFilter = '';
 				} else {
 					selectedFilter = 'desaparición';
 				}
@@ -131,18 +131,25 @@
 	};
 
 	export const resetFilter = () => {
-		selectedFilter = "";
-	}
+		selectedFilter = '';
+	};
 
 	onMount(() => {
 		gsap.registerPlugin(ScrollToPlugin);
-		MAX_BALL_PER_MONTH = Math.floor((document.querySelector("#yearsContainer")?.clientHeight - 20) / ballsize);
+		// MAX_BALL_PER_MONTH = Math.floor(
+		// 	(document.querySelector('#yearsContainer')?.clientHeight - 20) / ballsize
+		// );
 		hasRendered = true;
 	});
 </script>
 
-<div class="md:h-full">
-	<div class="flex justify-between overflow-x-scroll md:overflow-x-hidden {isDisabled ? 'disabled' : ''}">
+<div class="md:h-full flex flex-col">
+	<div
+		id="filtersContainer"
+		class="flex justify-between overflow-x-scroll md:overflow-x-hidden {isDisabled
+			? 'disabled'
+			: ''}"
+	>
 		<button
 			class="button {selectedFilter === 'detención' ? 'active' : ''}"
 			on:click={activeFilter}
@@ -156,8 +163,7 @@
 			disabled={isDisabled}
 		>
 			Rescates
-		</button
-		>
+		</button>
 		<button
 			class="button {selectedFilter === 'intercepción' ? 'active' : ''}"
 			disabled={isDisabled}
@@ -168,18 +174,20 @@
 			disabled={isDisabled}
 			on:click={activeFilter}>Transferencias</button
 		>
-		<button class="button {selectedFilter === 'expulsión' ? 'active' : ''}" on:click={activeFilter}
-			disabled={isDisabled}
-			>Expulsión</button
+		<button
+			class="button {selectedFilter === 'expulsión' ? 'active' : ''}"
+			on:click={activeFilter}
+			disabled={isDisabled}>Expulsión</button
 		>
 		<button
 			class="button {selectedFilter === 'repatriación' ? 'active' : ''}"
 			disabled={isDisabled}
 			on:click={activeFilter}>Repatriación</button
 		>
-		<button class="button {selectedFilter === 'muerte' ? 'active' : ''}" on:click={activeFilter}
-			disabled={isDisabled}
-			>Muerte</button
+		<button
+			class="button {selectedFilter === 'muerte' ? 'active' : ''}"
+			on:click={activeFilter}
+			disabled={isDisabled}>Muerte</button
 		>
 		<button
 			class="button {selectedFilter === 'desaparición' ? 'active' : ''}"
@@ -187,15 +195,10 @@
 			on:click={activeFilter}>Desapariciones</button
 		>
 	</div>
-	<div
-		id="timelineContainer"
-		class="border border-light rounded-xl mt-3 pt-5 relative"
-		style="height: calc(100% - 30px - 0.75rem);"
-	>
-		<div id="yearsContainer" class="flex relative h-full">
-			<!-- <div class="division" /> -->
+	<div id="timelineContainer" class="mt-3 relative">
+		<div class="timeline-wrapper border border-light rounded-xl py-4 mr-5 ml-2">
 			{#each years as year}
-				<div class="flex year-container">
+				<div class="year-container">
 					<div class="line year">
 						<span>{year}</span>
 					</div>
@@ -221,32 +224,87 @@
 </div>
 
 <style>
-	.disabled, .disabled button {
-		@apply cursor-not-allowed;
+	#filtersContainer::-webkit-scrollbar {
+		display: none;
+		width: 0 !important;
 	}
-	#yearsContainer {
-		overflow-x: auto;
-		overflow-y: hidden;
-	}
-	.year-container {
-		@apply shrink-0;
-	}
-	.button, .button:hover:disabled {
-		@apply rounded-xl text-light bg-dark m-1 px-2 py-1 border border-accent text-sm transition-all duration-200;
+	#filtersContainer {
+		height: 52px;
+		scrollbar-width: none;
 	}
 
-	.button:hover,
-	.button.active:hover {
+	#filtersContainer .disabled,
+	#filtersContainer .disabled button {
+		@apply cursor-not-allowed;
+	}
+
+	#filtersContainer .button,
+	#filtersContainer .button:hover:disabled {
+		-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+		@apply rounded-lg text-light bg-dark m-1 px-2 py-1 border border-accent text-sm transition-all duration-200;
+	}
+
+	#filtersContainer .button:hover,
+	#filtersContainer .button.active:hover {
 		@apply bg-light text-accent;
 		box-shadow: none;
 	}
-
-	.button.active {
-		@apply bg-accent border-dark border-2;
-		box-shadow: 0px 0px 0px 2px rgba(120, 86, 255, 0.75);
+	#filtersContainer .button.active {
+		@apply bg-accent border-dark border;
+		/* box-shadow: 0px 0px 0px 2px rgba(120, 86, 255, 0.75); */
 	}
 
-	.line {
+	#timelineContainer::-webkit-scrollbar {
+		/* @media screen and (max-width: 768px) {
+			
+		} */
+
+		display: none;
+		width: 0 !important;
+	}
+
+	#timelineContainer {
+		overflow-x: auto;
+		overflow-y: hidden;
+		scrollbar-width: none;
+	}
+
+	#timelineContainer .timeline-wrapper {
+		width: max-content;
+		min-width: 100%;
+		display: flex;
+		justify-content: space-evenly;
+		padding-right: 2rem;
+		height: 100%;
+	}
+
+	#timelineContainer .year-container {
+		width: 100%;
+		display: flex;
+		justify-content: space-evenly;
+	}
+
+	#timelineContainer .year-container .line {
+		min-width: 2.5rem;
+		writing-mode: vertical-lr;
+		transform: rotate(180deg);
+		@apply text-gray text-opacity-50 text-sm border-l-2 border-light border-opacity-50 text-end h-full;
+	}
+
+	#timelineContainer .year-container .line.year {
+		@apply text-accent border-l-4 border-opacity-100 text-opacity-100;
+	}
+
+	/* #yearsContainer {
+		overflow-x: auto;
+		overflow-y: hidden;
+	} */
+	/* .year-container {
+		@apply shrink-0;
+	}
+	 */
+
+	/* .line {
 		@apply w-9 flex justify-end;
 	}
 
@@ -257,7 +315,7 @@
 	}
 	.year span {
 		@apply text-accent border-l-4 opacity-100 w-9;
-	}
+	} */
 	/* #timelineContainer div:last-child > span {
 		@apply border-0;
 	} */

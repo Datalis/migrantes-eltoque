@@ -22,8 +22,7 @@
 </script>
 
 <div
-  class="container"
-  style="top: calc(50% - {top}px); --tw-translate-x: {ballsize / 2}px"	
+  class="events"
 >
   {#each data as date}
     <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -40,7 +39,31 @@
 </div>
 
 <style>
-  .container {
+  .events {
+    flex-grow: 1;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+  }
+
+  .events .ball {
+    width: var(--ballsize);
+		height: var(--ballsize);
+		position: relative;
+		left: -1.25rem;
+		@apply bg-dark border-2 border-accent rounded-full;
+  }
+
+  .events .ball.highlight {
+		@apply bg-light border-none border-0;
+		box-shadow: inset 0 0 0 2px rgb(120, 86, 255), inset 0 0 0 6px rgb(31, 32, 67);
+	}
+
+  .events .ball.hover:hover {
+    @apply bg-light border-light transition-all duration-500;
+  }
+
+  /* .container {
     @apply flex flex-col items-center w-fit absolute translate-x-4 z-10;
   }
   .ball {
@@ -57,5 +80,5 @@
   .ball.highlight {
     @apply bg-light border-none border-0;
     box-shadow: inset 0 0 0 2px rgb(120,86,255), inset 0 0 0 6px rgb(31, 32, 67);
-  }
+  } */
 </style>
