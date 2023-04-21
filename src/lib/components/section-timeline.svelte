@@ -278,7 +278,7 @@
 				</div>
 			{/if}
 			<div class="w-full md:w-2/3 ml-2 mt-5 md:mt-0">
-				<div class="h-full">
+				<div class="h-4/5 md:h-full">
 					<TimeLine bind:this={timeline} {events} {years} {isDisabled} {show_event} />
 				</div>
 			</div>

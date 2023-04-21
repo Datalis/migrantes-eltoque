@@ -143,7 +143,7 @@
 	});
 </script>
 
-<div class="md:h-full flex flex-col">
+<div class=" h-full flex flex-col">
 	<div
 		id="filtersContainer"
 		class="flex justify-between overflow-x-scroll md:overflow-x-hidden {isDisabled
