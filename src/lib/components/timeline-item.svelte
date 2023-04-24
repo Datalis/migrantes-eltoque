@@ -63,6 +63,9 @@
     @apply bg-light border-light transition-all duration-500;
   }
 
+  .ball.selected {
+    @apply bg-light border-0;
+  }
   /* .container {
     @apply flex flex-col items-center w-fit absolute translate-x-4 z-10;
   }
@@ -73,9 +76,6 @@
   }
   .ball.hover:hover {
     @apply bg-light border-light transition-all duration-500;
-  }
-  .ball.selected {
-    @apply bg-light border-0;
   }
   .ball.highlight {
     @apply bg-light border-none border-0;

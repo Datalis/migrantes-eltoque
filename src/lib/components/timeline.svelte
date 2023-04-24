@@ -1,6 +1,7 @@
 <script lang="ts">
 	import gsap from 'gsap';
 	import ScrollToPlugin from 'gsap/ScrollToPlugin';
+	import ScrollTrigger from 'gsap/ScrollTrigger';
 	import { onMount } from 'svelte';
 	import TimelineList from './timeline-list.svelte';
 
@@ -23,7 +24,7 @@
 		const offset = document.querySelector('#timelineContainer')?.clientWidth - element?.clientWidth;
 
 		//@ts-ignore
-		gsap.to('#yearsContainer', { duration: 1, scrollTo: { x: element, offsetX: offset / 2 } });
+		gsap.to('#timelineContainer', { duration: 1, scrollTo: { x: element, offsetX: offset / 2 } });
 	};
 
 	let selectedFilter: string = '';
@@ -136,14 +137,16 @@
 
 	onMount(() => {
 		gsap.registerPlugin(ScrollToPlugin);
-		// MAX_BALL_PER_MONTH = Math.floor(
-		// 	(document.querySelector('#yearsContainer')?.clientHeight - 20) / ballsize
-		// );
+		gsap.registerPlugin(ScrollTrigger);
+		MAX_BALL_PER_MONTH = Math.floor(
+			(document.querySelector('#yearsContainer')?.clientHeight - 40) / ballsize
+		);
 		hasRendered = true;
 	});
 </script>
 
 <div class=" h-full flex flex-col">
+	<button on:click={() => changeSelected({id: 170}, false)}>probar</button>
 	<div
 		id="filtersContainer"
 		class="flex justify-between overflow-x-scroll md:overflow-x-hidden {isDisabled
