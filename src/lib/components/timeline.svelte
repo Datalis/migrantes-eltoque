@@ -139,14 +139,13 @@
 		gsap.registerPlugin(ScrollToPlugin);
 		gsap.registerPlugin(ScrollTrigger);
 		MAX_BALL_PER_MONTH = Math.floor(
-			(document.querySelector('#yearsContainer')?.clientHeight - 40) / ballsize
+			(document.querySelector('.timeline-wrapper')?.clientHeight - 20) / ballsize
 		);
 		hasRendered = true;
 	});
 </script>
 
 <div class=" h-full flex flex-col">
-	<button on:click={() => changeSelected({id: 170}, false)}>probar</button>
 	<div
 		id="filtersContainer"
 		class="flex justify-between overflow-x-scroll md:overflow-x-hidden {isDisabled
@@ -231,8 +230,9 @@
 		height: 52px;
 	}
 
-	#filtersContainer .disabled,
-	#filtersContainer .disabled button {
+	#filtersContainer.disabled button {
+		background-color: gray;
+		border-color: transparent;
 		@apply cursor-not-allowed;
 	}
 

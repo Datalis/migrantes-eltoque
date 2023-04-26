@@ -15,8 +15,6 @@
     }
   }
 
-  $: top = data.length % 2 == 0 ? (data.length * ballsize) / 2 : ((data.length - 1) * ballsize) / 2;
-
   onMount(() => {
     });
 </script>
@@ -30,7 +28,7 @@
       id="ball-{date.id}"
       on:click={() => show_info(date)}
       class="ball
-        {isDisabled ? '' : 'hover'}
+        {isDisabled ? 'disabled' : 'hover'}
         {date.id == selected ? 'selected' : date.eventType == filter ? 'highlight' : ''}
       "
       style="{`--ballsize:${ballsize}`}px"
@@ -58,6 +56,10 @@
 		@apply bg-light border-none border-0;
 		box-shadow: inset 0 0 0 2px rgb(120, 86, 255), inset 0 0 0 6px rgb(31, 32, 67);
 	}
+  .events .ball.disabled:not(.selected):not(.ball.highlight) {
+    background-color: gray;
+    border-color: gray;
+  }
 
   .events .ball.hover:hover {
     @apply bg-light border-light transition-all duration-500;
