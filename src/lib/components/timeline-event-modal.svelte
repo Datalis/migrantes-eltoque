@@ -38,7 +38,7 @@
 		position: fixed;
 		left: 0;
 		top: 0;
-		overflow: auto;
+		overflow: hidden;
 		z-index: 40;
 	}
 
