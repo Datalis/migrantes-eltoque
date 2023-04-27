@@ -174,7 +174,7 @@
 					pin: true,
 					scrub: 1,
 					snap: 1 / (eventsDivs.length - 1),
-					end: () => '+=10000', // + document.querySelector('#event-container').offsetWidth
+					end: () => '+=7000', // + document.querySelector('#event-container').offsetWidth
 					onLeave: () => {
 						isDisabled = false;
 						featureds = events;
