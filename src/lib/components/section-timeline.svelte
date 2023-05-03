@@ -101,11 +101,11 @@
 
 		if (windowWidth >= 768) {
 			// desktop
-			tl.to('#events', {
+			tl.to('#eventos', {
 				scrollTrigger: {
-					trigger: '#events',
+					trigger: '#eventos',
 					start: 'top top',
-					pin: '#events',
+					pin: '#eventos',
 					end: '+=10000',
 					// markers: true,
 					onUpdate: (self) => {
@@ -116,7 +116,7 @@
 						if (!isDisabled) {
 							self.disable();
 							showEndScroll = false;
-							gsap.to(window, { transition: 1, scrollTo: '#events' });
+							gsap.to(window, { transition: 1, scrollTo: '#eventos' });
 							return;
 						}
 						if (progress >= 95) {
@@ -170,7 +170,7 @@
 				xPercent: -100 * (eventsDivs.length - 1),
 				ease: 'none',
 				scrollTrigger: {
-					trigger: '#events',
+					trigger: '#eventos',
 					pin: true,
 					scrub: 1,
 					snap: 1 / (eventsDivs.length - 1),
@@ -250,11 +250,11 @@
 			</div>
 		</div>
 		<div
-			id="events"
+			id="eventos"
 			class="flex flex-col mt-3 md:mt-0 md:flex-row panel-container py-0 md:py-10 md:h-screen"
 		>
 			<div
-				class="h-screen shrink-0 md:shrink md:h-full md:w-1/3 relative bg-accent md:rounded-xl text-light {windowWidth >=
+				class="h-screen shrink-0 md:shrink md:h-full md:w-1/3 md:pb-20 relative bg-accent md:rounded-xl text-light {windowWidth >=
 				768
 					? 'flex justify-center'
 					: ''}"

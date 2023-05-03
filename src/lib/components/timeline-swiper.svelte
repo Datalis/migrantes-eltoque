@@ -81,7 +81,7 @@
 	alt={selected.name}
 	loading="lazy"
 />
-<div class="h-4/5 px-8 mt-40 md:mt-[20%] md:mb-[30%] overflow-y-auto relative z-10">
+<div class="h-full px-8 pt-40 md:pt-[20%] overflow-y-auto relative z-10">
 	<h3 class="uppercase font-bold mb-4">
 		{months[selected.date.getMonth()]}
 		{selected.date.getFullYear()} / {selected.eventType}
