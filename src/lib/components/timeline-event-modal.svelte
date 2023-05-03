@@ -21,7 +21,7 @@
 
 <div
 	id="timeline-event-modal"
-	class="modal bg-dark bg-opacity-100 text-gray w-2/3 h-5/6 flex flex-col items-center justify-center"
+	class="modal bg-dark bg-opacity-100 text-gray w-full flex flex-col items-center justify-center"
 	role="dialog"
 	aria-modal="true"
 	bind:this={modal}
@@ -35,11 +35,11 @@
 
 <style>
 	.modal {
-		position: fixed;
-		right: 10px;
-		top: 12%;
+		/* position: fixed; */
+		/* right: 10px; */
+		/* top: 12%; */
 		overflow: hidden;
-		z-index: 40;
+		/* z-index: 40; */
 	}
 
 	button.close {
