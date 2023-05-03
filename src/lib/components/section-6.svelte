@@ -121,7 +121,7 @@
 			<Map data={places} bind:this={mapComponent} />
 		</div>
 		<div id="map-text" class="block my-20 z-10 text-lg">
-			<div class="intro bg-black min-h-screen">
+			<div class="intro px-4 md:px-0 bg-black min-h-screen">
 				<h2 class="title">Rutas Migratorias</h2>
 				<p class="text-gray">
 					Las rutas terrestres que cruzan el Darién o parten desde Nicaragua —país al que las
@@ -140,7 +140,7 @@
 			</div>
 			<div class="space h-screen md:h-0" />
 			{#each places.filter((place) => !!place[0]) as p, index}
-				<div id="place-{index}" class="place bg-black text-gray md:px-0 min-h-screen">
+				<div id="place-{index}" class="place bg-black text-gray px-4 md:px-0 min-h-screen">
 					<div class="">
 						<h2 class="title">{p[1]}</h2>
 						<p>{@html p[3]}</p>
@@ -148,7 +148,7 @@
 				</div>
 				<div class="space h-screen md:h-0" />
 			{/each}
-			<div class="resume text-gray gb-black md:px-0 min-h-screen">
+			<div class="resume text-gray gb-black px-4 md:px-0 min-h-screen">
 				<p>
 					Las rutas no son nuevas para los cubanos ni tampoco exclusiva de ellos; pero no por eso
 					dejan de ser peligrosas. La inexperiencia de quienes se aventuran, sus condiciones previas
@@ -169,39 +169,6 @@
 		<LinePathSmall id="line" class="decor-line w-full md:hidden" />
 		<img id="plane" class="decor-plane" src={Plane} alt="" loading="lazy" />
 		<img id="volcano" class="decor-volcano" src={Volcano} alt="" loading="lazy" />
-	</div>
-	<div class="max-w-3xl my-10 md:my-32 px-10">
-		<p class="text-light">
-			Desde octubre de 2020 hasta enero de 2023, la Guardia Costera de los Estados Unidos <a
-				class="underline"
-				target="_blank"
-				rel="noreferrer"
-				href="https://www.news.uscg.mil/Press-Releases/Article/3265898/coast-guard-repatriates-177-people-to-cuba/"
-				>interceptó</a
-			>
-			a 11 937 migrantes cubanos en el mar cuando intentaban llegar a territorio estadounidense. La mayoría
-			de ellos fueron repatriados a la isla. Según los datos recopilados por nuestro equipo durante ese
-			período, las autoridades nacionales regresaron a Cuba al menos a 8 643 personas desde Estados Unidos,
-			<a
-				class="underline"
-				target="_blank"
-				rel="noreferrer"
-				href="http://www.politicamigratoria.gob.mx/es/PoliticaMigratoria/Boletines_Estadisticos"
-				>5 902</a
-			>
-			desde México, 16 desde Guatemala y 195 desde Bahamas.
-			<br /><br />
-			Los eventos dramáticos que involucran a migrantes incluyen una serie de hechos como deportaciones,
-			rescates, que, si bien no siempre terminan con la vida de las personas, frustran sus planes y las
-			ponen en una situación de vulnerabilidad. Algunas de ellas invirtieron todos sus ahorros, vendieron
-			sus pertenencias o renunciaron a sus trabajos y no tienen otras alternativas legales para migrar.
-			<br /><br />
-			La migración es una elección personal; pero sobre todo es el reflejo de la falta de oportunidades 
-			en la isla y una expresión clara de inconformidad con la realidad que viven en Cuba. Es una decisión 
-			económica y también política. Cuando alguien, a pesar de todos los riesgos, opta por salir de manera 
-			irregular —porque no tiene otra opción— sus motivaciones van más allá de los peligros. Toma una 
-			decisión de vida, que también puede llevarle a la muerte.
-		</p>
 	</div>
 </section>
 
@@ -267,6 +234,6 @@
 	.intro,
 	.place div,
 	.resume {
-		@apply bg-opacity-70 backdrop-blur;
+		@apply bg-opacity-90 backdrop-blur;
 	}
 </style>
