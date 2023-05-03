@@ -156,6 +156,7 @@
 			class="button {selectedFilter === 'detención' ? 'active' : ''}"
 			on:click={activeFilter}
 			disabled={isDisabled}
+            title="En la mayoría de los casos fueron realizadas por la Patrulla Fronteriza de Estados Unidos a quienes llegan a través de la frontera con México o a balseros que logran tocar tierra."
 		>
 			Detenciones
 		</button>
@@ -163,39 +164,58 @@
 			class="button {selectedFilter === 'rescate' ? 'active' : ''}"
 			on:click={activeFilter}
 			disabled={isDisabled}
+            title="El rescate ocurre cuando los migrantes son detenidos en situaciones como accidentes, naufragios, hundimientos, o se encuentran varados en islas deshabitadas. En estos casos, la vida de los migrantes está en potencial peligro."
 		>
 			Rescates
 		</button>
 		<button
 			class="button {selectedFilter === 'intercepción' ? 'active' : ''}"
 			disabled={isDisabled}
-			on:click={activeFilter}>Intercepciones</button
-		>
+			on:click={activeFilter}
+            title="La mayoría de las intercepciones son llevadas a cabo por la Guardia Costera de Estados Unidos que se encarga de retener o interrumpir la travesía antes de que los migrantes toquen tierra."
+        >
+            Intercepciones
+        </button>
 		<button
 			class="button {selectedFilter === 'transferencia' ? 'active' : ''}"
 			disabled={isDisabled}
-			on:click={activeFilter}>Transferencias</button
-		>
+			on:click={activeFilter}
+            title="Se emplea el término para clasificar los casos en los que la Guardia Costera de EE. UU. transfiere un grupo de balseros cubanos interceptados en el mar a las autoridades bahameñas, pues fueron detenidos en territorio de Bahamas."
+        >
+            Transferencias
+        </button>
 		<button
 			class="button {selectedFilter === 'expulsión' ? 'active' : ''}"
 			on:click={activeFilter}
-			disabled={isDisabled}>Expulsión</button
-		>
+			disabled={isDisabled}
+            title="La categoría se utiliza solo en Guatemala para clasificar a los migrantes cubanos que no son deportados, pero sí expulsados del territorio de tránsito."
+        >
+            Expulsión
+        </button>
 		<button
 			class="button {selectedFilter === 'repatriación' ? 'active' : ''}"
 			disabled={isDisabled}
-			on:click={activeFilter}>Repatriación</button
-		>
+			on:click={activeFilter}
+            title="Cuando un migrante es devuelto voluntaria o involuntariamente a su país de origen."
+        >
+            Repatriación
+        </button>
 		<button
 			class="button {selectedFilter === 'muerte' ? 'active' : ''}"
 			on:click={activeFilter}
-			disabled={isDisabled}>Muerte</button
-		>
+			disabled={isDisabled}
+            title="Cuando se reporta la muerte de una o varias personas como consecuencia de un evento migratorio."
+        >
+            Muerte
+        </button>
 		<button
 			class="button {selectedFilter === 'desaparición' ? 'active' : ''}"
 			disabled={isDisabled}
-			on:click={activeFilter}>Desapariciones</button
-		>
+			on:click={activeFilter}
+            title="Aquellas personas que emprendieron una ruta migratoria y no se ha reportado la llegada a su destino."
+        >
+            Desapariciones
+        </button>
 	</div>
 	<div id="timelineContainer" class="mt-3 relative">
 		<div class="timeline-wrapper border border-light rounded-xl py-4 mr-5 ml-2">
