@@ -205,9 +205,6 @@
 			event={featureds[swiperIndex]}
 		/>
 	{/if}
-	{#if showEndScroll}
-		<TimelineEventModal on:close={() => (showEndScroll = false)} />
-	{/if}
 	<div class="container">
 		<div class="flex flex-col justify-center items-center pt-10 md:pt-32">
 			<div class="max-w-3xl md:mb-10 px-10">
@@ -279,7 +276,11 @@
 			{/if}
 			<div class="w-full md:w-2/3 ml-2 mt-5 md:mt-0">
 				<div class="h-4/5 md:h-full">
-					<TimeLine bind:this={timeline} {events} {years} {isDisabled} {show_event} />
+					{#if showEndScroll}
+						<TimelineEventModal on:close={() => (showEndScroll = false)} />
+					{:else}
+						<TimeLine bind:this={timeline} {events} {years} {isDisabled} {show_event} />
+					{/if}
 				</div>
 			</div>
 		</div>
