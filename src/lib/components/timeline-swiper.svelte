@@ -81,7 +81,7 @@
 	alt={selected.name}
 	loading="lazy"
 />
-<div class="h-full px-8 pt-40 md:pt-[20%] overflow-y-auto relative z-10">
+<div id="swiperText" class="h-full px-8 pt-40 md:pt-[20%] overflow-y-auto relative z-10">
 	<h3 class="uppercase font-bold mb-4">
 		{months[selected.date.getMonth()]}
 		{selected.date.getFullYear()} / {selected.eventType}
@@ -117,3 +117,29 @@
 		</span>
 	</div>
 {/if}
+
+<style>
+    #swiperText::-webkit-scrollbar {
+        -webkit-appearance: none;
+    }
+    #swiperText::-webkit-scrollbar:horizontal {
+        width: 5px;
+    }
+    #swiperText::-webkit-scrollbar-button:increment,.contenedor::-webkit-scrollbar-button {
+        display: none;
+    } 
+
+    #swiperText::-webkit-scrollbar:horizontal {
+        height: 5px;
+    }
+
+    #swiperText::-webkit-scrollbar-thumb {
+        background-color: #797979;
+        border-radius: 20px;
+        border: 2px solid #f1f2f3;
+    }
+
+    #swiperText::-webkit-scrollbar-track {
+        border-radius: 10px;  
+    }
+</style>

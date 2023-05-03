@@ -229,7 +229,7 @@
 				</p>
 
 				<p class="text-light mt-2">
-					Por ejemplo, desde octubre de 2020 hasta enero de 2023, la Guardia Costera de los Estados
+					Por ejemplo, desde octubre de 2020 hasta marzo de 2023, la Guardia Costera de los Estados
 					Unidos
 					<a
 						href="https://www.news.uscg.mil/Press-Releases/Article/3265898/coast-guard-repatriates-177-people-to-cuba/"
@@ -237,7 +237,7 @@
 						target="_blank"
 						rel="noreferrer">interceptó</a
 					>
-					a 11 937 migrantes cubanos en el mar cuando intentaban llegar a territorio estadounidense.
+					a 12 866 migrantes cubanos en el mar cuando intentaban llegar a territorio estadounidense.
 					La mayoría de ellos fueron repatriados a la isla. Según los datos recopilados por nuestro equipo
 					durante ese período, las autoridades nacionales regresaron a Cuba al menos a 8 643 personas
 					desde Estados Unidos, 5 902 desde México, 16 desde Guatemala y 195 desde Bahamas.
