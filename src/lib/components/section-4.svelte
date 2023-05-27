@@ -5,6 +5,7 @@
 	import AngelImg from '$lib/assets/images/angel.webp?w=500';
 	import DecorDeceased from '$lib/assets/images/fallecidos.svg?component';
 	import Toast from './toast.svelte';
+	import { imageLoader } from '$lib/utils';
 
 	let showModal = false;
 	let showToast = false;
@@ -23,6 +24,8 @@
 		else if (ageText.includes('meses')) return ageText;
 		else return `${ageText} años`;
 	}
+
+	const getImageUrl = (/** @type {string} */ url) => imageLoader(url);
 
 </script>
 
@@ -59,7 +62,7 @@
 							{person[11] || ''}
 						</p>
 					</div>
-					<img class="pic" src={'https://api.eltoque.com' + person[2]} alt="Picture of {[person[3]]}" loading="lazy">
+					<img class="pic" src={getImageUrl(person[2])} alt="Picture of {[person[3]]}" loading="lazy">
 					<DecorDeceased class="relative w-3/4 my-2" />
 					<h4 class="name text-center leading-tight font-semibold text-accent md:w-3/4 my-2">{person[3]}</h4>
 					<span class=" text-light text-center font-light text-xs md:text-sm"

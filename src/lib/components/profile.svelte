@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { imageLoader } from '$lib/utils';
 	import Button from './button.svelte';
 
 	export let data: any;
@@ -9,11 +10,13 @@
 		else if (ageText.includes('meses')) return ageText;
 		else return `${ageText} años`;
 	}
+
+	const getImageUrl = (url: string) => imageLoader(url);
 </script>
 
 <div class="profile flex flex-col items-center md:items-start h-full">
 	<img
-		src={data[2] ? 'https://api.eltoque.com' + data[2] : 'https://fakeimg.pl/250x250/7856ff/'}
+		src={data[2] ? getImageUrl(data[2]) : 'https://fakeimg.pl/250x250/7856ff/'}
 		class="aspect-square rounded-2xl w-3/4 md:w-full"
 		alt=""
 		loading="lazy"

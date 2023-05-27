@@ -55,3 +55,10 @@ export function parseDate(v: string) {
 		+match[1],  // day
 	);
 }
+
+export const imageLoader = (url: string) => {
+	if (url.indexOf('imagedelivery.net') !== -1) {
+		return url;
+	}
+	return `https://api.eltoque.com${url}`;
+}

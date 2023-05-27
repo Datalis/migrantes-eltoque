@@ -27,7 +27,7 @@
 
   const emptyToNull = (value: string): string | null => (value === '' ? null : value);
 
-  const stringToDate = (value: string): Date | NaN => {
+  const stringToDate = (value: string): Date | number => {
     try {
       const [day, month, year] = value.split('/');
       return new Date(Date.UTC(parseInt(year), parseInt(month) - 1, parseInt(day), 12));
@@ -39,12 +39,12 @@
     let values: any[] = data.map((value: any[]) => {
       const date = stringToDate(value[1]);
 
-      if (isNaN(date)) {
+      if (isNaN(date as number)) {
         return { date };
       }
 
-      if (years.length == 0 || years[years.length - 1] != date.getFullYear()) {
-        years.push(date.getFullYear());
+      if (years.length == 0 || years[years.length - 1] != (date as Date).getFullYear()) {
+        years.push((date as Date).getFullYear());
       }
 
       return {
@@ -128,8 +128,8 @@
                 featureds = events;
                 swiperIndex = featureds.length - 1;
                 eventIndex = swiperIndex;
-                timeline.changeSelected(featureds[eventIndex]);
-                timeline.resetFilter();
+                timeline?.changeSelected(featureds[eventIndex]);
+                timeline?.resetFilter();
               }
               showEndScroll = true;
               return;
