@@ -31,7 +31,7 @@
         <h2 class="font-sans font-semibold text-2xl lg:text-4xl text-light">
             En la travesía de Cuba <br /> a Estados Unidos
         </h2>
-		<span class="font-sans font-semibold text-lg md:text-2xl text-accent-dark z-10 mt-2">desde 2021</span>
+		<span class="font-sans font-semibold text-lg md:text-2xl text-accent-dark z-10 mt-2">desde 2014</span>
     </div>
 </section>
 
