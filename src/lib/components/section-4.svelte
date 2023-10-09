@@ -17,10 +17,10 @@
 	 */
 	export let deceased = [];
 
-	$: data = deceased?.filter(e => e[1] == 'Sí').reverse();
+	$: data = deceased?.filter(e => e[1] == 'Sí' || e[1] == 'Si').reverse();
 
 	const formatAge = (/** @type {string} */ ageText) => {
-		if (ageText == 'desconocida') return 'Edad desconocida';
+		if (ageText?.toLowerCase() == 'desconocida') return 'Edad desconocida';
 		else if (ageText.includes('meses')) return ageText;
 		else return `${ageText} años`;
 	}

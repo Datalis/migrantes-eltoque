@@ -4,7 +4,7 @@
 	export let totals: any;
 	export let deceased: any[] = [];
 
-	let withPic = deceased?.filter(e => e[1] == 'Sí');
+	let withPic = deceased?.filter(e => e[1] == 'Sí' || e[1] == 'Si');
 
 	$: male = withPic?.filter((e) => e[5] == 'M')?.length || 0;
 	$: female = withPic?.filter((e) => e[5] == 'F')?.length || 0;

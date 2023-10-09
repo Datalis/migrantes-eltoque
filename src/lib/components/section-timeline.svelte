@@ -215,8 +215,7 @@
           del camino
         </h2>
         <p class="text-light">
-          Hasta el momento hemos identificado {events.length} incidentes que han ocurrido desde enero
-          de 2021 que involucran a migrantes cubanos en diferentes zonas geográficas. Los eventos dramáticos
+          Hasta el momento hemos identificado {events.length} incidentes que han ocurrido desde 2014 que involucran a migrantes cubanos en diferentes zonas geográficas. Los eventos dramáticos
           que involucran a migrantes incluyen una serie de hechos como deportaciones, rescates, intercepciones
           en el mar, detenidos por las autoridades de los países donde se encuentra, devueltos o repatriados.
           En estos casos, si bien no siempre terminan con la vida de las personas, frustran sus planes
