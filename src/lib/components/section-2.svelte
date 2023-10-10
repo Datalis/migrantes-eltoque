@@ -48,7 +48,7 @@
 			travesías migratorias de Cuba a Estados Unidos.
 			<br />
 			<br />
-			Aunque la crisis que comenzó en 2021 fue el punto de partida, hemos seguido la búsqueda para visibilizar casos que datan desde 2014 hasta la actualidad
+			Aunque la crisis que comenzó en 2021 fue el punto de partida, hemos seguido la búsqueda para visibilizar casos que datan desde 2014 hasta la actualidad.
 			<br />
 			<br />
 			Sabemos que contar las víctimas de este drama humano y ponerles rostro no las devolverá; pero nos

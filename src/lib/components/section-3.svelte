@@ -18,7 +18,7 @@
 		<h2 class="font-sans font-semibold text-2xl md:text-4xl text-light my-4">Personas fallecidas</h2>
 		<p class="text-gray mt-10">
 			Al menos {totals?.deceased} cubanas y cubanos han fallecido en el intento de migrar a Estados Unidos, 
-			desde enero de 2021. Hasta el momento, hemos podido
+			desde enero de 2014. Hasta el momento, hemos podido
 			identificar a {withPic?.length} personas de ese total: {female} mujeres y {male} hombres. Tenemos
 			la esperanza de conocer la identidad de otros fallecidos con la colaboración de sus familiares,
 			amigos y organizaciones sensibles a esta tragedia.
