@@ -32,7 +32,7 @@
 			Una decisión de vida y muerte
 		</h2>
 		<p class="text-gray mt-10">
-			Desde enero de 2021, miles de cubanas y cubanos han emprendido una peligrosa
+			Tras la exención de visado para viajar a Nicaragua en noviembre de 2021, miles de cubanas y cubanos han emprendido una peligrosa
 			travesía hacia los Estados Unidos; algunos por mar, otros por tierra, protagonizando el
 			éxodo más grande de los últimos 60 años. Aunque la mayoría ha logrado su objetivo, la
 			emigración no siempre termina con un final feliz.
@@ -42,10 +42,13 @@
 			familias que sufren, historias truncadas y sueños incompletos.
 			<br />
 			<br />
-			Durante más de un año, hemos realizado un seguimiento de los artículos de prensa, reportes oficiales
+			Por ello, hemos realizado un seguimiento de los artículos de prensa, reportes oficiales
 			e informales y publicaciones en redes sociales sobre diferentes eventos migratorios para hacer
 			una base de datos que además compila identidades de personas fallecidas y desaparecidas en sus
 			travesías migratorias de Cuba a Estados Unidos.
+			<br />
+			<br />
+			Aunque la crisis que comenzó en 2021 fue el punto de partida, hemos seguido la búsqueda para visibilizar casos que datan desde 2014 hasta la actualidad.
 			<br />
 			<br />
 			Sabemos que contar las víctimas de este drama humano y ponerles rostro no las devolverá; pero nos

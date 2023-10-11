@@ -64,26 +64,26 @@
 		{
 			key: 'birthplace',
 			title: 'Lugar de origen',
-			value: (v: any) => v.birthplace,
+			value: (v: any) => v.birthplace || "-",
 			sortable: true
 		},
 		{
 			key: 'starting_point',
 			title: 'Punto de partida',
-			value: (v: any) => v.starting_point,
+			value: (v: any) => v.starting_point || '-',
 			sortable: true
 		},
 		{
 			key: 'missing_place',
 			title: 'Lugar donde desapareció',
-			value: (v: any) => v.missing_place,
+			value: (v: any) => v.missing_place || '-',
 			sortable: true
 		},
 		{
 			key: 'missing_date',
 			title: 'Fecha',
 			value: (v: any) => parseDate(v.missing_date),
-			renderValue: (v: any) => v.missing_date,
+			renderValue: (v: any) => v.missing_date || '-',
 			sortable: true
 		}
 	];
