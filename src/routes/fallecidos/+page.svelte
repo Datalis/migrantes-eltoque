@@ -125,10 +125,16 @@
 	</div>
 </main>
 
-<style>
+<style lang="postcss">
 	.table-wrapper {
-		overflow-x: scroll;
 		color: #fffffd;
+		@apply overflow-x-scroll md:overflow-x-auto;
+		:global(tbody tr td:last-child) {
+			@apply min-w-[40ch];
+		}
+		:global(thead tr td) {
+			@apply text-sm md:text-base;
+		}
 	}
 
 	:global(.table-wrapper thead tr) {
@@ -140,17 +146,13 @@
 		padding: 1rem 0.5rem;
 	}
 
-	:global(.table-wrapper tbody td) {
-		min-width: 100px;
-	}
-
-	:global(.table-wrapper tbody td:first-child),
-	:global(.table-wrapper tbody td:nth-child(5))  {
+	:global(.table-wrapper tbody tr td:first-child),
+	:global(.table-wrapper tbody tr td:nth-child(5))  {
 		min-width: 150px;
 	}
 
-	:global(.table-wrapper thead th:last-child) {
-		min-width: 100vw;
+	:global(.table-wrapper tbody tr td:nth-child(7)) {
+		font-size: 12px;
 	}
 
 	:global(.table-wrapper tbody td) {

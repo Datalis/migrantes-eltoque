@@ -77,7 +77,7 @@
 				>
 				<span class="text-light font-semibold flex flex-col md:flex-row items-center leading-loose"
 					>Compilación y análisis de datos: <span class="font-light ml-0 md:ml-2"
-						>Equipo DeFacto</span
+						>Aleiny Sánchez Marínez</span
 					></span
 				>
 				<span class="text-light font-semibold flex flex-col md:flex-row items-center leading-loose"
