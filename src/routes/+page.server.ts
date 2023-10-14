@@ -15,7 +15,7 @@ export const load: PageServerLoad = async () => {
 		'Todos los eventos'
 	]);
 	const { data: articles } = await get(
-		'https://api.eltoque.com/posts?categories=63daba063c88b2001e980d89&_sort=publish_date:DESC'
+		'https://api.eltoque.com/posts?categories=63daba063c88b2001e980d89&_sort=publish_date:DESC&language=5fc66bd13bb648000db118bb'
 	);
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any

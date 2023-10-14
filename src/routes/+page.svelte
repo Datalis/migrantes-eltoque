@@ -7,11 +7,11 @@
 	import Section_3 from '$lib/components/section-3.svelte';
 	import Section_4 from '$lib/components/section-4.svelte';
 	import Section_6 from '$lib/components/section-6.svelte';
-	import { onMount } from 'svelte';
 	import gsap from 'gsap';
-	import ScrollTrigger from 'gsap/ScrollTrigger';
+	import ScrollTrigger from 'gsap/dist/ScrollTrigger';
+	import Section_8 from '$lib/components/section-8.svelte';
 	import Section_7 from '$lib/components/section-7.svelte';
-	import Section_timeline from '$lib/components/section-timeline.svelte';
+	import { onMount } from 'svelte';
 
 	export let data: PageData;
 
@@ -42,8 +42,8 @@
 	<Section_4 {deceased} />
 	<Section_5 {missing} {totals} />
 	<Section_6 {places} />
-	<Section_timeline {events} />
-	<Section_7 {articles} />
+	<Section_7 {events}></Section_7>
+	<Section_8 {articles} />
 </main>
 
 <style>
