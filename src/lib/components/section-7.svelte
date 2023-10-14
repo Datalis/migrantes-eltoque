@@ -144,12 +144,19 @@
 		gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 		const timeline = document.getElementById('timeline');
 		const modal = document.getElementById('modal');
+		const events = document.getElementById('events');
 		const mm = gsap.matchMedia();
+
+		const pageHeight = document.body.clientHeight;
+		const visibleHeight = window.innerHeight;
+		const percent = visibleHeight / pageHeight;
+		const scrollDistance = pageHeight * percent;
+
 		mm.add('(min-width: 768px)', () => {
 			ScrollTrigger.create({
 				trigger: '#events',
 				start: 'center center',
-				end: () => `+=${_featuredEvents.length + 1 * 100}}%`,
+				end: () => `+=${(_featuredEvents.length + 1) * scrollDistance}}px`,
 				scrub: true,
 				pin: true,
 				anticipatePin: 1,

@@ -1,9 +1,10 @@
 import { batchGetSheet, get } from '$lib/data/api';
-import type { PageServerLoad } from './$types';
 
 export const prerender = false;
 
-export const load: PageServerLoad = async () => {
+export async function load({
+	setHeaders
+}) {
 
 	const {
 		data: { valueRanges: sheet }
@@ -19,16 +20,19 @@ export const load: PageServerLoad = async () => {
 	);
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const mapTotals = (data: any[][] | null | undefined) =>
-		data?.slice(1).reduce(
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			(acc: any, c) => {
-				acc['deceased'] += +(c?.[0] ?? 0);
-				acc['missing'] += +(c?.[1] ?? 0);
-				return acc;
-			},
-			{ deceased: 0, missing: 0 }
-		);
+	const mapTotals = (data: any[][] | null | undefined) => data?.slice(1).reduce(
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		(acc: any, c) => {
+			acc['deceased'] += +(c?.[0] ?? 0);
+			acc['missing'] += +(c?.[1] ?? 0);
+			return acc;
+		},
+		{ deceased: 0, missing: 0 }
+	);
+
+	setHeaders({
+        'Cache-Control': 'max-age=300, s-max-age=300, stale-while-revalidate=300'
+    });
 
 	return {
 		deceased: sheet?.[0].values?.slice(1),
@@ -38,19 +42,4 @@ export const load: PageServerLoad = async () => {
 		events: sheet?.[4]?.values?.slice(1),
 		articles
 	};
-};
-
-// export const actions: Actions = {
-// 	contact: async ({ request }) => {
-// 		const data = await request.formData();
-
-// 		const isMissing = data.get('is_missing');
-// 		const personName = data.get('person_name');
-// 		const contactName = data.get('contact_name');
-// 		const email = data.get('email');
-// 		const phone = data.get('phone');
-// 		const message = data.get('message');
-
-// 		await sendMail({ personName, contactName, email, phone, message, isMissing });
-// 	}
-// };
+}
