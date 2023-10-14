@@ -2,7 +2,7 @@
 	// import ToggleIcon from '$lib/assets/images/chevron-down-circle.svg?component';
 	import ChevronLeftIcon from '$lib/assets/images/chevron-left.svg?component';
 	//@ts-ignore
-	import SvelteTable from 'svelte-table';
+	import SvelteTable, { type TableColumn } from 'svelte-table';
 
 	import Button from '$lib/components/button.svelte';
 	import ReportModal from '$lib/components/report-modal.svelte';
@@ -40,7 +40,7 @@
 		else missing = searchFor(query, data.missing || []);
 	};
 
-	const cols = [
+	const cols: TableColumn<any>[] = [
 		{
 			key: 'name',
 			title: 'Nombre',
@@ -57,7 +57,7 @@
 		{
 			key: 'birthdate',
 			title: 'Fecha de Nacimiento',
-			value: (v: any) => parseDate(v.birthdate),
+			value: (v: any) => parseDate(v.birthdate)?.toDateString() || '-',
 			renderValue: (v: any) => v.birthdate || '-',
 			sortable: true
 		},
@@ -82,7 +82,7 @@
 		{
 			key: 'missing_date',
 			title: 'Fecha',
-			value: (v: any) => parseDate(v.missing_date),
+			value: (v: any) => parseDate(v.missing_date)?.toDateString() || '-',
 			renderValue: (v: any) => v.missing_date || '-',
 			sortable: true
 		}
@@ -93,7 +93,7 @@
 	{#if showModal}
 		<ReportModal on:close={() => (showModal = false)} />
 	{/if}
-	<div class="max-w-6xl mx-4 md:mx-auto py-10">
+	<div class="container px-4 py-10 mx-auto xl:max-w-6xl">
 		<a href="/" class="flex items-center text-gray">
 			<ChevronLeftIcon fill="rgb(224 224 224 / var(--tw-text-opacity))" />
 			Atrás

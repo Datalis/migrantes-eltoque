@@ -1,7 +1,7 @@
 <script>
 	import ShareIcon from '$lib/assets/images/share.svg?component';
 	import FacebookIcon from '$lib/assets/images/facebook.svg?component';
-	import TwitterIcon from '$lib/assets/images/twitter.svg?component';
+	import XIcon from '$lib/assets/images/x-twitter.svg?component';
 	import TelegramIcon from '$lib/assets/images/telegram.svg?component';
 	import WhatsappIcon from '$lib/assets/images/whatsapp.svg?component';
 	import { page } from '$app/stores';
@@ -38,14 +38,14 @@
 		target="_blank"
 		rel="noopener noreferrer"
 	>
-		<TwitterIcon width="24" height="24" />
+		<XIcon width="24" height="24" />
 	</a>
 	<button class="share-btn" on:click={() => (isExpanded = !isExpanded)}>
 		<ShareIcon width="28" height="28" />
 	</button>
 </div>
 
-<style>
+<style lang="postcss">
 	.share-btn-wrapper {
 		position: fixed;
 		bottom: 24px;

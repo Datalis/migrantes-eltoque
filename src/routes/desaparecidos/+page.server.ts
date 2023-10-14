@@ -1,9 +1,10 @@
 import { batchGetSheet } from '$lib/data/api';
-import type { PageServerLoad } from './$types';
 
-export const prerender = true;
+export const prerender = false;
 
-export const load = (async () => {
+export async function load({
+	setHeaders
+}) {
 	const {
 		data: { valueRanges: sheet }
 	} = await batchGetSheet(['Personas desaparecidas', 'Todos los eventos!O:P']);
@@ -18,6 +19,11 @@ export const load = (async () => {
 			},
 			{ deceased: 0, missing: 0 }
 		);
+
+	setHeaders({
+        'Cache-Control': 'max-age=300, s-max-age=300, stale-while-revalidate=300'
+    });
+	
 	return {
 		missing: sheet?.[0].values
 			?.slice(1)
@@ -35,4 +41,5 @@ export const load = (async () => {
 			})),
 		totals: mapTotals(sheet?.[1].values)
 	};
-}) satisfies PageServerLoad;
+}
+
