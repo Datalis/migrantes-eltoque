@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Highcharts from 'highcharts/highcharts';
+	import Highcharts from 'highcharts/highmaps';
 	import type { MapChart } from 'highcharts/highmaps';
 
 	import { points } from '@turf/helpers';
