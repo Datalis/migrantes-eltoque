@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-
 section h2.title {
     @apply text-4xl font-bold mb-10 text-light;
 }
+

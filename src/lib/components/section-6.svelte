@@ -9,8 +9,8 @@
 	import MapBackground from '$lib/assets/images/section-2/mapa.webp?webp';
 
 	import gsap from 'gsap';
-	import ScrollTrigger from 'gsap/ScrollTrigger';
-	import MotionPathPlugin from 'gsap/MotionPathPlugin';
+	import ScrollTrigger from 'gsap/dist/ScrollTrigger';
+	import MotionPathPlugin from 'gsap/dist/MotionPathPlugin';
 	import { onMount } from 'svelte';
 	import Map from './map.svelte';
 
@@ -39,7 +39,6 @@
 
 	onMount(() => {
 		gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
-
 		gsap.to('#map-component', {
 			scrollTrigger: {
 				trigger: '.section-6',
@@ -121,7 +120,7 @@
 			<Map data={places} bind:this={mapComponent} />
 		</div>
 		<div id="map-text" class="block my-20 z-10 text-lg">
-			<div class="intro px-4 md:px-0 bg-black min-h-screen">
+			<div class="intro px-4 py-10 md:px-0 bg-dark min-h-screen">
 				<h2 class="title">Rutas Migratorias</h2>
 				<p class="text-gray">
 					Las rutas terrestres que cruzan el Darién o parten desde Nicaragua —país al que las
@@ -140,7 +139,7 @@
 			</div>
 			<div class="space h-screen md:h-0" />
 			{#each places.filter((place) => !!place[0]) as p, index}
-				<div id="place-{index}" class="place bg-black text-gray px-4 md:px-0 min-h-screen">
+				<div id="place-{index}" class="place bg-dark text-gray px-4 py-10 md:px-0 min-h-screen">
 					<div class="">
 						<h2 class="title">{p[1]}</h2>
 						<p>{@html p[3]}</p>
@@ -148,7 +147,7 @@
 				</div>
 				<div class="space h-screen md:h-0" />
 			{/each}
-			<div class="resume text-gray gb-black px-4 md:px-0 min-h-screen">
+			<div class="resume text-gray bg-dark py-10 px-4 md:px-0 min-h-screen">
 				<p>
 					Las rutas no son nuevas para los cubanos ni tampoco exclusiva de ellos; pero no por eso
 					dejan de ser peligrosas. La inexperiencia de quienes se aventuran, sus condiciones previas
@@ -157,7 +156,7 @@
 					región.
 				</p>
 			</div>
-			<div class="space h-screen md:h-0" />
+			<div class="space md:h-0" />
 		</div>
 	</div>
 	<div class="section-6-decor">
@@ -172,7 +171,7 @@
 	</div>
 </section>
 
-<style >
+<style lang="postcss">
 	.section-6 .section-6-decor {
 		height: 600px;
 		width: 100%;
@@ -232,8 +231,8 @@
 	}
 
 	.intro,
-	.place div,
+	.place,
 	.resume {
-		@apply bg-opacity-90 backdrop-blur;
+		@apply bg-opacity-80 md:bg-opacity-100 backdrop-blur;
 	}
 </style>

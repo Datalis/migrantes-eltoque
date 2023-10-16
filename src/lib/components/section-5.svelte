@@ -100,22 +100,20 @@
 				><Button classes="w-full" type="bordered">Ver listado</Button></a
 			>
 			<div class="swiper-controls hidden md:flex ml-auto">
-				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<span on:click={onSwiperPrev}>
+				<button on:click={onSwiperPrev}>
 					<ArrowLeftIcon
 						class="control mr-4 {swiperIndex == 0 ? 'control-disabled' : ''}"
 						width="48"
 						height="48"
 					/>
-				</span>
-				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<span on:click={onSwiperNext}>
+				</button>
+				<button on:click={onSwiperNext}>
 					<ArrowRightIcon
 						class="control {swiperIndex == missing?.length ? 'control-disabled' : ''}"
 						width="48"
 						height="48"
 					/>
-				</span>
+				</button>
 			</div>
 		</div>
 		<div class="max-w-4xl mt-20 px-10 md:px-0">
@@ -158,21 +156,21 @@
 
 			<div class="swiper-controls flex justify-between w-full ml-auto mt-10 md:hidden">
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<span on:click={onSwiperPrev}>
+				<button on:click={onSwiperPrev}>
 					<ArrowLeftIcon
 						class="control {swiperIndex == 0 ? 'control-disabled' : ''}"
 						width="48"
 						height="48"
 					/>
-				</span>
+				</button>
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<span on:click={onSwiperNext}>
+				<button on:click={onSwiperNext}>
 					<ArrowRightIcon
 						class="control {swiperIndex == missing?.length ? 'control-disabled' : ''}"
 						width="48"
 						height="48"
 					/>
-				</span>
+				</button>
 			</div>
 		</div>
 		<div class="section-5-decor section-5-decor-sm md:hidden mt-10">

@@ -4,8 +4,7 @@
 	import ElToqueLogo from '$lib/assets/images/eltoque.svg?component';
 	import CollectivoLogo from '$lib/assets/images/colectivo+voces.svg?component';
 	import FacebookIcon from '$lib/assets/images/facebook.svg?component';
-	import TwitterIcon from '$lib/assets/images/twitter.svg?component';
-	// import InstagramIcon from '$lib/assets/images/instagram.svg?component';
+	import XIcon from '$lib/assets/images/x-twitter.svg?component';
 	import TelegramIcon from '$lib/assets/images/telegram.svg?component';
 
 	/**
@@ -53,7 +52,7 @@
 					rel="noopener noreferrer"
 					aria-label=""
 				>
-					<TwitterIcon fill="#fefefe" width="28" height="28" />
+					<XIcon fill="#fefefe" width="28" height="28" />
 				</a>
 
 				<!-- Sharingbutton Telegram -->
@@ -148,7 +147,7 @@
 						rel="noopener noreferrer"
 						aria-label=""
 					>
-						<TwitterIcon fill="#e0e0e0" width="32" height="32" />
+						<XIcon fill="#e0e0e0" width="32" height="32" />
 					</a>
 
 					<!-- Sharingbutton Telegram -->

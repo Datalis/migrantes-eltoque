@@ -1,10 +1,9 @@
 <script lang="ts">
 	import Highcharts from 'highcharts/highmaps';
+	import type { MapChart } from 'highcharts/highmaps';
 
 	import { points } from '@turf/helpers';
 	import center from '@turf/center';
-
-	import type { MapChart } from 'highcharts/highmaps';
 
 	import { onMount } from 'svelte';
 
@@ -26,13 +25,13 @@
 		if (data.length == 1) {
 			// Zoom to point
 			const item = mapData(data)[0];
-			highcharts?.mapView.setView([item.lon, item.lat], 4)
+			highcharts?.mapView?.setView([item.lon, item.lat], 4)
 		} else {
 			const items = mapData(data)
 			var features = points(items.map((item) => [item.lon, item.lat]))
 			var middle = center(features)
 			const zoom = data.length > 5 ? 4 : 6
-			highcharts?.mapView.setView(middle.geometry.coordinates, zoom)
+			highcharts?.mapView?.setView(middle.geometry.coordinates, zoom)
 		}
 	};
 
@@ -173,9 +172,6 @@
 						accessibility: {
 							point: {
 								descriptionFormatter: function (point) {
-									if (point.isCluster) {
-										return point.clusterPointsAmount + ' puntos.';
-									}
 									return point.name;
 								}
 							}

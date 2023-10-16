@@ -55,10 +55,4 @@
         height: 100%;
         opacity: 0.6;
     }
-    /* @media (max-width: 768px) {
-        .section-1 .section-1-wrapper {
-            height: unset;
-        }
-    } */
-	
 </style>

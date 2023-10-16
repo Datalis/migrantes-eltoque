@@ -6,7 +6,7 @@
 	import { compareObjects, parseDate, trimString } from '$lib/utils';
 	import type { PageData } from './$types';
 	//@ts-ignore
-	import SvelteTable from 'svelte-table';
+	import SvelteTable, { type TableColumn } from 'svelte-table';
 
 	export let data: PageData;
 
@@ -38,7 +38,7 @@
 		else deceased = searchFor(query, data.deceased || []);
 	};
 
-	const cols = [
+	const cols: TableColumn<any>[] = [
 		{
 			key: 'name',
 			title: 'Nombre',
@@ -55,7 +55,7 @@
 		{
 			key: 'death_date',
 			title: 'Fecha de Muerte',
-			value: (v: any) => parseDate(v.death_date),
+			value: (v: any) => parseDate(v.death_date)?.toDateString() || '-',
 			renderValue: (v: any) => v.death_date || '-',
 			sortable: true
 		},
@@ -90,7 +90,7 @@
 	{#if showModal}
 		<ReportModal isMissing={false} on:close={() => (showModal = false)} />
 	{/if}
-	<div class="max-w-6xl mx-4 md:mx-auto py-10">
+	<div class="container px-4 py-10 mx-auto xl:max-w-6xl">
 		<a href="/" class="flex items-center text-gray">
 			<ChevronLeftIcon fill="rgb(224 224 224 / var(--tw-text-opacity))" />
 			Atrás
