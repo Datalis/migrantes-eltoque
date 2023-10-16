@@ -332,12 +332,17 @@
 							<p>
 								{_selected?.description}
 							</p>
-							<p class="mt-4">
-								<span class="font-bold uppercase">Fuente:</span>
-								<a class="underline underline-offset-2" href="f" target="_blank" rel="noreferrer"
-									>source</a
-								>
-							</p>
+							{#if _selected.source}
+								<p class="mt-4">
+									<span class="font-bold uppercase">Fuente:</span>
+									<a
+										class="underline underline-offset-2"
+										href={_selected.links}
+										target="_blank"
+										rel="noreferrer">{_selected.source}</a
+									>
+								</p>
+							{/if}
 						</div>
 						<div
 							class:hidden={isDisabled}
