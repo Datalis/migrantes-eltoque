@@ -100,17 +100,16 @@
 				>
 
 				<span class="text-light font-semibold flex flex-col md:flex-row items-center leading-loose"
-					>Programación: <a
+					>Programación: <span class="font-light ml-0 md:ml-2"><a
 						href="https://datalis.dev"
 						target="_blank"
 						rel="noreferrer"
-						class="font-light ml-0 md:ml-2">Datalis</a
-					> | <a
+						class="font-light ml-0 md:ml-2">Datalis</a> | <a
 						href="https://mediaplusexperience.com/"
 						target="_blank"
 						rel="noreferrer"
 						class="font-light ml-0 md:ml-2">Mediaplus Experience</a
-					></span
+					></span></span
 				>
 
 				<span
