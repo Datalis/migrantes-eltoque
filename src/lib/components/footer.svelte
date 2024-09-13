@@ -91,15 +91,25 @@
 					></span
 				>
 				<span class="text-light font-semibold flex flex-col md:flex-row items-center leading-loose"
-					>Diseño: <span class="font-light ml-0 md:ml-2">Janet Aguilar (Catao Studio)</span></span
+					>Diseño: <span class="font-light ml-0 md:ml-2">Janet Aguilar | <a
+						href="https://mediaplusexperience.com/"
+						target="_blank"
+						rel="noreferrer"
+						class="font-light ml-0 md:ml-2">Mediaplus Experience</a
+					></span></span
 				>
 
 				<span class="text-light font-semibold flex flex-col md:flex-row items-center leading-loose"
 					>Programación: <a
-						href="http://datalis.dev"
+						href="https://datalis.dev"
 						target="_blank"
 						rel="noreferrer"
 						class="font-light ml-0 md:ml-2">Datalis</a
+					> | <a
+						href="https://mediaplusexperience.com/"
+						target="_blank"
+						rel="noreferrer"
+						class="font-light ml-0 md:ml-2">Mediaplus Experience</a
 					></span
 				>
 
