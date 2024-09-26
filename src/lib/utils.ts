@@ -1,4 +1,22 @@
-import { elasticOut } from 'svelte/easing'
+export function stringToDate(value: string): Date | undefined {
+    try {
+      const [day, month, year] = value.split('/');
+      return new Date(Date.UTC(parseInt(year), parseInt(month) - 1, parseInt(day), 12));
+    } catch (error) {
+      console.log(error);
+    }
+}
+
+export function ArrayChunks(array: unknown[], n: number) {
+	const chunk_array = [];
+	for (let i = 0; i < array.length; i += n) chunk_array.push(array.slice(i, i + n));
+	return chunk_array;
+}
+
+export function emptyToNull(value: string): string | null {
+	return value === '' ? null : value;
+}
+
 
 export function trimString(s: string) {
 	let l = 0,
@@ -8,22 +26,22 @@ export function trimString(s: string) {
 	return s.substring(l, r + 1);
 }
 
-export function compareObjects(o1: any, o2: any) {
+export function compareObjects(o1: Record<string, unknown>, o2: Record<string, unknown>) {
 	let k = '';
 	for (k in o1) if (o1[k] != o2[k]) return false;
 	for (k in o2) if (o1[k] != o2[k]) return false;
 	return true;
 }
 
-export function inViewport(node: HTMLElement, params: any = {}) {
-	let observer: any;
+export function inViewport(node: HTMLElement, params: IntersectionObserverInit) {
+	let observer: IntersectionObserver;
 
-	const handleIntersect = (e: any) => {
+	const handleIntersect: IntersectionObserverCallback = (e) => {
 		const v = e[0].isIntersecting ? "enter" : "exit";
 		node.dispatchEvent(new CustomEvent(v));
 	};
 
-	const setObserver = (params: any) => {
+	const setObserver = (params: IntersectionObserverInit) => {
 		const { root, threshold } = params;
 		const options = { root, threshold };
 		if (observer) observer.disconnect();
@@ -34,10 +52,9 @@ export function inViewport(node: HTMLElement, params: any = {}) {
 	setObserver(params);
 
 	return {
-		update(params: { root: any; threshold: any; }) {
+		update(params: IntersectionObserverInit) {
 			setObserver(params);
 		},
-
 		destroy() {
 			if (observer) observer.disconnect();
 		}

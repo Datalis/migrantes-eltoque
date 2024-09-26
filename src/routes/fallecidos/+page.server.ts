@@ -1,10 +1,10 @@
 import { batchGetSheet } from '$lib/data/api';
-import type { PageServerLoad } from './$types';
 
-export const prerender = true;
+export const prerender = false;
 
-export const load = (async () => {
-	// const { data } = await getSheet('Personas fallecidas');
+export async function load({
+	setHeaders
+}) {
 	const {
 		data: { valueRanges: sheet }
 	} = await batchGetSheet([
@@ -12,10 +12,8 @@ export const load = (async () => {
 		'Todos los eventos!O:P'
 	]);
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const mapTotals = (data: any[][] | null | undefined) =>
 		data?.slice(1).reduce(
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			(acc: any, c) => {
 				acc['deceased'] += +(c?.[0] ?? 0);
 				acc['missing'] += +(c?.[1] ?? 0);
@@ -23,6 +21,10 @@ export const load = (async () => {
 			},
 			{ deceased: 0, missing: 0 }
 		);
+
+	setHeaders({
+		'Cache-Control': 'max-age=300, s-max-age=300, stale-while-revalidate=300'
+	});
 
 	return {
 		deceased: sheet?.[0]?.values?.slice(1).map((e) => ({ 
@@ -36,4 +38,4 @@ export const load = (async () => {
 		}))?.sort((a,b) => a.name.localeCompare(b.name)),
 		totals: mapTotals(sheet?.[1].values)
 	};
-}) satisfies PageServerLoad;
+}

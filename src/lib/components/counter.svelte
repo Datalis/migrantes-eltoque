@@ -30,7 +30,9 @@
 
 </script>
 
-<div use:inViewport on:enter={() => visible=true}>
+<div use:inViewport={{
+    root: document.body
+}} on:enter={() => visible=true}>
     <i class="invisible">+{amount}</i>
     {#if visible}
         <span in:counter={{amount, delay}}>{amount}</span>
