@@ -3,7 +3,8 @@ import type { PageServerLoad } from './$types';
 
 export const prerender = false;
 
-export const load: PageServerLoad = async () => {
+export const load: PageServerLoad = async ({ url }) => {
+	const modal = url.searchParams.get('form');
 
 	const {
 		data: { valueRanges: sheet }
@@ -36,7 +37,8 @@ export const load: PageServerLoad = async () => {
 		places: sheet?.[2]?.values?.slice(1),
 		totals: mapTotals(sheet?.[3].values),
 		events: sheet?.[4]?.values?.slice(1),
-		articles
+		articles,
+		modal
 	};
 };
 

@@ -17,7 +17,7 @@
 
 	let windowWidth = 0;
 
-	const { totals, deceased, missing, articles, places, events } = data;
+	const { totals, deceased, missing, articles, places, events, modal } = data;
 
 	onMount(() => {
 		gsap.registerPlugin(ScrollTrigger);
@@ -39,8 +39,8 @@
 	<Section_1 {totals} />
 	<Section_2 />
 	<Section_3 {totals} {deceased} />
-	<Section_4 {deceased} />
-	<Section_5 {missing} {totals} />
+	<Section_4 {deceased} showModal={modal == 'fallecidos'} />
+	<Section_5 {missing} {totals} showModal={modal == 'desaparecidos'} />
 	<Section_6 {places} />
 	<Section_timeline {events} />
 	<Section_7 {articles} />

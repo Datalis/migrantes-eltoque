@@ -24,10 +24,10 @@
 
 	let showToast = false;
 	let errorSubmit = false;
-	let errorMessage = "";
+	let errorMessage = '';
 
 	// let showMissing = false;
-	let showModal = false;
+	export let showModal = false;
 	let selectedPerson: any;
 
 	let swiperIndex = 0;

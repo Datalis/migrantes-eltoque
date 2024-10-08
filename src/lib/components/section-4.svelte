@@ -7,26 +7,25 @@
 	import Toast from './toast.svelte';
 	import { imageLoader } from '$lib/utils';
 
-	let showModal = false;
+	export let showModal = false;
 	let showToast = false;
 	let errorSubmit = false;
-	let errorMessage = "";
+	let errorMessage = '';
 
 	/**
 	 * @type {any[]}
 	 */
 	export let deceased = [];
 
-	$: data = deceased?.filter(e => e[1] == 'Sí' || e[1] == 'Si').reverse();
+	$: data = deceased?.filter((e) => e[1] == 'Sí' || e[1] == 'Si').reverse();
 
 	const formatAge = (/** @type {string} */ ageText) => {
 		if (ageText?.toLowerCase() == 'desconocida') return 'Edad desconocida';
 		else if (ageText.includes('meses')) return ageText;
 		else return `${ageText} años`;
-	}
+	};
 
 	const getImageUrl = (/** @type {string} */ url) => imageLoader(url);
-
 </script>
 
 <Toast show={showToast} isError={errorSubmit} message={errorMessage} />
@@ -37,17 +36,19 @@
 			on:close={() => (showModal = false)}
 			isMissing={false}
 			on:submit={(e) => {
-				console.log(e.detail)
+				console.log(e.detail);
 				showToast = true;
 				errorSubmit = e.detail.isError;
 				errorMessage = e.detail.message;
-				setInterval(() => {showToast = false}, 8000)
+				setInterval(() => {
+					showToast = false;
+				}, 8000);
 			}}
 		/>
 	{/if}
 	<div class="flex flex-col h-full xl:container mx-auto">
 		<div class="flex-1 grid gap-2 md:gap-3 grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-			<div 
+			<div
 				style="background-image: url({AngelImg});"
 				class="memorial-block relative col-span-2 row-span-2 bg-accent flex flex-col justify-end p-10"
 			>
@@ -62,9 +63,16 @@
 							{person[11] || ''}
 						</p>
 					</div>
-					<img class="pic" src={getImageUrl(person[2])} alt="Picture of {[person[3]]}" loading="lazy">
+					<img
+						class="pic"
+						src={getImageUrl(person[2])}
+						alt="Picture of {[person[3]]}"
+						loading="lazy"
+					/>
 					<DecorDeceased class="relative w-3/4 my-2" />
-					<h4 class="name text-center leading-tight font-semibold text-accent md:w-3/4 my-2">{person[3]}</h4>
+					<h4 class="name text-center leading-tight font-semibold text-accent md:w-3/4 my-2">
+						{person[3]}
+					</h4>
 					<span class=" text-light text-center font-light text-xs md:text-sm"
 						>{formatAge(person[4])}</span
 					>
