@@ -1,7 +1,4 @@
 <script lang="ts">
-  import gsap from 'gsap';
-  import ScrollToPlugin from 'gsap/ScrollToPlugin';
-  import ScrollTrigger from 'gsap/ScrollTrigger';
   import { onMount } from 'svelte';
   import TimelineEvents from './timeline-events.svelte';
   import TimelineModal from './timeline-modal.svelte';
@@ -14,8 +11,7 @@
   let years: number[] = [];
   let timeline: any;
   let timelineSwiper: any;
-  let counter: number = 0;
-  let isDisabled: boolean = true;
+  let isDisabled: boolean = false;
   let showModal: boolean = false;
   let windowWidth = 0;
   let modal: any;
@@ -93,102 +89,13 @@
   };
 
   onMount(() => {
-    gsap.registerPlugin(ScrollTrigger);
-    gsap.registerPlugin(ScrollToPlugin);
-    const tl = gsap.timeline();
-
-    timeline.changeSelected(featureds[eventIndex], isDisabled);
-
-    if (windowWidth >= 768) {
-      // desktop
-      tl.to('#events', {
-        scrollTrigger: {
-          trigger: '#events',
-          start: 'top top',
-          pin: '#events',
-          end: '+=10000',
-          // markers: true,
-          onUpdate: (self) => {
-            const endPercents = 80;
-            const progress = parseFloat(self.progress.toFixed(2)) * 100;
-            const value = parseFloat((endPercents / featureds.length).toFixed(0));
-
-            if (!isDisabled) {
-              self.disable();
-              showEndScroll = false;
-              gsap.to(window, { transition: 1, scrollTo: '#events' });
-              return;
-            }
-            if (progress >= 95) {
-              console.log('entro')
-              isDisabled = false;
-              return;
-            } else if (progress >= endPercents) {
-              if (isDisabled) {
-                featureds = events;
-                swiperIndex = featureds.length - 1;
-                eventIndex = swiperIndex;
-                timeline?.changeSelected(featureds[eventIndex]);
-                timeline?.resetFilter();
-              }
-              showEndScroll = true;
-              return;
-            } else if (progress >= counter && progress < value + counter) {
-            } else if (progress > counter) {
-              counter += value;
-              if (swiperIndex >= featureds.length) {
-                swiperIndex = featureds.length - 1;
-              } else {
-                swiperIndex += 1;
-              }
-              eventIndex = events.indexOf(featureds[swiperIndex]);
-              if (eventIndex === -1) {
-              } else {
-                timeline.changeSelected(events[eventIndex], isDisabled);
-              }
-            } else if (progress < counter) {
-              counter -= value;
-              if (swiperIndex >= featureds.length) {
-                swiperIndex = featureds.length - 1;
-              } else {
-                swiperIndex -= 1;
-              }
-              eventIndex = events.indexOf(featureds[swiperIndex]);
-              timeline.changeSelected(events[eventIndex], isDisabled);
-            }
-            featureds = events.filter((event) => event.isFeature);
-            if (swiperIndex != -1) {
-              selected = featureds[swiperIndex];
-            }
-          },
-        }
-      });
-    } else {
-      // mobile view
-      const eventsDivs = gsap.utils.toArray('.event-info');
-      tl.to(eventsDivs, {
-        xPercent: -100 * (eventsDivs.length - 1),
-        ease: 'none',
-        scrollTrigger: {
-          trigger: '#events',
-          pin: true,
-          scrub: 1,
-          snap: 1 / (eventsDivs.length - 1),
-          end: () => '+=7000', // + document.querySelector('#event-container').offsetWidth
-          onLeave: () => {
-            isDisabled = false;
-            featureds = events;
-            // showEndScroll = true;
-          }
-        }
-      });
-      // isDisabled = false;
-      featureds = events;
-      swiperIndex = featureds.length - 1;
-      eventIndex = swiperIndex;
-      timeline.changeSelected(featureds[eventIndex]);
-      timeline.resetFilter();
-    }
+    // Línea de tiempo interactiva desde el inicio: sin scroll guiado ni pin.
+    // El usuario explora libremente los eventos y filtros.
+    swiperIndex = 0;
+    eventIndex = 0;
+    selected = featureds[swiperIndex];
+    timeline?.changeSelected(featureds[eventIndex]);
+    timeline?.resetFilter();
   });
 </script>
 

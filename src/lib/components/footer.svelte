@@ -136,6 +136,7 @@
 				class="flex flex-col items-center md:items-end bg-dark md:bg-accent w-full md:w-auto md:py-0 py-5"
 			>
 				<a href="/" class="text-light leading-loose">Inicio</a>
+				<a href="/riesgo" class="text-light leading-loose">Índice de riesgo</a>
 				<a href="/fallecidos" class="text-light leading-loose">Listado de Fallecidos</a>
 				<a href="/desaparecidos" class="text-light leading-loose">Listado de Desaparecidos</a>
 				<div class="md:hidden md:ml-auto flex mt-10">
