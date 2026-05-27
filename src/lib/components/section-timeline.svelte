@@ -73,26 +73,35 @@
       .sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
   };
   events = dataToObject(events);
-  let featureds = events.filter((event) => event.isFeature);
+  // Estado final equivalente al que quedaba al terminar el scroll guiado: todos
+  // los eventos quedan disponibles en el swiper (no solo los destacados).
+  let featureds = events;
 
   const show_event = (event: any) => {
+    // Centra y resalta el evento clicado en la línea de tiempo.
+    timeline?.changeSelected(event);
+
+    // Sincroniza el panel/swiper de detalle con el evento clicado.
     const index = featureds.findIndex((value) => value.id == event.id);
-    swiperIndex = index + 1 - 1;
-    timeline.changeSelected(featureds[index]);
+    if (index !== -1) {
+      swiperIndex = index;
+      eventIndex = index;
+      selected = featureds[index];
+    }
+
+    // En móvil, abre el modal con el detalle del evento.
     if (windowWidth <= 768) {
-      isDisabled = false;
-      modal?.update(featureds[index].id);
+      modal?.update(event.id);
       showModal = true;
-    } else {
-      selected = featureds[swiperIndex];
     }
   };
 
   onMount(() => {
-    // Línea de tiempo interactiva desde el inicio: sin scroll guiado ni pin.
-    // El usuario explora libremente los eventos y filtros.
-    swiperIndex = 0;
-    eventIndex = 0;
+    // Sin scroll guiado ni pin: el componente arranca directamente en el estado
+    // final del scroll (último evento seleccionado) y queda interactivo.
+    swiperIndex = featureds.length - 1;
+    eventIndex = swiperIndex;
+    showEndScroll = false;
     selected = featureds[swiperIndex];
     timeline?.changeSelected(featureds[eventIndex]);
     timeline?.resetFilter();

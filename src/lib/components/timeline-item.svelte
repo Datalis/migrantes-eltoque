@@ -42,6 +42,8 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		/* El contenedor no captura clics; solo los círculos (abajo). */
+		pointer-events: none;
   }
 
   .events .ball {
@@ -50,6 +52,23 @@
 		position: relative;
 		left: -1.25rem;
 		@apply bg-dark border-2 border-accent rounded-full;
+  }
+
+  /* Todos los círculos son clicables (no depende del estado hover/blanco) y
+     capturan el clic por encima de los elementos decorativos de la columna. */
+  .events .ball {
+    pointer-events: auto;
+    cursor: pointer;
+    z-index: 2;
+  }
+  /* Área de clic ampliada e invisible: facilita acertar el círculo (20px) sin
+     cambiar su tamaño visible. Se ensancha en horizontal, donde hay espacio
+     entre columnas, y un poco en vertical. */
+  .events .ball::after {
+    content: '';
+    position: absolute;
+    inset: -4px -12px;
+    border-radius: 9999px;
   }
 
   .events .ball.highlight {
@@ -62,7 +81,7 @@
   }
 
   .events .ball.hover:hover {
-    @apply bg-light border-light transition-all duration-500;
+    @apply bg-light border-light transition-all duration-150;
   }
 
   .ball.selected {
