@@ -1,7 +1,12 @@
 import { batchGetSheet } from '$lib/data/api';
 import type { PageServerLoad } from './$types';
 
-export const prerender = true;
+// SSR en cada request en lugar de prerender. Antes era `true`, pero la llamada
+// a Google Sheets en build se rompió en Netlify (Node 22 + node-fetch 2.x
+// dentro de google-auth-library → ERR_STREAM_PREMATURE_CLOSE en gzip).
+// Sirviendo on-demand evitamos esa dependencia en build y los datos quedan
+// más frescos (no esperan al próximo deploy para actualizarse).
+export const prerender = false;
 
 export const load = (async () => {
 	// const { data } = await getSheet('Personas fallecidas');

@@ -33,7 +33,12 @@
 		flex-direction: row-reverse;
 		align-items: center;
 		@apply text-gray text-opacity-50 text-sm border-l-2 border-light border-opacity-50 text-end h-full;
+		/* La columna y su etiqueta no deben robar el clic a los círculos. */
+		pointer-events: none;
     }
+    .line :global(.ball) {
+		pointer-events: auto;
+	}
     .line.second {
 		@apply text-opacity-25 border-opacity-25 border-dashed;
 	}
