@@ -43,7 +43,8 @@ export const load = (async () => {
 			age: e[4],
 			death_date: e[6],
 			death_cause: e[7],
-			death_location: e[8]
+			death_location: e[8],
+			death_country: e[9]
 		})) ?? [];
 
 	const missing: Person[] =
@@ -54,7 +55,8 @@ export const load = (async () => {
 			birthdate: e[4],
 			birthplace: e[11],
 			missing_date: e[6],
-			missing_place: e[7]
+			missing_place: e[7],
+			missing_country: e[8]
 		})) ?? [];
 
 	const people = [...deceased, ...missing].sort((a, b) => {
