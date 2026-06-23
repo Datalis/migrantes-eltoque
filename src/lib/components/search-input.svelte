@@ -1,13 +1,14 @@
 <script lang="ts">
 	import SearchIcon from '$lib/assets/images/search.svg?component';
 	import { createEventDispatcher } from 'svelte';
-    import debounce from 'lodash.debounce';
+	import debounce from 'lodash.debounce';
 
-	export let placeholder: string = "";
+	export let placeholder: string = '';
+	export let value: string = '';
 
 	let dispatch = createEventDispatcher();
 
-	let currentQuery = "";
+	let currentQuery = value;
 
 	const dispatchQueryChange = (q: string) => {
 		if (currentQuery == q) return;
@@ -15,16 +16,17 @@
 		currentQuery = q;
 	};
 
-	const onSearch = (e: any) => debounce(() => dispatchQueryChange(e.target.value), 400, { leading: false })();
-
+	const onSearch = (e: any) =>
+		debounce(() => dispatchQueryChange(e.target.value), 400, { leading: false })();
 </script>
 
 <div class="search-input w-full">
 	<input
 		{placeholder}
+		{value}
 		class="control w-full border border-accent rounded text-light"
 		type="search"
-		on:keydown={onSearch}
+		on:input={onSearch}
 	/>
 	<div class="icon">
 		<SearchIcon fill="#7856ff" />
