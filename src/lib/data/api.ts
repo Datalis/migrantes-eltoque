@@ -2,14 +2,11 @@ import {
 	GOOGLEAPIS_PRIVATE_KEY,
 	GOOGLEAPIS_CLIENT_ID,
 	GOOGLEAPIS_CLIENT_EMAIL,
-	SMTP_HOST,
-	SMTP_PORT,
-	SMTP_USERNAME,
-	SMTP_PASSWORD
+	RESEND_API_KEY
 } from '$env/static/private';
 import { GoogleAuth } from 'google-auth-library';
 import { google } from 'googleapis';
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
 const SPREADSHEET_ID = '1rb96kgAuMVclENWvoZTXtXfN1pqWYdT8EifWkprBMMQ';
 
@@ -41,8 +38,12 @@ const isTransient = (err: unknown) => {
 	const e = err as any;
 	const code = e?.code || e?.errno;
 	if (code && TRANSIENT_CODES.has(code)) return true;
-	const status = e?.response?.status ?? e?.code;
-	return status === 408 || status === 429 || (typeof status === 'number' && status >= 500 && status < 600);
+	const status = e?.statusCode ?? e?.response?.status ?? e?.code;
+	return (
+		status === 408 ||
+		status === 429 ||
+		(typeof status === 'number' && status >= 500 && status < 600)
+	);
 };
 
 const withRetry = async <T>(label: string, fn: () => Promise<T>): Promise<T> => {
@@ -55,7 +56,9 @@ const withRetry = async <T>(label: string, fn: () => Promise<T>): Promise<T> => 
 			if (i === RETRY_DELAYS_MS.length || !isTransient(err)) throw err;
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			const code = (err as any)?.code || (err as any)?.errno || 'unknown';
-			console.warn(`[api:${label}] error transitorio (${code}), reintentando en ${RETRY_DELAYS_MS[i]}ms…`);
+			console.warn(
+				`[api:${label}] error transitorio (${code}), reintentando en ${RETRY_DELAYS_MS[i]}ms…`
+			);
 			await new Promise((r) => setTimeout(r, RETRY_DELAYS_MS[i]));
 		}
 	}
@@ -79,28 +82,21 @@ export const get = async (url: string) => {
 	return { data: await data.json() };
 };
 
+const resend = new Resend(RESEND_API_KEY);
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const sendMail = async (opts: any) => {
-	const { personName, contactName, email, phone, message, isMissingPerson } = opts;
+	const { personName, contactName, email, phone, message, isMissing } = opts;
+	const isMissingPerson = isMissing === true || isMissing === 'true';
 
-	const transporter = nodemailer.createTransport({
-		host: SMTP_HOST,
-		port: +SMTP_PORT,
-		secure: false,
-		auth: {
-			user: SMTP_USERNAME,
-			pass: SMTP_PASSWORD
-		},
-		tls: {
-			rejectUnauthorized: false
-		}
-	});
-
-	const info = await transporter.sendMail({
-		from: 'desarrollo@eltoque.com',
-		to: 'audiencias@eltoque.com',
-		subject: `Nueva denuncia - ${isMissingPerson ? 'Desaparecido' : 'Fallecido'}`,
-		html: `
+	const data = await withRetry('sendMail', async () => {
+		const { data, error } = await resend.emails.send({
+			from: 'Denuncias La Travesía <denuncias@masvocesfoundation.org>',
+			to: ['audiencias@eltoque.com'],
+			// Permite responder directamente al denunciante (si dejó email).
+			replyTo: email ? [email] : undefined,
+			subject: `Nueva denuncia - ${isMissingPerson ? 'Desaparecido' : 'Fallecido'}`,
+			html: `
         <ul>
             <li>
                 <span style="font-weight: bold;">Denunciante: </span>
@@ -115,7 +111,9 @@ export const sendMail = async (opts: any) => {
                 <span>${phone}</span>
             </li>
             <li>
-                <span style="font-weight: bold;">Nombre del ${isMissingPerson ? 'desaparecido' : 'fallecido'}: </span>
+                <span style="font-weight: bold;">Nombre del ${
+									isMissingPerson ? 'desaparecido' : 'fallecido'
+								}: </span>
                 <span>${personName}</span>
             </li>
             <li>
@@ -124,7 +122,20 @@ export const sendMail = async (opts: any) => {
             </li>
         </ul>
         `
+		});
+
+		// Resend no lanza: devuelve { error }. Lo convertimos en throw para que
+		// withRetry reintente ante 429/500 y el endpoint /contact propague el fallo.
+		if (error) {
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			const err = new Error(error.message) as any;
+			err.name = error.name;
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			err.statusCode = (error as any).statusCode;
+			throw err;
+		}
+		return data;
 	});
 
-	console.debug('Message sent: %s', info.messageId);
+	console.debug('Email enviado: %s', data?.id);
 };

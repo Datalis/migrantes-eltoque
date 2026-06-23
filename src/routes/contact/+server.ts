@@ -1,7 +1,7 @@
 import { sendMail } from '$lib/data/api';
 import type { RequestHandler } from './$types';
 
-const SECRET_KEY = process.env.SECRET_KEY || "1x0000000000000000000000000000000AA"
+const SECRET_KEY = process.env.SECRET_KEY || '1x0000000000000000000000000000000AA';
 
 export const POST: RequestHandler = async ({ request }) => {
 	const data = await request.formData();
@@ -17,24 +17,30 @@ export const POST: RequestHandler = async ({ request }) => {
 
 	const formData = new FormData();
 	formData.append('secret', SECRET_KEY);
-	formData.append('response', token || "");
-	formData.append('remoteip', ip || "");
-	console.log(formData)
-	
+	formData.append('response', token || '');
+	formData.append('remoteip', ip || '');
+
 	const url = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
 	const result = await fetch(url, {
 		body: formData,
-		method: 'POST',
+		method: 'POST'
 	});
 
 	const outcome = await result.json();
-	console.log(outcome)
-	if (outcome.success) {
-		console.log('success')
-		await sendMail({ personName, contactName, email, phone, message, isMissing });
-	} else {
-		// throw error
+
+	// Verificación de Turnstile fallida: respondemos con error para que el
+	// formulario muestre el toast de error en vez de un falso "enviado".
+	if (!outcome.success) {
+		console.warn('Turnstile verification failed', outcome['error-codes']);
+		return new Response('Captcha verification failed', { status: 403 });
 	}
-    
-	return new Response();
+
+	try {
+		await sendMail({ personName, contactName, email, phone, message, isMissing });
+	} catch (err) {
+		console.error('Error enviando la denuncia con Resend', err);
+		return new Response('Email delivery failed', { status: 502 });
+	}
+
+	return new Response(null, { status: 204 });
 };
