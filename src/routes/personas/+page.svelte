@@ -46,14 +46,16 @@
 			{ label: 'Edad', key: 'age' },
 			{ label: 'Fecha de muerte', key: 'death_date' },
 			{ label: 'Causa', key: 'death_cause' },
-			{ label: 'Lugar donde murió', key: 'death_location' }
+			{ label: 'Lugar donde murió', key: 'death_location' },
+			{ label: 'País', key: 'death_country' }
 		],
 		missing: [
 			{ label: 'Edad al momento de la desaparición', key: 'age' },
 			{ label: 'Fecha de nacimiento', key: 'birthdate' },
 			{ label: 'Lugar de origen', key: 'birthplace' },
 			{ label: 'Visto por última vez', key: 'missing_date' },
-			{ label: 'Lugar donde fue visto por última vez', key: 'missing_place' }
+			{ label: 'Lugar donde fue visto por última vez', key: 'missing_place' },
+			{ label: 'País', key: 'missing_country' }
 		]
 	};
 </script>
