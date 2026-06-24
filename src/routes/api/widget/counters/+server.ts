@@ -1,15 +1,16 @@
 import { json } from '@sveltejs/kit';
 import { getSheet } from '$lib/data/api';
-import { parseEvents } from '$lib/data/irmc';
+import { parseEvents, type MigrationEvent } from '$lib/data/irmc';
 import type { RequestHandler } from './$types';
 
-// Endpoint público (con CORS) para el widget "La Travesía" embebido en
-// eltoque.com. Devuelve el contador de muertes y desapariciones agregado por
-// año, para que el widget resuelva los presets de periodo ("Desde 2014",
-// "Este año", "Últimos 3 años") en cliente con una sola petición.
+// Endpoint público (con CORS) para el contador del widget "La Travesía"
+// embebido en eltoque.com. Devuelve muertes y desapariciones para los tres
+// periodos del widget. Como dos de ellos son ventanas móviles relativas a
+// "hoy" (últimos 12 meses / últimos 30 días), el servidor las resuelve con la
+// fecha exacta de cada evento — el cliente no hace cálculos de fechas.
 //
 // Fuente: hoja `Todos los eventos`. Cada evento aporta su nº de personas
-// fallecidas (col. O) y desaparecidas (col. P) — ya parseadas por parseEvents
+// fallecidas (col. O) y desaparecidas (col. P), ya parseadas por parseEvents
 // como `deaths` y `missingsNo`. Es la misma fuente que alimenta el titular del
 // sitio, de modo que las cifras coinciden con /personas.
 export const prerender = false;
@@ -22,52 +23,45 @@ const CORS = {
 	'Access-Control-Allow-Headers': 'Content-Type'
 };
 
-const parseYear = (v: string | null): number | null => {
-	if (!v) return null;
-	const n = parseInt(v, 10);
-	return Number.isInteger(n) && n >= 2000 && n <= 2100 ? n : null;
-};
+const ymd = (ms: number) => new Date(ms).toISOString().slice(0, 10);
+
+const sumFrom = (events: MigrationEvent[], fromMs: number) =>
+	events.reduce(
+		(acc, e) => {
+			if (e.date!.getTime() < fromMs) return acc;
+			acc.deaths += e.deaths || 0;
+			acc.missing += e.missingsNo || 0;
+			return acc;
+		},
+		{ deaths: 0, missing: 0 }
+	);
 
 export const OPTIONS: RequestHandler = () => new Response(null, { headers: CORS });
 
-export const GET: RequestHandler = async ({ url }) => {
+export const GET: RequestHandler = async () => {
 	const now = new Date();
-	const currentYear = now.getUTCFullYear();
+	const nowMs = now.getTime();
+
+	// Límites de cada ventana.
+	const startMs = Date.UTC(START_YEAR, 0, 1); // "Desde 2014"
+	const last12Ms = Date.UTC(now.getUTCFullYear() - 1, now.getUTCMonth(), now.getUTCDate()); // 12 meses
+	const last30Ms = nowMs - 30 * 24 * 60 * 60 * 1000; // 30 días
 
 	const { data } = await getSheet('Todos los eventos');
-	const rows = data.values?.slice(1);
-	const events = parseEvents(rows);
-
-	// Agregado por año (solo eventos con fecha válida; parseEvents descarta el resto).
-	const byYear: Record<string, { deaths: number; missing: number }> = {};
-	for (const e of events) {
-		const year = e.date!.getUTCFullYear();
-		if (year < START_YEAR || year > currentYear) continue;
-		const key = String(year);
-		const bucket = byYear[key] ?? { deaths: 0, missing: 0 };
-		bucket.deaths += e.deaths || 0;
-		bucket.missing += e.missingsNo || 0;
-		byYear[key] = bucket;
-	}
-
-	// Filtro opcional por rango de años (?from=YYYY&to=YYYY). Si no se indica,
-	// el total abarca desde START_YEAR hasta el año en curso.
-	const from = parseYear(url.searchParams.get('from')) ?? START_YEAR;
-	const to = parseYear(url.searchParams.get('to')) ?? currentYear;
-
-	const total = { deaths: 0, missing: 0 };
-	for (const [key, b] of Object.entries(byYear)) {
-		const year = +key;
-		if (year < from || year > to) continue;
-		total.deaths += b.deaths;
-		total.missing += b.missing;
-	}
+	const events = parseEvents(data.values?.slice(1)).filter((e) => {
+		const t = e.date!.getTime();
+		return t >= startMs && t <= nowMs; // descarta fechas futuras o anteriores a 2014
+	});
 
 	return json(
 		{
-			range: { from, to, startYear: START_YEAR, currentYear },
-			total,
-			byYear
+			asOf: ymd(nowMs),
+			startYear: START_YEAR,
+			periods: {
+				all: { label: 'Desde 2014', since: ymd(startMs), ...sumFrom(events, startMs) },
+				last12Months: { label: 'Último año', since: ymd(last12Ms), ...sumFrom(events, last12Ms) },
+				last30Days: { label: 'Último mes', since: ymd(last30Ms), ...sumFrom(events, last30Ms) }
+			}
 		},
 		{ headers: { ...CORS, 'Cache-Control': 'public, max-age=300' } }
 	);
