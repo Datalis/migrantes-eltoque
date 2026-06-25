@@ -48,37 +48,51 @@ export interface MigrationEvent {
  *   Baja (1): impactos administrativos sin daño físico.
  */
 export const SEVERITY: Record<string, Severity> = {
-	// Alta
+	// Alta (3): daño grave o letal.
 	muerte: 3,
 	muertes: 3,
 	desaparicion: 3,
 	desapariciones: 3,
 	naufragio: 3,
+	naufragios: 3,
 	'hallazgo de cadaver': 3,
 	'violencia letal': 3,
-	// Media
-	rescate: 2,
-	rescates: 2,
-	secuestro: 2,
+	rescate: 3,
+	rescates: 3,
+	secuestro: 3,
+	secuestros: 3,
+	'violencia sexual': 3,
+	'trata de personas': 3,
+	// Media (2): afectación o riesgo serio a la integridad física.
 	deteneccion: 2, // tolerancia a typo
 	detencion: 2,
 	detenciones: 2,
-	intercepcion: 2,
-	intercepciones: 2,
+	'condiciones de detencion': 2,
+	deportacion: 2,
+	deportaciones: 2,
+	'vulneracion de la integridad': 2,
 	heridos: 2,
-	// Baja
+	// Baja (1): impactos administrativos sin daño físico.
 	repatriacion: 1,
 	repatriaciones: 1,
-	deportacion: 1,
+	intercepcion: 1,
+	intercepciones: 1,
 	expulsion: 1,
+	expulsiones: 1,
 	devolucion: 1,
+	devoluciones: 1,
 	retorno: 1,
+	retornos: 1,
 	transferencia: 1,
 	transferencias: 1,
 	traslado: 1,
 	traslados: 1,
 	llegada: 1,
-	llegadas: 1
+	llegadas: 1,
+	autodeportacion: 1,
+	asentamiento: 1,
+	'conflictos de integracion': 1,
+	'desamparo institucional': 1
 };
 
 /** Peso máximo de severidad: define el techo teórico del IRMC bruto (sección 4e). */

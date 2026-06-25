@@ -128,6 +128,41 @@
 					selectedFilter = 'desaparición';
 				}
 				break;
+			case 'Conflictos de integración':
+				if (selectedFilter == 'conflictos de integración') {
+					selectedFilter = '';
+				} else {
+					selectedFilter = 'conflictos de integración';
+				}
+				break;
+			case 'Vulneración de la integridad':
+				if (selectedFilter == 'vulneración de la integridad') {
+					selectedFilter = '';
+				} else {
+					selectedFilter = 'vulneración de la integridad';
+				}
+				break;
+			case 'Trata de personas':
+				if (selectedFilter == 'trata de personas') {
+					selectedFilter = '';
+				} else {
+					selectedFilter = 'trata de personas';
+				}
+				break;
+			case 'Violencia sexual':
+				if (selectedFilter == 'violencia sexual') {
+					selectedFilter = '';
+				} else {
+					selectedFilter = 'violencia sexual';
+				}
+				break;
+			case 'Desamparo institucional':
+				if (selectedFilter == 'desamparo institucional') {
+					selectedFilter = '';
+				} else {
+					selectedFilter = 'desamparo institucional';
+				}
+				break;
 		}
 	};
 
@@ -156,7 +191,7 @@
 			class="button {selectedFilter === 'detención' ? 'active' : ''}"
 			on:click={activeFilter}
 			disabled={isDisabled}
-            title="En la mayoría de los casos fueron realizadas por la Patrulla Fronteriza de Estados Unidos a quienes llegan a través de la frontera con México o a balseros que logran tocar tierra."
+			title="En la mayoría de los casos fueron realizadas por la Patrulla Fronteriza de Estados Unidos a quienes llegan a través de la frontera con México o a balseros que logran tocar tierra."
 		>
 			Detenciones
 		</button>
@@ -164,7 +199,7 @@
 			class="button {selectedFilter === 'rescate' ? 'active' : ''}"
 			on:click={activeFilter}
 			disabled={isDisabled}
-            title="El rescate ocurre cuando los migrantes son detenidos en situaciones como accidentes, naufragios, hundimientos, o se encuentran varados en islas deshabitadas. En estos casos, la vida de los migrantes está en potencial peligro."
+			title="El rescate ocurre cuando los migrantes son detenidos en situaciones como accidentes, naufragios, hundimientos, o se encuentran varados en islas deshabitadas. En estos casos, la vida de los migrantes está en potencial peligro."
 		>
 			Rescates
 		</button>
@@ -172,50 +207,90 @@
 			class="button {selectedFilter === 'intercepción' ? 'active' : ''}"
 			disabled={isDisabled}
 			on:click={activeFilter}
-            title="La mayoría de las intercepciones son llevadas a cabo por la Guardia Costera de Estados Unidos que se encarga de retener o interrumpir la travesía antes de que los migrantes toquen tierra."
-        >
-            Intercepciones
-        </button>
+			title="La mayoría de las intercepciones son llevadas a cabo por la Guardia Costera de Estados Unidos que se encarga de retener o interrumpir la travesía antes de que los migrantes toquen tierra."
+		>
+			Intercepciones
+		</button>
 		<button
 			class="button {selectedFilter === 'transferencia' ? 'active' : ''}"
 			disabled={isDisabled}
 			on:click={activeFilter}
-            title="Se emplea el término para clasificar los casos en los que la Guardia Costera de EE. UU. transfiere un grupo de balseros cubanos interceptados en el mar a las autoridades bahameñas, pues fueron detenidos en territorio de Bahamas."
-        >
-            Transferencias
-        </button>
+			title="Se emplea el término para clasificar los casos en los que la Guardia Costera de EE. UU. transfiere un grupo de balseros cubanos interceptados en el mar a las autoridades bahameñas, pues fueron detenidos en territorio de Bahamas."
+		>
+			Transferencias
+		</button>
 		<button
 			class="button {selectedFilter === 'expulsión' ? 'active' : ''}"
 			on:click={activeFilter}
 			disabled={isDisabled}
-            title="La categoría se utiliza solo en Guatemala para clasificar a los migrantes cubanos que no son deportados, pero sí expulsados del territorio de tránsito."
-        >
-            Expulsión
-        </button>
+			title="La categoría se utiliza solo en Guatemala para clasificar a los migrantes cubanos que no son deportados, pero sí expulsados del territorio de tránsito."
+		>
+			Expulsión
+		</button>
 		<button
 			class="button {selectedFilter === 'repatriación' ? 'active' : ''}"
 			disabled={isDisabled}
 			on:click={activeFilter}
-            title="Cuando un migrante es devuelto voluntaria o involuntariamente a su país de origen."
-        >
-            Repatriación
-        </button>
+			title="Cuando un migrante es devuelto voluntaria o involuntariamente a su país de origen."
+		>
+			Repatriación
+		</button>
 		<button
 			class="button {selectedFilter === 'muerte' ? 'active' : ''}"
 			on:click={activeFilter}
 			disabled={isDisabled}
-            title="Cuando se reporta la muerte de una o varias personas como consecuencia de un evento migratorio."
-        >
-            Muerte
-        </button>
+			title="Cuando se reporta la muerte de una o varias personas como consecuencia de un evento migratorio."
+		>
+			Muerte
+		</button>
 		<button
 			class="button {selectedFilter === 'desaparición' ? 'active' : ''}"
 			disabled={isDisabled}
 			on:click={activeFilter}
-            title="Aquellas personas que emprendieron una ruta migratoria y no se ha reportado la llegada a su destino."
-        >
-            Desapariciones
-        </button>
+			title="Aquellas personas que emprendieron una ruta migratoria y no se ha reportado la llegada a su destino."
+		>
+			Desapariciones
+		</button>
+		<button
+			class="button {selectedFilter === 'conflictos de integración' ? 'active' : ''}"
+			disabled={isDisabled}
+			on:click={activeFilter}
+			title="Barreras que obstaculizan la integración de las personas migrantes en ámbitos como el jurídico, educacional, laboral, sanitario: discriminación, exclusión social, violencia institucional o falta de protección institucional."
+		>
+			Conflictos de integración
+		</button>
+		<button
+			class="button {selectedFilter === 'vulneración de la integridad' ? 'active' : ''}"
+			disabled={isDisabled}
+			on:click={activeFilter}
+			title="Acciones que atentan contra la integridad física, emocional, y/o patrimonial de los migrantes durante la ruta o el asentamiento, pero que no implican la pérdida de la vida, tales como robo, agresión física, intento de homicidio, intento de feminicidio, lesiones."
+		>
+			Vulneración de la integridad
+		</button>
+		<button
+			class="button {selectedFilter === 'trata de personas' ? 'active' : ''}"
+			disabled={isDisabled}
+			on:click={activeFilter}
+			title="Evento donde se documenta la explotación sexual o laboral de migrantes en los territorios de tránsito o destino."
+		>
+			Trata de personas
+		</button>
+		<button
+			class="button {selectedFilter === 'violencia sexual' ? 'active' : ''}"
+			disabled={isDisabled}
+			on:click={activeFilter}
+			title="Agresiones sexuales y acoso asociadas al riesgo migratorio, ya sea en tránsito o durante el asentamiento."
+		>
+			Violencia sexual
+		</button>
+		<button
+			class="button {selectedFilter === 'desamparo institucional' ? 'active' : ''}"
+			disabled={isDisabled}
+			on:click={activeFilter}
+			title="Evento donde se documenta la ausencia de respuesta y responsabilidad consular ante situaciones de vulnerabilidad o necesidad de atención migratoria en el país de tránsito o destino."
+		>
+			Desamparo institucional
+		</button>
 	</div>
 	<div id="timelineContainer" class="mt-3 relative">
 		<div class="timeline-wrapper border border-light rounded-xl py-4 mr-5 ml-2">

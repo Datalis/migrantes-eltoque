@@ -41,6 +41,28 @@ describe('normalizeType / severityOf', () => {
 		expect(severityOf('')).toBeNull();
 		expect(severityOf(null)).toBeNull();
 	});
+
+	it('aplica el repesado de la metodología actualizada', () => {
+		// Tipos que ya existían pero cambiaron de peso.
+		expect(severityOf('rescate')).toBe(3); // antes 2
+		expect(severityOf('secuestro')).toBe(3); // antes 2
+		expect(severityOf('intercepción')).toBe(1); // antes 2
+		expect(severityOf('deportación')).toBe(2); // antes 1
+	});
+
+	it('asigna severidad a las categorías nuevas', () => {
+		// Alta (3)
+		expect(severityOf('trata de personas')).toBe(3);
+		expect(severityOf('violencia sexual')).toBe(3);
+		// Media (2)
+		expect(severityOf('condiciones de detención')).toBe(2);
+		expect(severityOf('vulneración de la integridad')).toBe(2);
+		// Baja (1)
+		expect(severityOf('autodeportación')).toBe(1);
+		expect(severityOf('asentamiento')).toBe(1);
+		expect(severityOf('conflictos de integración')).toBe(1);
+		expect(severityOf('desamparo institucional')).toBe(1);
+	});
 });
 
 describe('classify', () => {
@@ -78,6 +100,27 @@ describe('computeMonthlyIrmc (ejemplo del documento)', () => {
 		expect(m.n).toBe(15);
 		expect(m.excludedCount).toBe(2);
 		expect(m.irmc).toBeCloseTo(0.6, 5);
+	});
+});
+
+describe('computeMonthlyIrmc (categorías nuevas)', () => {
+	const d = (day: number) => new Date(Date.UTC(2026, 1, day, 12));
+
+	it('integra los tipos nuevos en las tres severidades', () => {
+		// 1 violencia sexual (S=3), 1 vulneración de la integridad (S=2),
+		// 1 asentamiento (S=1). N=3, cada fᵢ=1/3.
+		// IRMC bruto = 1/3·3 + 1/3·2 + 1/3·1 = 2 ; normalizado = 2/3 ≈ 0.667 -> alto.
+		const events: MigrationEvent[] = [
+			makeEvent(d(1), 'violencia sexual'),
+			makeEvent(d(2), 'vulneración de la integridad'),
+			makeEvent(d(3), 'asentamiento')
+		];
+		const m = computeMonthlyIrmc(events)[0];
+		expect(m.n).toBe(3);
+		expect(m.excludedCount).toBe(0);
+		expect(m.irmcBruto).toBeCloseTo(2, 5);
+		expect(m.irmc).toBeCloseTo(2 / 3, 5);
+		expect(m.classification.level).toBe('alto');
 	});
 });
 
