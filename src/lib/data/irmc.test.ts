@@ -4,6 +4,7 @@ import {
 	computeMonthlyIrmc,
 	normalizeType,
 	parseEvents,
+	resolveTypes,
 	severityOf,
 	type MigrationEvent
 } from './irmc';
@@ -65,6 +66,35 @@ describe('normalizeType / severityOf', () => {
 	});
 });
 
+describe('resolveTypes (eventos compuestos)', () => {
+	it('reconoce ; , y salto de línea como separadores', () => {
+		expect(resolveTypes('muerte; desaparición').map((t) => t.type)).toEqual([
+			'muerte',
+			'desaparicion'
+		]);
+		expect(resolveTypes('detención, muerte').map((t) => t.s)).toEqual([2, 3]);
+		expect(resolveTypes('desaparición\nrescate').map((t) => t.type)).toEqual([
+			'desaparicion',
+			'rescate'
+		]);
+	});
+
+	it('ignora sub-tipos no mapeados y deduplica', () => {
+		expect(resolveTypes('muerte; foo').map((t) => t.type)).toEqual(['muerte']);
+		expect(resolveTypes('muerte; muerte').map((t) => t.type)).toEqual(['muerte']);
+		expect(resolveTypes('foo; bar')).toEqual([]);
+		expect(resolveTypes('')).toEqual([]);
+		expect(resolveTypes(null)).toEqual([]);
+	});
+
+	it('severityOf de un compuesto es el máximo de sus tipos', () => {
+		expect(severityOf('muerte; desaparición')).toBe(3);
+		expect(severityOf('detención, muerte')).toBe(3);
+		expect(severityOf('detención; deportación')).toBe(2);
+		expect(severityOf('foo; bar')).toBeNull();
+	});
+});
+
 describe('classify', () => {
 	it('aplica los rangos fijos de la propuesta', () => {
 		expect(classify(0.1).level).toBe('bajo');
@@ -121,6 +151,42 @@ describe('computeMonthlyIrmc (categorías nuevas)', () => {
 		expect(m.irmcBruto).toBeCloseTo(2, 5);
 		expect(m.irmc).toBeCloseTo(2 / 3, 5);
 		expect(m.classification.level).toBe('alto');
+	});
+});
+
+describe('computeMonthlyIrmc (eventos compuestos)', () => {
+	const d = (day: number) => new Date(Date.UTC(2026, 2, day, 12));
+
+	it('un incidente compuesto cuenta en cada tipo (equivale a filas separadas)', () => {
+		// Un mes con «muerte; desaparición» + «detención» debe dar exactamente lo
+		// mismo que tener esas filas ya separadas: muerte + desaparición + detención.
+		const compound = computeMonthlyIrmc([
+			makeEvent(d(1), 'muerte; desaparición'),
+			makeEvent(d(2), 'detención')
+		])[0];
+		const separated = computeMonthlyIrmc([
+			makeEvent(d(1), 'muerte'),
+			makeEvent(d(1), 'desaparición'),
+			makeEvent(d(2), 'detención')
+		])[0];
+
+		expect(compound.n).toBe(3); // 2 del compuesto + 1 detención
+		expect(compound.excludedCount).toBe(0);
+		expect(compound.n).toBe(separated.n);
+		expect(compound.irmcBruto).toBeCloseTo(separated.irmcBruto, 10);
+		expect(compound.irmc).toBeCloseTo(separated.irmc, 10);
+	});
+
+	it('excluye sólo los incidentes sin ningún tipo reconocido', () => {
+		const m = computeMonthlyIrmc([
+			makeEvent(d(1), 'muerte; desaparición'), // 2 ocurrencias
+			makeEvent(d(2), 'sin información') // excluido
+		])[0];
+		expect(m.n).toBe(2);
+		expect(m.excludedCount).toBe(1);
+		// bruto = 1/2·3 + 1/2·3 = 3 ; irmc = 1 -> extremo
+		expect(m.irmc).toBeCloseTo(1, 5);
+		expect(m.classification.level).toBe('extremo');
 	});
 });
 

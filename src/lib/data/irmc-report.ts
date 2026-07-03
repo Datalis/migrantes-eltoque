@@ -7,15 +7,25 @@
 
 import {
 	computeMonthlyIrmc,
-	normalizeType,
+	resolveTypes,
 	severityOf,
 	type MigrationEvent,
 	type Severity
 } from './irmc';
 
 const MONTH_NAMES_ES = [
-	'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-	'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+	'Enero',
+	'Febrero',
+	'Marzo',
+	'Abril',
+	'Mayo',
+	'Junio',
+	'Julio',
+	'Agosto',
+	'Septiembre',
+	'Octubre',
+	'Noviembre',
+	'Diciembre'
 ];
 
 const SEVERITY_LEVELS: Record<Severity, 'baja' | 'media' | 'alta'> = {
@@ -24,7 +34,13 @@ const SEVERITY_LEVELS: Record<Severity, 'baja' | 'media' | 'alta'> = {
 	3: 'alta'
 };
 
-const DEATH_TYPES = new Set(['muerte', 'muertes', 'naufragio', 'hallazgo de cadaver', 'violencia letal']);
+const DEATH_TYPES = new Set([
+	'muerte',
+	'muertes',
+	'naufragio',
+	'hallazgo de cadaver',
+	'violencia letal'
+]);
 const MISSING_TYPES = new Set(['desaparicion', 'desapariciones']);
 
 export interface ReportPeriod {
@@ -186,48 +202,54 @@ export function buildMonthReport(
 		? { events: prev.n, people: sumField(previousClassified, 'personsNo') }
 		: null;
 
-	const trend = prev && previousTotals
-		? {
-			irmc: direction(current.irmc, prev.irmc),
-			irmcDelta: round2(current.irmc - prev.irmc),
-			events: direction(totals.events, previousTotals.events),
-			eventsDelta: totals.events - previousTotals.events,
-			people: direction(totals.people, previousTotals.people),
-			peopleDelta: totals.people - previousTotals.people,
-			peopleVarPercent:
-				previousTotals.people > 0
-					? Math.round(((totals.people - previousTotals.people) / previousTotals.people) * 100)
-					: null,
-			peopleVarPercentFormatted: (() => {
-				if (!previousTotals.people) return null;
-				const v = Math.round(
-					((totals.people - previousTotals.people) / previousTotals.people) * 100
-				);
-				const sign = v > 0 ? '+' : '';
-				return `${sign}${v} %`;
-			})()
-		}
-		: null;
+	const trend =
+		prev && previousTotals
+			? {
+					irmc: direction(current.irmc, prev.irmc),
+					irmcDelta: round2(current.irmc - prev.irmc),
+					events: direction(totals.events, previousTotals.events),
+					eventsDelta: totals.events - previousTotals.events,
+					people: direction(totals.people, previousTotals.people),
+					peopleDelta: totals.people - previousTotals.people,
+					peopleVarPercent:
+						previousTotals.people > 0
+							? Math.round(((totals.people - previousTotals.people) / previousTotals.people) * 100)
+							: null,
+					peopleVarPercentFormatted: (() => {
+						if (!previousTotals.people) return null;
+						const v = Math.round(
+							((totals.people - previousTotals.people) / previousTotals.people) * 100
+						);
+						const sign = v > 0 ? '+' : '';
+						return `${sign}${v} %`;
+					})()
+			  }
+			: null;
 
-	// Desglose por tipo (sólo eventos clasificados, ordenado por cantidad).
+	// Desglose por tipo (sólo eventos clasificados, ordenado por cantidad). Un
+	// incidente con doble clasificación cuenta en cada tipo; sus personas se
+	// atribuyen sólo al tipo de mayor severidad para no contarlas doble.
 	const byTypeMap = new Map<string, ReportTypeBreakdown>();
 	for (const e of classified) {
-		const key = normalizeType(e.eventType);
-		const sev = severityOf(e.eventType)!;
-		let entry = byTypeMap.get(key);
-		if (!entry) {
-			entry = {
-				type: key,
-				label: capitalize((e.eventType || '').trim()),
-				severity: sev,
-				severityLevel: SEVERITY_LEVELS[sev],
-				events: 0,
-				people: 0
-			};
-			byTypeMap.set(key, entry);
+		const types = resolveTypes(e.eventType);
+		const isSingle = types.length === 1;
+		const primary = types.reduce((a, b) => (b.s > a.s ? b : a), types[0]);
+		for (const { type, s } of types) {
+			let entry = byTypeMap.get(type);
+			if (!entry) {
+				entry = {
+					type,
+					label: isSingle ? capitalize((e.eventType || '').trim()) : capitalize(type),
+					severity: s,
+					severityLevel: SEVERITY_LEVELS[s],
+					events: 0,
+					people: 0
+				};
+				byTypeMap.set(type, entry);
+			}
+			entry.events += 1;
+			if (type === primary.type) entry.people += e.personsNo || 0;
 		}
-		entry.events += 1;
-		entry.people += e.personsNo || 0;
 	}
 	const byType = [...byTypeMap.values()].sort((a, b) => b.events - a.events);
 
@@ -253,7 +275,9 @@ export function buildMonthReport(
 		entry.people += e.personsNo || 0;
 	}
 	const countries = [...countryMap.values()].sort((a, b) => b.events - a.events);
-	const topByEvents = countries[0] ? { name: countries[0].name, events: countries[0].events } : null;
+	const topByEvents = countries[0]
+		? { name: countries[0].name, events: countries[0].events }
+		: null;
 	const topByPeopleSrc = [...countries].sort((a, b) => b.people - a.people)[0];
 	const topByPeople = topByPeopleSrc
 		? { name: topByPeopleSrc.name, people: topByPeopleSrc.people }
@@ -261,10 +285,14 @@ export function buildMonthReport(
 
 	const locations = uniqueSorted(classified.map((e) => e.location));
 	const deathCountries = uniqueSorted(
-		classified.filter((e) => DEATH_TYPES.has(normalizeType(e.eventType))).map((e) => e.country)
+		classified
+			.filter((e) => resolveTypes(e.eventType).some((t) => DEATH_TYPES.has(t.type)))
+			.map((e) => e.country)
 	);
 	const missingCountries = uniqueSorted(
-		classified.filter((e) => MISSING_TYPES.has(normalizeType(e.eventType))).map((e) => e.country)
+		classified
+			.filter((e) => resolveTypes(e.eventType).some((t) => MISSING_TYPES.has(t.type)))
+			.map((e) => e.country)
 	);
 
 	return {
@@ -280,15 +308,15 @@ export function buildMonthReport(
 		totals,
 		previous: prev
 			? {
-				period: periodOf(prev.year, prev.month),
-				irmc: {
-					value: round2(prev.irmc),
-					valueFormatted: formatES(prev.irmc),
-					level: prev.classification.level,
-					levelLabel: prev.classification.label
-				},
-				totals: previousTotals!
-			}
+					period: periodOf(prev.year, prev.month),
+					irmc: {
+						value: round2(prev.irmc),
+						valueFormatted: formatES(prev.irmc),
+						level: prev.classification.level,
+						levelLabel: prev.classification.label
+					},
+					totals: previousTotals!
+			  }
 			: null,
 		trend,
 		byType,
