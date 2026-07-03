@@ -2,8 +2,8 @@ import { json } from '@sveltejs/kit';
 import { getSheet } from '$lib/data/api';
 import {
 	computeMonthlyIrmc,
-	normalizeType,
 	parseEvents,
+	resolveTypes,
 	severityOf,
 	type MigrationEvent
 } from '$lib/data/irmc';
@@ -20,8 +20,18 @@ const CORS = {
 };
 
 const MONTH_NAMES_ES = [
-	'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-	'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+	'Enero',
+	'Febrero',
+	'Marzo',
+	'Abril',
+	'Mayo',
+	'Junio',
+	'Julio',
+	'Agosto',
+	'Septiembre',
+	'Octubre',
+	'Noviembre',
+	'Diciembre'
 ];
 
 const round2 = (n: number) => Math.round(n * 100) / 100;
@@ -52,23 +62,33 @@ const buildItem = (
 	);
 	const people = monthEvents.reduce((s, e) => s + (e.personsNo || 0), 0);
 
-	const byTypeMap = new Map<string, { type: string; label: string; severity: number; events: number; people: number }>();
+	// Un incidente con doble clasificación cuenta en cada tipo; sus personas se
+	// atribuyen sólo al tipo de mayor severidad para no contarlas doble.
+	const byTypeMap = new Map<
+		string,
+		{ type: string; label: string; severity: number; events: number; people: number }
+	>();
 	for (const e of monthEvents) {
-		const key = normalizeType(e.eventType);
-		const sev = severityOf(e.eventType)!;
-		let entry = byTypeMap.get(key);
-		if (!entry) {
-			entry = {
-				type: key,
-				label: (e.eventType || '').charAt(0).toUpperCase() + (e.eventType || '').slice(1).trim(),
-				severity: sev,
-				events: 0,
-				people: 0
-			};
-			byTypeMap.set(key, entry);
+		const types = resolveTypes(e.eventType);
+		const isSingle = types.length === 1;
+		const primary = types.reduce((a, b) => (b.s > a.s ? b : a), types[0]);
+		for (const { type, s } of types) {
+			let entry = byTypeMap.get(type);
+			if (!entry) {
+				entry = {
+					type,
+					label: isSingle
+						? (e.eventType || '').charAt(0).toUpperCase() + (e.eventType || '').slice(1).trim()
+						: type.charAt(0).toUpperCase() + type.slice(1),
+					severity: s,
+					events: 0,
+					people: 0
+				};
+				byTypeMap.set(type, entry);
+			}
+			entry.events += 1;
+			if (type === primary.type) entry.people += e.personsNo || 0;
 		}
-		entry.events += 1;
-		entry.people += e.personsNo || 0;
 	}
 	const byType = [...byTypeMap.values()].sort((a, b) => b.events - a.events);
 
@@ -113,7 +133,8 @@ export const GET: RequestHandler = async ({ url }) => {
 	const series = computeMonthlyIrmc(events);
 
 	let filtered = series.filter((m) => {
-		if (from && (m.year < from.year || (m.year === from.year && m.month < from.month))) return false;
+		if (from && (m.year < from.year || (m.year === from.year && m.month < from.month)))
+			return false;
 		if (to && (m.year > to.year || (m.year === to.year && m.month > to.month))) return false;
 		return true;
 	});

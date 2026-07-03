@@ -113,10 +113,48 @@ export function normalizeType(raw: string | null | undefined): string {
 		.replace(/\s+/g, ' ');
 }
 
-/** Devuelve el peso de severidad de un tipo de evento, o `null` si no está mapeado. */
+/**
+ * Descompone el tipo de un evento en sus sub-tipos reconocidos.
+ *
+ * Una misma celda puede traer varios tipos juntos, separados por `;`, `,` o
+ * salto de línea (p. ej. «muerte; desaparición»): así registra editorial los
+ * incidentes con doble clasificación. En ese caso el incidente se contabiliza
+ * en CADA uno de sus tipos —igual que si estuviera repartido en filas
+ * separadas—, de modo que el IRMC coincide con el resultado de separar las
+ * filas manualmente.
+ *
+ * Devuelve un arreglo `{ type, s }` (tipo normalizado + severidad) con los
+ * sub-tipos reconocidos y sin repetir; vacío si ninguno está mapeado.
+ */
+export function resolveTypes(
+	eventType: string | null | undefined
+): { type: string; s: Severity }[] {
+	if (!eventType) return [];
+	const seen = new Set<string>();
+	const out: { type: string; s: Severity }[] = [];
+	for (const part of eventType.toString().split(/[;,\n]+/)) {
+		const type = normalizeType(part);
+		if (!type || seen.has(type)) continue;
+		const s = SEVERITY[type];
+		if (s == null) continue;
+		seen.add(type);
+		out.push({ type, s });
+	}
+	return out;
+}
+
+/**
+ * Severidad de un evento: la MÁXIMA entre las de sus sub-tipos reconocidos (un
+ * incidente «muerte; desaparición» pesa como su componente más grave). Devuelve
+ * `null` si ningún tipo está mapeado. Para tipos simples equivale a buscar el
+ * peso directo en `SEVERITY`.
+ */
 export function severityOf(eventType: string | null | undefined): Severity | null {
-	const key = normalizeType(eventType);
-	return SEVERITY[key] ?? null;
+	const types = resolveTypes(eventType);
+	if (types.length === 0) return null;
+	let max = types[0].s;
+	for (const t of types) if (t.s > max) max = t.s;
+	return max;
 }
 
 export interface RiskClassification {
@@ -153,9 +191,13 @@ export interface MonthlyIrmc {
 	month: number; // 1–12
 	label: string; // 'MM/YYYY'
 	byType: TypeContribution[];
-	/** Total de eventos válidos (con severidad conocida) del mes. */
+	/**
+	 * Total de ocurrencias (evento × tipo reconocido) del mes. Un incidente con
+	 * varios tipos suma una ocurrencia por cada tipo, igual que si estuviera en
+	 * filas separadas. Es el denominador `N` de la frecuencia relativa.
+	 */
 	n: number;
-	/** Eventos excluidos del cálculo por tipo vacío / no mapeado. */
+	/** Incidentes excluidos del cálculo por no tener ningún tipo reconocido. */
 	excludedCount: number;
 	irmcBruto: number;
 	irmc: number;
@@ -227,9 +269,13 @@ const MONTH_KEY = (d: Date) =>
  * Calcula la serie mensual del IRMC a partir de los eventos parseados.
  * Devuelve un arreglo ordenado cronológicamente (un punto por mes con datos).
  *
- * Los eventos sin fecha válida, o cuyo tipo no tiene severidad asignada
- * (incluido «sin información»), se excluyen del cálculo y se contabilizan en
- * `excludedCount` para transparencia.
+ * Los incidentes sin fecha válida, o cuyo tipo no tiene ninguna severidad
+ * asignada (incluido «sin información»), se excluyen del cálculo y se
+ * contabilizan en `excludedCount` para transparencia.
+ *
+ * Los incidentes con doble clasificación en una sola celda («muerte;
+ * desaparición») se cuentan en cada uno de sus tipos (ver `resolveTypes`), de
+ * modo que el índice equivale al de tener esas filas ya separadas.
  */
 export function computeMonthlyIrmc(events: MigrationEvent[]): MonthlyIrmc[] {
 	// Agrupa por mes.
@@ -257,16 +303,19 @@ export function computeMonthlyIrmc(events: MigrationEvent[]): MonthlyIrmc[] {
 		let excludedCount = 0;
 
 		for (const ev of bucket.events) {
-			const s = severityOf(ev.eventType);
-			if (s === null) {
+			const types = resolveTypes(ev.eventType);
+			if (types.length === 0) {
 				excludedCount++;
 				continue;
 			}
-			const type = normalizeType(ev.eventType);
-			const entry = counts.get(type) ?? { n: 0, s };
-			entry.n += 1;
-			counts.set(type, entry);
-			n += 1;
+			// Un incidente con varios tipos cuenta en cada uno (como si estuviera
+			// en filas separadas): así el índice coincide con la separación manual.
+			for (const { type, s } of types) {
+				const entry = counts.get(type) ?? { n: 0, s };
+				entry.n += 1;
+				counts.set(type, entry);
+				n += 1;
+			}
 		}
 
 		const byType: TypeContribution[] = [];
