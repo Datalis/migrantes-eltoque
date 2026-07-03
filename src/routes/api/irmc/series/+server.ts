@@ -2,6 +2,7 @@ import { json } from '@sveltejs/kit';
 import { getSheet } from '$lib/data/api';
 import {
 	computeMonthlyIrmc,
+	labelForType,
 	parseEvents,
 	resolveTypes,
 	severityOf,
@@ -70,16 +71,13 @@ const buildItem = (
 	>();
 	for (const e of monthEvents) {
 		const types = resolveTypes(e.eventType);
-		const isSingle = types.length === 1;
 		const primary = types.reduce((a, b) => (b.s > a.s ? b : a), types[0]);
 		for (const { type, s } of types) {
 			let entry = byTypeMap.get(type);
 			if (!entry) {
 				entry = {
 					type,
-					label: isSingle
-						? (e.eventType || '').charAt(0).toUpperCase() + (e.eventType || '').slice(1).trim()
-						: type.charAt(0).toUpperCase() + type.slice(1),
+					label: labelForType(type),
 					severity: s,
 					events: 0,
 					people: 0

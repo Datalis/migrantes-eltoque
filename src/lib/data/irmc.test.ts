@@ -2,10 +2,13 @@ import { describe, it, expect } from 'vitest';
 import {
 	classify,
 	computeMonthlyIrmc,
+	labelForType,
 	normalizeType,
 	parseEvents,
 	resolveTypes,
+	SEVERITY,
 	severityOf,
+	TYPE_LABELS,
 	type MigrationEvent
 } from './irmc';
 
@@ -92,6 +95,25 @@ describe('resolveTypes (eventos compuestos)', () => {
 		expect(severityOf('detención, muerte')).toBe(3);
 		expect(severityOf('detención; deportación')).toBe(2);
 		expect(severityOf('foo; bar')).toBeNull();
+	});
+});
+
+describe('labelForType', () => {
+	it('devuelve la etiqueta canónica con acentos', () => {
+		expect(labelForType('desaparicion')).toBe('Desaparición');
+		expect(labelForType('muerte')).toBe('Muerte');
+		expect(labelForType('trata de personas')).toBe('Trata de personas');
+		expect(labelForType('vulneracion de la integridad')).toBe('Vulneración de la integridad');
+	});
+
+	it('capitaliza como respaldo si el tipo no está mapeado', () => {
+		expect(labelForType('foo')).toBe('Foo');
+	});
+
+	it('cubre todos los tipos de SEVERITY (sin quedar sin etiqueta canónica)', () => {
+		for (const key of Object.keys(SEVERITY)) {
+			expect(TYPE_LABELS[key], `falta etiqueta para "${key}"`).toBeDefined();
+		}
 	});
 });
 
