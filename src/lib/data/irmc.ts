@@ -99,6 +99,58 @@ export const SEVERITY: Record<string, Severity> = {
 export const MAX_SEVERITY: Severity = 3;
 
 /**
+ * Etiqueta canónica (con acentos y mayúscula inicial) para cada tipo
+ * normalizado. Se usa para mostrar el tipo en desgloses/reportes de forma
+ * consistente, incluso cuando el tipo se derivó de un evento compuesto —donde
+ * no hay un texto crudo con acentos que reutilizar. Claves = tipos normalizados
+ * (mismas que `SEVERITY`).
+ */
+export const TYPE_LABELS: Record<string, string> = {
+	muerte: 'Muerte',
+	muertes: 'Muertes',
+	desaparicion: 'Desaparición',
+	desapariciones: 'Desapariciones',
+	naufragio: 'Naufragio',
+	naufragios: 'Naufragios',
+	'hallazgo de cadaver': 'Hallazgo de cadáver',
+	'violencia letal': 'Violencia letal',
+	rescate: 'Rescate',
+	rescates: 'Rescates',
+	secuestro: 'Secuestro',
+	secuestros: 'Secuestros',
+	'violencia sexual': 'Violencia sexual',
+	'trata de personas': 'Trata de personas',
+	deteneccion: 'Detención',
+	detencion: 'Detención',
+	detenciones: 'Detenciones',
+	'condiciones de detencion': 'Condiciones de detención',
+	deportacion: 'Deportación',
+	deportaciones: 'Deportaciones',
+	'vulneracion de la integridad': 'Vulneración de la integridad',
+	heridos: 'Heridos',
+	repatriacion: 'Repatriación',
+	repatriaciones: 'Repatriaciones',
+	intercepcion: 'Intercepción',
+	intercepciones: 'Intercepciones',
+	expulsion: 'Expulsión',
+	expulsiones: 'Expulsiones',
+	devolucion: 'Devolución',
+	devoluciones: 'Devoluciones',
+	retorno: 'Retorno',
+	retornos: 'Retornos',
+	transferencia: 'Transferencia',
+	transferencias: 'Transferencias',
+	traslado: 'Traslado',
+	traslados: 'Traslados',
+	llegada: 'Llegada',
+	llegadas: 'Llegadas',
+	autodeportacion: 'Autodeportación',
+	asentamiento: 'Asentamiento',
+	'conflictos de integracion': 'Conflictos de integración',
+	'desamparo institucional': 'Desamparo institucional'
+};
+
+/**
  * Normaliza el texto del tipo de evento: minúsculas, sin acentos y sin espacios
  * sobrantes, para hacer coincidir variantes con el mapa de severidad.
  */
@@ -111,6 +163,17 @@ export function normalizeType(raw: string | null | undefined): string {
 		.normalize('NFD')
 		.replace(/[̀-ͯ]/g, '') // quita acentos (marcas diacríticas combinantes)
 		.replace(/\s+/g, ' ');
+}
+
+/**
+ * Etiqueta para mostrar un tipo de evento. Recibe el tipo ya normalizado y
+ * devuelve su forma canónica de `TYPE_LABELS`; si no está mapeado, capitaliza
+ * la primera letra como respaldo.
+ */
+export function labelForType(normalizedType: string): string {
+	return (
+		TYPE_LABELS[normalizedType] ?? normalizedType.charAt(0).toUpperCase() + normalizedType.slice(1)
+	);
 }
 
 /**

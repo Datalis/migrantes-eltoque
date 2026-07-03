@@ -7,6 +7,7 @@
 
 import {
 	computeMonthlyIrmc,
+	labelForType,
 	resolveTypes,
 	severityOf,
 	type MigrationEvent,
@@ -148,8 +149,6 @@ const direction = (a: number, b: number): 'aumentó' | 'disminuyó' | 'se mantuv
 	return 'se mantuvo';
 };
 
-const capitalize = (s: string) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
-
 const periodOf = (year: number, month: number): ReportPeriod => ({
 	year,
 	month,
@@ -232,14 +231,13 @@ export function buildMonthReport(
 	const byTypeMap = new Map<string, ReportTypeBreakdown>();
 	for (const e of classified) {
 		const types = resolveTypes(e.eventType);
-		const isSingle = types.length === 1;
 		const primary = types.reduce((a, b) => (b.s > a.s ? b : a), types[0]);
 		for (const { type, s } of types) {
 			let entry = byTypeMap.get(type);
 			if (!entry) {
 				entry = {
 					type,
-					label: isSingle ? capitalize((e.eventType || '').trim()) : capitalize(type),
+					label: labelForType(type),
 					severity: s,
 					severityLevel: SEVERITY_LEVELS[s],
 					events: 0,
