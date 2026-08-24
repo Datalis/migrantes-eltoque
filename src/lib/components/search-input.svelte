@@ -1,6 +1,6 @@
 <script lang="ts">
 	import SearchIcon from '$lib/assets/images/search.svg?component';
-	import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher, onDestroy } from 'svelte';
 	import debounce from 'lodash.debounce';
 
 	export let placeholder: string = '';
@@ -12,12 +12,17 @@
 
 	const dispatchQueryChange = (q: string) => {
 		if (currentQuery == q) return;
-		dispatch('search', q);
 		currentQuery = q;
+		dispatch('search', q);
 	};
 
-	const onSearch = (e: any) =>
-		debounce(() => dispatchQueryChange(e.target.value), 400, { leading: false })();
+	// Un único debounce a nivel de componente. Crear uno nuevo por pulsación
+	// (debounce(...)()) no cancela el anterior: sería un retraso de 400 ms por
+	// tecla, no un debounce.
+	const onSearch = debounce(dispatchQueryChange, 400, { leading: false });
+
+	// Que no quede un dispatch pendiente si se navega antes de que expire.
+	onDestroy(() => onSearch.cancel());
 </script>
 
 <div class="search-input w-full">
@@ -26,7 +31,7 @@
 		{value}
 		class="control w-full border border-accent rounded text-light"
 		type="search"
-		on:input={onSearch}
+		on:input={(e) => onSearch(e.currentTarget.value)}
 	/>
 	<div class="icon">
 		<SearchIcon fill="#7856ff" />

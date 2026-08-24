@@ -8,6 +8,13 @@ export function trimString(s: string) {
 	return s.substring(l, r + 1);
 }
 
+export function normalizeText(s: string) {
+	return s
+		.normalize('NFD')
+		.replace(/[\u0300-\u036f]/g, '')
+		.toLowerCase();
+}
+
 export function compareObjects(o1: any, o2: any) {
 	let k = '';
 	for (k in o1) if (o1[k] != o2[k]) return false;
