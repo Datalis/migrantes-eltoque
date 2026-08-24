@@ -15,9 +15,18 @@ export const load: PageServerLoad = async ({ url }) => {
 		'Todos los eventos!O:P',
 		'Todos los eventos'
 	]);
-	const { data: articles } = await get(
-		'https://api.eltoque.com/posts?categories=63daba063c88b2001e980d89&_sort=publish_date:DESC'
-	);
+	// El carrusel de artículos es contenido secundario y section-7 ya trae dos fijos:
+	// si la API del blog falla, la página sigue renderizando sin ellos.
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	let articles: any[] = [];
+	try {
+		const res = await get(
+			'https://api.eltoque.com/posts?categories=63daba063c88b2001e980d89&_sort=publish_date:DESC'
+		);
+		if (Array.isArray(res.data)) articles = res.data;
+	} catch (e) {
+		console.warn('No se pudieron cargar los artículos del blog:', (e as Error).message);
+	}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const mapTotals = (data: any[][] | null | undefined) =>

@@ -32,9 +32,25 @@ export const batchGetSheet = async (ranges: string[]) => {
 	return sheet.spreadsheets.values.batchGet({ spreadsheetId: SPREADSHEET_ID, ranges });
 };
 
+// Cloudflare desafía las peticiones no-navegador a *.eltoque.com; esta cabecera las deja pasar.
+const isElToque = (url: string) => {
+	try {
+		const { hostname } = new URL(url);
+		return hostname === 'eltoque.com' || hostname.endsWith('.eltoque.com');
+	} catch {
+		return false;
+	}
+};
+
 export const get = async (url: string) => {
-	const data = await fetch(url);
-	return { data: await data.json() };
+	const res = await fetch(url, {
+		headers: isElToque(url) ? { 'x-application': '1' } : {}
+	});
+	const contentType = res.headers.get('content-type') || '';
+	if (!res.ok || !contentType.includes('application/json')) {
+		throw new Error(`GET ${url} respondió ${res.status} (${contentType || 'sin content-type'})`);
+	}
+	return { data: await res.json() };
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
