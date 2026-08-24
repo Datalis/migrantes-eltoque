@@ -3,7 +3,7 @@
 	import Button from '$lib/components/button.svelte';
 	import ReportModal from '$lib/components/report-modal.svelte';
 	import SearchInput from '$lib/components/search-input.svelte';
-	import { compareObjects, parseDate, trimString } from '$lib/utils';
+	import { normalizeText, parseDate, trimString } from '$lib/utils';
 	import type { PageData } from './$types';
 	//@ts-ignore
 	import SvelteTable from 'svelte-table';
@@ -15,22 +15,12 @@
 	let deceased = data?.deceased || [];
 	let totals = data?.totals || [];
 
-	function itemExists(haystack: any[], needle: any) {
-		for (let i = 0; i < haystack.length; i++) if (compareObjects(haystack[i], needle)) return true;
-		return false;
-	}
-
 	function searchFor(toSearch: string, data: any[]) {
-		var results = [];
-		toSearch = trimString(toSearch); // trim it
-		for (var i = 0; i < data.length; i++) {
-			for (var key in data[i]) {
-				if (data[i][key].indexOf(toSearch) != -1) {
-					if (!itemExists(results, data[i])) results.push(data[i]);
-				}
-			}
-		}
-		return results;
+		const needle = normalizeText(trimString(toSearch));
+		if (!needle) return data;
+		return data.filter((item) =>
+			Object.values(item).some((v) => v != null && normalizeText(String(v)).includes(needle))
+		);
 	}
 
 	const onSearch = (query: string) => {
