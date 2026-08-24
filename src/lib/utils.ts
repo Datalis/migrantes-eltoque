@@ -63,7 +63,22 @@ export function parseDate(v: string) {
 	);
 }
 
+export const PHOTO_PLACEHOLDER = '/placeholder-persona.svg';
+
+// Reescribe una imagen de api.eltoque.com para que la pida nuestro servidor, que
+// sí puede mandar la cabecera `x-application` que exige Cloudflare. Devuelve null
+// si la URL no es de ese origen (o ya va por el proxy) y no hay nada que hacer.
+export const proxiedImage = (url: string) => {
+	const prefix = 'https://api.eltoque.com/uploads/';
+	if (!url.startsWith(prefix)) return null;
+	return `/api/img/uploads/${url.slice(prefix.length)}`;
+};
+
 export const imageLoader = (url: string) => {
+	// Sin foto no se puede concatenar: daría `https://api.eltoque.com` pelado y la imagen sale rota.
+	if (!url) {
+		return PHOTO_PLACEHOLDER;
+	}
 	if (url.indexOf('imagedelivery.net') !== -1) {
 		return url;
 	}
