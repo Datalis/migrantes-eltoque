@@ -101,7 +101,9 @@
 			</p>
 		{:else}
 			<ul class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-				{#each results as person (person.type + '-' + person.name)}
+				<!-- Hay homónimos en la hoja: type+name no es única y una clave duplicada
+				     rompe el bloque keyed, dejando la lista sin actualizarse al buscar. -->
+				{#each results as person, i (person.type + '-' + person.name + '-' + i)}
 					<li class="card border border-accent rounded-lg p-6 flex flex-col">
 						<span
 							class="badge self-start text-xs font-semibold uppercase tracking-wide px-3 py-1 rounded-full mb-3"
