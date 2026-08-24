@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { imageLoader } from '$lib/utils';
+	import { imageLoader, proxiedImage, PHOTO_PLACEHOLDER } from '$lib/utils';
 	import Button from './button.svelte';
 
 	export let data: any;
@@ -12,14 +12,26 @@
 	}
 
 	const getImageUrl = (url: string) => imageLoader(url);
+
+	// Directo -> proxy del servidor (que manda la cabecera) -> placeholder.
+	const onImageError = (e: Event) => {
+		const img = e.currentTarget as HTMLImageElement;
+		const viaProxy = proxiedImage(img.src);
+		if (viaProxy) {
+			img.src = viaProxy;
+			return;
+		}
+		if (!img.src.endsWith(PHOTO_PLACEHOLDER)) img.src = PHOTO_PLACEHOLDER;
+	};
 </script>
 
 <div class="profile flex flex-col items-center md:items-start h-full">
 	<img
-		src={data[2] ? getImageUrl(data[2]) : 'https://fakeimg.pl/250x250/7856ff/'}
+		src={getImageUrl(data[2])}
 		class="aspect-square rounded-2xl w-3/4 md:w-full"
 		alt=""
 		loading="lazy"
+		on:error={onImageError}
 	/>
 	<span class="font-semibold mt-4">{data[3]}</span>
 	<small>{data[12] || 'Origen Desconocido'} / {formatAge(data[5])}</small>
