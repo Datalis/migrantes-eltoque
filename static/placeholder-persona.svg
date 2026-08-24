@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250" width="250" height="250" role="img" aria-label="Sin fotografía disponible">
+	<rect width="250" height="250" fill="#7856ff"/>
+	<g fill="#f5f6f9" opacity="0.55">
+		<circle cx="125" cy="97" r="38"/>
+		<path d="M125 146c-38 0-69 26-75 61a4 4 0 0 0 4 5h142a4 4 0 0 0 4-5c-6-35-37-61-75-61z"/>
+	</g>
+	<text x="125" y="232" fill="#f5f6f9" opacity="0.75" font-family="Inter, sans-serif" font-size="15" text-anchor="middle">Sin fotografía</text>
+</svg>

@@ -15,7 +15,12 @@ const ARTICLES_URL =
  */
 const fetchArticles = async (fetch: typeof globalThis.fetch): Promise<unknown[]> => {
 	try {
-		const res = await fetch(ARTICLES_URL, { headers: { Accept: 'application/json' } });
+		const res = await fetch(ARTICLES_URL, {
+			// Cloudflare desafía las peticiones no-navegador a *.eltoque.com y
+			// responde 403 con HTML. Esta cabecera las deja pasar; sin ella el
+			// carrusel queda vacío en producción, en silencio.
+			headers: { Accept: 'application/json', 'x-application': '1' }
+		});
 		if (!res.ok) {
 			console.warn(`[home] posts API respondió ${res.status}; se omiten los artículos.`);
 			return [];

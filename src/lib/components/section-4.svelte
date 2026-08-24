@@ -5,7 +5,7 @@
 	import AngelImg from '$lib/assets/images/angel.webp?w=500';
 	import DecorDeceased from '$lib/assets/images/fallecidos.svg?component';
 	import Toast from './toast.svelte';
-	import { imageLoader } from '$lib/utils';
+	import { imageLoader, proxiedImage, PHOTO_PLACEHOLDER } from '$lib/utils';
 
 	export let showModal = false;
 	let showToast = false;
@@ -26,6 +26,17 @@
 	};
 
 	const getImageUrl = (/** @type {string} */ url) => imageLoader(url);
+
+	// Directo -> proxy del servidor (que manda la cabecera) -> placeholder.
+	const onImageError = (/** @type {Event} */ e) => {
+		const img = /** @type {HTMLImageElement} */ (e.currentTarget);
+		const viaProxy = proxiedImage(img.src);
+		if (viaProxy) {
+			img.src = viaProxy;
+			return;
+		}
+		if (!img.src.endsWith(PHOTO_PLACEHOLDER)) img.src = PHOTO_PLACEHOLDER;
+	};
 </script>
 
 <Toast show={showToast} isError={errorSubmit} message={errorMessage} />
@@ -68,6 +79,7 @@
 						src={getImageUrl(person[2])}
 						alt="Picture of {[person[3]]}"
 						loading="lazy"
+						on:error={onImageError}
 					/>
 					<DecorDeceased class="relative w-3/4 my-2" />
 					<h4 class="name text-center leading-tight font-semibold text-accent md:w-3/4 my-2">
